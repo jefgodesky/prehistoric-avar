@@ -1,11 +1,6 @@
 import { DOMParser, XMLSerializer } from 'npm:xmldom'
 import { parse } from 'npm:yaml'
-
-interface IRegion {
-  'Carrying capacity score': number
-  'Class names': string[]
-  Regions: string[]
-}
+import type { IRegion } from './index.t.ts'
 
 const fixInkscape = (input: string, regions: Record<string, IRegion>): string => {
   const parser = new DOMParser()
