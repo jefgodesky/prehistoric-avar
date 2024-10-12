@@ -1,4 +1,5 @@
 import { DOMParser, XMLSerializer } from 'npm:xmldom'
+import { parse } from 'npm:yaml'
 
 interface IRegion {
   'Class names': string[]
@@ -39,6 +40,31 @@ const fixInkscape = (input: string, regions: Record<string, IRegion>): string =>
   }
 
   return serializer.serializeToString(doc)
+}
+
+if (import.meta.main) {
+  const main = async (): Promise<void> => {
+    if (Deno.args.length !== 2) {
+      console.error('Usage: deno task fix <before> <after>')
+      Deno.exit(1)
+    }
+
+    const [before, after] = Deno.args
+
+    try {
+      const dir = './maps'
+      const beforeSVG = await Deno.readTextFile(`${dir}/${before}.svg`)
+      const regionsYAML = await Deno.readTextFile('regions.yml')
+      const regions = parse(regionsYAML) as Record<string, IRegion>
+      await Deno.writeTextFile(`${dir}/${after}.svg`, fixInkscape(beforeSVG, regions))
+      console.log(`New map successfully written to ${dir}/${after}.svg`)
+    } catch (error) {
+      console.error('Error: ', error)
+      Deno.exit(1)
+    }
+  }
+
+  main()
 }
 
 export default fixInkscape

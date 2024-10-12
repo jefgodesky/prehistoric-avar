@@ -1,7 +1,8 @@
 {
   "tasks": {
     "dev": "deno run --watch main.ts",
-    "test": "deno test --allow-read --allow-net --allow-env"
+    "test": "deno test --allow-read --allow-net --allow-env",
+    "fix": "deno run --allow-read --allow-write --allow-env fix-inkscape.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
