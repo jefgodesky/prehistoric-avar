@@ -1,0 +1,102 @@
+Boreal forests:
+  Class names:
+    - forest
+    - boreal
+  Regions:
+    - F01
+    - F02
+    - F03
+    - F04
+    - F05
+    - F06
+    - F07
+    - F27
+Temperate forests:
+  Class names:
+    - forest
+    - temperate
+  Regions:
+    - F08
+    - F12
+    - F13
+    - F14
+    - F15
+    - F16
+    - F17
+    - F19
+    - F20
+    - F21
+    - F22
+    - F25
+    - F26
+    - F28
+    - F30
+Tropical forests:
+  Class names:
+    - forest
+    - tropical
+  Regions:
+    - F09
+    - F10
+    - F11
+    - F18
+    - F23
+    - F24
+    - F29
+    - F31
+    - F32
+Hot deserts:
+  Class names:
+    - desert
+    - hot
+  Regions:
+    - D01
+Savannas:
+  Class names:
+    - grassland
+    - tropical
+  Regions:
+    - G01
+    - G03
+    - G09
+    - G10
+    - G13
+Temperate grasslands:
+  Class names:
+    - grassland
+    - temperate
+  Regions:
+    - G02
+    - G04
+    - G05
+    - G06
+    - G07
+    - G08
+    - G11
+    - G12
+Mountain ranges:
+  Class names:
+    - mountains
+  Regions:
+    - M01
+    - M02
+    - M03
+    - M04
+    - M05
+    - M06
+    - M07
+    - M08
+    - M09
+    - M10
+    - M11
+    - M12
+    - M13
+    - M14
+Polar regions:
+  Class names:
+    - polar
+  Regions:
+    - P01
+    - P02
+    - P03
+
