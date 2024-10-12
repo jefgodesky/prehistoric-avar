@@ -12,6 +12,7 @@
     "jsr:@std/path@^1.0.6": "1.0.6",
     "jsr:@std/testing@*": "1.0.3",
     "jsr:@std/testing@^1.0.3": "1.0.3",
+    "npm:svg-pathdata@^7.1.0": "7.1.0",
     "npm:xmldom@*": "0.6.0",
     "npm:xmldom@0.6": "0.6.0",
     "npm:yaml@*": "2.5.1",
@@ -61,11 +62,20 @@
     }
   },
   "npm": {
+    "svg-pathdata@7.1.0": {
+      "integrity": "sha512-wrvKHXZSYZyODOj5E1l1bMTIo8sR7YCH0E4SA8IgLgMsZq4RypslpYvNSsrdg4ThD6du2KWPyVeKinkqUelGhg==",
+      "dependencies": [
+        "yerror"
+      ]
+    },
     "xmldom@0.6.0": {
       "integrity": "sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg=="
     },
     "yaml@2.5.1": {
       "integrity": "sha512-bLQOjaX/ADgQ20isPJRvF0iRUHIxVhYvr53Of7wGcWlO2jvtUlH5m87DsmulFVxRpNLOnI4tB6p/oh8D7kpn9Q=="
+    },
+    "yerror@8.0.0": {
+      "integrity": "sha512-FemWD5/UqNm8ffj8oZIbjWXIF2KE0mZssggYpdaQkWDDgXBQ/35PNIxEuz6/YLn9o0kOxDBNJe8x8k9ljD7k/g=="
     }
   },
   "workspace": {
@@ -73,6 +83,7 @@
       "jsr:@std/assert@1",
       "jsr:@std/expect@^1.0.5",
       "jsr:@std/testing@^1.0.3",
+      "npm:svg-pathdata@^7.1.0",
       "npm:xmldom@0.6",
       "npm:yaml@^2.5.1"
     ]
