@@ -4,6 +4,8 @@
     "jsr:@b-fuze/deno-dom@*": "0.1.48",
     "jsr:@std/assert@1": "1.0.6",
     "jsr:@std/internal@^1.0.4": "1.0.4",
+    "npm:xmldom@*": "0.6.0",
+    "npm:xmldom@0.6": "0.6.0",
     "npm:yaml@*": "2.5.1",
     "npm:yaml@^2.5.1": "2.5.1"
   },
@@ -22,6 +24,9 @@
     }
   },
   "npm": {
+    "xmldom@0.6.0": {
+      "integrity": "sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg=="
+    },
     "yaml@2.5.1": {
       "integrity": "sha512-bLQOjaX/ADgQ20isPJRvF0iRUHIxVhYvr53Of7wGcWlO2jvtUlH5m87DsmulFVxRpNLOnI4tB6p/oh8D7kpn9Q=="
     }
@@ -29,6 +34,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
+      "npm:xmldom@0.6",
       "npm:yaml@^2.5.1"
     ]
   }
