@@ -2,6 +2,7 @@ Boreal forests:
   Class names:
     - forest
     - boreal
+  Carrying capacity score: 12
   Regions:
     - F01
     - F02
@@ -15,6 +16,7 @@ Temperate forests:
   Class names:
     - forest
     - temperate
+  Carrying capacity score: 95
   Regions:
     - F08
     - F12
@@ -35,6 +37,7 @@ Tropical forests:
   Class names:
     - forest
     - tropical
+  Carrying capacity score: 65
   Regions:
     - F09
     - F10
@@ -49,12 +52,14 @@ Hot deserts:
   Class names:
     - desert
     - hot
+  Carrying capacity score: 4
   Regions:
     - D01
 Savannas:
   Class names:
     - grassland
     - tropical
+  Carrying capacity score: 22
   Regions:
     - G01
     - G03
@@ -65,6 +70,7 @@ Temperate grasslands:
   Class names:
     - grassland
     - temperate
+  Carrying capacity score: 30
   Regions:
     - G02
     - G04
@@ -77,6 +83,7 @@ Temperate grasslands:
 Mountain ranges:
   Class names:
     - mountains
+  Carrying capacity score: 10
   Regions:
     - M01
     - M02
@@ -95,8 +102,8 @@ Mountain ranges:
 Polar regions:
   Class names:
     - polar
+  Carrying capacity score: 4
   Regions:
     - P01
     - P02
     - P03
-

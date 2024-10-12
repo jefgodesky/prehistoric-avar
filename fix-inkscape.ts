@@ -2,6 +2,7 @@ import { DOMParser, XMLSerializer } from 'npm:xmldom'
 import { parse } from 'npm:yaml'
 
 interface IRegion {
+  'Carrying capacity score': number
   'Class names': string[]
   Regions: string[]
 }
@@ -68,3 +69,4 @@ if (import.meta.main) {
 }
 
 export default fixInkscape
+export type { IRegion }
