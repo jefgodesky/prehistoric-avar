@@ -24,7 +24,7 @@ Boreal forests:
 
   const expected = `
     <svg xmlns="http://www.w3.org/2000/svg">
-      <g id="F01" class="forest boreal">
+      <g id="F01" class="region forest boreal">
         <path d="M0 0 L100 100" class="body"/>
         <path d="M0 0 L200 200" class="border"/>
       </g>

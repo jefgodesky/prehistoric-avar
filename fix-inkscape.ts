@@ -19,7 +19,7 @@ const fixInkscape = (input: string, regions: Record<string, IRegion>): string =>
       for (const [_, regionInfo] of Object.entries(regions)) {
         if (regionInfo.Regions.includes(label)) {
           group.setAttribute('id', label)
-          group.setAttribute('class', regionInfo['Class names'].join(' '))
+          group.setAttribute('class', ['region', ...regionInfo['Class names']].join(' '))
           group.removeAttribute('inkscape:label')
           break
         }
