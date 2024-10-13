@@ -10,6 +10,7 @@
     "@std/testing": "jsr:@std/testing@^1.0.3",
     "@turf/turf": "npm:@turf/turf@^7.1.0",
     "@types/proj4": "npm:@types/proj4@^2.5.5",
+    "geolib": "npm:geolib@^3.3.4",
     "proj4": "npm:proj4@^2.12.1",
     "svg-pathdata": "npm:svg-pathdata@^7.1.0",
     "xmldom": "npm:xmldom@^0.6.0",

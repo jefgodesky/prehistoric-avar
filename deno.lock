@@ -15,6 +15,7 @@
     "npm:@turf/helpers@^7.1.0": "7.1.0",
     "npm:@turf/turf@^7.1.0": "7.1.0",
     "npm:@types/proj4@^2.5.5": "2.5.5",
+    "npm:geolib@^3.3.4": "3.3.4",
     "npm:proj4@^2.12.1": "2.12.1",
     "npm:svg-pathdata@^7.1.0": "7.1.0",
     "npm:xmldom@*": "0.6.0",
@@ -1445,6 +1446,9 @@
         "rbush@2.0.2"
       ]
     },
+    "geolib@3.3.4": {
+      "integrity": "sha512-EicrlLLL3S42gE9/wde+11uiaYAaeSVDwCUIv2uMIoRBfNJCn8EsSI+6nS3r4TCKDO6+RQNM9ayLq2at+oZQWQ=="
+    },
     "jsts@2.7.1": {
       "integrity": "sha512-x2wSZHEBK20CY+Wy+BPE7MrFQHW6sIsdaGUMEqmGAio+3gFzQaBYPwLRonUfQf9Ak8pBieqj9tUofX1+WtAEIg=="
     },
@@ -1554,6 +1558,7 @@
       "jsr:@std/testing@^1.0.3",
       "npm:@turf/turf@^7.1.0",
       "npm:@types/proj4@^2.5.5",
+      "npm:geolib@^3.3.4",
       "npm:proj4@^2.12.1",
       "npm:svg-pathdata@^7.1.0",
       "npm:xmldom@0.6",
