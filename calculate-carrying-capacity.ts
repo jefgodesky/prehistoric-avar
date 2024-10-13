@@ -7,9 +7,6 @@ const calculateCarryingCapacity = (area: number, score: number): number => {
 export default calculateCarryingCapacity
 
 /*
- * Azgaar’s tells us we have a total land area of 1.6 million square
- * kilometers. The reachable land is most of that, but not all of that.
- *
  * Azgaar’s sets the total population at 69 million. We want to reach a
  * prehistoric population that’s roughly 1/10 of that.
  *
