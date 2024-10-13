@@ -4,6 +4,15 @@ interface IRegion {
   Regions: string[]
 }
 
+interface IRegionData {
+  [key: string]: {
+    tags: string[]
+    area: number
+    carryingCapacity: number
+  }
+}
+
 export type {
-  IRegion
+  IRegion,
+  IRegionData
 }
