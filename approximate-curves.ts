@@ -18,12 +18,15 @@ const approximateCurve = (d: string, precision: number = 1): string => {
 const approximateCurves = (d: string, precision: number = 1): string => {
   const pathData = new SVGPathData(d)
   const commands: string[] = []
+  let startSet = false
+  const start = { x: 0, y: 0 }
   const prev = { x: 0, y: 0 }
 
   for (const cmd of pathData.commands) {
     switch (cmd.type) {
       case SVGPathData.MOVE_TO:
         commands.push(`M${cmd.x},${cmd.y}`)
+        if (!startSet) { start.x = cmd.x; start.y = cmd.y; startSet = true }
         prev.x = cmd.x; prev.y = cmd.y; break
       case SVGPathData.LINE_TO:
         commands.push(`L${cmd.x},${cmd.y}`)
@@ -43,6 +46,9 @@ const approximateCurves = (d: string, precision: number = 1): string => {
           `M${prev.x},${prev.y} Q${cmd.x1},${cmd.y1},${cmd.x},${cmd.y}`,
           precision))
         prev.x = cmd.x; prev.y = cmd.y; break
+      case SVGPathData.CLOSE_PATH:
+        commands.push(`L${start.x},${start.y}`)
+        prev.x = start.x; prev.y = start.y; break
       default:
         break
     }
