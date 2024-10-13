@@ -1,7 +1,7 @@
 const CARRYING_CAPACITY_FACTOR = 5 // See below for why 5
 
 const calculateCarryingCapacity = (area: number, score: number): number => {
-  return area * (score / 100) * CARRYING_CAPACITY_FACTOR
+  return Math.floor(area * (score / 100) * CARRYING_CAPACITY_FACTOR)
 }
 
 export default calculateCarryingCapacity
