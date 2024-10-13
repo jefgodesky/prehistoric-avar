@@ -12,6 +12,7 @@
     "jsr:@std/path@^1.0.6": "1.0.6",
     "jsr:@std/testing@*": "1.0.3",
     "jsr:@std/testing@^1.0.3": "1.0.3",
+    "npm:@turf/helpers@^7.1.0": "7.1.0",
     "npm:svg-pathdata@^7.1.0": "7.1.0",
     "npm:xmldom@*": "0.6.0",
     "npm:xmldom@0.6": "0.6.0",
@@ -62,11 +63,24 @@
     }
   },
   "npm": {
+    "@turf/helpers@7.1.0": {
+      "integrity": "sha512-dTeILEUVeNbaEeoZUOhxH5auv7WWlOShbx7QSd4s0T4Z0/iz90z9yaVCtZOLbU89umKotwKaJQltBNO9CzVgaQ==",
+      "dependencies": [
+        "@types/geojson",
+        "tslib"
+      ]
+    },
+    "@types/geojson@7946.0.14": {
+      "integrity": "sha512-WCfD5Ht3ZesJUsONdhvm84dmzWOiOzOAqOncN0++w0lBw1o8OuDNJF2McvvCef/yBqb/HYRahp1BYtODFQ8bRg=="
+    },
     "svg-pathdata@7.1.0": {
       "integrity": "sha512-wrvKHXZSYZyODOj5E1l1bMTIo8sR7YCH0E4SA8IgLgMsZq4RypslpYvNSsrdg4ThD6du2KWPyVeKinkqUelGhg==",
       "dependencies": [
         "yerror"
       ]
+    },
+    "tslib@2.7.0": {
+      "integrity": "sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA=="
     },
     "xmldom@0.6.0": {
       "integrity": "sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg=="
@@ -83,6 +97,7 @@
       "jsr:@std/assert@1",
       "jsr:@std/expect@^1.0.5",
       "jsr:@std/testing@^1.0.3",
+      "npm:@turf/helpers@^7.1.0",
       "npm:svg-pathdata@^7.1.0",
       "npm:xmldom@0.6",
       "npm:yaml@^2.5.1"
