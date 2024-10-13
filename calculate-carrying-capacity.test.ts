@@ -4,10 +4,10 @@ import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
 
 describe('calculateCarryingCapacity', () => {
   it('calculates carrying capacity', () => {
-    expect(calculateCarryingCapacity(100, 100)).toBe(1300)
+    expect(calculateCarryingCapacity(100, 100)).toBe(500)
   })
 
   it('factors in carrying capacity score', () => {
-    expect(calculateCarryingCapacity(100, 50)).toBe(650)
+    expect(calculateCarryingCapacity(100, 50)).toBe(250)
   })
 })

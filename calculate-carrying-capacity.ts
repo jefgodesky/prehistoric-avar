@@ -1,4 +1,4 @@
-const CARRYING_CAPACITY_FACTOR = 13 // See below for why 13
+const CARRYING_CAPACITY_FACTOR = 5 // See below for why 5
 
 const calculateCarryingCapacity = (area: number, score: number): number => {
   return area * (score / 100) * CARRYING_CAPACITY_FACTOR
@@ -7,20 +7,20 @@ const calculateCarryingCapacity = (area: number, score: number): number => {
 export default calculateCarryingCapacity
 
 /*
- * Azgaar’s sets the total population at 69 million. We want to reach a
+ * Azgaar’s sets the total population at 69.2 million. We want to reach a
  * prehistoric population that’s roughly 1/10 of that.
  *
- * Let’s take a look at tropical rainforest. Azgaar says there’s 110,000 square
+ * Let’s take a look at tropical rainforest. Azgaar says there’s 285,000 square
  * kilometers of tropical rainforest, and tropical rainforest is 80% habitable.
  * Azgaar calculates for that a total population of 11.6 million. So…
  *
- * 11600000 = 110000x * 0.8
- * 14500000 = 110000x
- * x = 131.818181818
+ * 11600000 = 285000x * 0.8
+ * 14500000 = 285000
+ * x = 14500000 / 285000 ≈ 50.9
  *
- * So if we want our numbers to be roughly 1/10 of that, we’ll set x to be 13.
+ * So if we want our numbers to be roughly 1/10 of that, we’ll set x to be 5.
  *
- * 110000 * 13 * 0.8 = 1,144,000
+ * 285000 * 5 * 0.8 = 1,140,000
  *
  * So we’d have about one million people in our tropical rainforest, rather
  * than 11 million.
