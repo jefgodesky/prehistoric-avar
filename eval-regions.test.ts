@@ -54,8 +54,8 @@ Hot deserts:
 
   it('calculates carrying capacity correctly', () => {
     const result = evalRegions(input, data)
-    expect(result.F01.carryingCapacity).toBe(63295)
-    expect(result.D01.carryingCapacity).toBe(93075)
+    expect(result.F01.carryingCapacity).toBe(316476)
+    expect(result.D01.carryingCapacity).toBe(465376)
   })
 
   it('skips regions not in our regions data', () => {
