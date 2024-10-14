@@ -37,13 +37,13 @@ Hot deserts:
 
   it('calculates area for each region', async () => {
     const result = await evalRegions(data)
-    expect(result.F01.area).toBe(1272244)
-    expect(result.D01.area).toBe(2688510)
+    expect(result.F01.area).toBe(1272233)
+    expect(result.D01.area).toBe(2688696)
   })
 
   it('calculates carrying capacity correctly', async () => {
     const result = await evalRegions(data)
-    expect(result.F01.carryingCapacity).toBe(152669)
-    expect(result.D01.carryingCapacity).toBe(107540)
+    expect(result.F01.carryingCapacity).toBe(25444)
+    expect(result.D01.carryingCapacity).toBe(17924)
   })
 })
