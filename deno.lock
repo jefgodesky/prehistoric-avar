@@ -12,6 +12,7 @@
     "jsr:@std/path@^1.0.6": "1.0.6",
     "jsr:@std/testing@*": "1.0.3",
     "jsr:@std/testing@^1.0.3": "1.0.3",
+    "npm:@turf/area@^7.1.0": "7.1.0",
     "npm:@turf/helpers@^7.1.0": "7.1.0",
     "npm:@turf/turf@^7.1.0": "7.1.0",
     "npm:xmldom@*": "0.6.0",
@@ -1524,6 +1525,7 @@
       "jsr:@std/assert@1",
       "jsr:@std/expect@^1.0.5",
       "jsr:@std/testing@^1.0.3",
+      "npm:@turf/area@^7.1.0",
       "npm:@turf/turf@^7.1.0",
       "npm:xmldom@0.6",
       "npm:yaml@^2.5.1"
