@@ -7,10 +7,10 @@ export const evalRegions = async (regions: Record<string, IRegion>): Promise<IRe
   const data: IRegionData = {}
 
   for (const regionType in regions) {
-    const tags = regions[regionType]['Class names'].slice()
     const score = regions[regionType]['Carrying capacity score']
 
     for (const id of regions[regionType].Regions) {
+      const tags = regions[regionType]['Class names'].slice()
       const area = await calculateArea(id)
       const carryingCapacity = calculateCarryingCapacity(area, score)
       data[id] = { tags, area, carryingCapacity}
