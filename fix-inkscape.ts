@@ -1,5 +1,5 @@
 import { DOMParser, XMLSerializer } from 'npm:xmldom'
-import { parse } from 'npm:yaml'
+import { parse } from 'yaml'
 import type { IRegion } from './index.t.ts'
 
 const fixInkscape = (input: string, regions: Record<string, IRegion>): string => {
