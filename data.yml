@@ -1,0 +1,361 @@
+F01:
+  tags:
+    - forest
+    - boreal
+  area: 1272233
+  carryingCapacity: 25444
+F02:
+  tags:
+    - forest
+    - boreal
+  area: 770419
+  carryingCapacity: 15408
+F03:
+  tags:
+    - forest
+    - boreal
+  area: 871401
+  carryingCapacity: 17428
+F04:
+  tags:
+    - forest
+    - boreal
+  area: 2397898
+  carryingCapacity: 47957
+F05:
+  tags:
+    - forest
+    - boreal
+  area: 542146
+  carryingCapacity: 10842
+F06:
+  tags:
+    - forest
+    - boreal
+  area: 1563314
+  carryingCapacity: 31266
+F07:
+  tags:
+    - forest
+    - boreal
+  area: 838716
+  carryingCapacity: 16774
+F27:
+  tags:
+    - forest
+    - boreal
+  area: 281407
+  carryingCapacity: 5628
+F08:
+  tags:
+    - forest
+    - temperate
+  area: 1312439
+  carryingCapacity: 207802
+F12:
+  tags:
+    - forest
+    - temperate
+  area: 790423
+  carryingCapacity: 125150
+F13:
+  tags:
+    - forest
+    - temperate
+  area: 441338
+  carryingCapacity: 69878
+F14:
+  tags:
+    - forest
+    - temperate
+  area: 302461
+  carryingCapacity: 47889
+F15:
+  tags:
+    - forest
+    - temperate
+  area: 1022220
+  carryingCapacity: 161851
+F16:
+  tags:
+    - forest
+    - temperate
+  area: 529924
+  carryingCapacity: 83904
+F17:
+  tags:
+    - forest
+    - temperate
+  area: 1659045
+  carryingCapacity: 262682
+F19:
+  tags:
+    - forest
+    - temperate
+  area: 884193
+  carryingCapacity: 139997
+F20:
+  tags:
+    - forest
+    - temperate
+  area: 1759128
+  carryingCapacity: 278528
+F21:
+  tags:
+    - forest
+    - temperate
+  area: 619474
+  carryingCapacity: 98083
+F22:
+  tags:
+    - forest
+    - temperate
+  area: 1211075
+  carryingCapacity: 191753
+F25:
+  tags:
+    - forest
+    - temperate
+  area: 571972
+  carryingCapacity: 90562
+F26:
+  tags:
+    - forest
+    - temperate
+  area: 331348
+  carryingCapacity: 52463
+F28:
+  tags:
+    - forest
+    - temperate
+  area: 1786031
+  carryingCapacity: 282788
+F30:
+  tags:
+    - forest
+    - temperate
+  area: 1978204
+  carryingCapacity: 313215
+F09:
+  tags:
+    - forest
+    - tropical
+  area: 4969480
+  carryingCapacity: 538360
+F10:
+  tags:
+    - forest
+    - tropical
+  area: 2725549
+  carryingCapacity: 295267
+F11:
+  tags:
+    - forest
+    - tropical
+  area: 3572789
+  carryingCapacity: 387052
+F18:
+  tags:
+    - forest
+    - tropical
+  area: 353034
+  carryingCapacity: 38245
+F23:
+  tags:
+    - forest
+    - tropical
+  area: 471742
+  carryingCapacity: 51105
+F24:
+  tags:
+    - forest
+    - tropical
+  area: 529878
+  carryingCapacity: 57403
+F29:
+  tags:
+    - forest
+    - tropical
+  area: 4674493
+  carryingCapacity: 506403
+F31:
+  tags:
+    - forest
+    - tropical
+  area: 4727511
+  carryingCapacity: 512147
+F32:
+  tags:
+    - forest
+    - tropical
+  area: 140985
+  carryingCapacity: 15273
+D01:
+  tags:
+    - desert
+    - hot
+  area: 2688696
+  carryingCapacity: 17924
+G01:
+  tags:
+    - grassland
+    - tropical
+  area: 870978
+  carryingCapacity: 31935
+G03:
+  tags:
+    - grassland
+    - tropical
+  area: 5202705
+  carryingCapacity: 190765
+G09:
+  tags:
+    - grassland
+    - tropical
+  area: 386978
+  carryingCapacity: 14189
+G10:
+  tags:
+    - grassland
+    - tropical
+  area: 1137580
+  carryingCapacity: 41711
+G13:
+  tags:
+    - grassland
+    - tropical
+  area: 531971
+  carryingCapacity: 19505
+G02:
+  tags:
+    - grassland
+    - temperate
+  area: 1364935
+  carryingCapacity: 68246
+G04:
+  tags:
+    - grassland
+    - temperate
+  area: 4887376
+  carryingCapacity: 244368
+G05:
+  tags:
+    - grassland
+    - temperate
+  area: 4024890
+  carryingCapacity: 201244
+G06:
+  tags:
+    - grassland
+    - temperate
+  area: 2534315
+  carryingCapacity: 126715
+G07:
+  tags:
+    - grassland
+    - temperate
+  area: 428095
+  carryingCapacity: 21404
+G08:
+  tags:
+    - grassland
+    - temperate
+  area: 441027
+  carryingCapacity: 22051
+G11:
+  tags:
+    - grassland
+    - temperate
+  area: 1406191
+  carryingCapacity: 70309
+G12:
+  tags:
+    - grassland
+    - temperate
+  area: 388051
+  carryingCapacity: 19402
+M01:
+  tags:
+    - mountains
+  area: 220309
+  carryingCapacity: 3671
+M02:
+  tags:
+    - mountains
+  area: 119205
+  carryingCapacity: 1986
+M03:
+  tags:
+    - mountains
+  area: 466427
+  carryingCapacity: 7773
+M04:
+  tags:
+    - mountains
+  area: 153562
+  carryingCapacity: 2559
+M05:
+  tags:
+    - mountains
+  area: 228126
+  carryingCapacity: 3802
+M06:
+  tags:
+    - mountains
+  area: 4444669
+  carryingCapacity: 74077
+M07:
+  tags:
+    - mountains
+  area: 871307
+  carryingCapacity: 14521
+M08:
+  tags:
+    - mountains
+  area: 1290871
+  carryingCapacity: 21514
+M09:
+  tags:
+    - mountains
+  area: 620278
+  carryingCapacity: 10337
+M10:
+  tags:
+    - mountains
+  area: 399683
+  carryingCapacity: 6661
+M11:
+  tags:
+    - mountains
+  area: 92586
+  carryingCapacity: 1543
+M12:
+  tags:
+    - mountains
+  area: 357771
+  carryingCapacity: 5962
+M13:
+  tags:
+    - mountains
+  area: 495282
+  carryingCapacity: 8254
+M14:
+  tags:
+    - mountains
+  area: 424414
+  carryingCapacity: 7073
+P01:
+  tags:
+    - polar
+  area: 6344880
+  carryingCapacity: 42299
+P02:
+  tags:
+    - polar
+  area: 2461234
+  carryingCapacity: 16408
+P03:
+  tags:
+    - polar
+  area: 299121
+  carryingCapacity: 1994
