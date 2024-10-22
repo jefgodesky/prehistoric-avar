@@ -84,4 +84,20 @@ describe('World', () => {
       expect(world.habitability).toBe(0.4)
     })
   })
+
+  describe('restoreHabitability', () => {
+    it('restores half of the habitability lost', () => {
+      const world = new World()
+      world.habitability = 0.8
+      world.restoreHabitability()
+      expect(world.habitability).toBe(0.9)
+    })
+
+    it('rounds 0.95 up to 1', () => {
+      const world = new World()
+      world.habitability = 0.9
+      world.restoreHabitability()
+      expect(world.habitability).toBe(1)
+    })
+  })
 })

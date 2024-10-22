@@ -1,3 +1,5 @@
+const ROUND_HABITABILITY_TO_FULL = 0.95
+
 class World {
   habitability: number
   events: string[]
@@ -35,6 +37,12 @@ class World {
 
   reduceHabitability(factor: number): void {
     this.habitability *= factor
+  }
+
+  restoreHabitability(): void {
+    const gap = 1 - this.habitability
+    this.habitability += gap / 2
+    if (this.habitability >= ROUND_HABITABILITY_TO_FULL) this.habitability = 1
   }
 }
 
