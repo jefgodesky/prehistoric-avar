@@ -29,4 +29,12 @@ describe('World', () => {
       expect(world.events).toHaveLength(0)
     })
   })
+
+  describe('incrDraconicInterest', () => {
+    it('increases the level of draconic interest by 1', () => {
+      const world = new World()
+      world.incrDraconicInterest()
+      expect(world.dragons.interest).toBe(1)
+    })
+  })
 })

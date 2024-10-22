@@ -14,6 +14,10 @@ class World {
       fear: 0
     }
   }
+
+  incrDraconicInterest(): void {
+    this.dragons.interest++
+  }
 }
 
 export default World
