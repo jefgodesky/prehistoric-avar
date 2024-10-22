@@ -48,6 +48,10 @@ class World {
   addEvent(event: string): void {
     this.events = [...this.events, event]
   }
+
+  hasEvent(event: string): boolean {
+    return this.events.includes(event)
+  }
 }
 
 export default World

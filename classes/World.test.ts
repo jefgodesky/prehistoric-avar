@@ -109,4 +109,19 @@ describe('World', () => {
       expect(world.events).toEqual([event])
     })
   })
+
+  describe('hasEvent', () => {
+    const event = 'hasEvent test passes'
+
+    it('returns false if the world does not have the event', () => {
+      const world = new World()
+      expect(world.hasEvent(event)).toBe(false)
+    })
+
+    it('returns true if the world does have the event', () => {
+      const world = new World()
+      world.events = [event]
+      expect(world.hasEvent(event)).toBe(true)
+    })
+  })
 })
