@@ -52,4 +52,12 @@ describe('World', () => {
       expect(world.dragons.interest).toBe(0)
     })
   })
+
+  describe('incrDraconicFear', () => {
+    it('increases the level of draconic fear by 1', () => {
+      const world = new World()
+      world.incrDraconicFear()
+      expect(world.dragons.fear).toBe(1)
+    })
+  })
 })
