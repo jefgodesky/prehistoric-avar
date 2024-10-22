@@ -37,4 +37,19 @@ describe('World', () => {
       expect(world.dragons.interest).toBe(1)
     })
   })
+
+  describe('decrDraconicInterest', () => {
+    it('decreases the level of draconic interest by 1', () => {
+      const world = new World()
+      world.dragons.interest = 5
+      world.decrDraconicInterest()
+      expect(world.dragons.interest).toBe(4)
+    })
+
+    it('will not decrease draconic interest below 0', () => {
+      const world = new World()
+      world.decrDraconicInterest()
+      expect(world.dragons.interest).toBe(0)
+    })
+  })
 })
