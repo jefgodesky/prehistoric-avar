@@ -75,4 +75,13 @@ describe('World', () => {
       expect(world.dragons.fear).toBe(0)
     })
   })
+
+  describe('reduceHabitability', () => {
+    it('reduces habitability by a given percent', () => {
+      const world = new World()
+      world.habitability = 0.8
+      world.reduceHabitability(0.5)
+      expect(world.habitability).toBe(0.4)
+    })
+  })
 })

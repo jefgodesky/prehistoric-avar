@@ -32,6 +32,10 @@ class World {
     const { fear } = this.dragons
     this.dragons.fear = Math.max(fear - 1, 0)
   }
+
+  reduceHabitability(factor: number): void {
+    this.habitability *= factor
+  }
 }
 
 export default World
