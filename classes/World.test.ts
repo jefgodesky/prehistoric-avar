@@ -60,4 +60,19 @@ describe('World', () => {
       expect(world.dragons.fear).toBe(1)
     })
   })
+
+  describe('decrDraconicFear', () => {
+    it('decreases the level of draconic fear by 1', () => {
+      const world = new World()
+      world.dragons.fear = 5
+      world.decrDraconicFear()
+      expect(world.dragons.fear).toBe(4)
+    })
+
+    it('will not decrease draconic fear below 0', () => {
+      const world = new World()
+      world.decrDraconicFear()
+      expect(world.dragons.fear).toBe(0)
+    })
+  })
 })

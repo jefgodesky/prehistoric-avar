@@ -27,6 +27,11 @@ class World {
   incrDraconicFear(): void {
     this.dragons.fear++
   }
+
+  decrDraconicFear(): void {
+    const { fear } = this.dragons
+    this.dragons.fear = Math.max(fear - 1, 0)
+  }
 }
 
 export default World
