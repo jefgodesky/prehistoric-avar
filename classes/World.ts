@@ -44,6 +44,10 @@ class World {
     this.habitability += gap / 2
     if (this.habitability >= ROUND_HABITABILITY_TO_FULL) this.habitability = 1
   }
+
+  addEvent(event: string): void {
+    this.events = [...this.events, event]
+  }
 }
 
 export default World

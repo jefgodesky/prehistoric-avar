@@ -100,4 +100,13 @@ describe('World', () => {
       expect(world.habitability).toBe(1)
     })
   })
+
+  describe('addEvent', () => {
+    it('adds an event to the world', () => {
+      const event = 'addEvent adds an event to the world'
+      const world = new World()
+      world.addEvent(event)
+      expect(world.events).toEqual([event])
+    })
+  })
 })
