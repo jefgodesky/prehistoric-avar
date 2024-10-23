@@ -1,19 +1,43 @@
 import { parse, stringify } from 'yaml'
 import calculateArea from './calculate-area.ts'
 import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
+import getAdjacencyList from './get-adjacency-list.ts'
+import parseRegionId from './parse-region-id.ts'
 import type { IRegion, IRegionData } from './index.t.ts'
+import { LAYER } from './layer.ts'
 
-export const evalRegions = async (regions: Record<string, IRegion>): Promise<IRegionData> => {
+interface IEvalRegionsData {
+  regions: Record<string, IRegion>
+  adjacency: Record<string, string[]>
+  coastal: string[]
+}
+
+export const evalRegions = async (input: IEvalRegionsData): Promise<IRegionData> => {
+  const { regions, adjacency, coastal } = input
   const data: IRegionData = {}
 
   for (const regionType in regions) {
     const score = regions[regionType]['Carrying capacity score']
 
     for (const id of regions[regionType].Regions) {
-      const tags = regions[regionType]['Class names'].slice()
-      const area = await calculateArea(id)
-      const carryingCapacity = calculateCarryingCapacity(area, score)
-      data[id] = { tags, area, carryingCapacity}
+      const [code, num] = parseRegionId(id)
+      const givenTags = regions[regionType]['Class names'].slice()
+      const tags = coastal.includes(id)
+        ? [...givenTags, 'surface', 'coastal']
+        : [...givenTags, 'surface']
+      const layers = [
+        { code: 'S', score, tags, regionType, species: regions[regionType].Species },
+        { code: 'C', score: 2, tags: ['near-surface'], regionType: 'Near-surface subterranean', species: undefined },
+        { code: 'D', score: 10, tags: ['world-below'], regionType: 'World Below', species: 'Gnome' }
+      ]
+
+      for (const layer of layers) {
+        const layerId = [code, layer.code, num].join('')
+        const area = await calculateArea(id)
+        const capacity = calculateCarryingCapacity(area, layer.score)
+        const adjacent = getAdjacencyList(id, adjacency, layer.code as LAYER)
+        data[layerId] = { tags: layer.tags, area, capacity, adjacent, species: layer.species }
+      }
     }
   }
 
@@ -30,8 +54,12 @@ if (import.meta.main) {
     const [output] = Deno.args
     try {
       const regionsYAML = await Deno.readTextFile('regions.yml')
+      const adjacencyYAML = await Deno.readTextFile('adjacency.yml')
+      const coastalTXT = await Deno.readTextFile('coastal.txt')
       const regions = parse(regionsYAML) as Record<string, IRegion>
-      const result = await evalRegions(regions)
+      const adjacency = parse(adjacencyYAML) as Record<string, string[]>
+      const coastal = coastalTXT.split('\n')
+      const result = await evalRegions({ regions, adjacency, coastal })
       const resultYAML = stringify(result)
       await Deno.writeTextFile(`./${output}.yml`, resultYAML)
       console.log(`Region evaluation successfully written to ./${output}.yml`)
