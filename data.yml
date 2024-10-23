@@ -1,361 +1,2396 @@
-F01:
+FS01:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 1272233
-  carryingCapacity: 25444
-F02:
+  capacity: 25444
+  adjacent:
+    - FC01
+    - GS05
+    - PS03
+    - FS16
+  species: Orc
+FC01:
+  tags:
+    - near-surface
+  area: 1272233
+  capacity: 4240
+  adjacent:
+    - FS01
+    - FD01
+    - GC05
+    - PC03
+    - FC16
+FD01:
+  tags:
+    - world-below
+  area: 1272233
+  capacity: 21203
+  adjacent:
+    - FC01
+    - GD05
+    - PD03
+    - FD16
+  species: Gnome
+FS02:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 770419
-  carryingCapacity: 15408
-F03:
+  capacity: 15408
+  adjacent:
+    - FC02
+    - GS08
+    - FS15
+    - FS03
+    - PS02
+    - FS17
+    - MS05
+  species: Orc
+FC02:
+  tags:
+    - near-surface
+  area: 770419
+  capacity: 2568
+  adjacent:
+    - FS02
+    - FD02
+    - GC08
+    - FC15
+    - FC03
+    - PC02
+    - FC17
+    - MC05
+FD02:
+  tags:
+    - world-below
+  area: 770419
+  capacity: 12840
+  adjacent:
+    - FC02
+    - GD08
+    - FD15
+    - FD03
+    - PD02
+    - FD17
+    - MD05
+  species: Gnome
+FS03:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 871401
-  carryingCapacity: 17428
-F04:
+  capacity: 17428
+  adjacent:
+    - FC03
+    - GS06
+    - MS04
+    - GS07
+    - PS02
+    - FS02
+    - FS15
+  species: Orc
+FC03:
+  tags:
+    - near-surface
+  area: 871401
+  capacity: 2904
+  adjacent:
+    - FS03
+    - FD03
+    - GC06
+    - MC04
+    - GC07
+    - PC02
+    - FC02
+    - FC15
+FD03:
+  tags:
+    - world-below
+  area: 871401
+  capacity: 14523
+  adjacent:
+    - FC03
+    - GD06
+    - MD04
+    - GD07
+    - PD02
+    - FD02
+    - FD15
+  species: Gnome
+FS04:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 2397898
-  carryingCapacity: 47957
-F05:
+  capacity: 47957
+  adjacent:
+    - FC04
+    - PS01
+    - FS06
+    - FS13
+    - GS04
+    - MS13
+    - FS12
+    - MS03
+    - FS05
+  species: Orc
+FC04:
+  tags:
+    - near-surface
+  area: 2397898
+  capacity: 7992
+  adjacent:
+    - FS04
+    - FD04
+    - PC01
+    - FC06
+    - FC13
+    - GC04
+    - MC13
+    - FC12
+    - MC03
+    - FC05
+FD04:
+  tags:
+    - world-below
+  area: 2397898
+  capacity: 39964
+  adjacent:
+    - FC04
+    - PD01
+    - FD06
+    - FD13
+    - GD04
+    - MD13
+    - FD12
+    - MD03
+    - FD05
+  species: Gnome
+FS05:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 542146
-  carryingCapacity: 10842
-F06:
+  capacity: 10842
+  adjacent:
+    - FC05
+    - FS04
+    - MS03
+    - FS08
+  species: Orc
+FC05:
+  tags:
+    - near-surface
+  area: 542146
+  capacity: 1807
+  adjacent:
+    - FS05
+    - FD05
+    - FC04
+    - MC03
+    - FC08
+FD05:
+  tags:
+    - world-below
+  area: 542146
+  capacity: 9035
+  adjacent:
+    - FC05
+    - FD04
+    - MD03
+    - FD08
+  species: Gnome
+FS06:
   tags:
     - forest
     - boreal
+    - surface
   area: 1563314
-  carryingCapacity: 31266
-F07:
+  capacity: 31266
+  adjacent:
+    - FC06
+    - PS01
+    - MS14
+    - FS20
+    - GS04
+    - FS13
+    - FS04
+  species: Orc
+FC06:
+  tags:
+    - near-surface
+  area: 1563314
+  capacity: 5211
+  adjacent:
+    - FS06
+    - FD06
+    - PC01
+    - MC14
+    - FC20
+    - GC04
+    - FC13
+    - FC04
+FD06:
+  tags:
+    - world-below
+  area: 1563314
+  capacity: 26055
+  adjacent:
+    - FC06
+    - PD01
+    - MD14
+    - FD20
+    - GD04
+    - FD13
+    - FD04
+  species: Gnome
+FS07:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 838716
-  carryingCapacity: 16774
-F27:
+  capacity: 16774
+  adjacent:
+    - FC07
+    - PS01
+    - FS25
+    - FS22
+    - MS14
+  species: Orc
+FC07:
+  tags:
+    - near-surface
+  area: 838716
+  capacity: 2795
+  adjacent:
+    - FS07
+    - FD07
+    - PC01
+    - FC25
+    - FC22
+    - MC14
+FD07:
+  tags:
+    - world-below
+  area: 838716
+  capacity: 13978
+  adjacent:
+    - FC07
+    - PD01
+    - FD25
+    - FD22
+    - MD14
+  species: Gnome
+FS27:
   tags:
     - forest
     - boreal
+    - surface
+    - coastal
   area: 281407
-  carryingCapacity: 5628
-F08:
+  capacity: 5628
+  adjacent:
+    - FC27
+    - FS28
+    - GS12
+  species: Orc
+FC27:
+  tags:
+    - near-surface
+  area: 281407
+  capacity: 938
+  adjacent:
+    - FS27
+    - FD27
+    - FC28
+    - GC12
+FD27:
+  tags:
+    - world-below
+  area: 281407
+  capacity: 4690
+  adjacent:
+    - FC27
+    - FD28
+    - GD12
+  species: Gnome
+FS08:
   tags:
     - forest
     - temperate
+    - surface
+    - coastal
   area: 1312439
-  carryingCapacity: 207802
-F12:
+  capacity: 207802
+  adjacent:
+    - FC08
+    - FS05
+    - MS03
+    - GS01
+FC08:
+  tags:
+    - near-surface
+  area: 1312439
+  capacity: 4374
+  adjacent:
+    - FS08
+    - FD08
+    - FC05
+    - MC03
+    - GC01
+FD08:
+  tags:
+    - world-below
+  area: 1312439
+  capacity: 21873
+  adjacent:
+    - FC08
+    - FD05
+    - MD03
+    - GD01
+  species: Gnome
+FS12:
   tags:
     - forest
     - temperate
+    - surface
   area: 790423
-  carryingCapacity: 125150
-F13:
+  capacity: 125150
+  adjacent:
+    - FC12
+    - FS04
+    - MS13
+    - GS02
+    - MS03
+FC12:
+  tags:
+    - near-surface
+  area: 790423
+  capacity: 2634
+  adjacent:
+    - FS12
+    - FD12
+    - FC04
+    - MC13
+    - GC02
+    - MC03
+FD12:
+  tags:
+    - world-below
+  area: 790423
+  capacity: 13173
+  adjacent:
+    - FC12
+    - FD04
+    - MD13
+    - GD02
+    - MD03
+  species: Gnome
+FS13:
   tags:
     - forest
     - temperate
+    - surface
   area: 441338
-  carryingCapacity: 69878
-F14:
+  capacity: 69878
+  adjacent:
+    - FC13
+    - FS06
+    - GS04
+    - FS04
+FC13:
+  tags:
+    - near-surface
+  area: 441338
+  capacity: 1471
+  adjacent:
+    - FS13
+    - FD13
+    - FC06
+    - GC04
+    - FC04
+FD13:
+  tags:
+    - world-below
+  area: 441338
+  capacity: 7355
+  adjacent:
+    - FC13
+    - FD06
+    - GD04
+    - FD04
+  species: Gnome
+FS14:
   tags:
     - forest
     - temperate
+    - surface
   area: 302461
-  carryingCapacity: 47889
-F15:
+  capacity: 47889
+  adjacent:
+    - FC14
+    - GS05
+    - GS07
+    - GS06
+    - MS06
+FC14:
+  tags:
+    - near-surface
+  area: 302461
+  capacity: 1008
+  adjacent:
+    - FS14
+    - FD14
+    - GC05
+    - GC07
+    - GC06
+    - MC06
+FD14:
+  tags:
+    - world-below
+  area: 302461
+  capacity: 5041
+  adjacent:
+    - FC14
+    - GD05
+    - GD07
+    - GD06
+    - MD06
+  species: Gnome
+FS15:
   tags:
     - forest
     - temperate
+    - surface
   area: 1022220
-  carryingCapacity: 161851
-F16:
+  capacity: 161851
+  adjacent:
+    - FC15
+    - GS06
+    - FS03
+    - FS02
+    - GS08
+FC15:
+  tags:
+    - near-surface
+  area: 1022220
+  capacity: 3407
+  adjacent:
+    - FS15
+    - FD15
+    - GC06
+    - FC03
+    - FC02
+    - GC08
+FD15:
+  tags:
+    - world-below
+  area: 1022220
+  capacity: 17037
+  adjacent:
+    - FC15
+    - GD06
+    - FD03
+    - FD02
+    - GD08
+  species: Gnome
+FS16:
   tags:
     - forest
     - temperate
+    - surface
+    - coastal
   area: 529924
-  carryingCapacity: 83904
-F17:
+  capacity: 83904
+  adjacent:
+    - FC16
+    - GS05
+    - FS01
+    - GS07
+FC16:
+  tags:
+    - near-surface
+  area: 529924
+  capacity: 1766
+  adjacent:
+    - FS16
+    - FD16
+    - GC05
+    - FC01
+    - GC07
+FD16:
+  tags:
+    - world-below
+  area: 529924
+  capacity: 8832
+  adjacent:
+    - FC16
+    - GD05
+    - FD01
+    - GD07
+  species: Gnome
+FS17:
   tags:
     - forest
     - temperate
+    - surface
+    - coastal
   area: 1659045
-  carryingCapacity: 262682
-F19:
+  capacity: 262682
+  adjacent:
+    - FC17
+    - GS09
+    - MS07
+    - GS08
+    - MS05
+    - FS02
+FC17:
+  tags:
+    - near-surface
+  area: 1659045
+  capacity: 5530
+  adjacent:
+    - FS17
+    - FD17
+    - GC09
+    - MC07
+    - GC08
+    - MC05
+    - FC02
+FD17:
+  tags:
+    - world-below
+  area: 1659045
+  capacity: 27650
+  adjacent:
+    - FC17
+    - GD09
+    - MD07
+    - GD08
+    - MD05
+    - FD02
+  species: Gnome
+FS19:
   tags:
     - forest
     - temperate
+    - surface
   area: 884193
-  carryingCapacity: 139997
-F20:
+  capacity: 139997
+  adjacent:
+    - FC19
+    - GS13
+    - MS06
+    - GS05
+    - FS29
+FC19:
+  tags:
+    - near-surface
+  area: 884193
+  capacity: 2947
+  adjacent:
+    - FS19
+    - FD19
+    - GC13
+    - MC06
+    - GC05
+    - FC29
+FD19:
+  tags:
+    - world-below
+  area: 884193
+  capacity: 14736
+  adjacent:
+    - FC19
+    - GD13
+    - MD06
+    - GD05
+    - FD29
+  species: Gnome
+FS20:
   tags:
     - forest
     - temperate
+    - surface
   area: 1759128
-  carryingCapacity: 278528
-F21:
+  capacity: 278528
+  adjacent:
+    - FC20
+    - FS06
+    - MS14
+    - FS22
+    - MS11
+    - FS21
+    - GS04
+FC20:
+  tags:
+    - near-surface
+  area: 1759128
+  capacity: 5863
+  adjacent:
+    - FS20
+    - FD20
+    - FC06
+    - MC14
+    - FC22
+    - MC11
+    - FC21
+    - GC04
+FD20:
+  tags:
+    - world-below
+  area: 1759128
+  capacity: 29318
+  adjacent:
+    - FC20
+    - FD06
+    - MD14
+    - FD22
+    - MD11
+    - FD21
+    - GD04
+  species: Gnome
+FS21:
   tags:
     - forest
     - temperate
+    - surface
   area: 619474
-  carryingCapacity: 98083
-F22:
+  capacity: 98083
+  adjacent:
+    - FC21
+    - FS20
+    - GS04
+    - MS10
+FC21:
+  tags:
+    - near-surface
+  area: 619474
+  capacity: 2064
+  adjacent:
+    - FS21
+    - FD21
+    - FC20
+    - GC04
+    - MC10
+FD21:
+  tags:
+    - world-below
+  area: 619474
+  capacity: 10324
+  adjacent:
+    - FC21
+    - FD20
+    - GD04
+    - MD10
+  species: Gnome
+FS22:
   tags:
     - forest
     - temperate
+    - surface
   area: 1211075
-  carryingCapacity: 191753
-F25:
+  capacity: 191753
+  adjacent:
+    - FC22
+    - FS07
+    - FS20
+    - MS11
+    - MS14
+FC22:
+  tags:
+    - near-surface
+  area: 1211075
+  capacity: 4036
+  adjacent:
+    - FS22
+    - FD22
+    - FC07
+    - FC20
+    - MC11
+    - MC14
+FD22:
+  tags:
+    - world-below
+  area: 1211075
+  capacity: 20184
+  adjacent:
+    - FC22
+    - FD07
+    - FD20
+    - MD11
+    - MD14
+  species: Gnome
+FS25:
   tags:
     - forest
     - temperate
+    - surface
+    - coastal
   area: 571972
-  carryingCapacity: 90562
-F26:
+  capacity: 90562
+  adjacent:
+    - FC25
+    - FS07
+    - FS28
+    - MS12
+    - GS11
+    - FS26
+FC25:
+  tags:
+    - near-surface
+  area: 571972
+  capacity: 1906
+  adjacent:
+    - FS25
+    - FD25
+    - FC07
+    - FC28
+    - MC12
+    - GC11
+    - FC26
+FD25:
+  tags:
+    - world-below
+  area: 571972
+  capacity: 9532
+  adjacent:
+    - FC25
+    - FD07
+    - FD28
+    - MD12
+    - GD11
+    - FD26
+  species: Gnome
+FS26:
   tags:
     - forest
     - temperate
+    - surface
   area: 331348
-  carryingCapacity: 52463
-F28:
+  capacity: 52463
+  adjacent:
+    - FC26
+    - FS25
+    - GS11
+    - MS06
+    - FS24
+FC26:
+  tags:
+    - near-surface
+  area: 331348
+  capacity: 1104
+  adjacent:
+    - FS26
+    - FD26
+    - FC25
+    - GC11
+    - MC06
+    - FC24
+FD26:
+  tags:
+    - world-below
+  area: 331348
+  capacity: 5522
+  adjacent:
+    - FC26
+    - FD25
+    - GD11
+    - MD06
+    - FD24
+  species: Gnome
+FS28:
   tags:
     - forest
     - temperate
+    - surface
+    - coastal
   area: 1786031
-  carryingCapacity: 282788
-F30:
+  capacity: 282788
+  adjacent:
+    - FC28
+    - FS27
+    - FS29
+    - MS06
+    - GS11
+    - MS12
+    - FS25
+    - GS12
+FC28:
+  tags:
+    - near-surface
+  area: 1786031
+  capacity: 5953
+  adjacent:
+    - FS28
+    - FD28
+    - FC27
+    - FC29
+    - MC06
+    - GC11
+    - MC12
+    - FC25
+    - GC12
+FD28:
+  tags:
+    - world-below
+  area: 1786031
+  capacity: 29767
+  adjacent:
+    - FC28
+    - FD27
+    - FD29
+    - MD06
+    - GD11
+    - MD12
+    - FD25
+    - GD12
+  species: Gnome
+FS30:
   tags:
     - forest
     - temperate
+    - surface
+    - coastal
   area: 1978204
-  carryingCapacity: 313215
-F09:
+  capacity: 313215
+  adjacent:
+    - FC30
+    - FS31
+    - GS05
+FC30:
+  tags:
+    - near-surface
+  area: 1978204
+  capacity: 6594
+  adjacent:
+    - FS30
+    - FD30
+    - FC31
+    - GC05
+FD30:
+  tags:
+    - world-below
+  area: 1978204
+  capacity: 32970
+  adjacent:
+    - FC30
+    - FD31
+    - GD05
+  species: Gnome
+FS09:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 4969480
-  carryingCapacity: 538360
-F10:
+  capacity: 538360
+  adjacent:
+    - FC09
+    - GS03
+    - MS01
+FC09:
+  tags:
+    - near-surface
+  area: 4969480
+  capacity: 16564
+  adjacent:
+    - FS09
+    - FD09
+    - GC03
+    - MC01
+FD09:
+  tags:
+    - world-below
+  area: 4969480
+  capacity: 82824
+  adjacent:
+    - FC09
+    - GD03
+    - MD01
+  species: Gnome
+FS10:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 2725549
-  carryingCapacity: 295267
-F11:
+  capacity: 295267
+  adjacent:
+    - FC10
+    - MS01
+    - FS11
+FC10:
+  tags:
+    - near-surface
+  area: 2725549
+  capacity: 9085
+  adjacent:
+    - FS10
+    - FD10
+    - MC01
+    - FC11
+FD10:
+  tags:
+    - world-below
+  area: 2725549
+  capacity: 45425
+  adjacent:
+    - FC10
+    - MD01
+    - FD11
+  species: Gnome
+FS11:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 3572789
-  carryingCapacity: 387052
-F18:
+  capacity: 387052
+  adjacent:
+    - FC11
+    - FS10
+FC11:
+  tags:
+    - near-surface
+  area: 3572789
+  capacity: 11909
+  adjacent:
+    - FS11
+    - FD11
+    - FC10
+FD11:
+  tags:
+    - world-below
+  area: 3572789
+  capacity: 59546
+  adjacent:
+    - FC11
+    - FD10
+  species: Gnome
+FS18:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 353034
-  carryingCapacity: 38245
-F23:
+  capacity: 38245
+  adjacent:
+    - FC18
+    - GS06
+    - MS07
+    - GS09
+FC18:
+  tags:
+    - near-surface
+  area: 353034
+  capacity: 1176
+  adjacent:
+    - FS18
+    - FD18
+    - GC06
+    - MC07
+    - GC09
+FD18:
+  tags:
+    - world-below
+  area: 353034
+  capacity: 5883
+  adjacent:
+    - FC18
+    - GD06
+    - MD07
+    - GD09
+  species: Gnome
+FS23:
   tags:
     - forest
     - tropical
+    - surface
   area: 471742
-  carryingCapacity: 51105
-F24:
+  capacity: 51105
+  adjacent:
+    - FC23
+    - MS08
+    - GS10
+FC23:
+  tags:
+    - near-surface
+  area: 471742
+  capacity: 1572
+  adjacent:
+    - FS23
+    - FD23
+    - MC08
+    - GC10
+FD23:
+  tags:
+    - world-below
+  area: 471742
+  capacity: 7862
+  adjacent:
+    - FC23
+    - MD08
+    - GD10
+  species: Gnome
+FS24:
   tags:
     - forest
     - tropical
+    - surface
   area: 529878
-  carryingCapacity: 57403
-F29:
+  capacity: 57403
+  adjacent:
+    - FC24
+    - FS26
+    - MS06
+    - DS01
+    - MS08
+FC24:
+  tags:
+    - near-surface
+  area: 529878
+  capacity: 1766
+  adjacent:
+    - FS24
+    - FD24
+    - FC26
+    - MC06
+    - DC01
+    - MC08
+FD24:
+  tags:
+    - world-below
+  area: 529878
+  capacity: 8831
+  adjacent:
+    - FC24
+    - FD26
+    - MD06
+    - DD01
+    - MD08
+  species: Gnome
+FS29:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 4674493
-  carryingCapacity: 506403
-F31:
+  capacity: 506403
+  adjacent:
+    - FC29
+    - FS28
+    - FS19
+    - MS06
+FC29:
+  tags:
+    - near-surface
+  area: 4674493
+  capacity: 15581
+  adjacent:
+    - FS29
+    - FD29
+    - FC28
+    - FC19
+    - MC06
+FD29:
+  tags:
+    - world-below
+  area: 4674493
+  capacity: 77908
+  adjacent:
+    - FC29
+    - FD28
+    - FD19
+    - MD06
+  species: Gnome
+FS31:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 4727511
-  carryingCapacity: 512147
-F32:
+  capacity: 512147
+  adjacent:
+    - FC31
+    - FS30
+    - GS05
+FC31:
+  tags:
+    - near-surface
+  area: 4727511
+  capacity: 15758
+  adjacent:
+    - FS31
+    - FD31
+    - FC30
+    - GC05
+FD31:
+  tags:
+    - world-below
+  area: 4727511
+  capacity: 78791
+  adjacent:
+    - FC31
+    - FD30
+    - GD05
+  species: Gnome
+FS32:
   tags:
     - forest
     - tropical
+    - surface
+    - coastal
   area: 140985
-  carryingCapacity: 15273
-D01:
+  capacity: 15273
+  adjacent:
+    - FC32
+  species: Halfling
+FC32:
+  tags:
+    - near-surface
+  area: 140985
+  capacity: 469
+  adjacent:
+    - FS32
+    - FD32
+FD32:
+  tags:
+    - world-below
+  area: 140985
+  capacity: 2349
+  adjacent:
+    - FC32
+  species: Gnome
+DS01:
   tags:
     - desert
     - hot
+    - surface
   area: 2688696
-  carryingCapacity: 17924
-G01:
+  capacity: 17924
+  adjacent:
+    - DC01
+    - MS06
+    - GS06
+    - GS10
+    - FS23
+DC01:
+  tags:
+    - near-surface
+  area: 2688696
+  capacity: 8962
+  adjacent:
+    - DS01
+    - DD01
+    - MC06
+    - GC06
+    - GC10
+    - FC23
+DD01:
+  tags:
+    - world-below
+  area: 2688696
+  capacity: 44811
+  adjacent:
+    - DC01
+    - MD06
+    - GD06
+    - GD10
+    - FD23
+  species: Gnome
+GS01:
   tags:
     - grassland
     - tropical
+    - surface
+    - coastal
   area: 870978
-  carryingCapacity: 31935
-G03:
+  capacity: 31935
+  adjacent:
+    - GC01
+    - FS08
+    - MS03
+    - GS02
+    - MS02
+    - GS03
+  species: Human
+GC01:
+  tags:
+    - near-surface
+  area: 870978
+  capacity: 2903
+  adjacent:
+    - GS01
+    - GD01
+    - FC08
+    - MC03
+    - GC02
+    - MC02
+    - GC03
+GD01:
+  tags:
+    - world-below
+  area: 870978
+  capacity: 14516
+  adjacent:
+    - GC01
+    - FD08
+    - MD03
+    - GD02
+    - MD02
+    - GD03
+  species: Gnome
+GS03:
   tags:
     - grassland
     - tropical
+    - surface
+    - coastal
   area: 5202705
-  carryingCapacity: 190765
-G09:
+  capacity: 190765
+  adjacent:
+    - GC03
+    - MS13
+    - GS04
+    - MS09
+    - FS09
+    - GS01
+    - MS02
+    - GS02
+  species: Human
+GC03:
+  tags:
+    - near-surface
+  area: 5202705
+  capacity: 17342
+  adjacent:
+    - GS03
+    - GD03
+    - MC13
+    - GC04
+    - MC09
+    - FC09
+    - GC01
+    - MC02
+    - GC02
+GD03:
+  tags:
+    - world-below
+  area: 5202705
+  capacity: 86711
+  adjacent:
+    - GC03
+    - MD13
+    - GD04
+    - MD09
+    - FD09
+    - GD01
+    - MD02
+    - GD02
+  species: Gnome
+GS09:
   tags:
     - grassland
     - tropical
+    - surface
+    - coastal
   area: 386978
-  carryingCapacity: 14189
-G10:
+  capacity: 14189
+  adjacent:
+    - GC09
+    - FS18
+    - MS07
+    - FS17
+  species: Human
+GC09:
+  tags:
+    - near-surface
+  area: 386978
+  capacity: 1289
+  adjacent:
+    - GS09
+    - GD09
+    - FC18
+    - MC07
+    - FC17
+GD09:
+  tags:
+    - world-below
+  area: 386978
+  capacity: 6449
+  adjacent:
+    - GC09
+    - FD18
+    - MD07
+    - FD17
+  species: Gnome
+GS10:
   tags:
     - grassland
     - tropical
+    - surface
+    - coastal
   area: 1137580
-  carryingCapacity: 41711
-G13:
+  capacity: 41711
+  adjacent:
+    - GC10
+    - FS23
+    - MS08
+    - GS06
+    - GS04
+  species: Human
+GC10:
+  tags:
+    - near-surface
+  area: 1137580
+  capacity: 3791
+  adjacent:
+    - GS10
+    - GD10
+    - FC23
+    - MC08
+    - GC06
+    - GC04
+GD10:
+  tags:
+    - world-below
+  area: 1137580
+  capacity: 18959
+  adjacent:
+    - GC10
+    - FD23
+    - MD08
+    - GD06
+    - GD04
+  species: Gnome
+GS13:
   tags:
     - grassland
     - tropical
+    - surface
   area: 531971
-  carryingCapacity: 19505
-G02:
+  capacity: 19505
+  adjacent:
+    - GC13
+    - MS06
+    - FS19
+  species: Human
+GC13:
+  tags:
+    - near-surface
+  area: 531971
+  capacity: 1773
+  adjacent:
+    - GS13
+    - GD13
+    - MC06
+    - FC19
+GD13:
+  tags:
+    - world-below
+  area: 531971
+  capacity: 8866
+  adjacent:
+    - GC13
+    - MD06
+    - FD19
+  species: Gnome
+GS02:
   tags:
     - grassland
     - temperate
+    - surface
   area: 1364935
-  carryingCapacity: 68246
-G04:
+  capacity: 68246
+  adjacent:
+    - GC02
+    - FS12
+    - MS13
+    - GS03
+    - MS02
+    - GS01
+GC02:
+  tags:
+    - near-surface
+  area: 1364935
+  capacity: 4549
+  adjacent:
+    - GS02
+    - GD02
+    - FC12
+    - MC13
+    - GC03
+    - MC02
+    - GC01
+GD02:
+  tags:
+    - world-below
+  area: 1364935
+  capacity: 22748
+  adjacent:
+    - GC02
+    - FD12
+    - MD13
+    - GD03
+    - MD02
+    - GD01
+  species: Gnome
+GS04:
   tags:
     - grassland
     - temperate
+    - surface
+    - coastal
   area: 4887376
-  carryingCapacity: 244368
-G05:
+  capacity: 244368
+  adjacent:
+    - GC04
+    - FS13
+    - FS06
+    - FS20
+    - FS21
+    - MS10
+    - GS10
+    - GS03
+    - MS09
+    - MS13
+    - FS04
+GC04:
+  tags:
+    - near-surface
+  area: 4887376
+  capacity: 16291
+  adjacent:
+    - GS04
+    - GD04
+    - FC13
+    - FC06
+    - FC20
+    - FC21
+    - MC10
+    - GC10
+    - GC03
+    - MC09
+    - MC13
+    - FC04
+GD04:
+  tags:
+    - world-below
+  area: 4887376
+  capacity: 81456
+  adjacent:
+    - GC04
+    - FD13
+    - FD06
+    - FD20
+    - FD21
+    - MD10
+    - GD10
+    - GD03
+    - MD09
+    - MD13
+    - FD04
+  species: Gnome
+GS05:
   tags:
     - grassland
     - temperate
+    - surface
+    - coastal
   area: 4024890
-  carryingCapacity: 201244
-G06:
+  capacity: 201244
+  adjacent:
+    - GC05
+    - FS19
+    - FS31
+    - FS30
+    - FS01
+    - FS16
+    - FS14
+    - MS06
+GC05:
+  tags:
+    - near-surface
+  area: 4024890
+  capacity: 13416
+  adjacent:
+    - GS05
+    - GD05
+    - FC19
+    - FC31
+    - FC30
+    - FC01
+    - FC16
+    - FC14
+    - MC06
+GD05:
+  tags:
+    - world-below
+  area: 4024890
+  capacity: 67081
+  adjacent:
+    - GC05
+    - FD19
+    - FD31
+    - FD30
+    - FD01
+    - FD16
+    - FD14
+    - MD06
+  species: Gnome
+GS06:
   tags:
     - grassland
     - temperate
+    - surface
   area: 2534315
-  carryingCapacity: 126715
-G07:
+  capacity: 126715
+  adjacent:
+    - GC06
+    - MS08
+    - DS01
+    - MS06
+    - FS14
+    - GS07
+    - MS04
+    - FS03
+    - FS15
+    - GS08
+    - MS07
+    - FS18
+    - GS10
+GC06:
+  tags:
+    - near-surface
+  area: 2534315
+  capacity: 8447
+  adjacent:
+    - GS06
+    - GD06
+    - MC08
+    - DC01
+    - MC06
+    - FC14
+    - GC07
+    - MC04
+    - FC03
+    - FC15
+    - GC08
+    - MC07
+    - FC18
+    - GC10
+GD06:
+  tags:
+    - world-below
+  area: 2534315
+  capacity: 42238
+  adjacent:
+    - GC06
+    - MD08
+    - DD01
+    - MD06
+    - FD14
+    - GD07
+    - MD04
+    - FD03
+    - FD15
+    - GD08
+    - MD07
+    - FD18
+    - GD10
+  species: Gnome
+GS07:
   tags:
     - grassland
     - temperate
+    - surface
+    - coastal
   area: 428095
-  carryingCapacity: 21404
-G08:
+  capacity: 21404
+  adjacent:
+    - GC07
+    - FS14
+    - FS16
+    - FS03
+    - MS04
+    - GS06
+GC07:
+  tags:
+    - near-surface
+  area: 428095
+  capacity: 1426
+  adjacent:
+    - GS07
+    - GD07
+    - FC14
+    - FC16
+    - FC03
+    - MC04
+    - GC06
+GD07:
+  tags:
+    - world-below
+  area: 428095
+  capacity: 7134
+  adjacent:
+    - GC07
+    - FD14
+    - FD16
+    - FD03
+    - MD04
+    - GD06
+  species: Gnome
+GS08:
   tags:
     - grassland
     - temperate
+    - surface
   area: 441027
-  carryingCapacity: 22051
-G11:
+  capacity: 22051
+  adjacent:
+    - GC08
+    - MS07
+    - GS06
+    - FS15
+    - FS02
+    - MS05
+    - FS17
+GC08:
+  tags:
+    - near-surface
+  area: 441027
+  capacity: 1470
+  adjacent:
+    - GS08
+    - GD08
+    - MC07
+    - GC06
+    - FC15
+    - FC02
+    - MC05
+    - FC17
+GD08:
+  tags:
+    - world-below
+  area: 441027
+  capacity: 7350
+  adjacent:
+    - GC08
+    - MD07
+    - GD06
+    - FD15
+    - FD02
+    - MD05
+    - FD17
+  species: Gnome
+GS11:
   tags:
     - grassland
     - temperate
+    - surface
   area: 1406191
-  carryingCapacity: 70309
-G12:
+  capacity: 70309
+  adjacent:
+    - GC11
+    - FS25
+    - MS12
+    - FS28
+    - MS06
+    - FS26
+GC11:
+  tags:
+    - near-surface
+  area: 1406191
+  capacity: 4687
+  adjacent:
+    - GS11
+    - GD11
+    - FC25
+    - MC12
+    - FC28
+    - MC06
+    - FC26
+GD11:
+  tags:
+    - world-below
+  area: 1406191
+  capacity: 23436
+  adjacent:
+    - GC11
+    - FD25
+    - MD12
+    - FD28
+    - MD06
+    - FD26
+  species: Gnome
+GS12:
   tags:
     - grassland
     - temperate
+    - surface
   area: 388051
-  carryingCapacity: 19402
-M01:
+  capacity: 19402
+  adjacent:
+    - GC12
+    - FS27
+    - FS28
+GC12:
+  tags:
+    - near-surface
+  area: 388051
+  capacity: 1293
+  adjacent:
+    - GS12
+    - GD12
+    - FC27
+    - FC28
+GD12:
+  tags:
+    - world-below
+  area: 388051
+  capacity: 6467
+  adjacent:
+    - GC12
+    - FD27
+    - FD28
+  species: Gnome
+MS01:
   tags:
     - mountains
+    - surface
   area: 220309
-  carryingCapacity: 3671
-M02:
+  capacity: 3671
+  adjacent:
+    - MC01
+    - FS09
+    - FS10
+  species: Dwarf
+MC01:
+  tags:
+    - near-surface
+  area: 220309
+  capacity: 734
+  adjacent:
+    - MS01
+    - MD01
+    - FC09
+    - FC10
+MD01:
+  tags:
+    - world-below
+  area: 220309
+  capacity: 3671
+  adjacent:
+    - MC01
+    - FD09
+    - FD10
+  species: Gnome
+MS02:
   tags:
     - mountains
+    - surface
   area: 119205
-  carryingCapacity: 1986
-M03:
+  capacity: 1986
+  adjacent:
+    - MC02
+    - GS01
+    - GS02
+    - GS03
+  species: Dwarf
+MC02:
+  tags:
+    - near-surface
+  area: 119205
+  capacity: 397
+  adjacent:
+    - MS02
+    - MD02
+    - GC01
+    - GC02
+    - GC03
+MD02:
+  tags:
+    - world-below
+  area: 119205
+  capacity: 1986
+  adjacent:
+    - MC02
+    - GD01
+    - GD02
+    - GD03
+  species: Gnome
+MS03:
   tags:
     - mountains
+    - surface
   area: 466427
-  carryingCapacity: 7773
-M04:
+  capacity: 7773
+  adjacent:
+    - MC03
+    - FS04
+    - FS12
+    - GS02
+    - GS01
+    - FS08
+    - FS05
+  species: Dwarf
+MC03:
+  tags:
+    - near-surface
+  area: 466427
+  capacity: 1554
+  adjacent:
+    - MS03
+    - MD03
+    - FC04
+    - FC12
+    - GC02
+    - GC01
+    - FC08
+    - FC05
+MD03:
+  tags:
+    - world-below
+  area: 466427
+  capacity: 7773
+  adjacent:
+    - MC03
+    - FD04
+    - FD12
+    - GD02
+    - GD01
+    - FD08
+    - FD05
+  species: Gnome
+MS04:
   tags:
     - mountains
+    - surface
   area: 153562
-  carryingCapacity: 2559
-M05:
+  capacity: 2559
+  adjacent:
+    - MC04
+    - GS06
+    - GS07
+    - FS03
+  species: Dwarf
+MC04:
+  tags:
+    - near-surface
+  area: 153562
+  capacity: 511
+  adjacent:
+    - MS04
+    - MD04
+    - GC06
+    - GC07
+    - FC03
+MD04:
+  tags:
+    - world-below
+  area: 153562
+  capacity: 2559
+  adjacent:
+    - MC04
+    - GD06
+    - GD07
+    - FD03
+  species: Gnome
+MS05:
   tags:
     - mountains
+    - surface
   area: 228126
-  carryingCapacity: 3802
-M06:
+  capacity: 3802
+  adjacent:
+    - MC05
+    - GS08
+    - FS02
+    - FS17
+  species: Dwarf
+MC05:
+  tags:
+    - near-surface
+  area: 228126
+  capacity: 760
+  adjacent:
+    - MS05
+    - MD05
+    - GC08
+    - FC02
+    - FC17
+MD05:
+  tags:
+    - world-below
+  area: 228126
+  capacity: 3802
+  adjacent:
+    - MC05
+    - GD08
+    - FD02
+    - FD17
+  species: Gnome
+MS06:
   tags:
     - mountains
+    - surface
   area: 4444669
-  carryingCapacity: 74077
-M07:
+  capacity: 74077
+  adjacent:
+    - MC06
+    - FS26
+    - GS11
+    - FS28
+    - FS29
+    - FS19
+    - GS13
+    - GS05
+    - FS14
+    - GS06
+    - DS01
+    - FS24
+  species: Dwarf
+MC06:
+  tags:
+    - near-surface
+  area: 4444669
+  capacity: 14815
+  adjacent:
+    - MS06
+    - MD06
+    - FC26
+    - GC11
+    - FC28
+    - FC29
+    - FC19
+    - GC13
+    - GC05
+    - FC14
+    - GC06
+    - DC01
+    - FC24
+MD06:
+  tags:
+    - world-below
+  area: 4444669
+  capacity: 74077
+  adjacent:
+    - MC06
+    - FD26
+    - GD11
+    - FD28
+    - FD29
+    - FD19
+    - GD13
+    - GD05
+    - FD14
+    - GD06
+    - DD01
+    - FD24
+  species: Gnome
+MS07:
   tags:
     - mountains
+    - surface
   area: 871307
-  carryingCapacity: 14521
-M08:
+  capacity: 14521
+  adjacent:
+    - MC07
+    - GS09
+    - FS18
+    - GS06
+    - GS08
+    - FS17
+  species: Dwarf
+MC07:
+  tags:
+    - near-surface
+  area: 871307
+  capacity: 2904
+  adjacent:
+    - MS07
+    - MD07
+    - GC09
+    - FC18
+    - GC06
+    - GC08
+    - FC17
+MD07:
+  tags:
+    - world-below
+  area: 871307
+  capacity: 14521
+  adjacent:
+    - MC07
+    - GD09
+    - FD18
+    - GD06
+    - GD08
+    - FD17
+  species: Gnome
+MS08:
   tags:
     - mountains
+    - surface
   area: 1290871
-  carryingCapacity: 21514
-M09:
+  capacity: 21514
+  adjacent:
+    - MC08
+    - FS24
+    - DS01
+    - GS06
+    - GS10
+    - FS23
+  species: Dwarf
+MC08:
+  tags:
+    - near-surface
+  area: 1290871
+  capacity: 4302
+  adjacent:
+    - MS08
+    - MD08
+    - FC24
+    - DC01
+    - GC06
+    - GC10
+    - FC23
+MD08:
+  tags:
+    - world-below
+  area: 1290871
+  capacity: 21514
+  adjacent:
+    - MC08
+    - FD24
+    - DD01
+    - GD06
+    - GD10
+    - FD23
+  species: Gnome
+MS09:
   tags:
     - mountains
+    - surface
   area: 620278
-  carryingCapacity: 10337
-M10:
+  capacity: 10337
+  adjacent:
+    - MC09
+    - GS04
+    - GS03
+  species: Dwarf
+MC09:
+  tags:
+    - near-surface
+  area: 620278
+  capacity: 2067
+  adjacent:
+    - MS09
+    - MD09
+    - GC04
+    - GC03
+MD09:
+  tags:
+    - world-below
+  area: 620278
+  capacity: 10337
+  adjacent:
+    - MC09
+    - GD04
+    - GD03
+  species: Gnome
+MS10:
   tags:
     - mountains
+    - surface
   area: 399683
-  carryingCapacity: 6661
-M11:
+  capacity: 6661
+  adjacent:
+    - MC10
+    - GS04
+    - FS21
+  species: Dwarf
+MC10:
+  tags:
+    - near-surface
+  area: 399683
+  capacity: 1332
+  adjacent:
+    - MS10
+    - MD10
+    - GC04
+    - FC21
+MD10:
+  tags:
+    - world-below
+  area: 399683
+  capacity: 6661
+  adjacent:
+    - MC10
+    - GD04
+    - FD21
+  species: Gnome
+MS11:
   tags:
     - mountains
+    - surface
   area: 92586
-  carryingCapacity: 1543
-M12:
+  capacity: 1543
+  adjacent:
+    - MC11
+    - FS20
+    - FS22
+  species: Dwarf
+MC11:
+  tags:
+    - near-surface
+  area: 92586
+  capacity: 308
+  adjacent:
+    - MS11
+    - MD11
+    - FC20
+    - FC22
+MD11:
+  tags:
+    - world-below
+  area: 92586
+  capacity: 1543
+  adjacent:
+    - MC11
+    - FD20
+    - FD22
+  species: Gnome
+MS12:
   tags:
     - mountains
+    - surface
   area: 357771
-  carryingCapacity: 5962
-M13:
+  capacity: 5962
+  adjacent:
+    - MC12
+    - FS28
+    - GS11
+    - FS25
+  species: Dwarf
+MC12:
+  tags:
+    - near-surface
+  area: 357771
+  capacity: 1192
+  adjacent:
+    - MS12
+    - MD12
+    - FC28
+    - GC11
+    - FC25
+MD12:
+  tags:
+    - world-below
+  area: 357771
+  capacity: 5962
+  adjacent:
+    - MC12
+    - FD28
+    - GD11
+    - FD25
+  species: Gnome
+MS13:
   tags:
     - mountains
+    - surface
   area: 495282
-  carryingCapacity: 8254
-M14:
+  capacity: 8254
+  adjacent:
+    - MC13
+    - FS04
+    - GS04
+    - GS03
+    - GS02
+    - FS12
+  species: Dwarf
+MC13:
+  tags:
+    - near-surface
+  area: 495282
+  capacity: 1650
+  adjacent:
+    - MS13
+    - MD13
+    - FC04
+    - GC04
+    - GC03
+    - GC02
+    - FC12
+MD13:
+  tags:
+    - world-below
+  area: 495282
+  capacity: 8254
+  adjacent:
+    - MC13
+    - FD04
+    - GD04
+    - GD03
+    - GD02
+    - FD12
+  species: Gnome
+MS14:
   tags:
     - mountains
+    - surface
   area: 424414
-  carryingCapacity: 7073
-P01:
+  capacity: 7073
+  adjacent:
+    - MC14
+    - PS01
+    - FS07
+    - FS22
+    - FS20
+    - FS06
+  species: Dwarf
+MC14:
+  tags:
+    - near-surface
+  area: 424414
+  capacity: 1414
+  adjacent:
+    - MS14
+    - MD14
+    - PC01
+    - FC07
+    - FC22
+    - FC20
+    - FC06
+MD14:
+  tags:
+    - world-below
+  area: 424414
+  capacity: 7073
+  adjacent:
+    - MC14
+    - PD01
+    - FD07
+    - FD22
+    - FD20
+    - FD06
+  species: Gnome
+PS01:
   tags:
     - polar
+    - surface
+    - coastal
   area: 6344880
-  carryingCapacity: 42299
-P02:
+  capacity: 42299
+  adjacent:
+    - PC01
+    - FS07
+    - MS14
+    - FS06
+    - FS04
+  species: Orc
+PC01:
+  tags:
+    - near-surface
+  area: 6344880
+  capacity: 21149
+  adjacent:
+    - PS01
+    - PD01
+    - FC07
+    - MC14
+    - FC06
+    - FC04
+PD01:
+  tags:
+    - world-below
+  area: 6344880
+  capacity: 105748
+  adjacent:
+    - PC01
+    - FD07
+    - MD14
+    - FD06
+    - FD04
+  species: Gnome
+PS02:
   tags:
     - polar
+    - surface
+    - coastal
   area: 2461234
-  carryingCapacity: 16408
-P03:
+  capacity: 16408
+  adjacent:
+    - PC02
+    - FS02
+    - FS03
+  species: Orc
+PC02:
+  tags:
+    - near-surface
+  area: 2461234
+  capacity: 8204
+  adjacent:
+    - PS02
+    - PD02
+    - FC02
+    - FC03
+PD02:
+  tags:
+    - world-below
+  area: 2461234
+  capacity: 41020
+  adjacent:
+    - PC02
+    - FD02
+    - FD03
+  species: Gnome
+PS03:
   tags:
     - polar
+    - surface
+    - coastal
   area: 299121
-  carryingCapacity: 1994
+  capacity: 1994
+  adjacent:
+    - PC03
+    - FS01
+  species: Orc
+PC03:
+  tags:
+    - near-surface
+  area: 299121
+  capacity: 997
+  adjacent:
+    - PS03
+    - PD03
+    - FC01
+PD03:
+  tags:
+    - world-below
+  area: 299121
+  capacity: 4985
+  adjacent:
+    - PC03
+    - FD01
+  species: Gnome
