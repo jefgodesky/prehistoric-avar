@@ -12,6 +12,7 @@ Boreal forests:
     - F06
     - F07
     - F27
+  Species: Orc
 Temperate forests:
   Class names:
     - forest
@@ -66,6 +67,7 @@ Savannas:
     - G09
     - G10
     - G13
+  Species: Human
 Temperate grasslands:
   Class names:
     - grassland
@@ -99,6 +101,7 @@ Mountain ranges:
     - M12
     - M13
     - M14
+  Species: Dwarf
 Polar regions:
   Class names:
     - polar
@@ -107,3 +110,4 @@ Polar regions:
     - P01
     - P02
     - P03
+  Species: Orc

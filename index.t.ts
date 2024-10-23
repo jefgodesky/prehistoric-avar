@@ -6,6 +6,7 @@ interface IPoint {
 interface IRegion {
   'Carrying capacity score': number
   'Class names': string[]
+  Species?: string
   Regions: string[]
 }
 
@@ -13,7 +14,9 @@ interface IRegionData {
   [key: string]: {
     tags: string[]
     area: number
-    carryingCapacity: number
+    capacity: number
+    species?: string
+    adjacent: string[]
   }
 }
 
