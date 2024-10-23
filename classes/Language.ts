@@ -20,9 +20,16 @@ class Language {
   order: WORDORDER
   morphology: MORPHOLOGY
 
-  constructor(order: WORDORDER = WORDORDER.SOV, morphology: MORPHOLOGY = MORPHOLOGY.FUSIONAL) {
+  constructor (order: WORDORDER = WORDORDER.SOV, morphology: MORPHOLOGY = MORPHOLOGY.FUSIONAL) {
     this.order = order
     this.morphology = morphology
+  }
+
+  advanceMorphology () {
+    const types = [MORPHOLOGY.FUSIONAL, MORPHOLOGY.ANALYTIC, MORPHOLOGY.AGGLUTINATIVE]
+    const curr = types.indexOf(this.morphology)
+    const next = (curr + 1) % types.length
+    this.morphology = types[next]
   }
 }
 

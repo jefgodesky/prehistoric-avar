@@ -54,4 +54,24 @@ describe('Language', () => {
       expect(lang.morphology).toBe(MORPHOLOGY.AGGLUTINATIVE)
     })
   })
+
+  describe('advanceMorpology', () => {
+    it('advances from fusional to analytic', () => {
+      const lang = new Language()
+      lang.advanceMorphology()
+      expect(lang.morphology).toBe(MORPHOLOGY.ANALYTIC)
+    })
+
+    it('advances from analytic to agglutinative', () => {
+      const lang = new Language(WORDORDER.SOV, MORPHOLOGY.ANALYTIC)
+      lang.advanceMorphology()
+      expect(lang.morphology).toBe(MORPHOLOGY.AGGLUTINATIVE)
+    })
+
+    it('advances from agglutinative to fusional', () => {
+      const lang = new Language(WORDORDER.SOV, MORPHOLOGY.AGGLUTINATIVE)
+      lang.advanceMorphology()
+      expect(lang.morphology).toBe(MORPHOLOGY.FUSIONAL)
+    })
+  })
 })
