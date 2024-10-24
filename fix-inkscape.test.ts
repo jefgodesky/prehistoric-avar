@@ -1,7 +1,7 @@
 import { assertEquals } from '@std/assert'
 import { parse } from 'npm:yaml'
 import fixInkscape from './fix-inkscape.ts'
-import type { IRegion } from './index.t.ts'
+import type { IBiome } from './index.t.ts'
 
 Deno.test('fixInkscape', () => {
   const input = `
@@ -34,7 +34,7 @@ Boreal forests:
     </svg>
   `
 
-  const data = parse(regions) as Record<string, IRegion>
+  const data = parse(regions) as Record<string, IBiome>
   const result = fixInkscape(input, data)
   assertEquals(result.trim(), expected.trim())
 })

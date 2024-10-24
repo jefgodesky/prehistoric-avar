@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { parse } from 'npm:yaml'
-import type { IRegion } from './index.t.ts'
+import type { IBiome } from './index.t.ts'
 import getRegionIdList from './get-region-id-list.ts'
 
 describe('getRegionIdList', () => {
@@ -23,7 +23,7 @@ Hot deserts:
     - F01
   `
 
-  const data = parse(regions) as Record<string, IRegion>
+  const data = parse(regions) as Record<string, IBiome>
 
   it('compiles a list of all region IDs', () => {
     const result = getRegionIdList(data)

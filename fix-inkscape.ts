@@ -1,8 +1,8 @@
 import { DOMParser, XMLSerializer } from 'npm:xmldom'
 import { parse } from 'yaml'
-import type { IRegion } from './index.t.ts'
+import type { IBiome } from './index.t.ts'
 
-const fixInkscape = (input: string, regions: Record<string, IRegion>): string => {
+const fixInkscape = (input: string, regions: Record<string, IBiome>): string => {
   const parser = new DOMParser()
   const serializer = new XMLSerializer()
   const doc = parser.parseFromString(input, 'text/xml')
@@ -51,7 +51,7 @@ if (import.meta.main) {
       const dir = './maps'
       const beforeSVG = await Deno.readTextFile(`${dir}/${before}.svg`)
       const regionsYAML = await Deno.readTextFile('regions.yml')
-      const regions = parse(regionsYAML) as Record<string, IRegion>
+      const regions = parse(regionsYAML) as Record<string, IBiome>
       await Deno.writeTextFile(`${dir}/${after}.svg`, fixInkscape(beforeSVG, regions))
       console.log(`New map successfully written to ${dir}/${after}.svg`)
     } catch (error) {
@@ -64,4 +64,4 @@ if (import.meta.main) {
 }
 
 export default fixInkscape
-export type { IRegion }
+export type { IBiome }

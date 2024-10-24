@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { parse } from 'npm:yaml'
-import type { IRegion } from './index.t.ts'
+import type { IBiome } from './index.t.ts'
 import evalRegions from './eval-regions.ts'
 
 describe('evalRegions', () => {
@@ -31,7 +31,7 @@ Hot deserts:
   `
 
   const data = {
-    regions: parse(regionsYAML) as Record<string, IRegion>,
+    regions: parse(regionsYAML) as Record<string, IBiome>,
     adjacency: parse(adjacencyYAML) as Record<string, string[]>,
     coastal: ['F01']
   }

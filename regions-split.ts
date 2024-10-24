@@ -1,12 +1,12 @@
 import { DOMParser } from 'xmldom'
 import { parse } from 'yaml'
 import getRegionIdList from './get-region-id-list.ts'
-import type {IRegion} from './index.t.ts'
+import type { IBiome } from './index.t.ts'
 
 const directory = './maps'
 const src = `${directory}/base.svg`
 const regionsYAML = await Deno.readTextFile('regions.yml')
-const regionData = parse(regionsYAML) as Record<string, IRegion>
+const regionData = parse(regionsYAML) as Record<string, IBiome>
 const allRegions = getRegionIdList(regionData)
 
 try {

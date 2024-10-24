@@ -3,11 +3,11 @@ import calculateArea from './calculate-area.ts'
 import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
 import getAdjacencyList from './get-adjacency-list.ts'
 import parseRegionId from './parse-region-id.ts'
-import type { IRegion, IRegionData } from './index.t.ts'
+import type { IBiome, IRegionData } from './index.t.ts'
 import { LAYER } from './layer.ts'
 
 interface IEvalRegionsData {
-  regions: Record<string, IRegion>
+  regions: Record<string, IBiome>
   adjacency: Record<string, string[]>
   coastal: string[]
 }
@@ -56,7 +56,7 @@ if (import.meta.main) {
       const regionsYAML = await Deno.readTextFile('regions.yml')
       const adjacencyYAML = await Deno.readTextFile('adjacency.yml')
       const coastalTXT = await Deno.readTextFile('coastal.txt')
-      const regions = parse(regionsYAML) as Record<string, IRegion>
+      const regions = parse(regionsYAML) as Record<string, IBiome>
       const adjacency = parse(adjacencyYAML) as Record<string, string[]>
       const coastal = coastalTXT.split('\n')
       const result = await evalRegions({ regions, adjacency, coastal })
