@@ -1,8 +1,3 @@
-interface IPoint {
-  latitude: number
-  longitude: number
-}
-
 interface IRegion {
   'Carrying capacity score': number
   'Class names': string[]
@@ -21,7 +16,6 @@ interface IRegionData {
 }
 
 export type {
-  IPoint,
   IRegion,
   IRegionData
 }

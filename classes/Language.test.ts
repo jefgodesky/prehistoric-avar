@@ -1,6 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import Language, { WORDORDER, MORPHOLOGY } from './Language.ts'
+import Language, { ILanguage, WORDORDER, MORPHOLOGY } from './Language.ts'
 
 describe('Language', () => {
   describe('constructor', () => {
@@ -9,34 +9,45 @@ describe('Language', () => {
       expect(lang).toBeInstanceOf(Language)
     })
 
+    it('can have a name', () => {
+      const name = 'FS32-001'
+      const lang = new Language({ name })
+      expect(lang.name).toBe(name)
+    })
+
     it('defaults to SOV', () => {
       const lang = new Language()
       expect(lang.order).toBe(WORDORDER.SOV)
     })
 
     it('can be SVO', () => {
-      const lang = new Language(WORDORDER.SVO)
-      expect(lang.order).toBe(WORDORDER.SVO)
+      const order = WORDORDER.SVO
+      const lang = new Language({ order })
+      expect(lang.order).toBe(order)
     })
 
     it('can be OSV', () => {
-      const lang = new Language(WORDORDER.OSV)
-      expect(lang.order).toBe(WORDORDER.OSV)
+      const order = WORDORDER.OSV
+      const lang = new Language({ order })
+      expect(lang.order).toBe(order)
     })
 
     it('can be OVS', () => {
-      const lang = new Language(WORDORDER.OVS)
-      expect(lang.order).toBe(WORDORDER.OVS)
+      const order = WORDORDER.OVS
+      const lang = new Language({ order })
+      expect(lang.order).toBe(order)
     })
 
     it('can be VSO', () => {
-      const lang = new Language(WORDORDER.VSO)
-      expect(lang.order).toBe(WORDORDER.VSO)
+      const order = WORDORDER.VSO
+      const lang = new Language({ order })
+      expect(lang.order).toBe(order)
     })
 
     it('can be VOS', () => {
-      const lang = new Language(WORDORDER.VOS)
-      expect(lang.order).toBe(WORDORDER.VOS)
+      const order = WORDORDER.VOS
+      const lang = new Language({ order })
+      expect(lang.order).toBe(order)
     })
 
     it('defaults to fusional', () => {
@@ -45,13 +56,15 @@ describe('Language', () => {
     })
 
     it('can be analytic', () => {
-      const lang = new Language(WORDORDER.SOV, MORPHOLOGY.ANALYTIC)
-      expect(lang.morphology).toBe(MORPHOLOGY.ANALYTIC)
+      const morphology = MORPHOLOGY.ANALYTIC
+      const lang = new Language({ morphology })
+      expect(lang.morphology).toBe(morphology)
     })
 
     it('can be agglutinative', () => {
-      const lang = new Language(WORDORDER.SOV, MORPHOLOGY.AGGLUTINATIVE)
-      expect(lang.morphology).toBe(MORPHOLOGY.AGGLUTINATIVE)
+      const morphology = MORPHOLOGY.AGGLUTINATIVE
+      const lang = new Language({ morphology })
+      expect(lang.morphology).toBe(morphology)
     })
   })
 
@@ -63,13 +76,13 @@ describe('Language', () => {
     })
 
     it('advances from analytic to agglutinative', () => {
-      const lang = new Language(WORDORDER.SOV, MORPHOLOGY.ANALYTIC)
+      const lang = new Language({ morphology: MORPHOLOGY.ANALYTIC })
       lang.advanceMorphology()
       expect(lang.morphology).toBe(MORPHOLOGY.AGGLUTINATIVE)
     })
 
     it('advances from agglutinative to fusional', () => {
-      const lang = new Language(WORDORDER.SOV, MORPHOLOGY.AGGLUTINATIVE)
+      const lang = new Language({ morphology: MORPHOLOGY.AGGLUTINATIVE })
       lang.advanceMorphology()
       expect(lang.morphology).toBe(MORPHOLOGY.FUSIONAL)
     })

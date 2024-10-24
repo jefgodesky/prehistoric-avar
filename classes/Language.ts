@@ -13,16 +13,25 @@ export const MORPHOLOGY = {
   AGGLUTINATIVE: 8
 } as const
 
-export type WORDORDER = typeof WORDORDER[keyof typeof WORDORDER]
-export type MORPHOLOGY = typeof MORPHOLOGY[keyof typeof MORPHOLOGY]
+interface ILanguage {
+  name?: string
+  order?: WordOrder
+  morphology?: Morphology
+}
+
+export type WordOrder = typeof WORDORDER[keyof typeof WORDORDER]
+export type Morphology = typeof MORPHOLOGY[keyof typeof MORPHOLOGY]
+export type { ILanguage }
 
 class Language {
-  order: WORDORDER
-  morphology: MORPHOLOGY
+  name?: string
+  order: WordOrder
+  morphology: Morphology
 
-  constructor (order: WORDORDER = WORDORDER.SOV, morphology: MORPHOLOGY = MORPHOLOGY.FUSIONAL) {
-    this.order = order
-    this.morphology = morphology
+  constructor (data?: ILanguage) {
+    this.order = data?.order ?? WORDORDER.SOV
+    this.morphology = data?.morphology ?? MORPHOLOGY.FUSIONAL
+    if (data?.name) this.name = data.name
   }
 
   advanceMorphology () {
