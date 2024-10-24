@@ -1,6 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { parse } from 'npm:yaml'
+import { BIOMES } from './enums.ts'
 import type { IBiome } from './index.d.ts'
 import evalRegions from './eval-regions.ts'
 
@@ -39,6 +40,16 @@ Hot deserts:
   it('evaluates the correct number of regions', async () => {
     const result = await evalRegions(data)
     expect(Object.keys(result).length).toBe(6)
+  })
+
+  it('correctly assigns biomes to regions', async () => {
+    const result = await evalRegions(data)
+    expect(result.FS01.biome).toEqual(BIOMES.BOREAL_FOREST)
+    expect(result.FC01.biome).toEqual(BIOMES.CAVES)
+    expect(result.FD01.biome).toEqual(BIOMES.WORLD_BELOW)
+    expect(result.DS01.biome).toEqual(BIOMES.DESERT)
+    expect(result.DC01.biome).toEqual(BIOMES.CAVES)
+    expect(result.DD01.biome).toEqual(BIOMES.WORLD_BELOW)
   })
 
   it('correctly assigns tags to regions', async () => {

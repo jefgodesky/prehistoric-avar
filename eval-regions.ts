@@ -2,6 +2,7 @@ import { parse, stringify } from 'yaml'
 import calculateArea from './calculate-area.ts'
 import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
 import getAdjacencyList from './get-adjacency-list.ts'
+import getBiomeFromTags from './get-biome-from-tags.ts'
 import parseRegionId from './parse-region-id.ts'
 import type { IBiome, IRegionData } from './index.d.ts'
 import type { Layer } from './enums.ts'
@@ -34,9 +35,10 @@ export const evalRegions = async (input: IEvalRegionsData): Promise<IRegionData>
       for (const layer of layers) {
         const layerId = [code, layer.code, num].join('')
         const area = await calculateArea(id)
+        const biome = getBiomeFromTags(...layer.tags)
         const capacity = calculateCarryingCapacity(area, layer.score)
         const adjacent = getAdjacencyList(id, adjacency, layer.code as Layer)
-        data[layerId] = { tags: layer.tags, area, capacity, adjacent, species: layer.species }
+        data[layerId] = { biome, tags: layer.tags, area, capacity, adjacent, species: layer.species }
       }
     }
   }

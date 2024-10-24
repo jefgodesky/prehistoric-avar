@@ -1,4 +1,4 @@
-import { LangMorphology, LangOrder } from './enums.ts'
+import { Biome, LangMorphology, LangOrder } from './enums.ts'
 
 interface IBiome {
   'Carrying capacity score': number
@@ -21,6 +21,7 @@ interface ILanguage {
 
 interface IRegionData {
   [key: string]: {
+    biome: Biome
     tags: string[]
     area: number
     capacity: number
