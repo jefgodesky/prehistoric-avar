@@ -1,5 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
 import Language from './Language.ts'
 
 describe('Language', () => {
@@ -17,52 +18,52 @@ describe('Language', () => {
 
     it('defaults to SOV', () => {
       const lang = new Language()
-      expect(lang.order).toBe('SOV')
+      expect(lang.order).toBe(LANG_ORDER.SOV)
     })
 
     it('can be SVO', () => {
-      const order = 'SVO'
+      const order = LANG_ORDER.SVO
       const lang = new Language({ order })
       expect(lang.order).toBe(order)
     })
 
     it('can be OSV', () => {
-      const order = 'OSV'
+      const order = LANG_ORDER.OSV
       const lang = new Language({ order })
       expect(lang.order).toBe(order)
     })
 
     it('can be OVS', () => {
-      const order = 'OVS'
+      const order = LANG_ORDER.OVS
       const lang = new Language({ order })
       expect(lang.order).toBe(order)
     })
 
     it('can be VSO', () => {
-      const order = 'VSO'
+      const order = LANG_ORDER.VSO
       const lang = new Language({ order })
       expect(lang.order).toBe(order)
     })
 
     it('can be VOS', () => {
-      const order = 'VOS'
+      const order = LANG_ORDER.VOS
       const lang = new Language({ order })
       expect(lang.order).toBe(order)
     })
 
     it('defaults to fusional', () => {
       const lang = new Language()
-      expect(lang.morphology).toBe('Fusional')
+      expect(lang.morphology).toBe(LANG_MORPHOLOGY.FUSIONAL)
     })
 
     it('can be analytic', () => {
-      const morphology = 'Analytic'
+      const morphology = LANG_MORPHOLOGY.ANALYTIC
       const lang = new Language({ morphology })
       expect(lang.morphology).toBe(morphology)
     })
 
     it('can be agglutinative', () => {
-      const morphology = 'Agglutinative'
+      const morphology = LANG_MORPHOLOGY.AGGLUTINATIVE
       const lang = new Language({ morphology })
       expect(lang.morphology).toBe(morphology)
     })
@@ -72,19 +73,19 @@ describe('Language', () => {
     it('advances from fusional to analytic', () => {
       const lang = new Language()
       lang.advanceMorphology()
-      expect(lang.morphology).toBe('Analytic')
+      expect(lang.morphology).toBe(LANG_MORPHOLOGY.ANALYTIC)
     })
 
     it('advances from analytic to agglutinative', () => {
-      const lang = new Language({ morphology: 'Analytic' })
+      const lang = new Language({ morphology: LANG_MORPHOLOGY.ANALYTIC })
       lang.advanceMorphology()
-      expect(lang.morphology).toBe('Agglutinative')
+      expect(lang.morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
     })
 
     it('advances from agglutinative to fusional', () => {
-      const lang = new Language({ morphology: 'Agglutinative' })
+      const lang = new Language({ morphology: LANG_MORPHOLOGY.AGGLUTINATIVE })
       lang.advanceMorphology()
-      expect(lang.morphology).toBe('Fusional')
+      expect(lang.morphology).toBe(LANG_MORPHOLOGY.FUSIONAL)
     })
   })
 

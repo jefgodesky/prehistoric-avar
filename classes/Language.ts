@@ -1,13 +1,15 @@
-import { ILanguage, LanguageMorphology, LanguageOrder } from '../index.d.ts'
+import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
+import type { LangMorphology, LangOrder } from '../enums.ts'
+import { ILanguage } from '../index.d.ts'
 
 class Language {
   name?: string
-  order: LanguageOrder
-  morphology: LanguageMorphology
+  order: LangOrder
+  morphology: LangMorphology
 
   constructor (data?: ILanguage) {
-    this.order = data?.order ?? 'SOV'
-    this.morphology = data?.morphology ?? 'Fusional'
+    this.order = data?.order ?? LANG_ORDER.SOV
+    this.morphology = data?.morphology ?? LANG_MORPHOLOGY.FUSIONAL
     if (data?.name) this.name = data.name
   }
 
@@ -26,11 +28,11 @@ class Language {
     }
   }
 
-  static getMorphologyTypes (): LanguageMorphology[] {
+  static getMorphologyTypes (): LangMorphology[] {
     return [
-      'Fusional' as LanguageMorphology,
-      'Analytic' as LanguageMorphology,
-      'Agglutinative' as LanguageMorphology
+      LANG_MORPHOLOGY.FUSIONAL,
+      LANG_MORPHOLOGY.ANALYTIC,
+      LANG_MORPHOLOGY.AGGLUTINATIVE
     ]
   }
 }

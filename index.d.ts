@@ -1,5 +1,4 @@
-export type LanguageOrder = 'SOV' | 'SVO' | 'OSV' | 'OVS' | 'VSO' | 'VOS'
-export type LanguageMorphology = 'Fusional' | 'Analytic' | 'Agglutinative'
+import { LangMorphology, LangOrder } from './enums.ts'
 
 interface IBiome {
   'Carrying capacity score': number
@@ -16,8 +15,8 @@ interface IHabitable {
 
 interface ILanguage {
   name?: string
-  order?: LanguageOrder
-  morphology?: LanguageMorphology
+  order?: LangOrder
+  morphology?: LangMorphology
 }
 
 interface IRegionData {

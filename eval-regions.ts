@@ -4,7 +4,7 @@ import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
 import getAdjacencyList from './get-adjacency-list.ts'
 import parseRegionId from './parse-region-id.ts'
 import type { IBiome, IRegionData } from './index.d.ts'
-import { LAYER } from './layer.ts'
+import type { Layer } from './enums.ts'
 
 interface IEvalRegionsData {
   regions: Record<string, IBiome>
@@ -35,7 +35,7 @@ export const evalRegions = async (input: IEvalRegionsData): Promise<IRegionData>
         const layerId = [code, layer.code, num].join('')
         const area = await calculateArea(id)
         const capacity = calculateCarryingCapacity(area, layer.score)
-        const adjacent = getAdjacencyList(id, adjacency, layer.code as LAYER)
+        const adjacent = getAdjacencyList(id, adjacency, layer.code as Layer)
         data[layerId] = { tags: layer.tags, area, capacity, adjacent, species: layer.species }
       }
     }
