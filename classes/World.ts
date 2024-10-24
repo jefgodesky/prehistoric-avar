@@ -1,6 +1,8 @@
+import { IHabitable } from '../index.d.ts'
+
 const ROUND_HABITABILITY_TO_FULL = 0.95
 
-class World {
+class World implements IHabitable {
   habitability: number
   events: string[]
   dragons: {

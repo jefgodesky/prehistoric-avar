@@ -8,6 +8,12 @@ interface IBiome {
   Regions: string[]
 }
 
+interface IHabitable {
+  habitability: number
+  reduceHabitability: (factor: number) => void
+  restoreHabitability: () => void
+}
+
 interface ILanguage {
   name?: string
   order?: LanguageOrder
@@ -25,7 +31,6 @@ interface IRegionData {
 }
 
 interface IWorld {
-  habitability: number
   dragons: {
     interest: number
     fear: number
@@ -35,6 +40,7 @@ interface IWorld {
 
 export type {
   IBiome,
+  IHabitable,
   ILanguage,
   IRegionData,
   IWorld
