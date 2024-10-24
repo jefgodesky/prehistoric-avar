@@ -1,27 +1,5 @@
-export const WORDORDER = {
-  SOV: 'SOV',
-  SVO: 'SVO',
-  OSV: 'OSV',
-  OVS: 'OVS',
-  VSO: 'VSO',
-  VOS: 'VOS'
-} as const
-
-export const MORPHOLOGY = {
-  FUSIONAL: 12,
-  ANALYTIC: 4,
-  AGGLUTINATIVE: 8
-} as const
-
-interface ILanguage {
-  name?: string
-  order?: WordOrder
-  morphology?: Morphology
-}
-
-export type WordOrder = typeof WORDORDER[keyof typeof WORDORDER]
-export type Morphology = typeof MORPHOLOGY[keyof typeof MORPHOLOGY]
-export type { ILanguage }
+import { MORPHOLOGY, WORDORDER } from '../index.t.ts'
+import type { Morphology, WordOrder, ILanguage } from '../index.t.ts'
 
 class Language {
   name?: string

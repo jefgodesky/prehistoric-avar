@@ -1,6 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import Language, { ILanguage, WORDORDER, MORPHOLOGY } from './Language.ts'
+import { MORPHOLOGY, WORDORDER } from '../index.t.ts'
+import Language from './Language.ts'
 
 describe('Language', () => {
   describe('constructor', () => {
