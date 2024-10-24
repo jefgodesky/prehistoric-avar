@@ -1,10 +1,14 @@
-import { Biome, LangMorphology, LangOrder } from './enums.ts'
+import type { Biome, LangMorphology, LangOrder } from './enums.ts'
 
 interface IBiome {
   'Carrying capacity score': number
   'Class names': string[]
   Species?: string
   Regions: string[]
+}
+
+interface IFitness {
+  [key: Biome]: number
 }
 
 interface IHabitable {
