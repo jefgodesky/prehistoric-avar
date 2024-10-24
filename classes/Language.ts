@@ -40,6 +40,14 @@ class Language {
     const next = (curr + 1) % types.length
     this.morphology = types[next]
   }
+
+  toObject (): ILanguage {
+    return {
+      name: this.name,
+      order: this.order,
+      morphology: this.morphology
+    }
+  }
 }
 
 export default Language

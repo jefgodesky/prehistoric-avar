@@ -87,4 +87,14 @@ describe('Language', () => {
       expect(lang.morphology).toBe(MORPHOLOGY.FUSIONAL)
     })
   })
+
+  describe('toObject', () => {
+    it('returns an object', () => {
+      const lang = new Language()
+      const obj = lang.toObject()
+      expect(obj.name).toEqual(lang.name)
+      expect(obj.order).toEqual(lang.order)
+      expect(obj.morphology).toEqual(lang.morphology)
+    })
+  })
 })
