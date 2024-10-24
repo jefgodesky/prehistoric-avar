@@ -1,6 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import World from './World.ts'
+import Language from './Language.ts'
 
 describe('World', () => {
   describe('constructor', () => {
@@ -122,6 +123,17 @@ describe('World', () => {
       const world = new World()
       world.events = [event]
       expect(world.hasEvent(event)).toBe(true)
+    })
+  })
+
+  describe('toObject', () => {
+    it('returns an object', () => {
+      const world = new World()
+      const obj = world.toObject()
+      expect(obj.habitability).toEqual(world.habitability)
+      expect(obj.dragons.interest).toEqual(world.dragons.interest)
+      expect(obj.dragons.fear).toEqual(world.dragons.fear)
+      expect(obj.events).toEqual(world.events)
     })
   })
 })

@@ -31,6 +31,7 @@ interface IRegionData {
 }
 
 interface IWorld {
+  habitability: number
   dragons: {
     interest: number
     fear: number

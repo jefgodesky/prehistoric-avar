@@ -1,4 +1,4 @@
-import { IHabitable } from '../index.d.ts'
+import { IHabitable, IWorld } from '../index.d.ts'
 
 const ROUND_HABITABILITY_TO_FULL = 0.95
 
@@ -53,6 +53,14 @@ class World implements IHabitable {
 
   hasEvent(event: string): boolean {
     return this.events.includes(event)
+  }
+
+  toObject(): IWorld {
+    return {
+      habitability: this.habitability,
+      dragons: this.dragons,
+      events: this.events,
+    }
   }
 }
 
