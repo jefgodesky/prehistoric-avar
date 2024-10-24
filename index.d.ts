@@ -1,17 +1,5 @@
-const WORDORDER = {
-  SOV: 'SOV',
-  SVO: 'SVO',
-  OSV: 'OSV',
-  OVS: 'OVS',
-  VSO: 'VSO',
-  VOS: 'VOS'
-} as const
-
-const MORPHOLOGY = {
-  FUSIONAL: 12,
-  ANALYTIC: 4,
-  AGGLUTINATIVE: 8
-} as const
+export type LanguageOrder = 'SOV' | 'SVO' | 'OSV' | 'OVS' | 'VSO' | 'VOS'
+export type LanguageMorphology = 'Fusional' | 'Analytic' | 'Agglutinative'
 
 interface IBiome {
   'Carrying capacity score': number
@@ -22,8 +10,8 @@ interface IBiome {
 
 interface ILanguage {
   name?: string
-  order?: WordOrder
-  morphology?: Morphology
+  order?: LanguageOrder
+  morphology?: LanguageMorphology
 }
 
 interface IRegionData {
@@ -45,14 +33,7 @@ interface IWorld {
   events: string[]
 }
 
-type WordOrder = typeof WORDORDER[keyof typeof WORDORDER]
-type Morphology = typeof MORPHOLOGY[keyof typeof MORPHOLOGY]
-
-export { MORPHOLOGY, WORDORDER }
 export type {
-  Morphology,
-  WordOrder,
-
   IBiome,
   ILanguage,
   IRegionData,

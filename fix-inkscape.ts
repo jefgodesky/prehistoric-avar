@@ -1,6 +1,6 @@
 import { DOMParser, XMLSerializer } from 'npm:xmldom'
 import { parse } from 'yaml'
-import type { IBiome } from './index.t.ts'
+import type { IBiome } from './index.d.ts'
 
 const fixInkscape = (input: string, regions: Record<string, IBiome>): string => {
   const parser = new DOMParser()

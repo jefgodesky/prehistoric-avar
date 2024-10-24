@@ -1,7 +1,7 @@
 import { DOMParser } from 'xmldom'
 import { parse } from 'yaml'
 import getRegionIdList from './get-region-id-list.ts'
-import type { IBiome } from './index.t.ts'
+import type { IBiome } from './index.d.ts'
 
 const directory = './maps'
 const src = `${directory}/base.svg`

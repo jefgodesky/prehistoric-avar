@@ -3,7 +3,7 @@ import calculateArea from './calculate-area.ts'
 import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
 import getAdjacencyList from './get-adjacency-list.ts'
 import parseRegionId from './parse-region-id.ts'
-import type { IBiome, IRegionData } from './index.t.ts'
+import type { IBiome, IRegionData } from './index.d.ts'
 import { LAYER } from './layer.ts'
 
 interface IEvalRegionsData {

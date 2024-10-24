@@ -1,7 +1,7 @@
 import { assertEquals } from '@std/assert'
 import { parse } from 'npm:yaml'
 import fixInkscape from './fix-inkscape.ts'
-import type { IBiome } from './index.t.ts'
+import type { IBiome } from './index.d.ts'
 
 Deno.test('fixInkscape', () => {
   const input = `
