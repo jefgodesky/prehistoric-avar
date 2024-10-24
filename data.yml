@@ -1,4 +1,5 @@
 FS01:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -13,6 +14,7 @@ FS01:
     - FS16
   species: Orc
 FC01:
+  biome: Cave system
   tags:
     - near-surface
   area: 1272233
@@ -24,6 +26,7 @@ FC01:
     - PC03
     - FC16
 FD01:
+  biome: World Below
   tags:
     - world-below
   area: 1272233
@@ -35,6 +38,7 @@ FD01:
     - FD16
   species: Gnome
 FS02:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -52,6 +56,7 @@ FS02:
     - MS05
   species: Orc
 FC02:
+  biome: Cave system
   tags:
     - near-surface
   area: 770419
@@ -66,6 +71,7 @@ FC02:
     - FC17
     - MC05
 FD02:
+  biome: World Below
   tags:
     - world-below
   area: 770419
@@ -80,6 +86,7 @@ FD02:
     - MD05
   species: Gnome
 FS03:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -97,6 +104,7 @@ FS03:
     - FS15
   species: Orc
 FC03:
+  biome: Cave system
   tags:
     - near-surface
   area: 871401
@@ -111,6 +119,7 @@ FC03:
     - FC02
     - FC15
 FD03:
+  biome: World Below
   tags:
     - world-below
   area: 871401
@@ -125,6 +134,7 @@ FD03:
     - FD15
   species: Gnome
 FS04:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -144,6 +154,7 @@ FS04:
     - FS05
   species: Orc
 FC04:
+  biome: Cave system
   tags:
     - near-surface
   area: 2397898
@@ -160,6 +171,7 @@ FC04:
     - MC03
     - FC05
 FD04:
+  biome: World Below
   tags:
     - world-below
   area: 2397898
@@ -176,6 +188,7 @@ FD04:
     - FD05
   species: Gnome
 FS05:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -190,6 +203,7 @@ FS05:
     - FS08
   species: Orc
 FC05:
+  biome: Cave system
   tags:
     - near-surface
   area: 542146
@@ -201,6 +215,7 @@ FC05:
     - MC03
     - FC08
 FD05:
+  biome: World Below
   tags:
     - world-below
   area: 542146
@@ -212,6 +227,7 @@ FD05:
     - FD08
   species: Gnome
 FS06:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -228,6 +244,7 @@ FS06:
     - FS04
   species: Orc
 FC06:
+  biome: Cave system
   tags:
     - near-surface
   area: 1563314
@@ -242,6 +259,7 @@ FC06:
     - FC13
     - FC04
 FD06:
+  biome: World Below
   tags:
     - world-below
   area: 1563314
@@ -256,6 +274,7 @@ FD06:
     - FD04
   species: Gnome
 FS07:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -271,6 +290,7 @@ FS07:
     - MS14
   species: Orc
 FC07:
+  biome: Cave system
   tags:
     - near-surface
   area: 838716
@@ -283,6 +303,7 @@ FC07:
     - FC22
     - MC14
 FD07:
+  biome: World Below
   tags:
     - world-below
   area: 838716
@@ -295,6 +316,7 @@ FD07:
     - MD14
   species: Gnome
 FS27:
+  biome: Boreal forest
   tags:
     - forest
     - boreal
@@ -308,6 +330,7 @@ FS27:
     - GS12
   species: Orc
 FC27:
+  biome: Cave system
   tags:
     - near-surface
   area: 281407
@@ -318,6 +341,7 @@ FC27:
     - FC28
     - GC12
 FD27:
+  biome: World Below
   tags:
     - world-below
   area: 281407
@@ -328,6 +352,7 @@ FD27:
     - GD12
   species: Gnome
 FS08:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -341,6 +366,7 @@ FS08:
     - MS03
     - GS01
 FC08:
+  biome: Cave system
   tags:
     - near-surface
   area: 1312439
@@ -352,6 +378,7 @@ FC08:
     - MC03
     - GC01
 FD08:
+  biome: World Below
   tags:
     - world-below
   area: 1312439
@@ -363,6 +390,7 @@ FD08:
     - GD01
   species: Gnome
 FS12:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -376,6 +404,7 @@ FS12:
     - GS02
     - MS03
 FC12:
+  biome: Cave system
   tags:
     - near-surface
   area: 790423
@@ -388,6 +417,7 @@ FC12:
     - GC02
     - MC03
 FD12:
+  biome: World Below
   tags:
     - world-below
   area: 790423
@@ -400,6 +430,7 @@ FD12:
     - MD03
   species: Gnome
 FS13:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -412,6 +443,7 @@ FS13:
     - GS04
     - FS04
 FC13:
+  biome: Cave system
   tags:
     - near-surface
   area: 441338
@@ -423,6 +455,7 @@ FC13:
     - GC04
     - FC04
 FD13:
+  biome: World Below
   tags:
     - world-below
   area: 441338
@@ -434,6 +467,7 @@ FD13:
     - FD04
   species: Gnome
 FS14:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -447,6 +481,7 @@ FS14:
     - GS06
     - MS06
 FC14:
+  biome: Cave system
   tags:
     - near-surface
   area: 302461
@@ -459,6 +494,7 @@ FC14:
     - GC06
     - MC06
 FD14:
+  biome: World Below
   tags:
     - world-below
   area: 302461
@@ -471,6 +507,7 @@ FD14:
     - MD06
   species: Gnome
 FS15:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -484,6 +521,7 @@ FS15:
     - FS02
     - GS08
 FC15:
+  biome: Cave system
   tags:
     - near-surface
   area: 1022220
@@ -496,6 +534,7 @@ FC15:
     - FC02
     - GC08
 FD15:
+  biome: World Below
   tags:
     - world-below
   area: 1022220
@@ -508,6 +547,7 @@ FD15:
     - GD08
   species: Gnome
 FS16:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -521,6 +561,7 @@ FS16:
     - FS01
     - GS07
 FC16:
+  biome: Cave system
   tags:
     - near-surface
   area: 529924
@@ -532,6 +573,7 @@ FC16:
     - FC01
     - GC07
 FD16:
+  biome: World Below
   tags:
     - world-below
   area: 529924
@@ -543,6 +585,7 @@ FD16:
     - GD07
   species: Gnome
 FS17:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -558,6 +601,7 @@ FS17:
     - MS05
     - FS02
 FC17:
+  biome: Cave system
   tags:
     - near-surface
   area: 1659045
@@ -571,6 +615,7 @@ FC17:
     - MC05
     - FC02
 FD17:
+  biome: World Below
   tags:
     - world-below
   area: 1659045
@@ -584,6 +629,7 @@ FD17:
     - FD02
   species: Gnome
 FS19:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -597,6 +643,7 @@ FS19:
     - GS05
     - FS29
 FC19:
+  biome: Cave system
   tags:
     - near-surface
   area: 884193
@@ -609,6 +656,7 @@ FC19:
     - GC05
     - FC29
 FD19:
+  biome: World Below
   tags:
     - world-below
   area: 884193
@@ -621,6 +669,7 @@ FD19:
     - FD29
   species: Gnome
 FS20:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -636,6 +685,7 @@ FS20:
     - FS21
     - GS04
 FC20:
+  biome: Cave system
   tags:
     - near-surface
   area: 1759128
@@ -650,6 +700,7 @@ FC20:
     - FC21
     - GC04
 FD20:
+  biome: World Below
   tags:
     - world-below
   area: 1759128
@@ -664,6 +715,7 @@ FD20:
     - GD04
   species: Gnome
 FS21:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -676,6 +728,7 @@ FS21:
     - GS04
     - MS10
 FC21:
+  biome: Cave system
   tags:
     - near-surface
   area: 619474
@@ -687,6 +740,7 @@ FC21:
     - GC04
     - MC10
 FD21:
+  biome: World Below
   tags:
     - world-below
   area: 619474
@@ -698,6 +752,7 @@ FD21:
     - MD10
   species: Gnome
 FS22:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -711,6 +766,7 @@ FS22:
     - MS11
     - MS14
 FC22:
+  biome: Cave system
   tags:
     - near-surface
   area: 1211075
@@ -723,6 +779,7 @@ FC22:
     - MC11
     - MC14
 FD22:
+  biome: World Below
   tags:
     - world-below
   area: 1211075
@@ -735,6 +792,7 @@ FD22:
     - MD14
   species: Gnome
 FS25:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -750,6 +808,7 @@ FS25:
     - GS11
     - FS26
 FC25:
+  biome: Cave system
   tags:
     - near-surface
   area: 571972
@@ -763,6 +822,7 @@ FC25:
     - GC11
     - FC26
 FD25:
+  biome: World Below
   tags:
     - world-below
   area: 571972
@@ -776,6 +836,7 @@ FD25:
     - FD26
   species: Gnome
 FS26:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -789,6 +850,7 @@ FS26:
     - MS06
     - FS24
 FC26:
+  biome: Cave system
   tags:
     - near-surface
   area: 331348
@@ -801,6 +863,7 @@ FC26:
     - MC06
     - FC24
 FD26:
+  biome: World Below
   tags:
     - world-below
   area: 331348
@@ -813,6 +876,7 @@ FD26:
     - FD24
   species: Gnome
 FS28:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -830,6 +894,7 @@ FS28:
     - FS25
     - GS12
 FC28:
+  biome: Cave system
   tags:
     - near-surface
   area: 1786031
@@ -845,6 +910,7 @@ FC28:
     - FC25
     - GC12
 FD28:
+  biome: World Below
   tags:
     - world-below
   area: 1786031
@@ -860,6 +926,7 @@ FD28:
     - GD12
   species: Gnome
 FS30:
+  biome: Temperate forest
   tags:
     - forest
     - temperate
@@ -872,6 +939,7 @@ FS30:
     - FS31
     - GS05
 FC30:
+  biome: Cave system
   tags:
     - near-surface
   area: 1978204
@@ -882,6 +950,7 @@ FC30:
     - FC31
     - GC05
 FD30:
+  biome: World Below
   tags:
     - world-below
   area: 1978204
@@ -892,6 +961,7 @@ FD30:
     - GD05
   species: Gnome
 FS09:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -904,6 +974,7 @@ FS09:
     - GS03
     - MS01
 FC09:
+  biome: Cave system
   tags:
     - near-surface
   area: 4969480
@@ -914,6 +985,7 @@ FC09:
     - GC03
     - MC01
 FD09:
+  biome: World Below
   tags:
     - world-below
   area: 4969480
@@ -924,6 +996,7 @@ FD09:
     - MD01
   species: Gnome
 FS10:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -936,6 +1009,7 @@ FS10:
     - MS01
     - FS11
 FC10:
+  biome: Cave system
   tags:
     - near-surface
   area: 2725549
@@ -946,6 +1020,7 @@ FC10:
     - MC01
     - FC11
 FD10:
+  biome: World Below
   tags:
     - world-below
   area: 2725549
@@ -956,6 +1031,7 @@ FD10:
     - FD11
   species: Gnome
 FS11:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -967,6 +1043,7 @@ FS11:
     - FC11
     - FS10
 FC11:
+  biome: Cave system
   tags:
     - near-surface
   area: 3572789
@@ -976,6 +1053,7 @@ FC11:
     - FD11
     - FC10
 FD11:
+  biome: World Below
   tags:
     - world-below
   area: 3572789
@@ -985,6 +1063,7 @@ FD11:
     - FD10
   species: Gnome
 FS18:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -998,6 +1077,7 @@ FS18:
     - MS07
     - GS09
 FC18:
+  biome: Cave system
   tags:
     - near-surface
   area: 353034
@@ -1009,6 +1089,7 @@ FC18:
     - MC07
     - GC09
 FD18:
+  biome: World Below
   tags:
     - world-below
   area: 353034
@@ -1020,6 +1101,7 @@ FD18:
     - GD09
   species: Gnome
 FS23:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -1031,6 +1113,7 @@ FS23:
     - MS08
     - GS10
 FC23:
+  biome: Cave system
   tags:
     - near-surface
   area: 471742
@@ -1041,6 +1124,7 @@ FC23:
     - MC08
     - GC10
 FD23:
+  biome: World Below
   tags:
     - world-below
   area: 471742
@@ -1051,6 +1135,7 @@ FD23:
     - GD10
   species: Gnome
 FS24:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -1064,6 +1149,7 @@ FS24:
     - DS01
     - MS08
 FC24:
+  biome: Cave system
   tags:
     - near-surface
   area: 529878
@@ -1076,6 +1162,7 @@ FC24:
     - DC01
     - MC08
 FD24:
+  biome: World Below
   tags:
     - world-below
   area: 529878
@@ -1088,6 +1175,7 @@ FD24:
     - MD08
   species: Gnome
 FS29:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -1101,6 +1189,7 @@ FS29:
     - FS19
     - MS06
 FC29:
+  biome: Cave system
   tags:
     - near-surface
   area: 4674493
@@ -1112,6 +1201,7 @@ FC29:
     - FC19
     - MC06
 FD29:
+  biome: World Below
   tags:
     - world-below
   area: 4674493
@@ -1123,6 +1213,7 @@ FD29:
     - MD06
   species: Gnome
 FS31:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -1135,6 +1226,7 @@ FS31:
     - FS30
     - GS05
 FC31:
+  biome: Cave system
   tags:
     - near-surface
   area: 4727511
@@ -1145,6 +1237,7 @@ FC31:
     - FC30
     - GC05
 FD31:
+  biome: World Below
   tags:
     - world-below
   area: 4727511
@@ -1155,6 +1248,7 @@ FD31:
     - GD05
   species: Gnome
 FS32:
+  biome: Tropical forest
   tags:
     - forest
     - tropical
@@ -1166,6 +1260,7 @@ FS32:
     - FC32
   species: Halfling
 FC32:
+  biome: Cave system
   tags:
     - near-surface
   area: 140985
@@ -1174,6 +1269,7 @@ FC32:
     - FS32
     - FD32
 FD32:
+  biome: World Below
   tags:
     - world-below
   area: 140985
@@ -1182,6 +1278,7 @@ FD32:
     - FC32
   species: Gnome
 DS01:
+  biome: Desert
   tags:
     - desert
     - hot
@@ -1195,6 +1292,7 @@ DS01:
     - GS10
     - FS23
 DC01:
+  biome: Cave system
   tags:
     - near-surface
   area: 2688696
@@ -1207,6 +1305,7 @@ DC01:
     - GC10
     - FC23
 DD01:
+  biome: World Below
   tags:
     - world-below
   area: 2688696
@@ -1219,6 +1318,7 @@ DD01:
     - FD23
   species: Gnome
 GS01:
+  biome: Savanna
   tags:
     - grassland
     - tropical
@@ -1235,6 +1335,7 @@ GS01:
     - GS03
   species: Human
 GC01:
+  biome: Cave system
   tags:
     - near-surface
   area: 870978
@@ -1248,6 +1349,7 @@ GC01:
     - MC02
     - GC03
 GD01:
+  biome: World Below
   tags:
     - world-below
   area: 870978
@@ -1261,6 +1363,7 @@ GD01:
     - GD03
   species: Gnome
 GS03:
+  biome: Savanna
   tags:
     - grassland
     - tropical
@@ -1279,6 +1382,7 @@ GS03:
     - GS02
   species: Human
 GC03:
+  biome: Cave system
   tags:
     - near-surface
   area: 5202705
@@ -1294,6 +1398,7 @@ GC03:
     - MC02
     - GC02
 GD03:
+  biome: World Below
   tags:
     - world-below
   area: 5202705
@@ -1309,6 +1414,7 @@ GD03:
     - GD02
   species: Gnome
 GS09:
+  biome: Savanna
   tags:
     - grassland
     - tropical
@@ -1323,6 +1429,7 @@ GS09:
     - FS17
   species: Human
 GC09:
+  biome: Cave system
   tags:
     - near-surface
   area: 386978
@@ -1334,6 +1441,7 @@ GC09:
     - MC07
     - FC17
 GD09:
+  biome: World Below
   tags:
     - world-below
   area: 386978
@@ -1345,6 +1453,7 @@ GD09:
     - FD17
   species: Gnome
 GS10:
+  biome: Savanna
   tags:
     - grassland
     - tropical
@@ -1360,6 +1469,7 @@ GS10:
     - GS04
   species: Human
 GC10:
+  biome: Cave system
   tags:
     - near-surface
   area: 1137580
@@ -1372,6 +1482,7 @@ GC10:
     - GC06
     - GC04
 GD10:
+  biome: World Below
   tags:
     - world-below
   area: 1137580
@@ -1384,6 +1495,7 @@ GD10:
     - GD04
   species: Gnome
 GS13:
+  biome: Savanna
   tags:
     - grassland
     - tropical
@@ -1396,6 +1508,7 @@ GS13:
     - FS19
   species: Human
 GC13:
+  biome: Cave system
   tags:
     - near-surface
   area: 531971
@@ -1406,6 +1519,7 @@ GC13:
     - MC06
     - FC19
 GD13:
+  biome: World Below
   tags:
     - world-below
   area: 531971
@@ -1416,6 +1530,7 @@ GD13:
     - FD19
   species: Gnome
 GS02:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1430,6 +1545,7 @@ GS02:
     - MS02
     - GS01
 GC02:
+  biome: Cave system
   tags:
     - near-surface
   area: 1364935
@@ -1443,6 +1559,7 @@ GC02:
     - MC02
     - GC01
 GD02:
+  biome: World Below
   tags:
     - world-below
   area: 1364935
@@ -1456,6 +1573,7 @@ GD02:
     - GD01
   species: Gnome
 GS04:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1476,6 +1594,7 @@ GS04:
     - MS13
     - FS04
 GC04:
+  biome: Cave system
   tags:
     - near-surface
   area: 4887376
@@ -1494,6 +1613,7 @@ GC04:
     - MC13
     - FC04
 GD04:
+  biome: World Below
   tags:
     - world-below
   area: 4887376
@@ -1512,6 +1632,7 @@ GD04:
     - FD04
   species: Gnome
 GS05:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1529,6 +1650,7 @@ GS05:
     - FS14
     - MS06
 GC05:
+  biome: Cave system
   tags:
     - near-surface
   area: 4024890
@@ -1544,6 +1666,7 @@ GC05:
     - FC14
     - MC06
 GD05:
+  biome: World Below
   tags:
     - world-below
   area: 4024890
@@ -1559,6 +1682,7 @@ GD05:
     - MD06
   species: Gnome
 GS06:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1580,6 +1704,7 @@ GS06:
     - FS18
     - GS10
 GC06:
+  biome: Cave system
   tags:
     - near-surface
   area: 2534315
@@ -1600,6 +1725,7 @@ GC06:
     - FC18
     - GC10
 GD06:
+  biome: World Below
   tags:
     - world-below
   area: 2534315
@@ -1620,6 +1746,7 @@ GD06:
     - GD10
   species: Gnome
 GS07:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1635,6 +1762,7 @@ GS07:
     - MS04
     - GS06
 GC07:
+  biome: Cave system
   tags:
     - near-surface
   area: 428095
@@ -1648,6 +1776,7 @@ GC07:
     - MC04
     - GC06
 GD07:
+  biome: World Below
   tags:
     - world-below
   area: 428095
@@ -1661,6 +1790,7 @@ GD07:
     - GD06
   species: Gnome
 GS08:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1676,6 +1806,7 @@ GS08:
     - MS05
     - FS17
 GC08:
+  biome: Cave system
   tags:
     - near-surface
   area: 441027
@@ -1690,6 +1821,7 @@ GC08:
     - MC05
     - FC17
 GD08:
+  biome: World Below
   tags:
     - world-below
   area: 441027
@@ -1704,6 +1836,7 @@ GD08:
     - FD17
   species: Gnome
 GS11:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1718,6 +1851,7 @@ GS11:
     - MS06
     - FS26
 GC11:
+  biome: Cave system
   tags:
     - near-surface
   area: 1406191
@@ -1731,6 +1865,7 @@ GC11:
     - MC06
     - FC26
 GD11:
+  biome: World Below
   tags:
     - world-below
   area: 1406191
@@ -1744,6 +1879,7 @@ GD11:
     - FD26
   species: Gnome
 GS12:
+  biome: Temperate grassland
   tags:
     - grassland
     - temperate
@@ -1755,6 +1891,7 @@ GS12:
     - FS27
     - FS28
 GC12:
+  biome: Cave system
   tags:
     - near-surface
   area: 388051
@@ -1765,6 +1902,7 @@ GC12:
     - FC27
     - FC28
 GD12:
+  biome: World Below
   tags:
     - world-below
   area: 388051
@@ -1775,6 +1913,7 @@ GD12:
     - FD28
   species: Gnome
 MS01:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -1786,6 +1925,7 @@ MS01:
     - FS10
   species: Dwarf
 MC01:
+  biome: Cave system
   tags:
     - near-surface
   area: 220309
@@ -1796,6 +1936,7 @@ MC01:
     - FC09
     - FC10
 MD01:
+  biome: World Below
   tags:
     - world-below
   area: 220309
@@ -1806,6 +1947,7 @@ MD01:
     - FD10
   species: Gnome
 MS02:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -1818,6 +1960,7 @@ MS02:
     - GS03
   species: Dwarf
 MC02:
+  biome: Cave system
   tags:
     - near-surface
   area: 119205
@@ -1829,6 +1972,7 @@ MC02:
     - GC02
     - GC03
 MD02:
+  biome: World Below
   tags:
     - world-below
   area: 119205
@@ -1840,6 +1984,7 @@ MD02:
     - GD03
   species: Gnome
 MS03:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -1855,6 +2000,7 @@ MS03:
     - FS05
   species: Dwarf
 MC03:
+  biome: Cave system
   tags:
     - near-surface
   area: 466427
@@ -1869,6 +2015,7 @@ MC03:
     - FC08
     - FC05
 MD03:
+  biome: World Below
   tags:
     - world-below
   area: 466427
@@ -1883,6 +2030,7 @@ MD03:
     - FD05
   species: Gnome
 MS04:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -1895,6 +2043,7 @@ MS04:
     - FS03
   species: Dwarf
 MC04:
+  biome: Cave system
   tags:
     - near-surface
   area: 153562
@@ -1906,6 +2055,7 @@ MC04:
     - GC07
     - FC03
 MD04:
+  biome: World Below
   tags:
     - world-below
   area: 153562
@@ -1917,6 +2067,7 @@ MD04:
     - FD03
   species: Gnome
 MS05:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -1929,6 +2080,7 @@ MS05:
     - FS17
   species: Dwarf
 MC05:
+  biome: Cave system
   tags:
     - near-surface
   area: 228126
@@ -1940,6 +2092,7 @@ MC05:
     - FC02
     - FC17
 MD05:
+  biome: World Below
   tags:
     - world-below
   area: 228126
@@ -1951,6 +2104,7 @@ MD05:
     - FD17
   species: Gnome
 MS06:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -1971,6 +2125,7 @@ MS06:
     - FS24
   species: Dwarf
 MC06:
+  biome: Cave system
   tags:
     - near-surface
   area: 4444669
@@ -1990,6 +2145,7 @@ MC06:
     - DC01
     - FC24
 MD06:
+  biome: World Below
   tags:
     - world-below
   area: 4444669
@@ -2009,6 +2165,7 @@ MD06:
     - FD24
   species: Gnome
 MS07:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2023,6 +2180,7 @@ MS07:
     - FS17
   species: Dwarf
 MC07:
+  biome: Cave system
   tags:
     - near-surface
   area: 871307
@@ -2036,6 +2194,7 @@ MC07:
     - GC08
     - FC17
 MD07:
+  biome: World Below
   tags:
     - world-below
   area: 871307
@@ -2049,6 +2208,7 @@ MD07:
     - FD17
   species: Gnome
 MS08:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2063,6 +2223,7 @@ MS08:
     - FS23
   species: Dwarf
 MC08:
+  biome: Cave system
   tags:
     - near-surface
   area: 1290871
@@ -2076,6 +2237,7 @@ MC08:
     - GC10
     - FC23
 MD08:
+  biome: World Below
   tags:
     - world-below
   area: 1290871
@@ -2089,6 +2251,7 @@ MD08:
     - FD23
   species: Gnome
 MS09:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2100,6 +2263,7 @@ MS09:
     - GS03
   species: Dwarf
 MC09:
+  biome: Cave system
   tags:
     - near-surface
   area: 620278
@@ -2110,6 +2274,7 @@ MC09:
     - GC04
     - GC03
 MD09:
+  biome: World Below
   tags:
     - world-below
   area: 620278
@@ -2120,6 +2285,7 @@ MD09:
     - GD03
   species: Gnome
 MS10:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2131,6 +2297,7 @@ MS10:
     - FS21
   species: Dwarf
 MC10:
+  biome: Cave system
   tags:
     - near-surface
   area: 399683
@@ -2141,6 +2308,7 @@ MC10:
     - GC04
     - FC21
 MD10:
+  biome: World Below
   tags:
     - world-below
   area: 399683
@@ -2151,6 +2319,7 @@ MD10:
     - FD21
   species: Gnome
 MS11:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2162,6 +2331,7 @@ MS11:
     - FS22
   species: Dwarf
 MC11:
+  biome: Cave system
   tags:
     - near-surface
   area: 92586
@@ -2172,6 +2342,7 @@ MC11:
     - FC20
     - FC22
 MD11:
+  biome: World Below
   tags:
     - world-below
   area: 92586
@@ -2182,6 +2353,7 @@ MD11:
     - FD22
   species: Gnome
 MS12:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2194,6 +2366,7 @@ MS12:
     - FS25
   species: Dwarf
 MC12:
+  biome: Cave system
   tags:
     - near-surface
   area: 357771
@@ -2205,6 +2378,7 @@ MC12:
     - GC11
     - FC25
 MD12:
+  biome: World Below
   tags:
     - world-below
   area: 357771
@@ -2216,6 +2390,7 @@ MD12:
     - FD25
   species: Gnome
 MS13:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2230,6 +2405,7 @@ MS13:
     - FS12
   species: Dwarf
 MC13:
+  biome: Cave system
   tags:
     - near-surface
   area: 495282
@@ -2243,6 +2419,7 @@ MC13:
     - GC02
     - FC12
 MD13:
+  biome: World Below
   tags:
     - world-below
   area: 495282
@@ -2256,6 +2433,7 @@ MD13:
     - FD12
   species: Gnome
 MS14:
+  biome: Mountain range
   tags:
     - mountains
     - surface
@@ -2270,6 +2448,7 @@ MS14:
     - FS06
   species: Dwarf
 MC14:
+  biome: Cave system
   tags:
     - near-surface
   area: 424414
@@ -2283,6 +2462,7 @@ MC14:
     - FC20
     - FC06
 MD14:
+  biome: World Below
   tags:
     - world-below
   area: 424414
@@ -2296,6 +2476,7 @@ MD14:
     - FD06
   species: Gnome
 PS01:
+  biome: Polar region
   tags:
     - polar
     - surface
@@ -2310,6 +2491,7 @@ PS01:
     - FS04
   species: Orc
 PC01:
+  biome: Cave system
   tags:
     - near-surface
   area: 6344880
@@ -2322,6 +2504,7 @@ PC01:
     - FC06
     - FC04
 PD01:
+  biome: World Below
   tags:
     - world-below
   area: 6344880
@@ -2334,6 +2517,7 @@ PD01:
     - FD04
   species: Gnome
 PS02:
+  biome: Polar region
   tags:
     - polar
     - surface
@@ -2346,6 +2530,7 @@ PS02:
     - FS03
   species: Orc
 PC02:
+  biome: Cave system
   tags:
     - near-surface
   area: 2461234
@@ -2356,6 +2541,7 @@ PC02:
     - FC02
     - FC03
 PD02:
+  biome: World Below
   tags:
     - world-below
   area: 2461234
@@ -2366,6 +2552,7 @@ PD02:
     - FD03
   species: Gnome
 PS03:
+  biome: Polar region
   tags:
     - polar
     - surface
@@ -2377,6 +2564,7 @@ PS03:
     - FS01
   species: Orc
 PC03:
+  biome: Cave system
   tags:
     - near-surface
   area: 299121
@@ -2386,6 +2574,7 @@ PC03:
     - PD03
     - FC01
 PD03:
+  biome: World Below
   tags:
     - world-below
   area: 299121
