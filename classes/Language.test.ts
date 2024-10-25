@@ -69,33 +69,35 @@ describe('Language', () => {
     })
   })
 
-  describe('advanceMorpology', () => {
-    it('advances from fusional to analytic', () => {
-      const lang = new Language()
-      lang.advanceMorphology()
-      expect(lang.morphology).toBe(LANG_MORPHOLOGY.ANALYTIC)
+  describe('Member methods', () => {
+    describe('advanceMorpology', () => {
+      it('advances from fusional to analytic', () => {
+        const lang = new Language()
+        lang.advanceMorphology()
+        expect(lang.morphology).toBe(LANG_MORPHOLOGY.ANALYTIC)
+      })
+
+      it('advances from analytic to agglutinative', () => {
+        const lang = new Language({morphology: LANG_MORPHOLOGY.ANALYTIC})
+        lang.advanceMorphology()
+        expect(lang.morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
+      })
+
+      it('advances from agglutinative to fusional', () => {
+        const lang = new Language({morphology: LANG_MORPHOLOGY.AGGLUTINATIVE})
+        lang.advanceMorphology()
+        expect(lang.morphology).toBe(LANG_MORPHOLOGY.FUSIONAL)
+      })
     })
 
-    it('advances from analytic to agglutinative', () => {
-      const lang = new Language({ morphology: LANG_MORPHOLOGY.ANALYTIC })
-      lang.advanceMorphology()
-      expect(lang.morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
-    })
-
-    it('advances from agglutinative to fusional', () => {
-      const lang = new Language({ morphology: LANG_MORPHOLOGY.AGGLUTINATIVE })
-      lang.advanceMorphology()
-      expect(lang.morphology).toBe(LANG_MORPHOLOGY.FUSIONAL)
-    })
-  })
-
-  describe('toObject', () => {
-    it('returns an object', () => {
-      const lang = new Language()
-      const obj = lang.toObject()
-      expect(obj.name).toEqual(lang.name)
-      expect(obj.order).toEqual(lang.order)
-      expect(obj.morphology).toEqual(lang.morphology)
+    describe('toObject', () => {
+      it('returns an object', () => {
+        const lang = new Language()
+        const obj = lang.toObject()
+        expect(obj.name).toEqual(lang.name)
+        expect(obj.order).toEqual(lang.order)
+        expect(obj.morphology).toEqual(lang.morphology)
+      })
     })
   })
 })
