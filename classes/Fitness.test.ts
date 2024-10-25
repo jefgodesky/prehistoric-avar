@@ -25,6 +25,13 @@ describe('Fitness', () => {
         expect(fitness.biomes[biome]).toBe(init[biome])
       }
     })
+
+    it('rounds values', () => {
+      const biome = BIOMES.BOREAL_FOREST
+      const init: IFitness = { [biome]: 3.1415 } as IFitness
+      const fitness = new Fitness(init)
+      expect(fitness.biomes[biome]).toBe(3)
+    })
   })
 
   describe('Member methods', () => {
@@ -44,6 +51,13 @@ describe('Fitness', () => {
           fitness.set(biome, 1)
           expect(fitness.biomes[biome]).toBe(1)
         }
+      })
+
+      it('rounds numbers', () => {
+        const biome = BIOMES.BOREAL_FOREST
+        const fitness = new Fitness()
+        fitness.set(biome, 3.1415)
+        expect(fitness.biomes[biome]).toBe(3)
       })
     })
 

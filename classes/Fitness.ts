@@ -8,7 +8,7 @@ class Fitness {
   constructor (data?: IFitness) {
     this.biomes = {} as IFitness
     for (const biome of Object.values(BIOMES)) {
-      this.biomes[biome] = data && data[biome] ? data[biome] : 0
+      this.biomes[biome] = data && data[biome] ? Math.round(data[biome]) : 0
     }
   }
 
@@ -17,7 +17,7 @@ class Fitness {
   }
 
   set (biome: Biome, value: number): void {
-    this.biomes[biome] = value
+    this.biomes[biome] = Math.round(value)
   }
 
   toObject (): IFitness {
