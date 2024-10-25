@@ -1,4 +1,4 @@
-import type { Biome, LangMorphology, LangOrder } from './enums.ts'
+import type { Biome, LangMorphology, LangOrder, SpeciesName } from './enums.ts'
 
 interface IBiome {
   'Carrying capacity score': number
@@ -34,6 +34,20 @@ interface IRegionData {
   }
 }
 
+interface ISpeciesLangPrefs {
+  order?: LangOrder[]
+  typology?: LangMorphology[]
+}
+
+interface ISpecies {
+  name: SpeciesName
+  ancestor?: SpeciesName
+  fitness: IFitness
+  generation: number
+  langPrefs?: ISpeciesLangPrefs
+  appeared?: number
+}
+
 interface IWorld {
   habitability: number
   dragons: {
@@ -45,8 +59,10 @@ interface IWorld {
 
 export type {
   IBiome,
+  IFitness,
   IHabitable,
   ILanguage,
   IRegionData,
+  ISpecies,
   IWorld
 }

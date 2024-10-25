@@ -32,7 +32,18 @@ export const LAYER = {
   WORLD_BELOW: 'D'
 } as const
 
+export const SPECIES_NAMES = {
+  DWARF: 'Dwarf',
+  ELF: 'Elf',
+  GNOME: 'Gnome',
+  HALFLING: 'Halfling',
+  HUMAN: 'Human',
+  ORC: 'Orc',
+  WOSAN: 'Wosan'
+}
+
 export type Biome = typeof BIOMES[keyof typeof BIOMES]
 export type LangMorphology = typeof LANG_MORPHOLOGY[keyof typeof LANG_MORPHOLOGY]
 export type LangOrder = typeof LANG_ORDER[keyof typeof LANG_ORDER]
 export type Layer = typeof LAYER[keyof typeof LAYER]
+export type SpeciesName = typeof SPECIES_NAMES[keyof typeof SPECIES_NAMES]
