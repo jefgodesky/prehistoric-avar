@@ -46,6 +46,29 @@ interface ISpecies {
   appeared?: number
 }
 
+interface ISpeciesYAML {
+  [key: string]: {
+    Generation: number
+    Ancestor?: string
+    Fitness: {
+      'Boreal forest': number
+      'Temperate forest': number
+      'Tropical forest': number
+      Desert: number
+      Savanna: number
+      'Temperate grassland': number
+      'Mountain range': number
+      'Polar region': number
+      'Cave system': number
+      'World Below': number
+    }
+    'Language preferences'?: {
+      Typology?: string[]
+      'Word order'?: string[]
+    }
+  }
+}
+
 interface IWorld {
   habitability: number
   dragons: {
@@ -63,5 +86,6 @@ export type {
   IRegionData,
   ISpecies,
   ISpeciesLangPrefs,
+  ISpeciesYAML,
   IWorld
 }
