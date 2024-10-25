@@ -15,7 +15,7 @@ describe('getBiomeFromTags', () => {
 
   it('can identify a temperate forest', () => {
     const tags = ['forest', 'surface', 'coastal', 'temperate']
-    expect(getBiomeFromTags(...tags)).toEqual(BIOMES.TEMPLATE_FOREST)
+    expect(getBiomeFromTags(...tags)).toEqual(BIOMES.TEMPERATE_FOREST)
   })
 
   it('can identify a tropical forest', () => {

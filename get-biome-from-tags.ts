@@ -4,7 +4,7 @@ import type { Biome } from './enums.ts'
 const getBiomeFromTags = (...tags: string[]): Biome => {
   const biomes: { [key: Biome]: string[]} = {}
   biomes[BIOMES.BOREAL_FOREST] = ['forest', 'boreal']
-  biomes[BIOMES.TEMPLATE_FOREST] = ['forest', 'temperate']
+  biomes[BIOMES.TEMPERATE_FOREST] = ['forest', 'temperate']
   biomes[BIOMES.TROPICAL_FOREST] = ['forest', 'tropical']
   biomes[BIOMES.DESERT] = ['desert']
   biomes[BIOMES.SAVANNA] = ['grassland', 'tropical']

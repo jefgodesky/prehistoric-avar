@@ -1,6 +1,6 @@
 export const BIOMES = {
   BOREAL_FOREST: 'Boreal forest',
-  TEMPLATE_FOREST: 'Temperate forest',
+  TEMPERATE_FOREST: 'Temperate forest',
   TROPICAL_FOREST: 'Tropical forest',
   DESERT: 'Desert',
   SAVANNA: 'Savanna',
