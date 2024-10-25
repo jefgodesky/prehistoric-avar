@@ -1,4 +1,5 @@
 import { BIOMES } from '../enums.ts'
+import type { Biome } from '../enums.ts'
 import type { IFitness } from '../index.d.ts'
 
 class Fitness {
@@ -9,6 +10,10 @@ class Fitness {
     for (const biome of Object.values(BIOMES)) {
       this.biomes[biome] = data && data[biome] ? data[biome] : 0
     }
+  }
+
+  get (biome: Biome): number {
+    return this.biomes[biome]
   }
 
   toObject (): IFitness {
