@@ -55,6 +55,9 @@ interface IWorld {
     fear: number
   }
   events: string[]
+  species: {
+    [key: SpeciesName]: ISpecies
+  }
 }
 
 export type {

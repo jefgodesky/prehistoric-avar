@@ -1,4 +1,15 @@
-import { IHabitable, IWorld } from '../index.d.ts'
+import { SPECIES_NAMES } from '../enums.ts'
+import type { SpeciesName } from '../enums.ts'
+import { IHabitable, ISpecies, IWorld } from '../index.d.ts'
+import {
+  getElf,
+  getDwarf,
+  getGnome,
+  getHalfling,
+  getHuman,
+  getOrc,
+  getWosan
+} from '../get-species.ts'
 
 const ROUND_HABITABILITY_TO_FULL = 0.95
 
@@ -9,6 +20,9 @@ class World implements IHabitable {
     interest: number
     fear: number
   }
+  species: {
+    [key: SpeciesName]: ISpecies
+  }
 
   constructor() {
     this.habitability = 1
@@ -17,6 +31,16 @@ class World implements IHabitable {
       interest: 0,
       fear: 0
     }
+
+    this.species = {}
+    this.species[SPECIES_NAMES.ELF] = getElf()
+    this.species[SPECIES_NAMES.DWARF] = getDwarf()
+    this.species[SPECIES_NAMES.GNOME] = getGnome()
+    this.species[SPECIES_NAMES.HALFLING] = getHalfling()
+    this.species[SPECIES_NAMES.HUMAN] = getHuman()
+    this.species[SPECIES_NAMES.ORC] = getOrc()
+    this.species[SPECIES_NAMES.WOSAN] = getWosan()
+    this.species[SPECIES_NAMES.WOSAN].appeared = 1
   }
 
   incrDraconicInterest(): void {
@@ -60,6 +84,7 @@ class World implements IHabitable {
       habitability: this.habitability,
       dragons: this.dragons,
       events: this.events,
+      species: this.species
     }
   }
 }

@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { SPECIES_NAMES } from '../enums.ts'
 import World from './World.ts'
-import Language from './Language.ts'
 
 describe('World', () => {
   describe('constructor', () => {
@@ -28,6 +28,25 @@ describe('World', () => {
     it('defaults events to an empty list', () => {
       const world = new World()
       expect(world.events).toHaveLength(0)
+    })
+
+    it('defines seven species', () => {
+      const world = new World()
+      const names = [
+        SPECIES_NAMES.ELF,
+        SPECIES_NAMES.DWARF,
+        SPECIES_NAMES.GNOME,
+        SPECIES_NAMES.HALFLING,
+        SPECIES_NAMES.HUMAN,
+        SPECIES_NAMES.ORC,
+        SPECIES_NAMES.WOSAN
+      ]
+
+      expect(Object.keys(world.species)).toHaveLength(names.length)
+      expect(world.species[SPECIES_NAMES.WOSAN].appeared).toBe(1)
+      for (const name of names) {
+        expect(world.species[name].name).toEqual(name)
+      }
     })
   })
 
