@@ -9,7 +9,7 @@ export const BIOMES = {
   POLAR: 'Polar region',
   CAVES: 'Cave system',
   WORLD_BELOW: 'World Below'
-}
+} as const
 
 export const LANG_MORPHOLOGY = {
   FUSIONAL: 'Fusional',

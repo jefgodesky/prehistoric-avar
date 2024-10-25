@@ -4,8 +4,8 @@ import { BIOMES } from './enums.ts'
 import getBiomeFromTags from './get-biome-from-tags.ts'
 
 describe('getBiomeFromTags', () => {
-  it('returns a null string if not given anything', () => {
-    expect(getBiomeFromTags()).toEqual('')
+  it('returns null if not given anything', () => {
+    expect(getBiomeFromTags()).toEqual(null)
   })
 
   it('can identify a boreal forest', () => {
