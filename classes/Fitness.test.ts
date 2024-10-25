@@ -16,6 +16,11 @@ describe('Fitness', () => {
       expect(fitness.max).toBe(null)
     })
 
+    it('defaults minimum value to null', () => {
+      const fitness = new Fitness()
+      expect(fitness.min).toBe(null)
+    })
+
     it('defaults each biome\'s value to 0', () => {
       const fitness = new Fitness()
       for (const biome of Object.values(BIOMES)) {
@@ -31,9 +36,14 @@ describe('Fitness', () => {
       }
     })
 
-    it('can set the max value', () => {
+    it('can set the maximum value', () => {
       const fitness = new Fitness({} as IFitness, 3)
       expect(fitness.max).toBe(3)
+    })
+
+    it('can set the minimum value', () => {
+      const fitness = new Fitness({} as IFitness, 3, -3)
+      expect(fitness.min).toBe(-3)
     })
 
     it('rounds values', () => {
@@ -43,11 +53,18 @@ describe('Fitness', () => {
       expect(fitness.biomes[biome]).toBe(3)
     })
 
-    it('won\'t allow values greater than max', () => {
+    it('won\'t allow values greater than the maximum', () => {
       const biome = BIOMES.BOREAL_FOREST
       const init: IFitness = { [biome]: 4 } as IFitness
       const fitness = new Fitness(init, 3)
       expect(fitness.biomes[biome]).toBe(3)
+    })
+
+    it('won\'t allow values less than the minimum', () => {
+      const biome = BIOMES.BOREAL_FOREST
+      const init: IFitness = { [biome]: -4 } as IFitness
+      const fitness = new Fitness(init, 3, -3)
+      expect(fitness.biomes[biome]).toBe(-3)
     })
   })
 
@@ -77,11 +94,18 @@ describe('Fitness', () => {
         expect(fitness.biomes[biome]).toBe(3)
       })
 
-      it('won\'t allow values greater than max', () => {
+      it('won\'t allow values greater than the maximum', () => {
         const biome = BIOMES.BOREAL_FOREST
         const fitness = new Fitness({} as IFitness, 3)
         fitness.set(biome, 4)
         expect(fitness.biomes[biome]).toBe(3)
+      })
+
+      it('won\'t allow values less than the minimum', () => {
+        const biome = BIOMES.BOREAL_FOREST
+        const fitness = new Fitness({} as IFitness, 3, -3)
+        fitness.set(biome, -4)
+        expect(fitness.biomes[biome]).toBe(-3)
       })
     })
 

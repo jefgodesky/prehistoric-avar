@@ -5,9 +5,11 @@ import type { IFitness } from '../index.d.ts'
 class Fitness {
   biomes: IFitness
   max: number | null
+  min: number | null
 
-  constructor (data?: IFitness, max?: number) {
+  constructor (data?: IFitness, max?: number, min?: number) {
     this.max = max ?? null
+    this.min = min ?? null
     this.biomes = {} as IFitness
     for (const biome of Object.values(BIOMES)) {
       this.biomes[biome] = data && data[biome] ? this.clamp(data[biome]) : 0
@@ -27,7 +29,9 @@ class Fitness {
   }
 
   private clamp (value: number): number {
-    return Math.min(Math.round(value), this.max ?? Number.MAX_VALUE)
+    const max = this.max ?? Number.MAX_SAFE_INTEGER
+    const min = this.min ?? Number.MIN_SAFE_INTEGER
+    return Math.max(Math.min(Math.round(value), max), min)
   }
 
   static combine (a: Fitness, b: Fitness): Fitness {
