@@ -11,6 +11,11 @@ describe('Fitness', () => {
       expect(fitness).toBeInstanceOf(Fitness)
     })
 
+    it('defaults maximum value to null', () => {
+      const fitness = new Fitness()
+      expect(fitness.max).toBe(null)
+    })
+
     it('defaults each biome\'s value to 0', () => {
       const fitness = new Fitness()
       for (const biome of Object.values(BIOMES)) {
@@ -26,10 +31,22 @@ describe('Fitness', () => {
       }
     })
 
+    it('can set the max value', () => {
+      const fitness = new Fitness({} as IFitness, 3)
+      expect(fitness.max).toBe(3)
+    })
+
     it('rounds values', () => {
       const biome = BIOMES.BOREAL_FOREST
       const init: IFitness = { [biome]: 3.1415 } as IFitness
       const fitness = new Fitness(init)
+      expect(fitness.biomes[biome]).toBe(3)
+    })
+
+    it('won\'t allow values greater than max', () => {
+      const biome = BIOMES.BOREAL_FOREST
+      const init: IFitness = { [biome]: 4 } as IFitness
+      const fitness = new Fitness(init, 3)
       expect(fitness.biomes[biome]).toBe(3)
     })
   })
@@ -57,6 +74,13 @@ describe('Fitness', () => {
         const biome = BIOMES.BOREAL_FOREST
         const fitness = new Fitness()
         fitness.set(biome, 3.1415)
+        expect(fitness.biomes[biome]).toBe(3)
+      })
+
+      it('won\'t allow values greater than max', () => {
+        const biome = BIOMES.BOREAL_FOREST
+        const fitness = new Fitness({} as IFitness, 3)
+        fitness.set(biome, 4)
         expect(fitness.biomes[biome]).toBe(3)
       })
     })
