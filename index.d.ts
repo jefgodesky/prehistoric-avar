@@ -62,5 +62,6 @@ export type {
   ILanguage,
   IRegionData,
   ISpecies,
+  ISpeciesLangPrefs,
   IWorld
 }
