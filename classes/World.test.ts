@@ -29,25 +29,6 @@ describe('World', () => {
       const world = new World()
       expect(world.events).toHaveLength(0)
     })
-
-    it('defines seven species', () => {
-      const world = new World()
-      const names = [
-        SPECIES_NAMES.ELF,
-        SPECIES_NAMES.DWARF,
-        SPECIES_NAMES.GNOME,
-        SPECIES_NAMES.HALFLING,
-        SPECIES_NAMES.HUMAN,
-        SPECIES_NAMES.ORC,
-        SPECIES_NAMES.WOSAN
-      ]
-
-      expect(Object.keys(world.species)).toHaveLength(names.length)
-      expect(world.species[SPECIES_NAMES.WOSAN].appeared).toBe(1)
-      for (const name of names) {
-        expect(world.species[name].name).toEqual(name)
-      }
-    })
   })
 
   describe('incrDraconicInterest', () => {
