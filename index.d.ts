@@ -7,9 +7,7 @@ interface IBiome {
   Regions: string[]
 }
 
-interface IFitness {
-  [key: Biome]: number
-}
+type IFitness = Record<Biome, number>
 
 interface IHabitable {
   habitability: number
