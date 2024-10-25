@@ -37,6 +37,16 @@ describe('Fitness', () => {
       })
     })
 
+    describe('set', () => {
+      it('sets the value for any biome', () => {
+        const fitness = new Fitness()
+        for (const biome of Object.values(BIOMES)) {
+          fitness.set(biome, 1)
+          expect(fitness.biomes[biome]).toBe(1)
+        }
+      })
+    })
+
     describe('toObject', () => {
       it('exports to an object', () => {
         const fitness = new Fitness()

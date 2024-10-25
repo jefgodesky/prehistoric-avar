@@ -16,6 +16,10 @@ class Fitness {
     return this.biomes[biome]
   }
 
+  set (biome: Biome, value: number): void {
+    this.biomes[biome] = value
+  }
+
   toObject (): IFitness {
     return this.biomes
   }
