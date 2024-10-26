@@ -11,6 +11,12 @@ export const BIOMES = {
   WORLD_BELOW: 'World Below'
 } as const
 
+export const DISPOSITIONS = {
+  HOSTILE: 'Hostile',
+  INDIFFERENT: 'Indifferent',
+  FRIENDLY: 'Friendly'
+} as const
+
 export const LANG_MORPHOLOGY = {
   FUSIONAL: 'Fusional',
   ANALYTIC: 'Analytic',
@@ -43,6 +49,7 @@ export const SPECIES_NAMES = {
 }
 
 export type Biome = typeof BIOMES[keyof typeof BIOMES]
+export type Disposition = typeof DISPOSITIONS[keyof typeof DISPOSITIONS]
 export type LangMorphology = typeof LANG_MORPHOLOGY[keyof typeof LANG_MORPHOLOGY]
 export type LangOrder = typeof LANG_ORDER[keyof typeof LANG_ORDER]
 export type Layer = typeof LAYER[keyof typeof LAYER]
