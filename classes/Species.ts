@@ -13,7 +13,7 @@ class Species {
     this.name = data?.name ?? null
     this.ancestor = data?.ancestor ?? null
     this.generation = data?.generation ?? null
-    this.fitness = new Fitness(data?.fitness)
+    this.fitness = new Fitness(data?.fitness, 3, -3)
     this.langPrefs = data?.langPrefs === undefined ? null : data?.langPrefs
   }
 

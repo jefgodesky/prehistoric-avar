@@ -92,6 +92,8 @@ describe('Species', () => {
     it('instantiates an empty fitness instance by default', () => {
       const sp = new Species()
       expect(sp.fitness.get(BIOMES.BOREAL_FOREST)).toEqual(0)
+      expect(sp.fitness.max).toBe(3)
+      expect(sp.fitness.min).toBe(-3)
     })
 
     it('can set a name', () => {
@@ -113,6 +115,8 @@ describe('Species', () => {
       const biome = BIOMES.BOREAL_FOREST
       const sp = new Species(wosan)
       expect(sp.fitness.get(biome)).toEqual(wosan.fitness[biome])
+      expect(sp.fitness.max).toBe(3)
+      expect(sp.fitness.min).toBe(-3)
     })
 
     it('uses langPrefs to determine capacity for speech', () => {
