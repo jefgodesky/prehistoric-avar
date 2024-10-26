@@ -74,4 +74,13 @@ describe('Immortal', () => {
       expect(i.slayable).toEqual([1000000, 500000])
     })
   })
+
+  describe('Member methods', () => {
+    describe('toObject', () => {
+      it('exports an object', () => {
+        const i = new Immortal(data)
+        expect(JSON.stringify(i.toObject())).toBe(JSON.stringify(data))
+      })
+    })
+  })
 })

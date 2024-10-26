@@ -18,6 +18,16 @@ class Immortal {
       : []
     this.slayable = data?.slayable ?? false
   }
+
+  toObject (): IImmortal {
+    return {
+      description: this.description,
+      disposition: this.disposition,
+      impact: this.impact,
+      scrolls: this.scrolls.map(scroll => scroll.toObject()),
+      slayable: this.slayable
+    }
+  }
 }
 
 export default Immortal
