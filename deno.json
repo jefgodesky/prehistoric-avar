@@ -11,6 +11,7 @@
     "@std/testing": "jsr:@std/testing@^1.0.3",
     "@turf/area": "npm:@turf/area@^7.1.0",
     "@turf/turf": "npm:@turf/turf@^7.1.0",
+    "emittery": "npm:emittery@^1.0.3",
     "xmldom": "npm:xmldom@^0.6.0",
     "yaml": "npm:yaml@^2.5.1"
   },

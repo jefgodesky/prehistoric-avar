@@ -16,6 +16,7 @@
     "npm:@turf/area@^7.1.0": "7.1.0",
     "npm:@turf/helpers@^7.1.0": "7.1.0",
     "npm:@turf/turf@^7.1.0": "7.1.0",
+    "npm:emittery@^1.0.3": "1.0.3",
     "npm:xmldom@*": "0.6.0",
     "npm:xmldom@0.6": "0.6.0",
     "npm:yaml@*": "2.5.1",
@@ -1445,6 +1446,9 @@
     "earcut@2.2.4": {
       "integrity": "sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ=="
     },
+    "emittery@1.0.3": {
+      "integrity": "sha512-tJdCJitoy2lrC2ldJcqN4vkqJ00lT+tOWNT1hBJjO/3FDMJa5TTIiYGCKGkn/WfCyOzUMObeohbVTj00fhiLiA=="
+    },
     "escape-latex@1.2.0": {
       "integrity": "sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw=="
     },
@@ -1586,6 +1590,7 @@
       "npm:@dice-roller/rpg-dice-roller@^5.5.0",
       "npm:@turf/area@^7.1.0",
       "npm:@turf/turf@^7.1.0",
+      "npm:emittery@^1.0.3",
       "npm:xmldom@0.6",
       "npm:yaml@^2.5.1"
     ]
