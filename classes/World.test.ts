@@ -1,6 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import World from './World.ts'
+import {BIOMES, SPECIES_NAMES} from '../enums.ts'
 
 describe('World', () => {
   describe('constructor', () => {
@@ -27,6 +28,13 @@ describe('World', () => {
     it('defaults events to an empty list', () => {
       const world = new World()
       expect(world.events).toHaveLength(0)
+    })
+
+    it('loads species', () => {
+      const world = new World()
+      for (const species of Object.values(SPECIES_NAMES)) {
+        expect(Object.keys(world.species)).toContain(species.toLowerCase())
+      }
     })
   })
 
@@ -134,6 +142,7 @@ describe('World', () => {
         expect(obj.dragons.interest).toEqual(world.dragons.interest)
         expect(obj.dragons.fear).toEqual(world.dragons.fear)
         expect(obj.events).toEqual(world.events)
+        expect(Object.keys(obj.species)).toHaveLength(7)
       })
     })
 

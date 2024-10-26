@@ -103,6 +103,9 @@ interface IWorld {
     interest: number
     fear: number
   }
+  species: {
+    [key: string]: ISpecies
+  }
   events: string[]
 }
 

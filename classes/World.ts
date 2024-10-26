@@ -1,4 +1,6 @@
-import { IHabitable, IWorld } from '../index.d.ts'
+import {IHabitable, ISpecies, IWorld} from '../index.d.ts'
+import Species from './Species.ts'
+import species from '../instances/species/index.ts'
 
 const ROUND_HABITABILITY_TO_FULL = 0.95
 
@@ -9,6 +11,7 @@ class World implements IHabitable {
     interest: number
     fear: number
   }
+  species: Record<string, Species>
 
   constructor () {
     this.habitability = 1
@@ -17,6 +20,7 @@ class World implements IHabitable {
       interest: 0,
       fear: 0
     }
+    this.species = species
   }
 
   incrDraconicInterest (): void {
@@ -56,10 +60,16 @@ class World implements IHabitable {
   }
 
   toObject (): IWorld {
+    const species: Record<string, ISpecies> = {}
+    for (const sp in this.species) {
+      species[sp] = this.species[sp].toObject()
+    }
+
     return {
       habitability: this.habitability,
       dragons: this.dragons,
-      events: this.events
+      events: this.events,
+      species
     }
   }
 
