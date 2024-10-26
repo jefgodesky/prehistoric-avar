@@ -24,6 +24,17 @@ class Species {
   canSpeak (): boolean {
     return this.langPrefs !== null
   }
+
+  toObject (): ISpecies {
+    const obj: ISpecies = {
+      name: this.name ?? '',
+      generation: this.generation ?? -1,
+      fitness: this.fitness.toObject()
+    }
+    if (this.ancestor) obj.ancestor = this.ancestor
+    if (this.langPrefs) obj.langPrefs = this.langPrefs
+    return obj
+  }
 }
 
 export default Species

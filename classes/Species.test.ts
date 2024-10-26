@@ -160,5 +160,18 @@ describe('Species', () => {
         expect(sp.canSpeak()).toEqual(true)
       })
     })
+
+    describe('toObject', () => {
+      it('returns an object', () => {
+        const sp = new Species(human)
+        const biome = BIOMES.BOREAL_FOREST
+        const actual = sp.toObject()
+        expect(actual.name).toEqual(sp.name)
+        expect(actual.ancestor).toEqual(sp.ancestor)
+        expect(actual.generation).toEqual(sp.generation)
+        expect(actual.fitness[biome]).toEqual(sp.getFitness(biome))
+        expect(JSON.stringify(actual.langPrefs)).toEqual(JSON.stringify(sp.langPrefs))
+      })
+    })
   })
 })
