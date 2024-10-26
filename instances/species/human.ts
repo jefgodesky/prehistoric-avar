@@ -17,5 +17,5 @@ export default new Species({
     [BIOMES.CAVES]: -3,
     [BIOMES.WORLD_BELOW]: -1
   },
-  langPrefs: {}
+  languagePreferences: {}
 })

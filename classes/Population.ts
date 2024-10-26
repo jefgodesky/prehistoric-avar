@@ -1,6 +1,6 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
-import type { IPopulation, IRelationship } from '../index.d.ts'
+import type { IPopulation } from '../index.d.ts'
 import Fitness from './Fitness.ts'
 import Relationship from './Relationship.ts'
 import Scroll from './Scroll.ts'

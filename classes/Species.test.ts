@@ -1,68 +1,10 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES, LANG_ORDER, LANG_MORPHOLOGY, SPECIES_NAMES } from '../enums.ts'
-import type { ISpecies } from '../index.d.ts'
+import { ElfData, HumanData, WosanData } from '../test-data.ts'
 import Species from './Species.ts'
 
 describe('Species', () => {
-  const wosan: ISpecies = {
-    name: SPECIES_NAMES.WOSAN,
-    generation: 50,
-    fitness: {
-      [BIOMES.BOREAL_FOREST]: 0,
-      [BIOMES.TEMPERATE_FOREST]: 1,
-      [BIOMES.TROPICAL_FOREST]: 0,
-      [BIOMES.DESERT]: -2,
-      [BIOMES.SAVANNA]: 2,
-      [BIOMES.TEMPERATE_GRASSLAND]: 1,
-      [BIOMES.MOUNTAINS]: -2,
-      [BIOMES.POLAR]: -3,
-      [BIOMES.CAVES]: -3,
-      [BIOMES.WORLD_BELOW]: -1
-    }
-  }
-
-  const elf: ISpecies = {
-    name: SPECIES_NAMES.ELF,
-    ancestor: SPECIES_NAMES.WOSAN,
-    generation: 10,
-    fitness: {
-      [BIOMES.BOREAL_FOREST]: 3,
-      [BIOMES.TEMPERATE_FOREST]: 3,
-      [BIOMES.TROPICAL_FOREST]: 3,
-      [BIOMES.DESERT]: -2,
-      [BIOMES.SAVANNA]: 0,
-      [BIOMES.TEMPERATE_GRASSLAND]: 0,
-      [BIOMES.MOUNTAINS]: -1,
-      [BIOMES.POLAR]: -3,
-      [BIOMES.CAVES]: -3,
-      [BIOMES.WORLD_BELOW]: 1
-    },
-    langPrefs: {
-      typology: [LANG_MORPHOLOGY.ANALYTIC],
-      order: [LANG_ORDER.VSO, LANG_ORDER.VOS]
-    }
-  }
-
-  const human: ISpecies = {
-    name: SPECIES_NAMES.HUMAN,
-    ancestor: SPECIES_NAMES.WOSAN,
-    generation: 40,
-    fitness: {
-      [BIOMES.BOREAL_FOREST]: 0,
-      [BIOMES.TEMPERATE_FOREST]: 1,
-      [BIOMES.TROPICAL_FOREST]: 0,
-      [BIOMES.DESERT]: -1,
-      [BIOMES.SAVANNA]: 2,
-      [BIOMES.TEMPERATE_GRASSLAND]: 2,
-      [BIOMES.MOUNTAINS]: -2,
-      [BIOMES.POLAR]: -3,
-      [BIOMES.CAVES]: -3,
-      [BIOMES.WORLD_BELOW]: -1
-    },
-    langPrefs: {}
-  }
-
   describe('constructor', () => {
     it('creates a Species instance', () => {
       const sp = new Species()
@@ -86,7 +28,7 @@ describe('Species', () => {
 
     it('sets null for language preferences by default', () => {
       const sp = new Species()
-      expect(sp.langPrefs).toEqual(null)
+      expect(sp.languagePreferences).toEqual(null)
     })
 
     it('instantiates an empty fitness instance by default', () => {
@@ -97,91 +39,91 @@ describe('Species', () => {
     })
 
     it('can set a name', () => {
-      const sp = new Species(wosan)
-      expect(sp.name).toEqual(wosan.name)
+      const sp = new Species(WosanData)
+      expect(sp.name).toEqual(WosanData.name)
     })
 
     it('can set an ancestor', () => {
-      const sp = new Species(elf)
-      expect(sp.ancestor).toEqual(elf.ancestor)
+      const sp = new Species(ElfData)
+      expect(sp.ancestor).toEqual(ElfData.ancestor)
     })
 
     it('can set a generation value', () => {
-      const sp = new Species(wosan)
-      expect(sp.generation).toEqual(wosan.generation)
+      const sp = new Species(WosanData)
+      expect(sp.generation).toEqual(WosanData.generation)
     })
 
     it('can set fitness', () => {
       const biome = BIOMES.BOREAL_FOREST
-      const sp = new Species(wosan)
-      expect(sp.fitness.get(biome)).toEqual(wosan.fitness[biome])
+      const sp = new Species(WosanData)
+      expect(sp.fitness.get(biome)).toEqual(WosanData.fitness[biome])
       expect(sp.fitness.max).toBe(3)
       expect(sp.fitness.min).toBe(-3)
     })
 
-    it('uses langPrefs to determine capacity for speech', () => {
-      const sp = new Species(human)
-      expect(sp.langPrefs).not.toEqual(null)
+    it('uses languagePreferences to determine capacity for speech', () => {
+      const sp = new Species(HumanData)
+      expect(sp.languagePreferences).not.toEqual(null)
     })
 
     it('can set a preference for morphological types in language', () => {
-      const sp = new Species(elf)
-      expect(sp.langPrefs?.typology).toHaveLength(1)
-      expect(sp.langPrefs?.typology).toContain(LANG_MORPHOLOGY.ANALYTIC)
+      const sp = new Species(ElfData)
+      expect(sp.languagePreferences?.typology).toHaveLength(1)
+      expect(sp.languagePreferences?.typology).toContain(LANG_MORPHOLOGY.ANALYTIC)
     })
 
     it('can set a preference for word order', () => {
-      const sp = new Species(elf)
-      expect(sp.langPrefs?.order).toHaveLength(2)
-      expect(sp.langPrefs?.order).toContain(LANG_ORDER.VOS)
-      expect(sp.langPrefs?.order).toContain(LANG_ORDER.VSO)
+      const sp = new Species(ElfData)
+      expect(sp.languagePreferences?.order).toHaveLength(2)
+      expect(sp.languagePreferences?.order).toContain(LANG_ORDER.VOS)
+      expect(sp.languagePreferences?.order).toContain(LANG_ORDER.VSO)
     })
   })
 
   describe('Member methods', () => {
     describe('getFitness', () => {
       it('returns the species fitness for a given biome', () => {
-        const sp = new Species(wosan)
+        const sp = new Species(WosanData)
         for (const biome of Object.values(BIOMES)) {
-          expect(sp.getFitness(biome)).toEqual(wosan.fitness[biome])
+          expect(sp.getFitness(biome)).toEqual(WosanData.fitness[biome])
         }
       })
     })
 
     describe('canSpeak', () => {
-      it('returns false if the species has null for langPrefs', () => {
-        const sp = new Species(wosan)
+      it('returns false if the species has null for languagePreferences', () => {
+        const sp = new Species(WosanData)
         expect(sp.canSpeak()).toEqual(false)
       })
 
-      it('returns false if the species has langPrefs', () => {
-        const sp = new Species(elf)
+      it('returns false if the species has languagePreferences', () => {
+        const sp = new Species(ElfData)
         expect(sp.canSpeak()).toEqual(true)
       })
 
-      it('returns false if the species has langPrefs, even with nothing specified', () => {
-        const sp = new Species(human)
+      it('returns false if the species has languagePreferences, even with nothing specified', () => {
+        const sp = new Species(HumanData)
         expect(sp.canSpeak()).toEqual(true)
       })
     })
 
     describe('toObject', () => {
       it('returns an object', () => {
-        const sp = new Species(human)
+        const sp = new Species(HumanData)
         const biome = BIOMES.BOREAL_FOREST
         const actual = sp.toObject()
         expect(actual.name).toEqual(sp.name)
         expect(actual.ancestor).toEqual(sp.ancestor)
         expect(actual.generation).toEqual(sp.generation)
         expect(actual.fitness[biome]).toEqual(sp.getFitness(biome))
-        expect(JSON.stringify(actual.langPrefs)).toEqual(JSON.stringify(sp.langPrefs))
+        expect(JSON.stringify(actual.languagePreferences)).toEqual(JSON.stringify(sp.languagePreferences))
       })
     })
 
     describe('toString', () => {
       it('returns a string', () => {
-        const sp = new Species(human)
-        expect(sp.toString()).toEqual(`Species: ${human.name}`)
+        const sp = new Species(HumanData)
+        expect(sp.toString()).toEqual(`Species: ${HumanData.name}`)
       })
     })
   })

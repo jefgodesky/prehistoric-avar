@@ -1,26 +1,10 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DISPOSITIONS } from '../enums.ts'
-import type { IRelationship } from '../index.d.ts'
+import { SampleRelationship } from '../test-data.ts'
 import Relationship from './Relationship.ts'
 
 describe('Relationship', () => {
-  const data: IRelationship = {
-    a: 'Population: GS03-001WO',
-    b: 'Immortal: The Dragon Queen',
-    disposition: DISPOSITIONS.HOSTILE,
-    scrolls: [
-      {
-        text: 'We will come to worship the Dragon Queen',
-        seals: 10
-      },
-      {
-        text: 'We will invent gods to protect us from the Dragon Queen',
-        seals: 10
-      }
-    ]
-  }
-
   describe('constructor', () => {
     it('creates a Relationship instance', () => {
       const rel = new Relationship()
@@ -48,38 +32,39 @@ describe('Relationship', () => {
     })
 
     it('can set A', () => {
-      const rel = new Relationship(data)
-      expect(rel.a).toBe(data.a)
+      const rel = new Relationship(SampleRelationship)
+      expect(rel.a).toBe(SampleRelationship.a)
     })
 
     it('can set B', () => {
-      const rel = new Relationship(data)
-      expect(rel.b).toBe(data.b)
+      const rel = new Relationship(SampleRelationship)
+      expect(rel.b).toBe(SampleRelationship.b)
     })
 
     it('can set the disposition', () => {
-      const rel = new Relationship(data)
-      expect(rel.disposition).toBe(data.disposition)
+      const rel = new Relationship(SampleRelationship)
+      expect(rel.disposition).toBe(SampleRelationship.disposition)
     })
 
     it('can set the scrolls', () => {
-      const rel = new Relationship(data)
-      expect(rel.scrolls).toHaveLength(data.scrolls.length)
+      const rel = new Relationship(SampleRelationship)
+      expect(rel.scrolls).toHaveLength(SampleRelationship.scrolls.length)
     })
   })
 
   describe('Member methods', () => {
     describe('toObject', () => {
       it('exports an object', () => {
-        const rel = new Relationship(data)
-        expect(JSON.stringify(rel.toObject())).toBe(JSON.stringify(data))
+        const rel = new Relationship(SampleRelationship)
+        expect(JSON.stringify(rel.toObject())).toBe(JSON.stringify(SampleRelationship))
       })
     })
 
     describe('toString', () => {
       it('exports a string', () => {
-        const rel = new Relationship(data)
-        expect(rel.toString()).toBe(`${data.a} → ${data.b} [${data.disposition}]`)
+        const { a, b, disposition } = SampleRelationship
+        const rel = new Relationship(SampleRelationship)
+        expect(rel.toString()).toBe(`${a} → ${b} [${disposition}]`)
       })
     })
   })

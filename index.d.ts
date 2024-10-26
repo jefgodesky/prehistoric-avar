@@ -97,7 +97,7 @@ interface IScroll {
   seals: number
 }
 
-interface ISpeciesLangPrefs {
+interface ISpeciesLanguagePreferences {
   order?: LangOrder[]
   typology?: LangMorphology[]
 }
@@ -107,7 +107,7 @@ interface ISpecies {
   ancestor?: SpeciesName
   fitness: IFitness
   generation: number
-  langPrefs?: ISpeciesLangPrefs
+  languagePreferences?: ISpeciesLanguagePreferences
   appeared?: number
 }
 
@@ -141,7 +141,7 @@ export type {
   IRegionData,
   IScroll,
   ISpecies,
-  ISpeciesLangPrefs,
+  ISpeciesLanguagePreferences,
   ITradition,
   IWorld
 }

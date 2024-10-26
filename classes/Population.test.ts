@@ -1,55 +1,10 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import {BIOMES, DISPOSITIONS, SPECIES_NAMES} from '../enums.ts'
-import type { IPopulation } from '../index.d.ts'
+import { SamplePopulation } from '../test-data.ts'
 import Population from './Population.ts'
 
 describe('Population', () => {
-  const data: IPopulation = {
-    id: 'GS02-123HU',
-    species: SPECIES_NAMES.HUMAN,
-    tradition: {
-      fitness: {
-        [BIOMES.BOREAL_FOREST]: 0,
-        [BIOMES.TEMPERATE_FOREST]: 0,
-        [BIOMES.TROPICAL_FOREST]: 0,
-        [BIOMES.DESERT]: 0,
-        [BIOMES.SAVANNA]: 1,
-        [BIOMES.TEMPERATE_GRASSLAND]: 1,
-        [BIOMES.MOUNTAINS]: 0,
-        [BIOMES.POLAR]: 0,
-        [BIOMES.CAVES]: 0,
-        [BIOMES.WORLD_BELOW]: 0
-      },
-      scrolls: [
-        {
-          text: 'We adapt to temperate grasslands',
-          seals: 2
-        },
-        {
-          text: 'We forget the ways of the savanna',
-          seals: 3
-        }
-      ]
-    },
-    size: 54321,
-    viability: 0.9,
-    relationships: [
-      {
-        a: 'Population: GS02-123HU',
-        b: 'Immortal: The Dragon Queen',
-        disposition: DISPOSITIONS.HOSTILE,
-        scrolls: []
-      }
-    ],
-    scrolls: [
-      {
-        text: 'Example scroll',
-        seals: 10
-      }
-    ]
-  }
-
   describe('constructor', () => {
     it('creates a Population instance', () => {
       const p = new Population()
@@ -95,55 +50,55 @@ describe('Population', () => {
     })
 
     it('can set an ID', () => {
-      const p = new Population(data)
-      expect(p.id).toBe(data.id)
+      const p = new Population(SamplePopulation)
+      expect(p.id).toBe(SamplePopulation.id)
     })
 
     it('can set a species', () => {
-      const p = new Population(data)
-      expect(p.species.name).toBe(data.species)
+      const p = new Population(SamplePopulation)
+      expect(p.species.name).toBe(SamplePopulation.species)
     })
 
     it('can set tradition', () => {
-      const p = new Population(data)
-      expect(p.tradition.scrolls).toHaveLength(data.tradition.scrolls.length)
+      const p = new Population(SamplePopulation)
+      expect(p.tradition.scrolls).toHaveLength(SamplePopulation.tradition.scrolls.length)
       for (const biome of Object.values(BIOMES)) {
-        expect(p.tradition.fitness.biomes[biome]).toBe(data.tradition.fitness[biome])
+        expect(p.tradition.fitness.biomes[biome]).toBe(SamplePopulation.tradition.fitness[biome])
       }
     })
 
     it('can set size', () => {
-      const p = new Population(data)
-      expect(p.size).toBe(data.size)
+      const p = new Population(SamplePopulation)
+      expect(p.size).toBe(SamplePopulation.size)
     })
 
     it('can set viability', () => {
-      const p = new Population(data)
-      expect(p.viability).toBe(data.viability)
+      const p = new Population(SamplePopulation)
+      expect(p.viability).toBe(SamplePopulation.viability)
     })
 
     it('can set relationships', () => {
-      const p = new Population(data)
-      expect(p.relationships).toHaveLength(data.relationships.length)
+      const p = new Population(SamplePopulation)
+      expect(p.relationships).toHaveLength(SamplePopulation.relationships.length)
     })
 
     it('can set scrolls', () => {
-      const p = new Population(data)
-      expect(p.scrolls).toHaveLength(data.scrolls.length)
+      const p = new Population(SamplePopulation)
+      expect(p.scrolls).toHaveLength(SamplePopulation.scrolls.length)
     })
   })
 
   describe('Member methods', () => {
     describe('getFitness', () => {
       it('returns the population fitness for a given biome', () => {
-        const p = new Population(data)
+        const p = new Population(SamplePopulation)
         expect(p.getFitness(BIOMES.SAVANNA)).toBe(3)
       })
     })
 
     describe('adjustViability', () => {
       it('does quite a bit of random stuff', () => {
-        const p = new Population(data)
+        const p = new Population(SamplePopulation)
         p.viability = 0.6
         p.adjustViability()
         expect(p.viability).toBeGreaterThanOrEqual(0)
@@ -153,15 +108,15 @@ describe('Population', () => {
 
     describe('toObject', () => {
       it('exports an object', () => {
-        const p = new Population(data)
+        const p = new Population(SamplePopulation)
         const obj = p.toObject()
-        expect(JSON.stringify(obj)).toBe(JSON.stringify(data))
+        expect(JSON.stringify(obj)).toBe(JSON.stringify(SamplePopulation))
       })
     })
 
     describe('toString', () => {
       it('exports a string', () => {
-        const p = new Population(data)
+        const p = new Population(SamplePopulation)
         expect(p.toString()).toBe(`Population: ${p.id}`)
       })
     })

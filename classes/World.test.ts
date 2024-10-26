@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { SPECIES_NAMES } from '../enums.ts'
 import World from './World.ts'
-import {BIOMES, SPECIES_NAMES} from '../enums.ts'
 
 describe('World', () => {
   describe('constructor', () => {

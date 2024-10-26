@@ -17,7 +17,7 @@ export default new Species({
     [BIOMES.CAVES]: 2,
     [BIOMES.WORLD_BELOW]: 3
   },
-  langPrefs: {
+  languagePreferences: {
     typology: [LANG_MORPHOLOGY.ANALYTIC]
   }
 })

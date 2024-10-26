@@ -1,5 +1,5 @@
-import type { ISpeciesLangPrefs, ISpecies } from '../index.d.ts'
-import {Biome, SPECIES_NAMES, SpeciesName} from '../enums.ts'
+import type { ISpeciesLanguagePreferences, ISpecies } from '../index.d.ts'
+import {Biome, SpeciesName} from '../enums.ts'
 import Fitness from './Fitness.ts'
 
 class Species {
@@ -7,14 +7,14 @@ class Species {
   ancestor: SpeciesName | null
   generation: number | null
   fitness: Fitness
-  langPrefs: ISpeciesLangPrefs | null
+  languagePreferences: ISpeciesLanguagePreferences | null
 
   constructor (data?: ISpecies) {
     this.name = data?.name ?? null
     this.ancestor = data?.ancestor ?? null
     this.generation = data?.generation ?? null
     this.fitness = new Fitness(data?.fitness, 3, -3)
-    this.langPrefs = data?.langPrefs === undefined ? null : data?.langPrefs
+    this.languagePreferences = data?.languagePreferences === undefined ? null : data?.languagePreferences
   }
 
   getFitness (biome: Biome): number {
@@ -22,7 +22,7 @@ class Species {
   }
 
   canSpeak (): boolean {
-    return this.langPrefs !== null
+    return this.languagePreferences !== null
   }
 
   toObject (): ISpecies {
@@ -32,7 +32,7 @@ class Species {
       fitness: this.fitness.toObject()
     }
     if (this.ancestor) obj.ancestor = this.ancestor
-    if (this.langPrefs) obj.langPrefs = this.langPrefs
+    if (this.languagePreferences) obj.languagePreferences = this.languagePreferences
     return obj
   }
 

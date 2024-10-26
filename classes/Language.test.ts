@@ -70,7 +70,7 @@ describe('Language', () => {
   })
 
   describe('Member methods', () => {
-    describe('advanceMorpology', () => {
+    describe('advanceMorphology', () => {
       it('advances from fusional to analytic', () => {
         const lang = new Language()
         lang.advanceMorphology()
