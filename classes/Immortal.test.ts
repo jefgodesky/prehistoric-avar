@@ -82,5 +82,12 @@ describe('Immortal', () => {
         expect(JSON.stringify(i.toObject())).toBe(JSON.stringify(data))
       })
     })
+
+    describe('toString', () => {
+      it('exports a string', () => {
+        const i = new Immortal(data)
+        expect(i.toString()).toBe(`Immortal: ${data.description}`)
+      })
+    })
   })
 })

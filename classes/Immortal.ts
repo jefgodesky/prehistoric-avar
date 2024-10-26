@@ -28,6 +28,10 @@ class Immortal {
       slayable: this.slayable
     }
   }
+
+  toString (): string {
+    return `Immortal: ${this.description}`
+  }
 }
 
 export default Immortal
