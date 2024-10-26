@@ -98,5 +98,12 @@ describe('Scroll', () => {
         expect(actual.seals).toBe(seals)
       })
     })
+
+    describe('toString', () => {
+      it('returns a string', () => {
+        const scroll = new Scroll(text, seals)
+        expect(scroll.toString()).toBe(`Scroll: ${text} [${seals}]`)
+      })
+    })
   })
 })

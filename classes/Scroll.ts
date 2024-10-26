@@ -23,6 +23,10 @@ class Scroll {
       seals: this.seals
     }
   }
+
+  toString (): string {
+    return `Scroll: ${this.text} [${this.seals}]`
+  }
 }
 
 export default Scroll
