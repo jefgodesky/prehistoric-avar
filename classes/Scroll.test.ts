@@ -1,12 +1,13 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { IWorld } from '../index.d.ts'
-import Scroll from './Scroll.ts'
+import Scroll, { defaultScrollOnUnseal } from './Scroll.ts'
 
 describe('Scroll', () => {
   const text = 'Test passes'
   const seals = 4
   const unseal = () => 2
+  const open = () => { return }
 
   describe('constructor', () => {
     it('creates a Scroll instance', () => {
@@ -26,7 +27,12 @@ describe('Scroll', () => {
 
     it('defaults unseal to a function that always removes 1 seal', () => {
       const scroll = new Scroll()
-      expect(scroll.fn).toBeInstanceOf(Function)
+      expect(scroll.onUnseal).toBeInstanceOf(Function)
+    })
+
+    it('defaults open to a function that does nothing', () => {
+      const scroll = new Scroll()
+      expect(scroll.onOpen).toBeInstanceOf(Function)
     })
 
     it('can take text', () => {
@@ -41,7 +47,12 @@ describe('Scroll', () => {
 
     it('can take an unsealing function', () => {
       const scroll = new Scroll(text, seals, unseal)
-      expect(scroll.fn).toBe(unseal)
+      expect(scroll.onUnseal).toBe(unseal)
+    })
+
+    it('can take an opening function', () => {
+      const scroll = new Scroll(text, seals, unseal, open)
+      expect(scroll.onOpen).toBe(open)
     })
   })
 
@@ -87,6 +98,31 @@ describe('Scroll', () => {
         context.events.push('Fourth event', 'Fifth event')
         expect(scroll.unseal(context)).toBe(true)
         expect(scroll.seals).toBe(0)
+      })
+
+      it('opens when the last seal is broken', () => {
+        let opened = false
+        const fn = (): void => { opened = true }
+        const scroll = new Scroll(text, 1, defaultScrollOnUnseal, fn)
+        expect(scroll.unseal()).toBe(true)
+        expect(opened).toBe(true)
+      })
+    })
+
+    describe('open', () => {
+      it('can use context', () => {
+        let number = 0
+        const context: IWorld = {
+          habitability: 1,
+          dragons: { interest: 0, fear: 0 },
+          events: ['First event', 'Second event']
+        }
+        const fn = (context?: IWorld) => {
+          number = context?.events.length ?? 1
+        }
+        const scroll = new Scroll(text, 1, defaultScrollOnUnseal, fn)
+        scroll.open(context)
+        expect(number).toBe(2)
       })
     })
 
