@@ -185,4 +185,18 @@ describe('Species', () => {
       })
     })
   })
+
+  describe('Static methods', () => {
+    describe('getCode', () => {
+      it('returns a two-letter code for each species name', () => {
+        expect(Species.getCode(SPECIES_NAMES.DWARF)).toBe('DW')
+        expect(Species.getCode(SPECIES_NAMES.ELF)).toBe('EL')
+        expect(Species.getCode(SPECIES_NAMES.GNOME)).toBe('GN')
+        expect(Species.getCode(SPECIES_NAMES.HALFLING)).toBe('HA')
+        expect(Species.getCode(SPECIES_NAMES.HUMAN)).toBe('HU')
+        expect(Species.getCode(SPECIES_NAMES.ORC)).toBe('OR')
+        expect(Species.getCode(SPECIES_NAMES.WOSAN)).toBe('WO')
+      })
+    })
+  })
 })

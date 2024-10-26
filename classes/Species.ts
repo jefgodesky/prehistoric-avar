@@ -1,5 +1,5 @@
 import type { ISpeciesLangPrefs, ISpecies } from '../index.d.ts'
-import type { Biome, SpeciesName } from '../enums.ts'
+import {Biome, SPECIES_NAMES, SpeciesName} from '../enums.ts'
 import Fitness from './Fitness.ts'
 
 class Species {
@@ -38,6 +38,10 @@ class Species {
 
   toString (): string {
     return `Species: ${this.name}`
+  }
+
+  static getCode (name: SpeciesName): string {
+    return name.slice(0, 2).toUpperCase()
   }
 }
 
