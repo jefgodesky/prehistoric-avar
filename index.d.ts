@@ -36,6 +36,7 @@ interface IPopulation {
   tradition: ITradition
   size: number
   viability: number
+  relationships: IRelationship[]
   scrolls: IScroll[]
 }
 

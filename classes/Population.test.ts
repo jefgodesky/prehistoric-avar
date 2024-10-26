@@ -1,6 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { BIOMES, SPECIES_NAMES } from '../enums.ts'
+import {BIOMES, DISPOSITIONS, SPECIES_NAMES} from '../enums.ts'
 import type { IPopulation } from '../index.d.ts'
 import Population from './Population.ts'
 
@@ -34,6 +34,14 @@ describe('Population', () => {
     },
     size: 54321,
     viability: 0.9,
+    relationships: [
+      {
+        a: 'Population: GS02-123HU',
+        b: 'Immortal: The Dragon Queen',
+        disposition: DISPOSITIONS.HOSTILE,
+        scrolls: []
+      }
+    ],
     scrolls: [
       {
         text: 'Example scroll',
@@ -76,6 +84,11 @@ describe('Population', () => {
       expect(p.viability).toBe(1)
     })
 
+    it('defaults to an empty array of relationships', () => {
+      const p = new Population()
+      expect(p.relationships).toHaveLength(0)
+    })
+
     it('defaults to an empty array of scrolls', () => {
       const p = new Population()
       expect(p.scrolls).toHaveLength(0)
@@ -109,6 +122,11 @@ describe('Population', () => {
       expect(p.viability).toBe(data.viability)
     })
 
+    it('can set relationships', () => {
+      const p = new Population(data)
+      expect(p.relationships).toHaveLength(data.relationships.length)
+    })
+
     it('can set scrolls', () => {
       const p = new Population(data)
       expect(p.scrolls).toHaveLength(data.scrolls.length)
@@ -123,7 +141,7 @@ describe('Population', () => {
       })
     })
 
-    describe('aadjustViability', () => {
+    describe('adjustViability', () => {
       it('does quite a bit of random stuff', () => {
         const p = new Population(data)
         p.viability = 0.6

@@ -1,11 +1,12 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
-import type { IPopulation } from '../index.d.ts'
+import type { IPopulation, IRelationship } from '../index.d.ts'
+import Fitness from './Fitness.ts'
+import Relationship from './Relationship.ts'
 import Scroll from './Scroll.ts'
 import Species from './Species.ts'
 import Tradition from './Tradition.ts'
 import species from '../instances/species/index.ts'
-import Fitness from './Fitness.ts'
 
 class Population {
   id: string
@@ -14,17 +15,21 @@ class Population {
   size: number
   viability: number
   scrolls: Scroll[]
+  relationships: Relationship[]
   private fitness: Fitness
 
   constructor (data?: IPopulation) {
     const sp = data?.species ?? SPECIES_NAMES.WOSAN
     const scrolls = data?.scrolls ?? []
+    const relationships = data?.relationships ?? []
+
     this.id = data?.id ?? 'GS03-001WO'
     this.species = species[sp.toLowerCase()]
     this.tradition = new Tradition(data?.tradition ?? undefined)
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
     this.scrolls = scrolls.map(scroll => new Scroll(scroll.text, scroll.seals))
+    this.relationships = relationships.map(rel => new Relationship(rel))
     this.fitness = Fitness.combine(this.species.fitness, this.tradition.fitness)
   }
 
@@ -53,6 +58,7 @@ class Population {
       tradition: this.tradition.toObject(),
       size: this.size,
       viability: this.viability,
+      relationships: this.relationships.map(rel => rel.toObject()),
       scrolls: this.scrolls.map(scroll => scroll.toObject())
     }
   }
