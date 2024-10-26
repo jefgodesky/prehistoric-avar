@@ -20,6 +20,7 @@ interface IImmortal {
   description: string
   disposition: Disposition
   impact: number
+  relationships: IRelationship[]
   scrolls: IScroll[]
   slayable: [number, number] | false
 }

@@ -9,6 +9,14 @@ describe('Immortal', () => {
     description: 'The Dragon Queen',
     disposition: DISPOSITIONS.HOSTILE,
     impact: 1000,
+    relationships: [
+      {
+        a: 'Immortal: The Dragon Queen',
+        b: 'Population: GS03-001WO',
+        disposition: DISPOSITIONS.HOSTILE,
+        scrolls: []
+      }
+    ],
     scrolls: [
       {
         text: 'The Dragon Queen finds a consort',
@@ -39,6 +47,11 @@ describe('Immortal', () => {
       expect(i.impact).toBe(0)
     })
 
+    it('defaults relationships to an empty array', () => {
+      const i = new Immortal()
+      expect(i.relationships).toHaveLength(0)
+    })
+
     it('defaults scrolls to an empty array', () => {
       const i = new Immortal()
       expect(i.scrolls).toHaveLength(0)
@@ -62,6 +75,11 @@ describe('Immortal', () => {
     it('can set impact', () => {
       const i = new Immortal(data)
       expect(i.impact).toBe(data.impact)
+    })
+
+    it('can set relationships', () => {
+      const i = new Immortal(data)
+      expect(i.relationships).toHaveLength(data.relationships.length)
     })
 
     it('can set scrolls', () => {
