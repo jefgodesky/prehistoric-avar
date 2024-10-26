@@ -82,6 +82,11 @@ interface ISpeciesYAML {
   }
 }
 
+interface ITradition {
+  fitness: IFitness
+  scrolls: IScroll[]
+}
+
 interface IWorld {
   habitability: number
   dragons: {
@@ -102,5 +107,6 @@ export type {
   ISpecies,
   ISpeciesLangPrefs,
   ISpeciesYAML,
+  ITradition,
   IWorld
 }
