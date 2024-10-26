@@ -1,4 +1,4 @@
-import type { Biome, LangMorphology, LangOrder, SpeciesName } from './enums.ts'
+import type { Biome, Disposition, LangMorphology, LangOrder, SpeciesName } from './enums.ts'
 
 interface IBiome {
   'Carrying capacity score': number
@@ -13,6 +13,14 @@ interface IHabitable {
   habitability: number
   reduceHabitability: (factor: number) => void
   restoreHabitability: () => void
+}
+
+interface IImmortal {
+  description: string
+  disposition: Disposition
+  impact: number
+  scrolls: IScroll[]
+  slayable: [number, number] | false
 }
 
 interface ILanguage {
@@ -87,6 +95,7 @@ export type {
   IBiome,
   IFitness,
   IHabitable,
+  IImmortal,
   ILanguage,
   IRegionData,
   IScroll,
