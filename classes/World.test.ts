@@ -1,6 +1,5 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { SPECIES_NAMES } from '../enums.ts'
 import World from './World.ts'
 
 describe('World', () => {
@@ -135,6 +134,21 @@ describe('World', () => {
         expect(obj.dragons.interest).toEqual(world.dragons.interest)
         expect(obj.dragons.fear).toEqual(world.dragons.fear)
         expect(obj.events).toEqual(world.events)
+      })
+    })
+
+    describe('toString', () => {
+      it('returns a string', () => {
+        const world = new World()
+        expect(world.toString()).toEqual('World: 100% [0/0]')
+      })
+
+      it('rounds habitability to the nearest percent', () => {
+        const world = new World()
+        world.habitability = 0.31415
+        world.dragons.interest = 5
+        world.dragons.fear = 4
+        expect(world.toString()).toEqual('World: 31% [5/4]')
       })
     })
   })
