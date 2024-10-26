@@ -1,8 +1,9 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DISPOSITIONS } from '../enums.ts'
-import { DragonQueen } from '../test-data.ts'
+import {DragonQueen, SampleTradition} from '../test-data.ts'
 import Immortal from './Immortal.ts'
+import Tradition from './Tradition.ts'
 
 describe('Immortal', () => {
   describe('constructor', () => {
@@ -75,8 +76,10 @@ describe('Immortal', () => {
   describe('Member methods', () => {
     describe('toObject', () => {
       it('exports an object', () => {
+        const cpy = Object.assign({}, DragonQueen)
         const i = new Immortal(DragonQueen)
-        expect(JSON.stringify(i.toObject())).toBe(JSON.stringify(DragonQueen))
+        cpy.scrolls = i.scrolls.map(scroll => scroll.toObject())
+        expect(JSON.stringify(i.toObject())).toBe(JSON.stringify(cpy))
       })
     })
 

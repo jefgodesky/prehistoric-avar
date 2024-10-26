@@ -1,15 +1,18 @@
+import { nanoid } from 'nanoid'
 import { IScroll, IWorld } from '../index.d.ts'
 
 const defaultScrollOnUnseal = (): number => 1
 const defaultScrollOnOpen = (): void => { return }
 
 class Scroll {
+  id: string
   text: string
   seals: number
   onUnseal: (context?: IWorld) => number
   onOpen: (context?: IWorld) => void
 
   constructor (text?: string, seals?: number, onUnseal?: (context?: IWorld) => number, onOpen?: (context?: IWorld) => void) {
+    this.id = nanoid()
     this.text = text ?? ''
     this.seals = seals ?? 1
     this.onUnseal = onUnseal ?? defaultScrollOnUnseal
@@ -30,6 +33,7 @@ class Scroll {
 
   toObject (): IScroll {
     return {
+      id: this.id,
       text: this.text,
       seals: this.seals
     }

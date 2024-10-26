@@ -1,8 +1,9 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import {BIOMES, DISPOSITIONS, SPECIES_NAMES} from '../enums.ts'
-import { SamplePopulation } from '../test-data.ts'
+import {SamplePopulation, SampleTradition} from '../test-data.ts'
 import Population from './Population.ts'
+import Tradition from './Tradition.ts'
 
 describe('Population', () => {
   describe('constructor', () => {
@@ -108,9 +109,11 @@ describe('Population', () => {
 
     describe('toObject', () => {
       it('exports an object', () => {
+        const cpy = Object.assign({}, SamplePopulation)
         const p = new Population(SamplePopulation)
-        const obj = p.toObject()
-        expect(JSON.stringify(obj)).toBe(JSON.stringify(SamplePopulation))
+        cpy.scrolls = p.scrolls.map(scroll => scroll.toObject())
+        cpy.tradition.scrolls = p.tradition.scrolls.map(scroll => scroll.toObject())
+        expect(JSON.stringify(p.toObject())).toBe(JSON.stringify(cpy))
       })
     })
 

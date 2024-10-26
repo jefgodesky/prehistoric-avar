@@ -15,6 +15,11 @@ describe('Scroll', () => {
       expect(scroll).toBeInstanceOf(Scroll)
     })
 
+    it('assigns an ID on creation', () => {
+      const scroll = new Scroll()
+      expect(scroll.id).toBeDefined()
+    })
+
     it('defaults text to a null string', () => {
       const scroll = new Scroll()
       expect(scroll.text).toBe('')
@@ -132,6 +137,7 @@ describe('Scroll', () => {
       it('returns an object', () => {
         const scroll = new Scroll(text, seals)
         const actual = scroll.toObject()
+        expect(actual.id).toBe(scroll.id)
         expect(actual.text).toBe(text)
         expect(actual.seals).toBe(seals)
       })

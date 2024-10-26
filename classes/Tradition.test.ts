@@ -5,8 +5,6 @@ import { SampleTradition } from '../test-data.ts'
 import Tradition from './Tradition.ts'
 
 describe('Tradition', () => {
-
-
   describe('constructor', () => {
     it('creates a Tradition instance', () => {
       const trad = new Tradition()
@@ -45,9 +43,10 @@ describe('Tradition', () => {
   describe('Member methods', () => {
     describe('toObject', () => {
       it('exports an object', () => {
+        const cpy = Object.assign({}, SampleTradition)
         const trad = new Tradition(SampleTradition)
-        const obj = trad.toObject()
-        expect(JSON.stringify(obj)).toBe(JSON.stringify(SampleTradition))
+        cpy.scrolls = trad.scrolls.map(scroll => scroll.toObject())
+        expect(JSON.stringify(trad.toObject())).toBe(JSON.stringify(cpy))
       })
     })
 

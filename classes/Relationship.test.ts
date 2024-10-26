@@ -1,8 +1,9 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DISPOSITIONS } from '../enums.ts'
-import { SampleRelationship } from '../test-data.ts'
+import {SampleRelationship, SampleTradition} from '../test-data.ts'
 import Relationship from './Relationship.ts'
+import Tradition from './Tradition.ts'
 
 describe('Relationship', () => {
   describe('constructor', () => {
@@ -55,8 +56,10 @@ describe('Relationship', () => {
   describe('Member methods', () => {
     describe('toObject', () => {
       it('exports an object', () => {
+        const cpy = Object.assign({}, SampleRelationship)
         const rel = new Relationship(SampleRelationship)
-        expect(JSON.stringify(rel.toObject())).toBe(JSON.stringify(SampleRelationship))
+        cpy.scrolls = rel.scrolls.map(scroll => scroll.toObject())
+        expect(JSON.stringify(rel.toObject())).toBe(JSON.stringify(cpy))
       })
     })
 

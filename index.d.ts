@@ -93,6 +93,7 @@ interface IRelationship {
 }
 
 interface IScroll {
+  id?: string
   text: string
   seals: number
 }
