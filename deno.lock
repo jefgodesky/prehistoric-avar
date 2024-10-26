@@ -17,6 +17,7 @@
     "npm:@turf/helpers@^7.1.0": "7.1.0",
     "npm:@turf/turf@^7.1.0": "7.1.0",
     "npm:emittery@^1.0.3": "1.0.3",
+    "npm:nanoid@^5.0.7": "5.0.7",
     "npm:xmldom@*": "0.6.0",
     "npm:xmldom@0.6": "0.6.0",
     "npm:yaml@*": "2.5.1",
@@ -1493,6 +1494,9 @@
         "typed-function"
       ]
     },
+    "nanoid@5.0.7": {
+      "integrity": "sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ=="
+    },
     "point-in-polygon-hao@1.1.0": {
       "integrity": "sha512-3hTIM2j/v9Lio+wOyur3kckD4NxruZhpowUbEgmyikW+a2Kppjtu1eN+AhnMQtoHW46zld88JiYWv6fxpsDrTQ=="
     },
@@ -1591,6 +1595,7 @@
       "npm:@turf/area@^7.1.0",
       "npm:@turf/turf@^7.1.0",
       "npm:emittery@^1.0.3",
+      "npm:nanoid@^5.0.7",
       "npm:xmldom@0.6",
       "npm:yaml@^2.5.1"
     ]
