@@ -1,4 +1,5 @@
 import type { Biome, Disposition, LangMorphology, LangOrder, SpeciesName } from './enums.ts'
+import Species from './classes/Species.ts'
 
 interface IBiome {
   'Carrying capacity score': number
@@ -27,6 +28,15 @@ interface ILanguage {
   name?: string
   order?: LangOrder
   morphology?: LangMorphology
+}
+
+interface IPopulation {
+  id: string
+  species: SpeciesName
+  tradition: ITradition
+  size: number
+  viability: number
+  scrolls: IScroll[]
 }
 
 interface IRegionData {
@@ -102,6 +112,7 @@ export type {
   IHabitable,
   IImmortal,
   ILanguage,
+  IPopulation,
   IRegionData,
   IScroll,
   ISpecies,
