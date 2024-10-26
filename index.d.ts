@@ -63,8 +63,8 @@ interface ISpeciesYAML {
       'World Below': number
     }
     'Language preferences'?: {
-      Typology?: string[]
-      'Word order'?: string[]
+      Typology?: LangMorphology[]
+      'Word order'?: LangOrder[]
     }
   }
 }
