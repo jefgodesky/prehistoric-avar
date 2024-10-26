@@ -1,10 +1,10 @@
 import type { ISpeciesLangPrefs, ISpecies } from '../index.d.ts'
-import type { Biome } from '../enums.ts'
+import type { Biome, SpeciesName } from '../enums.ts'
 import Fitness from './Fitness.ts'
 
 class Species {
-  name: string | null
-  ancestor: string | null
+  name: SpeciesName | null
+  ancestor: SpeciesName | null
   generation: number | null
   fitness: Fitness
   langPrefs: ISpeciesLangPrefs | null

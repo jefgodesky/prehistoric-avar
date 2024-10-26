@@ -1,12 +1,12 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { BIOMES, LANG_ORDER, LANG_MORPHOLOGY } from '../enums.ts'
+import { BIOMES, LANG_ORDER, LANG_MORPHOLOGY, SPECIES_NAMES } from '../enums.ts'
 import type { ISpecies } from '../index.d.ts'
 import Species from './Species.ts'
 
 describe('Species', () => {
   const wosan: ISpecies = {
-    name: 'Wosan',
+    name: SPECIES_NAMES.WOSAN,
     generation: 50,
     fitness: {
       [BIOMES.BOREAL_FOREST]: 0,
@@ -23,8 +23,8 @@ describe('Species', () => {
   }
 
   const elf: ISpecies = {
-    name: 'Elf',
-    ancestor: 'Wosan',
+    name: SPECIES_NAMES.ELF,
+    ancestor: SPECIES_NAMES.WOSAN,
     generation: 10,
     fitness: {
       [BIOMES.BOREAL_FOREST]: 3,
@@ -45,8 +45,8 @@ describe('Species', () => {
   }
 
   const human: ISpecies = {
-    name: 'Human',
-    ancestor: 'Wosan',
+    name: SPECIES_NAMES.HUMAN,
+    ancestor: SPECIES_NAMES.WOSAN,
     generation: 40,
     fitness: {
       [BIOMES.BOREAL_FOREST]: 0,
