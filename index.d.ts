@@ -1,5 +1,14 @@
-import type { Biome, Disposition, LangMorphology, LangOrder, SpeciesName } from './enums.ts'
-import Species from './classes/Species.ts'
+import Emittery from 'emittery'
+import type { DatalessEventNames, OmnipresentEventData } from 'emittery'
+import type {
+  Biome,
+  Disposition,
+  LangMorphology,
+  LangOrder,
+  SpeciesName
+} from './enums.ts'
+
+type Emitter = Emittery<Record<PropertyKey, any>, Record<PropertyKey, any> & OmnipresentEventData, DatalessEventNames<Record<PropertyKey, any>>>
 
 interface IBiome {
   'Carrying capacity score': number
@@ -120,6 +129,7 @@ interface IWorld {
 }
 
 export type {
+  Emitter,
   IBiome,
   IFitness,
   IHabitable,
