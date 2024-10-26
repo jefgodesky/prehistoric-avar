@@ -58,6 +58,10 @@ class Language {
     }
   }
 
+  toString (): string {
+    return `Language: ${this.name}`
+  }
+
   static getMorphologyTypes (): LangMorphology[] {
     return [
       LANG_MORPHOLOGY.FUSIONAL,

@@ -167,5 +167,13 @@ describe('Language', () => {
         expect(obj.morphology).toEqual(lang.morphology)
       })
     })
+
+    describe('toString', () => {
+      it('returns a string', () => {
+        const name = 'FS32-001'
+        const lang = new Language({ name })
+        expect(lang.toString()).toEqual(`Language: ${name}`)
+      })
+    })
   })
 })
