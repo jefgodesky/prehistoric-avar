@@ -50,6 +50,13 @@ interface IRegionData {
   }
 }
 
+interface IRelationship {
+  a: string
+  b: string
+  disposition: Disposition
+  scrolls: IScroll[]
+}
+
 interface IScroll {
   text: string
   seals: number
@@ -67,29 +74,6 @@ interface ISpecies {
   generation: number
   langPrefs?: ISpeciesLangPrefs
   appeared?: number
-}
-
-interface ISpeciesYAML {
-  [key: string]: {
-    Generation: number
-    Ancestor?: string
-    Fitness: {
-      'Boreal forest': number
-      'Temperate forest': number
-      'Tropical forest': number
-      Desert: number
-      Savanna: number
-      'Temperate grassland': number
-      'Mountain range': number
-      'Polar region': number
-      'Cave system': number
-      'World Below': number
-    }
-    'Language preferences'?: {
-      Typology?: LangMorphology[]
-      'Word order'?: LangOrder[]
-    }
-  }
 }
 
 interface ITradition {
@@ -116,11 +100,11 @@ export type {
   IImmortal,
   ILanguage,
   IPopulation,
+  IRelationship,
   IRegionData,
   IScroll,
   ISpecies,
   ISpeciesLangPrefs,
-  ISpeciesYAML,
   ITradition,
   IWorld
 }
