@@ -41,6 +41,30 @@ interface IPopulation {
   scrolls: IScroll[]
 }
 
+interface IRegion {
+  id: string
+  adjacentRegions: string[]
+  area: number
+  biome: Biome
+  capacity: number
+  dragons: string[]
+  features: [
+    {
+      description: string
+      impact: number
+    }
+  ]
+  feyInfluence: number
+  habitability: number
+  immortals: IImmortal[]
+  languages: ILanguage[]
+  ogrism: number
+  populations: IPopulation[]
+  scrolls: IScroll[]
+  species: SpeciesName
+  tags: string[]
+}
+
 interface IRegionData {
   [key: string]: {
     biome: Biome
@@ -103,6 +127,7 @@ export type {
   ILanguage,
   IPopulation,
   IRelationship,
+  IRegion,
   IRegionData,
   IScroll,
   ISpecies,
