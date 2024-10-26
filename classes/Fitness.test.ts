@@ -118,6 +118,13 @@ describe('Fitness', () => {
         }
       })
     })
+
+    describe('toString', () => {
+      it('exports a string', () => {
+        const fitness = new Fitness()
+        expect(fitness.toString()).toEqual('0 0 0 0 0 0 0 0 0 0')
+      })
+    })
   })
 
   describe('Static methods', () => {

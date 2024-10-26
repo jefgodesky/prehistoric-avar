@@ -28,6 +28,22 @@ class Fitness {
     return this.biomes
   }
 
+  toString (): string {
+    const values = [
+      this.biomes[BIOMES.BOREAL_FOREST],
+      this.biomes[BIOMES.TEMPERATE_FOREST],
+      this.biomes[BIOMES.TROPICAL_FOREST],
+      this.biomes[BIOMES.DESERT],
+      this.biomes[BIOMES.SAVANNA],
+      this.biomes[BIOMES.TEMPERATE_GRASSLAND],
+      this.biomes[BIOMES.MOUNTAINS],
+      this.biomes[BIOMES.POLAR],
+      this.biomes[BIOMES.CAVES],
+      this.biomes[BIOMES.WORLD_BELOW]
+    ]
+    return values.join(' ')
+  }
+
   private clamp (value: number): number {
     const max = this.max ?? Number.MAX_SAFE_INTEGER
     const min = this.min ?? Number.MIN_SAFE_INTEGER
