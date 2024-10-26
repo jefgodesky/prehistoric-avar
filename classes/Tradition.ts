@@ -19,6 +19,10 @@ class Tradition {
       scrolls: this.scrolls.map(scroll => scroll.toObject())
     }
   }
+
+  toString (): string {
+    return `Tradition: ${this.fitness.toString()}`
+  }
 }
 
 export default Tradition

@@ -73,5 +73,12 @@ describe('Tradition', () => {
         expect(JSON.stringify(obj)).toBe(JSON.stringify(example))
       })
     })
+
+    describe('toString', () => {
+      it('exports a string', () => {
+        const trad = new Tradition(example)
+        expect(trad.toString()).toBe('Tradition: 1 0 0 0 0 0 0 0 0 0')
+      })
+    })
   })
 })
