@@ -177,5 +177,12 @@ describe('Species', () => {
         expect(JSON.stringify(actual.langPrefs)).toEqual(JSON.stringify(sp.langPrefs))
       })
     })
+
+    describe('toString', () => {
+      it('returns a string', () => {
+        const sp = new Species(human)
+        expect(sp.toString()).toEqual(`Species: ${human.name}`)
+      })
+    })
   })
 })

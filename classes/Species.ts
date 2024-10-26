@@ -35,6 +35,10 @@ class Species {
     if (this.langPrefs) obj.langPrefs = this.langPrefs
     return obj
   }
+
+  toString (): string {
+    return `Species: ${this.name}`
+  }
 }
 
 export default Species
