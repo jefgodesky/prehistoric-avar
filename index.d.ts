@@ -32,6 +32,11 @@ interface IRegionData {
   }
 }
 
+interface IScroll {
+  text: string
+  seals: number
+}
+
 interface ISpeciesLangPrefs {
   order?: LangOrder[]
   typology?: LangMorphology[]
@@ -84,6 +89,7 @@ export type {
   IHabitable,
   ILanguage,
   IRegionData,
+  IScroll,
   ISpecies,
   ISpeciesLangPrefs,
   ISpeciesYAML,
