@@ -9,8 +9,10 @@ import {
 import {
   IImmortal,
   IPopulation,
+  IRegion,
   IRelationship,
-  ISpecies, ITradition
+  ISpecies,
+  ITradition
 } from './index.d.ts'
 
 const DragonQueen: IImmortal = {
@@ -178,6 +180,76 @@ const SampleTradition: ITradition = {
   ]
 }
 
+const DS01: IRegion = {
+  id: 'DS01',
+  adjacentRegions: ['DC01', 'MS06', 'GS06', 'GS10', 'FS23'],
+  area: 2688696,
+  biome: BIOMES.DESERT,
+  capacity: 17924,
+  dragons: [],
+  features: [],
+  feyInfluence: 0,
+  habitability: 1,
+  immortals: [],
+  languages: [],
+  ogrism: 0,
+  populations: [],
+  tags: ['desert', 'hot', 'surface']
+}
+
+for (let i = 0; i < 25; i++) {
+  DS01.features.push({
+    description: 'Oasis',
+    impact: 100
+  })
+}
+
+const GS02: IRegion = {
+  id: 'GS02',
+  adjacentRegions: ['GC01', 'FS08', 'MS03', 'GS02', 'MS02', 'GS03'],
+  area: 870978,
+  biome: BIOMES.SAVANNA,
+  capacity: 31935,
+  dragons: ['storm dragon'],
+  features: [],
+  feyInfluence: 2,
+  habitability: 1,
+  immortals: [],
+  languages: [
+    {
+      name: 'GS02-002',
+      order: LANG_ORDER.SOV,
+      morphology: LANG_MORPHOLOGY.ANALYTIC
+    },
+    {
+      name: 'GS02-001',
+      order: LANG_ORDER.SOV,
+      morphology: LANG_MORPHOLOGY.FUSIONAL
+    }
+  ],
+  ogrism: 1,
+  populations: [SamplePopulation],
+  tags: ['grassland', 'tropical', 'surface', 'coastal']
+}
+
+const FS32: IRegion = {
+  id: 'FS32',
+  adjacentRegions: ['FC32'],
+  area: 140985,
+  biome: BIOMES.TROPICAL_FOREST,
+  capacity: 15273,
+  dragons: ['storm dragon', 'forest dragon'],
+  features: [],
+  feyInfluence: 0,
+  habitability: 1,
+  immortals: [],
+  languages: [],
+  ogrism: 0,
+  populations: [],
+  species: SPECIES_NAMES.HALFLING,
+  tags: ['forest', 'tropical', 'surface', 'coastal']
+}
+
 export {
   DragonQueen,
   SamplePopulation,
@@ -185,5 +257,8 @@ export {
   SampleTradition,
   ElfData,
   HumanData,
-  WosanData
+  WosanData,
+  DS01,
+  GS02,
+  FS32
 }
