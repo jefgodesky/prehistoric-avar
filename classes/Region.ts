@@ -83,6 +83,11 @@ class Region extends Markable implements IHabitable {
     this.languages.push(language)
   }
 
+  getCurrentLanguage (): Language | undefined {
+    if (this.languages.length < 1) return undefined
+    return this.languages[this.languages.length - 1]
+  }
+
   toObject (): IRegion {
     const obj: IRegion = {
       id: this.id,

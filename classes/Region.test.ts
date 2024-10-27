@@ -284,6 +284,22 @@ describe('Region', () => {
       })
     })
 
+    describe('getCurrentLanguage', () => {
+      it('returns undefined if the region has never had a language', () => {
+        const region = new Region(emitter, GS02)
+        const actual = region.getCurrentLanguage()
+        expect(actual).not.toBeDefined()
+      })
+
+      it('returns the region\'s most recent language', () => {
+        const region = new Region(emitter, GS02)
+        const lang = new Language()
+        region.languages.push(lang)
+        const actual = region.getCurrentLanguage()
+        expect(JSON.stringify(actual?.toString())).toBe(JSON.stringify(lang.toString()))
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const region = new Region(emitter, FS32)
