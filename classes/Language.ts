@@ -50,6 +50,10 @@ class Language {
     this.order = newOrder
   }
 
+  willNaturallyAdvanceMorphology (): boolean {
+    return Math.random() < (1/3)
+  }
+
   toObject (): ILanguage {
     return {
       name: this.name,
