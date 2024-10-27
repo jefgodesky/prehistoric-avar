@@ -3,7 +3,7 @@ import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { IScroll } from '../index.d.ts'
 import Scroll from './Scroll.ts'
-import Scribe from './Scribe.ts'
+import Scribe, { SCROLL_EVENTS } from './Scribe.ts'
 
 describe('Scribe', () => {
   const emitter = new Emittery()
@@ -51,8 +51,8 @@ describe('Scribe', () => {
   })
 
   describe('Event handling', () => {
-    describe('Scroll.Open', () => {
-      const event = 'Scroll.Open'
+    describe(SCROLL_EVENTS.OPEN, () => {
+      const event = SCROLL_EVENTS.OPEN
 
       it('removes the scroll', async () => {
         const scroll = new Scroll('Test scroll', 5)

@@ -1,6 +1,10 @@
 import type { Emitter, IScroll } from '../index.d.ts'
 import Scroll from './Scroll.ts'
 
+const SCROLL_EVENTS = {
+  OPEN: 'Scroll.Open'
+}
+
 class Scribe {
   scrolls: Scroll[]
 
@@ -22,3 +26,4 @@ class Scribe {
 }
 
 export default Scribe
+export { SCROLL_EVENTS }
