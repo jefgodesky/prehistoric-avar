@@ -165,6 +165,13 @@ describe('Language', () => {
       })
     })
 
+    describe('willNaturallyAdvanceOrder', () => {
+      it('returns a boolean answer', () => {
+        const lang = new Language()
+        expect(lang.willNaturallyAdvanceOrder()).toBeDefined()
+      })
+    })
+
     describe('toObject', () => {
       it('returns an object', () => {
         const lang = new Language()

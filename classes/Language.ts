@@ -54,6 +54,18 @@ class Language {
     return Math.random() < (1/3)
   }
 
+  willNaturallyAdvanceOrder (): boolean {
+    // (1 - 0.004)^175 ≈ 0.4958887
+    // Meaning that after 175 iterations (as in 175,000 years, or about as long
+    // as we think languages have been spoken on earth), on average 49.6% of
+    // languages will have returned true at least once (which matches the nearly
+    // half of languages on earth that are still SOV, per Gell-Mann & Ruhlen).
+    // Gell-Mann, M. and Ruhlen, M. "The origin and evolution of word order,"
+    // PNAS, October 10, 2011
+    // https://www.pnas.org/doi/10.1073/pnas.1113716108
+    return Math.random() < 0.004
+  }
+
   toObject (): ILanguage {
     return {
       name: this.name,
