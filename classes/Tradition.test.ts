@@ -1,3 +1,4 @@
+import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES } from '../enums.ts'
@@ -5,14 +6,16 @@ import { SampleTradition } from '../test-data.ts'
 import Tradition from './Tradition.ts'
 
 describe('Tradition', () => {
+  const emitter = new Emittery()
+
   describe('constructor', () => {
     it('creates a Tradition instance', () => {
-      const trad = new Tradition()
+      const trad = new Tradition(emitter)
       expect(trad).toBeInstanceOf(Tradition)
     })
 
     it('defaults fitness for each biome to zero', () => {
-      const trad = new Tradition()
+      const trad = new Tradition(emitter)
       expect(trad.fitness.max).toBe(3)
       expect(trad.fitness.min).toBe(0)
       for (const biome of Object.values(BIOMES)) {
@@ -21,12 +24,12 @@ describe('Tradition', () => {
     })
 
     it('defaults scrolls to an empty list', () => {
-      const trad = new Tradition()
-      expect(trad.scrolls).toHaveLength(0)
+      const trad = new Tradition(emitter)
+      expect(trad.scribe.scrolls).toHaveLength(0)
     })
 
     it('can set fitness for each biome', () => {
-      const trad = new Tradition(SampleTradition)
+      const trad = new Tradition(emitter, SampleTradition)
       expect(trad.fitness.max).toBe(3)
       expect(trad.fitness.min).toBe(0)
       for (const biome of Object.values(BIOMES)) {
@@ -35,8 +38,8 @@ describe('Tradition', () => {
     })
 
     it('can set scrolls', () => {
-      const trad = new Tradition(SampleTradition)
-      expect(trad.scrolls).toHaveLength(SampleTradition.scrolls.length)
+      const trad = new Tradition(emitter, SampleTradition)
+      expect(trad.scribe.scrolls).toHaveLength(SampleTradition.scrolls.length)
     })
   })
 
@@ -44,15 +47,15 @@ describe('Tradition', () => {
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SampleTradition)
-        const trad = new Tradition(SampleTradition)
-        cpy.scrolls = trad.scrolls.map(scroll => scroll.toObject())
+        const trad = new Tradition(emitter, SampleTradition)
+        cpy.scrolls = trad.scribe.toObject()
         expect(JSON.stringify(trad.toObject())).toBe(JSON.stringify(cpy))
       })
     })
 
     describe('toString', () => {
       it('exports a string', () => {
-        const trad = new Tradition(SampleTradition)
+        const trad = new Tradition(emitter, SampleTradition)
         expect(trad.toString()).toBe('Tradition: 1 0 0 0 0 0 0 0 0 0')
       })
     })
