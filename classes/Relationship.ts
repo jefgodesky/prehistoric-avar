@@ -1,19 +1,18 @@
 import { Disposition, DISPOSITIONS } from '../enums.ts'
-import type { IRelationship } from '../index.d.ts'
-import Scroll from './Scroll.ts'
+import type { Emitter, IRelationship } from '../index.d.ts'
+import Scribe from './Scribe.ts'
 
 class Relationship {
   a: string
   b: string
   disposition: Disposition
-  scrolls: Scroll[]
+  scribe: Scribe
 
-  constructor (data?: IRelationship) {
-    const scrolls = data?.scrolls ?? []
+  constructor (emitter: Emitter, data?: IRelationship) {
     this.a = data?.a ?? ''
     this.b = data?.b ?? ''
     this.disposition = data?.disposition ?? DISPOSITIONS.INDIFFERENT
-    this.scrolls = scrolls.map(scroll => new Scroll(scroll.text, scroll.seals))
+    this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
   }
 
   toObject (): IRelationship {
@@ -21,7 +20,7 @@ class Relationship {
       a: this.a,
       b: this.b,
       disposition: this.disposition,
-      scrolls: this.scrolls.map(scroll => scroll.toObject())
+      scrolls: this.scribe.toObject()
     }
   }
 

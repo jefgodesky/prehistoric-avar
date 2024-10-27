@@ -28,7 +28,7 @@ class Population {
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
-    this.relationships = relationships.map(rel => new Relationship(rel))
+    this.relationships = relationships.map(rel => new Relationship(emitter, rel))
     this.fitness = Fitness.combine(this.species.fitness, this.tradition.fitness)
   }
 

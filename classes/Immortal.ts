@@ -17,7 +17,7 @@ class Immortal {
     this.description = data?.description ?? ''
     this.disposition = data?.disposition ?? DISPOSITIONS.INDIFFERENT
     this.impact = data?.impact ?? 0
-    this.relationships = relationships.map(rel => new Relationship(rel))
+    this.relationships = relationships.map(rel => new Relationship(emitter, rel))
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
     this.slayable = data?.slayable ?? false
   }
