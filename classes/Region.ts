@@ -64,8 +64,11 @@ class Region extends Markable implements IHabitable {
   }
 
   hasSpeechCommunity (): boolean {
-    if (this.languages.length < 1) return false
-    return this.hasPopulationCapableOfSpeech()
+    const { languages, populations } = this
+    if (languages.length < 1) return false
+    return populations
+      .map(p => p.species.canSpeak())
+      .reduce((acc, curr) => acc && curr, true)
   }
 
   reduceHabitability (factor: number): void {
