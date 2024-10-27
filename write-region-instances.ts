@@ -26,12 +26,12 @@ for (const id in data) {
 
   // Add glaciers and volcanoes to mountains
   if (region.tags.includes('mountains')) {
-    const glaciers = Math.round(region.area / 100)
+    const glaciers = Math.round(region.area / 10000)
     for (let i = 0; i < glaciers; i++) {
-      features.push({ description: 'Glacier', impact: -10 })
+      features.push({ description: 'Glacier', impact: -100 })
     }
 
-    const volcanoes = Math.round(region.area / 10000)
+    const volcanoes = Math.round(region.area / 1000000)
     for (let i = 0; i < volcanoes; i++) {
       features.push({ description: 'Volcano', impact: 0 })
     }
