@@ -1,4 +1,4 @@
-import type { Layer } from './enums.ts'
+import type { Layer } from '../enums.ts'
 import parseRegionId from './parse-region-id.ts'
 
 const makeLayerId = (id: string, layer: Layer): string => {

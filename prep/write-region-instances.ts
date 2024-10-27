@@ -1,5 +1,5 @@
 import { parse } from 'yaml'
-import type { IRegionData } from './index.d.ts'
+import type { IRegionData } from '../index.d.ts'
 
 const yaml = await Deno.readTextFile('data.yml')
 const data = parse(yaml) as IRegionData

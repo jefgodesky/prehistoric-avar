@@ -1,6 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { LAYER } from './enums.ts'
+import { LAYER } from '../enums.ts'
 import makeLayerId from './make-layer-id.ts'
 
 describe('makeLayerId', () => {

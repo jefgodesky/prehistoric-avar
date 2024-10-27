@@ -1,5 +1,5 @@
-import { BIOMES } from './enums.ts'
-import type { Biome } from './enums.ts'
+import { BIOMES } from '../enums.ts'
+import type { Biome } from '../enums.ts'
 
 const getBiomeFromTags = (...tags: string[]): Biome | null => {
   const biomes: Record<Biome, string[]> = {

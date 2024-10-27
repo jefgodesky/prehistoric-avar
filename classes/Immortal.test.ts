@@ -2,7 +2,7 @@ import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DISPOSITIONS } from '../enums.ts'
-import { DragonQueen } from '../test-data.ts'
+import { DragonQueen } from '../test-examples.ts'
 import Immortal from './Immortal.ts'
 
 describe('Immortal', () => {

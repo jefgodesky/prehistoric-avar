@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { parse } from 'npm:yaml'
-import type { IBiome } from './index.d.ts'
+import type { IBiome } from '../index.d.ts'
 import getRegionIdList from './get-region-id-list.ts'
 
 describe('getRegionIdList', () => {

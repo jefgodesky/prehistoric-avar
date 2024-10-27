@@ -1,5 +1,5 @@
-import { LAYER } from './enums.ts'
-import type { Layer } from './enums.ts'
+import { LAYER } from '../enums.ts'
+import type { Layer } from '../enums.ts'
 import makeLayerId from './make-layer-id.ts'
 
 const getAdjacencyList = (id: string, data: { [key: string]: string[] }, layer: Layer = LAYER.SURFACE): string[] => {

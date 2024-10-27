@@ -4,9 +4,9 @@ import calculateCarryingCapacity from './calculate-carrying-capacity.ts'
 import getAdjacencyList from './get-adjacency-list.ts'
 import getBiomeFromTags from './get-biome-from-tags.ts'
 import parseRegionId from './parse-region-id.ts'
-import { BIOMES } from './enums.ts'
-import type { IBiome, IRegionData } from './index.d.ts'
-import type { Layer } from './enums.ts'
+import { BIOMES } from '../enums.ts'
+import type { IBiome, IRegionData } from '../index.d.ts'
+import type { Layer } from '../enums.ts'
 
 interface IEvalRegionsData {
   regions: Record<string, IBiome>

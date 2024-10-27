@@ -2,7 +2,7 @@ import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DISPOSITIONS } from '../enums.ts'
-import { SampleRelationship } from '../test-data.ts'
+import { SampleRelationship } from '../test-examples.ts'
 import Relationship from './Relationship.ts'
 
 describe('Relationship', () => {

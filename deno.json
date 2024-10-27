@@ -1,8 +1,8 @@
 {
   "tasks": {
     "test": "deno test --allow-read --allow-net --allow-env",
-    "fix": "deno run --allow-read --allow-write --allow-env fix-inkscape.ts",
-    "eval": "deno run --allow-read --allow-write --allow-env eval-regions.ts"
+    "fix": "deno run --allow-read --allow-write --allow-env ./prep/fix-inkscape.ts",
+    "eval": "deno run --allow-read --allow-write --allow-env ./prep/eval-regions.ts"
   },
   "imports": {
     "@dice-roller/rpg-dice-roller": "npm:@dice-roller/rpg-dice-roller@^5.5.0",

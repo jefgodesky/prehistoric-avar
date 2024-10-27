@@ -1,6 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { BIOMES } from './enums.ts'
+import { BIOMES } from '../enums.ts'
 import getBiomeFromTags from './get-biome-from-tags.ts'
 
 describe('getBiomeFromTags', () => {

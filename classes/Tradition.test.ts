@@ -2,7 +2,7 @@ import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES } from '../enums.ts'
-import { SampleTradition } from '../test-data.ts'
+import { SampleTradition } from '../test-examples.ts'
 import Tradition from './Tradition.ts'
 
 describe('Tradition', () => {

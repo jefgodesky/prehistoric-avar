@@ -1,8 +1,8 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { parse } from 'npm:yaml'
-import { BIOMES } from './enums.ts'
-import type { IBiome } from './index.d.ts'
+import { BIOMES } from '../enums.ts'
+import type { IBiome } from '../index.d.ts'
 import evalRegions from './eval-regions.ts'
 
 describe('evalRegions', () => {

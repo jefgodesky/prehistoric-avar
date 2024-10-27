@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES, LANG_ORDER, LANG_MORPHOLOGY, SPECIES_NAMES } from '../enums.ts'
-import { ElfData, HumanData, WosanData } from '../test-data.ts'
+import { ElfData, HumanData, WosanData } from '../test-examples.ts'
 import Species from './Species.ts'
 
 describe('Species', () => {
