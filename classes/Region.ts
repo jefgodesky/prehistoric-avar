@@ -78,6 +78,11 @@ class Region extends Markable implements IHabitable {
     if (this.habitability >= ROUND_HABITABILITY_TO_FULL) this.habitability = 1
   }
 
+  addLanguage (language: Language, millennium: number): void {
+    language.name = `${this.id}-${millennium.toString().padStart(3, '0')}`
+    this.languages.push(language)
+  }
+
   toObject (): IRegion {
     const obj: IRegion = {
       id: this.id,

@@ -275,6 +275,15 @@ describe('Region', () => {
       })
     })
 
+    describe('addLanguage', () => {
+      it('adds a language to the region', () => {
+        const region = new Region(emitter, GS02)
+        region.addLanguage(new Language(), 1)
+        expect(region.languages).toHaveLength(1)
+        expect(region.languages[0].name).toBe(`${GS02.id}-001`)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const region = new Region(emitter, FS32)
