@@ -1,4 +1,4 @@
-import { Emitter, IImmortal } from '../index.d.ts'
+import { Emitter, IImmortal, IQuest } from '../index.d.ts'
 import { Disposition, DISPOSITIONS } from '../enums.ts'
 import Relationship from './Relationship.ts'
 import Scribe from './Scribe.ts'
@@ -9,7 +9,7 @@ class Immortal {
   impact: number
   relationships: Relationship[]
   scribe: Scribe
-  slayable: [number, number] | false
+  slayable: IQuest | false
 
   constructor (emitter: Emitter, data?: IImmortal) {
     const relationships = data?.relationships ?? []

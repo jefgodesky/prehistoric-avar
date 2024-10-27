@@ -15,27 +15,6 @@ import {
   ITradition
 } from './index.d.ts'
 
-const DragonQueen: IImmortal = {
-  description: 'The Dragon Queen',
-  disposition: DISPOSITIONS.HOSTILE,
-  impact: 1000,
-  relationships: [
-    {
-      a: 'Immortal: The Dragon Queen',
-      b: 'Population: GS03-001WO',
-      disposition: DISPOSITIONS.HOSTILE,
-      scrolls: []
-    }
-  ],
-  scrolls: [
-    {
-      text: 'The Dragon Queen finds a consort',
-      seals: 4
-    }
-  ],
-  slayable: [1000000, 500000]
-}
-
 const SamplePopulation: IPopulation = {
   id: 'GS02-123HU',
   species: SPECIES_NAMES.HUMAN,
@@ -187,6 +166,27 @@ const SampleQuest: IQuest = {
   courage: 0.0001,
   skill: 0.000001,
   lethality: 0.9
+}
+
+const DragonQueen: IImmortal = {
+  description: 'The Dragon Queen',
+  disposition: DISPOSITIONS.HOSTILE,
+  impact: 1000,
+  relationships: [
+    {
+      a: 'Immortal: The Dragon Queen',
+      b: 'Population: GS03-001WO',
+      disposition: DISPOSITIONS.HOSTILE,
+      scrolls: []
+    }
+  ],
+  scrolls: [
+    {
+      text: 'The Dragon Queen finds a consort',
+      seals: 4
+    }
+  ],
+  slayable: SampleQuest
 }
 
 export {

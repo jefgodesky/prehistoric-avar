@@ -32,7 +32,7 @@ interface IImmortal {
   impact: number
   relationships: IRelationship[]
   scrolls: IScroll[]
-  slayable: [number, number] | false
+  slayable: IQuest | false
 }
 
 interface ILanguage {
