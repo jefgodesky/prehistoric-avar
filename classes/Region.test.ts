@@ -2,8 +2,9 @@ import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
+import { SamplePopulation } from '../test-examples.ts'
+import Population from './Population.ts'
 import Region from './Region.ts'
-import World from './World.ts'
 
 describe('Region', () => {
   const emitter = new Emittery()
@@ -183,6 +184,19 @@ describe('Region', () => {
         const expected = (DS01.capacity * worldHabitability * region.habitability) + featureImpact
         const capacity = region.getCapacity(worldHabitability)
         expect(capacity).toBe(expected)
+      })
+    })
+
+    describe('isPopulated', () => {
+      it('returns false if the region has no population', () => {
+        const region = new Region(emitter, DS01)
+        expect(region.isPopulated()).toBe(false)
+      })
+
+      it('returns true if the region has 1 or more populations', () => {
+        const region = new Region(emitter, GS02)
+        region.populations.push(new Population(emitter, SamplePopulation))
+        expect(region.isPopulated()).toBe(true)
       })
     })
 

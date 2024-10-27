@@ -54,6 +54,10 @@ class Region extends Markable implements IHabitable {
     return (this.capacity * this.habitability * worldHabitability) + featureImpact
   }
 
+  isPopulated (): boolean {
+    return this.populations.length > 0
+  }
+
   reduceHabitability (factor: number): void {
     this.habitability *= factor
   }
