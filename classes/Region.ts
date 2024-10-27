@@ -1,4 +1,4 @@
-import { Biome, BIOMES, SpeciesName } from '../enums.ts'
+import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
 import { Emitter, IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Immortal from './Immortal.ts'
@@ -56,6 +56,11 @@ class Region extends Markable implements IHabitable {
 
   isPopulated (): boolean {
     return this.populations.length > 0
+  }
+
+  hasPopulationCapableOfSpeech (): boolean {
+    const notWosan = this.populations.filter(p => p.species.name !== SPECIES_NAMES.WOSAN)
+    return notWosan.length > 0
   }
 
   reduceHabitability (factor: number): void {

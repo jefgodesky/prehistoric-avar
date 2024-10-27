@@ -5,6 +5,7 @@ import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import { SamplePopulation } from '../test-examples.ts'
 import Population from './Population.ts'
 import Region from './Region.ts'
+import {SPECIES_NAMES} from '../enums.ts'
 
 describe('Region', () => {
   const emitter = new Emittery()
@@ -197,6 +198,26 @@ describe('Region', () => {
         const region = new Region(emitter, GS02)
         region.populations.push(new Population(emitter, SamplePopulation))
         expect(region.isPopulated()).toBe(true)
+      })
+    })
+
+    describe('hasPopulationCapableOfSpeech', () => {
+      it('returns false if the region is unpopulated', () => {
+        const region = new Region(emitter, DS01)
+        expect(region.hasPopulationCapableOfSpeech()).toBe(false)
+      })
+
+      it('returns false if the region has a Wosan population', () => {
+        const region = new Region(emitter, GS02)
+        const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
+        region.populations.push(new Population(emitter, wosan))
+        expect(region.hasPopulationCapableOfSpeech()).toBe(false)
+      })
+
+      it('returns true if the region has a population that is not Wosan', () => {
+        const region = new Region(emitter, GS02)
+        region.populations.push(new Population(emitter, SamplePopulation))
+        expect(region.hasPopulationCapableOfSpeech()).toBe(true)
       })
     })
 
