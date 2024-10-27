@@ -70,6 +70,13 @@ class Language {
     ]
   }
 
+  static willNaturallyAdvance (): { morphology: boolean, order: boolean } {
+    return {
+      morphology: Language.willNaturallyAdvanceMorphology(),
+      order: Language.willNaturallyAdvanceOrder()
+    }
+  }
+
   static willNaturallyAdvanceMorphology (): boolean {
     return Math.random() < (1/3)
   }

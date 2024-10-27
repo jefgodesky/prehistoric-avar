@@ -178,6 +178,12 @@ describe('Language', () => {
   })
 
   describe('Static methods', () => {
+    describe('willNaturallyAdvance', () => {
+      const { morphology, order } = Language.willNaturallyAdvance()
+      expect(morphology).toBeDefined()
+      expect(order).toBeDefined()
+    })
+
     describe('willNaturallyAdvanceMorphology', () => {
       it('returns a boolean answer', () => {
         expect(Language.willNaturallyAdvanceMorphology()).toBeDefined()
