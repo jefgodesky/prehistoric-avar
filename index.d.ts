@@ -51,6 +51,27 @@ interface IPopulation {
   markers: string[]
 }
 
+interface IQuest {
+  id: string
+  description: string
+  courage: number
+  skill: number
+  lethality: number
+}
+
+interface IQuestCall {
+  scope: string
+  quest: IQuest
+}
+
+interface IQuestReport {
+  quest: IQuest
+  attempted: number
+  abandoned: number
+  killed: number
+  success: boolean
+}
+
 interface IRegionFeature {
   description: string
   impact: number
@@ -139,6 +160,9 @@ export type {
   IImmortal,
   ILanguage,
   IPopulation,
+  IQuest,
+  IQuestCall,
+  IQuestReport,
   IRelationship,
   IRegion,
   IRegionFeature,

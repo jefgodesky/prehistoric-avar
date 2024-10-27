@@ -9,7 +9,7 @@ import {
 import {
   IImmortal,
   IPopulation,
-  IRegion,
+  IQuest,
   IRelationship,
   ISpecies,
   ITradition
@@ -181,9 +181,18 @@ const SampleTradition: ITradition = {
   ]
 }
 
+const SampleQuest: IQuest = {
+  id: 'slay-dragon-queen',
+  description: 'Slay the Dragon Queen',
+  courage: 0.0001,
+  skill: 0.000001,
+  lethality: 0.9
+}
+
 export {
   DragonQueen,
   SamplePopulation,
+  SampleQuest,
   SampleRelationship,
   SampleTradition,
   ElfData,
