@@ -158,20 +158,6 @@ describe('Language', () => {
       })
     })
 
-    describe('willNaturallyAdvanceMorphology', () => {
-      it('returns a boolean answer', () => {
-        const lang = new Language()
-        expect(lang.willNaturallyAdvanceMorphology()).toBeDefined()
-      })
-    })
-
-    describe('willNaturallyAdvanceOrder', () => {
-      it('returns a boolean answer', () => {
-        const lang = new Language()
-        expect(lang.willNaturallyAdvanceOrder()).toBeDefined()
-      })
-    })
-
     describe('toObject', () => {
       it('returns an object', () => {
         const lang = new Language()
@@ -187,6 +173,20 @@ describe('Language', () => {
         const name = 'FS32-001'
         const lang = new Language({ name })
         expect(lang.toString()).toEqual(`Language: ${name}`)
+      })
+    })
+  })
+
+  describe('Static methods', () => {
+    describe('willNaturallyAdvanceMorphology', () => {
+      it('returns a boolean answer', () => {
+        expect(Language.willNaturallyAdvanceMorphology()).toBeDefined()
+      })
+    })
+
+    describe('willNaturallyAdvanceOrder', () => {
+      it('returns a boolean answer', () => {
+        expect(Language.willNaturallyAdvanceOrder()).toBeDefined()
       })
     })
   })
