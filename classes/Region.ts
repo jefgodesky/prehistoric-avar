@@ -47,6 +47,13 @@ class Region extends Markable implements IHabitable {
     if (data?.species) this.species = data.species
   }
 
+  getCapacity (worldHabitability: number): number {
+    const featureImpact = this.features
+      .map(feature => feature.impact)
+      .reduce((acc, curr) => acc + curr, 0)
+    return (this.capacity * this.habitability * worldHabitability) + featureImpact
+  }
+
   reduceHabitability (factor: number): void {
     this.habitability *= factor
   }

@@ -172,6 +172,20 @@ describe('Region', () => {
   })
 
   describe('Member methods', () => {
+    describe('getCapacity', () => {
+      it('calculates actual carrying capacity', () => {
+        const region = new Region(emitter, DS01)
+        region.habitability = 0.9
+        const featureImpact = region.features
+          .map(feature => feature.impact)
+          .reduce((acc, curr) => acc + curr, 0)
+        const worldHabitability = 0.92
+        const expected = (DS01.capacity * worldHabitability * region.habitability) + featureImpact
+        const capacity = region.getCapacity(worldHabitability)
+        expect(capacity).toBe(expected)
+      })
+    })
+
     describe('reduceHabitability', () => {
       it('reduces habitability by a given percent', () => {
         const region = new Region(emitter, GS02)
