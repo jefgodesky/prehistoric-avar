@@ -222,8 +222,12 @@ const regionData = [
   PD01, PD02, PD03
 ]
 
-const getRegions = (emitter: Emitter): Region[] => {
-  return regionData.map(data => new Region(emitter, data))
+const getRegions = (emitter: Emitter): Record<string, Region> => {
+  const dictionary: Record<string, Region> = {}
+  for (const region of regionData) {
+    dictionary[region.id] = new Region(emitter, region)
+  }
+  return dictionary
 }
 
 export {

@@ -126,6 +126,7 @@ interface IWorld {
     [key: string]: ISpecies
   }
   events: string[]
+  regions: IRegion[]
 }
 
 export type {

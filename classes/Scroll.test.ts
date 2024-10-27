@@ -85,7 +85,8 @@ describe('Scroll', () => {
           habitability: 1,
           dragons: { interest: 0, fear: 0 },
           events: [],
-          species: {}
+          species: {},
+          regions: []
         }
         const fn = (context?: IWorld) => context?.events.length || 0
         const scroll = new Scroll(text, 5, fn)
@@ -122,7 +123,8 @@ describe('Scroll', () => {
           habitability: 1,
           dragons: { interest: 0, fear: 0 },
           events: ['First event', 'Second event'],
-          species: {}
+          species: {},
+          regions: []
         }
         const fn = (context?: IWorld) => {
           number = context?.events.length ?? 1

@@ -1,5 +1,7 @@
-import {IHabitable, ISpecies, IWorld} from '../index.d.ts'
+import { Emitter, IHabitable, ISpecies, IWorld } from '../index.d.ts'
+import Region from './Region.ts'
 import Species from './Species.ts'
+import { getRegions } from '../instances/regions/index.ts'
 import species from '../instances/species/index.ts'
 
 const ROUND_HABITABILITY_TO_FULL = 0.95
@@ -12,8 +14,9 @@ class World implements IHabitable {
     fear: number
   }
   species: Record<string, Species>
+  regions: Record<string, Region>
 
-  constructor () {
+  constructor (emitter: Emitter) {
     this.habitability = 1
     this.events = []
     this.dragons = {
@@ -21,6 +24,7 @@ class World implements IHabitable {
       fear: 0
     }
     this.species = species
+    this.regions = getRegions(emitter)
   }
 
   incrDraconicInterest (): void {
@@ -69,7 +73,8 @@ class World implements IHabitable {
       habitability: this.habitability,
       dragons: this.dragons,
       events: this.events,
-      species
+      species,
+      regions: Object.values(this.regions).map(region => region.toObject())
     }
   }
 
