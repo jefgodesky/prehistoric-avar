@@ -1,12 +1,16 @@
 import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import type { IQuestReport } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
-import { SamplePopulation } from '../test-examples.ts'
-import Population from './Population.ts'
-import Region from './Region.ts'
-import {SPECIES_NAMES} from '../enums.ts'
+import { DragonQueen, SamplePopulation } from '../test-examples.ts'
+import { SPECIES_NAMES } from '../enums.ts'
+import { QUEST_EVENTS } from './Quest.ts'
+import Immortal from './Immortal.ts'
 import Language from './Language.ts'
+import Population from './Population.ts'
+import Quest from './Quest.ts'
+import Region from './Region.ts'
 
 describe('Region', () => {
   const emitter = new Emittery()
@@ -311,6 +315,42 @@ describe('Region', () => {
       it('exports a string', () => {
         const region = new Region(emitter, FS32)
         expect(region.toString()).toEqual(FS32.id)
+      })
+    })
+  })
+
+  describe('Event handling', () => {
+    describe(QUEST_EVENTS.ACCOMPLISHED, () => {
+      const event = QUEST_EVENTS.ACCOMPLISHED
+
+      it('leaves unharmed immortals alone', async () => {
+        const region = new Region(emitter, GS02)
+        region.immortals.push(new Immortal(emitter, DragonQueen))
+        const report: IQuestReport = {
+          quest: (region.immortals[0].slayable as Quest).toObject(),
+          attempted: 100,
+          abandoned: 50,
+          killed: 50,
+          success: false
+        }
+        await emitter.emit(event, report)
+        expect(region.immortals).toHaveLength(1)
+      })
+
+      it('slays', async () => {
+        const region = new Region(emitter, GS02)
+        const i = new Immortal(emitter, DragonQueen)
+        region.immortals.push(i)
+        const report: IQuestReport = {
+          quest: (region.immortals[0].slayable as Quest).toObject(),
+          attempted: 100,
+          abandoned: 50,
+          killed: 49,
+          success: true
+        }
+        await emitter.emit(event, report)
+        expect(i.slain).toBe(true)
+        expect(region.immortals).toHaveLength(0)
       })
     })
   })

@@ -1,5 +1,6 @@
-import { Emitter, IImmortal, IQuest } from '../index.d.ts'
+import {Emitter, IImmortal, IQuestReport} from '../index.d.ts'
 import { Disposition, DISPOSITIONS } from '../enums.ts'
+import Quest, {QUEST_EVENTS} from './Quest.ts'
 import Relationship from './Relationship.ts'
 import Scribe from './Scribe.ts'
 
@@ -9,7 +10,8 @@ class Immortal {
   impact: number
   relationships: Relationship[]
   scribe: Scribe
-  slayable: IQuest | false
+  slayable: Quest | false
+  slain: boolean = false
 
   constructor (emitter: Emitter, data?: IImmortal) {
     const relationships = data?.relationships ?? []
@@ -19,7 +21,7 @@ class Immortal {
     this.impact = data?.impact ?? 0
     this.relationships = relationships.map(rel => new Relationship(emitter, rel))
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
-    this.slayable = data?.slayable ?? false
+    this.slayable = data?.slayable ? new Quest(emitter, data.slayable) : false
   }
 
   toObject (): IImmortal {
@@ -29,7 +31,7 @@ class Immortal {
       impact: this.impact,
       relationships: this.relationships.map(rel => rel.toObject()),
       scrolls: this.scribe.toObject(),
-      slayable: this.slayable
+      slayable: this.slayable === false ? false : this.slayable.toObject()
     }
   }
 

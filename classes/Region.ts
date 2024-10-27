@@ -1,10 +1,11 @@
 import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
-import { Emitter, IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
+import {Emitter, IHabitable, IQuestReport, IRegion, IRegionFeature} from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
+import {QUEST_EVENTS} from './Quest.ts'
 
 class Region extends Markable implements IHabitable {
   adjacentRegions: string[]
@@ -45,6 +46,8 @@ class Region extends Markable implements IHabitable {
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species
+
+    emitter.on(QUEST_EVENTS.ACCOMPLISHED, (report: IQuestReport) => this.handleQuestAccomplished(report))
   }
 
   getCapacity (worldHabitability: number): number {
@@ -116,6 +119,15 @@ class Region extends Markable implements IHabitable {
 
   override toString (): string {
     return this.id
+  }
+
+  private handleQuestAccomplished (report: IQuestReport): void {
+    if (!report.success) return
+    const slain = this.immortals
+      .filter(immortal => immortal.slayable !== false && immortal.slayable.id === report.quest.id)
+    if (slain.length < 1) return
+    slain.forEach(immortal => { immortal.slain = true })
+    this.immortals = this.immortals.filter(immortal => !immortal.slain)
   }
 }
 

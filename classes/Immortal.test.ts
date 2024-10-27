@@ -3,6 +3,7 @@ import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DISPOSITIONS } from '../enums.ts'
 import { DragonQueen } from '../test-examples.ts'
+import Quest from './Quest.ts'
 import Immortal from './Immortal.ts'
 
 describe('Immortal', () => {
@@ -44,6 +45,11 @@ describe('Immortal', () => {
       expect(i.slayable).toBe(false)
     })
 
+    it('starts slain as false', () => {
+      const i = new Immortal(emitter)
+      expect(i.slain).toBe(false)
+    })
+
     it('can set description', () => {
       const i = new Immortal(emitter, DragonQueen)
       expect(i.description).toBe(DragonQueen.description)
@@ -71,7 +77,7 @@ describe('Immortal', () => {
 
     it('can set slayable', () => {
       const i = new Immortal(emitter, DragonQueen)
-      expect(i.slayable).toEqual(DragonQueen.slayable)
+      expect((i.slayable as Quest).toObject()).toEqual(DragonQueen.slayable)
     })
   })
 
