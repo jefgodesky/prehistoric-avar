@@ -1,6 +1,7 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
-import { Biome, SPECIES_NAMES } from '../enums.ts'
+import {Biome, SPECIES_NAMES, SpeciesName} from '../enums.ts'
 import type { Emitter, IPopulation } from '../index.d.ts'
+import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
 import Relationship from './Relationship.ts'
 import Markable from './Markable.ts'
@@ -68,6 +69,12 @@ class Population extends Markable {
 
   override toString (): string {
     return `Population: ${this.id}`
+  }
+
+  static generateId (region: string, millennium: number, species: SpeciesName): string {
+    const step = millennium.toString().padStart(3, '0')
+    const sp = Species.getCode(species)
+    return `${region}-${step}${sp}`
   }
 }
 
