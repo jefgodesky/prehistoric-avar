@@ -63,6 +63,11 @@ class Region extends Markable implements IHabitable {
     return notWosan.length > 0
   }
 
+  hasSpeechCommunity (): boolean {
+    if (this.languages.length < 1) return false
+    return this.hasPopulationCapableOfSpeech()
+  }
+
   reduceHabitability (factor: number): void {
     this.habitability *= factor
   }

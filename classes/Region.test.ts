@@ -6,6 +6,7 @@ import { SamplePopulation } from '../test-examples.ts'
 import Population from './Population.ts'
 import Region from './Region.ts'
 import {SPECIES_NAMES} from '../enums.ts'
+import Language from './Language.ts'
 
 describe('Region', () => {
   const emitter = new Emittery()
@@ -218,6 +219,34 @@ describe('Region', () => {
         const region = new Region(emitter, GS02)
         region.populations.push(new Population(emitter, SamplePopulation))
         expect(region.hasPopulationCapableOfSpeech()).toBe(true)
+      })
+    })
+
+    describe('hasSpeechCommunity', () => {
+      it('returns false if the region is unpopulated', () => {
+        const region = new Region(emitter, DS01)
+        expect(region.hasSpeechCommunity()).toBe(false)
+      })
+
+      it('returns false if the region is populated by Wosan', () => {
+        const region = new Region(emitter, GS02)
+        const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
+        region.languages.push(new Language())
+        region.populations.push(new Population(emitter, wosan))
+        expect(region.hasSpeechCommunity()).toBe(false)
+      })
+
+      it('returns false if the region is populated but has no language', () => {
+        const region = new Region(emitter, GS02)
+        region.populations.push(new Population(emitter, SamplePopulation))
+        expect(region.hasSpeechCommunity()).toBe(false)
+      })
+
+      it('returns true if the region has a language and people to speak it', () => {
+        const region = new Region(emitter, GS02)
+        region.languages.push(new Language())
+        region.populations.push(new Population(emitter, SamplePopulation))
+        expect(region.hasSpeechCommunity()).toBe(true)
       })
     })
 
