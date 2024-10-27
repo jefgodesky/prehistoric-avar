@@ -10,7 +10,6 @@ import Tradition from './Tradition.ts'
 import species from '../instances/species/index.ts'
 
 class Population extends Markable {
-  id: string
   species: Species
   tradition: Tradition
   size: number
@@ -20,7 +19,7 @@ class Population extends Markable {
   private fitness: Fitness
 
   constructor (emitter: Emitter, data?: IPopulation) {
-    super(data)
+    super(emitter, data)
 
     const sp = data?.species ?? SPECIES_NAMES.WOSAN
     const relationships = data?.relationships ?? []

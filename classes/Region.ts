@@ -6,7 +6,6 @@ import Markable from './Markable.ts'
 import Population from './Population.ts'
 
 class Region extends Markable {
-  id: string
   adjacentRegions: string[]
   area: number
   biome: Biome | null
@@ -23,7 +22,7 @@ class Region extends Markable {
   tags: string[]
 
   constructor (emitter: Emitter, data?: IRegion) {
-    super(data)
+    super(emitter, data)
 
     const immortals = data?.immortals ?? []
     const languages = data?.languages ?? []
