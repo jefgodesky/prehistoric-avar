@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid'
-import { Emitter, IPopulation, IQuest, IQuestCall, IQuestReport } from '../index.d.ts'
+import { Biome } from '../enums.ts'
+import { Emitter, IQuest, IQuestCall, IQuestReport } from '../index.d.ts'
+import type Population from './Population.ts'
 
 const QUEST_EVENTS = {
   ACCOMPLISHED: 'Quest.Accomplished',
@@ -28,7 +30,7 @@ class Quest {
     await this.emitter.emit(QUEST_EVENTS.CALL, call)
   }
 
-  async run (pop: IPopulation): Promise<IQuestReport> {
+  async run (p: Population, biome: Biome): Promise<IQuestReport> {
     const report = {
       quest: this.toObject(),
       attempted: 0,
@@ -37,12 +39,16 @@ class Quest {
       success: false
     }
 
-    for (let i = 1; i <= pop.size; i++) {
+    for (let i = 1; i <= p.size; i++) {
       const courage = Math.random()
       if (courage <= this.courage) {
         // This person embarks on the quest
         report.attempted++
-        const skill = Math.random()
+        // You get to attempt once for each level of fitness
+        const fitness = p.getFitness(biome)
+        const attempts: number[] = []
+        for (let a = 0; a < fitness; a++) attempts.push(Math.random())
+        const skill = Math.max(...attempts)
         if (skill <= this.skill) {
           // This person succeeded on the quest
           report.success = true

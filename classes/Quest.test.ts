@@ -1,7 +1,9 @@
 import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { BIOMES } from '../enums.ts'
 import { IQuest } from '../index.d.ts'
+import Population from './Population.ts'
 import Quest, { QUEST_EVENTS } from './Quest.ts'
 import { SampleQuest, SamplePopulation } from '../test-examples.ts'
 
@@ -86,9 +88,12 @@ describe('Quest', () => {
     })
 
     describe('run', () => {
+      const quest = new Quest(emitter, SampleQuest)
+      const p = new Population(emitter, SamplePopulation)
+      const biome = BIOMES.TEMPERATE_GRASSLAND
+
       it('runs the quest', async () => {
-        const quest = new Quest(emitter, SampleQuest)
-        const report = await quest.run(SamplePopulation)
+        const report = await quest.run(p, biome)
         expect(report.quest.id).toBe(SampleQuest.id)
         expect(report.attempted).toBeDefined()
         expect(report.abandoned).toBeDefined()
@@ -109,7 +114,7 @@ describe('Quest', () => {
           lethality: 0
         })
 
-        const report = await quest.run(SamplePopulation)
+        const report = await quest.run(p, biome)
         expect(report.quest.id).toBe(quest.id)
         expect(emitted).toEqual(quest.id)
       })
