@@ -10,27 +10,15 @@ const DS01: IRegion = {
   features: [
     {
       description: 'Oasis',
-      impact: 55
+      impact: 129
     },
     {
       description: 'Oasis',
-      impact: 87
+      impact: 149
     },
     {
       description: 'Oasis',
-      impact: 76
-    },
-    {
-      description: 'Oasis',
-      impact: 77
-    },
-    {
-      description: 'Oasis',
-      impact: 104
-    },
-    {
-      description: 'Oasis',
-      impact: 105
+      impact: 146
     },
     {
       description: 'Oasis',
@@ -38,7 +26,55 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 87
+      impact: 135
+    },
+    {
+      description: 'Oasis',
+      impact: 62
+    },
+    {
+      description: 'Oasis',
+      impact: 114
+    },
+    {
+      description: 'Oasis',
+      impact: 96
+    },
+    {
+      description: 'Oasis',
+      impact: 74
+    },
+    {
+      description: 'Oasis',
+      impact: 85
+    },
+    {
+      description: 'Oasis',
+      impact: 111
+    },
+    {
+      description: 'Oasis',
+      impact: 124
+    },
+    {
+      description: 'Oasis',
+      impact: 133
+    },
+    {
+      description: 'Oasis',
+      impact: 116
+    },
+    {
+      description: 'Oasis',
+      impact: 97
+    },
+    {
+      description: 'Oasis',
+      impact: 111
+    },
+    {
+      description: 'Oasis',
+      impact: 81
     },
     {
       description: 'Oasis',
@@ -46,23 +82,11 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 107
+      impact: 92
     },
     {
       description: 'Oasis',
-      impact: 69
-    },
-    {
-      description: 'Oasis',
-      impact: 142
-    },
-    {
-      description: 'Oasis',
-      impact: 84
-    },
-    {
-      description: 'Oasis',
-      impact: 62
+      impact: 115
     },
     {
       description: 'Oasis',
@@ -70,57 +94,34 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 62
-    },
-    {
-      description: 'Oasis',
-      impact: 66
-    },
-    {
-      description: 'Oasis',
-      impact: 68
-    },
-    {
-      description: 'Oasis',
-      impact: 150
-    },
-    {
-      description: 'Oasis',
-      impact: 125
-    },
-    {
-      description: 'Oasis',
-      impact: 78
-    },
-    {
-      description: 'Oasis',
-      impact: 56
-    },
-    {
-      description: 'Oasis',
-      impact: 131
-    },
-    {
-      description: 'Oasis',
-      impact: 76
-    },
-    {
-      description: 'Oasis',
-      impact: 141
-    },
-    {
-      description: 'Oasis',
-      impact: 62
+      impact: 149
     },
     {
       description: 'Oasis',
       impact: 99
+    },
+    {
+      description: 'Oasis',
+      impact: 90
+    },
+    {
+      description: 'Oasis',
+      impact: 63
+    },
+    {
+      description: 'Oasis',
+      impact: 57
+    },
+    {
+      description: 'Oasis',
+      impact: 87
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
   languages: [],
+  markers: [],
   ogrism: 0,
   populations: [],
   tags: ['desert', 'hot', 'surface'],

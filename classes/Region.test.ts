@@ -78,6 +78,11 @@ describe('Region', () => {
       expect(region.populations).toHaveLength(0)
     })
 
+    it('defaults markers to an empty array', () => {
+      const region = new Region(emitter)
+      expect(region.populations).toHaveLength(0)
+    })
+
     it('has no species by default', () => {
       const region = new Region(emitter)
       expect(region.species).not.toBeDefined()

@@ -12,6 +12,7 @@ const FD09: IRegion = {
   habitability: 1,
   immortals: [],
   languages: [],
+  markers: [],
   ogrism: 0,
   populations: [],
   tags: ['world-below'],

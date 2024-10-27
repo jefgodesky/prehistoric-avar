@@ -52,6 +52,11 @@ describe('Population', () => {
       expect(p.scribe.scrolls).toHaveLength(0)
     })
 
+    it('defaults to an empty array of markers', () => {
+      const p = new Population(emitter)
+      expect(p.markers).toHaveLength(0)
+    })
+
     it('can set an ID', () => {
       const p = new Population(emitter, SamplePopulation)
       expect(p.id).toBe(SamplePopulation.id)
@@ -86,6 +91,11 @@ describe('Population', () => {
     })
 
     it('can set scrolls', () => {
+      const p = new Population(emitter, SamplePopulation)
+      expect(p.scribe.scrolls).toHaveLength(SamplePopulation.scrolls.length)
+    })
+
+    it('can set markers', () => {
       const p = new Population(emitter, SamplePopulation)
       expect(p.scribe.scrolls).toHaveLength(SamplePopulation.scrolls.length)
     })

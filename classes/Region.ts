@@ -2,9 +2,10 @@ import { Biome, BIOMES, SpeciesName } from '../enums.ts'
 import { Emitter, IRegion, IRegionFeature } from '../index.d.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
+import Markable from './Markable.ts'
 import Population from './Population.ts'
 
-class Region {
+class Region extends Markable {
   id: string
   adjacentRegions: string[]
   area: number
@@ -22,6 +23,8 @@ class Region {
   tags: string[]
 
   constructor (emitter: Emitter, data?: IRegion) {
+    super(data)
+
     const immortals = data?.immortals ?? []
     const languages = data?.languages ?? []
     const populations = data?.populations ?? []
@@ -57,6 +60,7 @@ class Region {
       habitability: this.habitability,
       immortals: this.immortals.map(immortal => immortal.toObject()),
       languages: this.languages.map(lang => lang.toObject()),
+      markers: this.markers,
       ogrism: this.ogrism,
       populations: this.populations.map(pop => pop.toObject()),
       tags: this.tags
@@ -66,7 +70,7 @@ class Region {
     return obj
   }
 
-  toString (): string {
+  override toString (): string {
     return this.id
   }
 }

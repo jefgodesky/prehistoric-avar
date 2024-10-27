@@ -48,6 +48,7 @@ interface IPopulation {
   viability: number
   relationships: IRelationship[]
   scrolls: IScroll[]
+  markers: string[]
 }
 
 interface IRegionFeature {
@@ -67,6 +68,7 @@ interface IRegion {
   habitability: number
   immortals: IImmortal[]
   languages: ILanguage[]
+  markers: string[]
   ogrism: number
   populations: IPopulation[]
   species?: SpeciesName

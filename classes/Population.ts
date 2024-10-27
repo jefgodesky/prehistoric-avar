@@ -3,12 +3,13 @@ import { Biome, SPECIES_NAMES } from '../enums.ts'
 import type { Emitter, IPopulation } from '../index.d.ts'
 import Fitness from './Fitness.ts'
 import Relationship from './Relationship.ts'
+import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
 import Species from './Species.ts'
 import Tradition from './Tradition.ts'
 import species from '../instances/species/index.ts'
 
-class Population {
+class Population extends Markable {
   id: string
   species: Species
   tradition: Tradition
@@ -19,6 +20,8 @@ class Population {
   private fitness: Fitness
 
   constructor (emitter: Emitter, data?: IPopulation) {
+    super(data)
+
     const sp = data?.species ?? SPECIES_NAMES.WOSAN
     const relationships = data?.relationships ?? []
 
@@ -29,6 +32,7 @@ class Population {
     this.viability = data?.viability ?? 1
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
     this.relationships = relationships.map(rel => new Relationship(emitter, rel))
+    this.markers = data?.markers ?? []
     this.fitness = Fitness.combine(this.species.fitness, this.tradition.fitness)
   }
 
@@ -55,6 +59,7 @@ class Population {
       id: this.id,
       species: this.species.name as string,
       tradition: this.tradition.toObject(),
+      markers: this.markers,
       size: this.size,
       viability: this.viability,
       relationships: this.relationships.map(rel => rel.toObject()),
@@ -62,7 +67,7 @@ class Population {
     }
   }
 
-  toString (): string {
+  override toString (): string {
     return `Population: ${this.id}`
   }
 }

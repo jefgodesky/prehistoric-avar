@@ -63,6 +63,7 @@ const SamplePopulation: IPopulation = {
       }
     ]
   },
+  markers: ['Example marker'],
   size: 54321,
   viability: 0.9,
   relationships: [

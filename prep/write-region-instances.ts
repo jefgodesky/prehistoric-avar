@@ -1,7 +1,7 @@
 import { parse } from 'yaml'
 import type { IRegionData } from '../index.d.ts'
 
-const yaml = await Deno.readTextFile('data.yml')
+const yaml = await Deno.readTextFile('./data/data.yml')
 const data = parse(yaml) as IRegionData
 
 for (const id in data) {
@@ -63,6 +63,7 @@ const ${id}: IRegion = {
   habitability: 1,
   immortals: [],
   languages: [],
+  markers: [],
   ogrism: 0,
   populations: [],
   tags: [${region.tags.map(tag => `'${tag}'`).join(', ')}],
