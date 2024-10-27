@@ -1,4 +1,4 @@
-import {Biome, BIOMES, SpeciesName} from '../enums.ts'
+import { Biome, BIOMES, SpeciesName } from '../enums.ts'
 import { Emitter, IRegion, IRegionFeature } from '../index.d.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'

@@ -1,7 +1,7 @@
 import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { DS01, GS02, FS32 } from '../test-data.ts'
+import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import Region from './Region.ts'
 
 describe('Region', () => {
