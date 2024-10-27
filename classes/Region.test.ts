@@ -3,6 +3,7 @@ import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import Region from './Region.ts'
+import World from './World.ts'
 
 describe('Region', () => {
   const emitter = new Emittery()
@@ -171,6 +172,31 @@ describe('Region', () => {
   })
 
   describe('Member methods', () => {
+    describe('reduceHabitability', () => {
+      it('reduces habitability by a given percent', () => {
+        const region = new Region(emitter, GS02)
+        region.habitability = 0.8
+        region.reduceHabitability(0.5)
+        expect(region.habitability).toBe(0.4)
+      })
+    })
+
+    describe('restoreHabitability', () => {
+      it('restores half of the habitability lost', () => {
+        const region = new Region(emitter, GS02)
+        region.habitability = 0.8
+        region.restoreHabitability()
+        expect(region.habitability).toBe(0.9)
+      })
+
+      it('rounds 0.95 up to 1', () => {
+        const region = new Region(emitter, GS02)
+        region.habitability = 0.9
+        region.restoreHabitability()
+        expect(region.habitability).toBe(1)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const region = new Region(emitter, FS32)

@@ -1,10 +1,10 @@
 import { Emitter, IHabitable, ISpecies, IWorld } from '../index.d.ts'
+import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Region from './Region.ts'
 import Species from './Species.ts'
 import { getRegions } from '../instances/regions/index.ts'
 import species from '../instances/species/index.ts'
 
-const ROUND_HABITABILITY_TO_FULL = 0.95
 
 class World implements IHabitable {
   habitability: number

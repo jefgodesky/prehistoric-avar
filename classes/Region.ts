@@ -1,11 +1,12 @@
 import { Biome, BIOMES, SpeciesName } from '../enums.ts'
-import { Emitter, IRegion, IRegionFeature } from '../index.d.ts'
+import { Emitter, IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
+import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 
-class Region extends Markable {
+class Region extends Markable implements IHabitable {
   adjacentRegions: string[]
   area: number
   biome: Biome | null
@@ -44,6 +45,16 @@ class Region extends Markable {
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species
+  }
+
+  reduceHabitability (factor: number): void {
+    this.habitability *= factor
+  }
+
+  restoreHabitability (): void {
+    const gap = 1 - this.habitability
+    this.habitability += gap / 2
+    if (this.habitability >= ROUND_HABITABILITY_TO_FULL) this.habitability = 1
   }
 
   toObject (): IRegion {

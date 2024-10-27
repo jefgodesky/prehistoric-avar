@@ -1,0 +1,1 @@
+export const ROUND_HABITABILITY_TO_FULL = 0.95
