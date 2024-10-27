@@ -6,7 +6,7 @@ const MARKABLE_EVENTS = {
   REMOVE: 'Marker.Remove',
   MARKED: 'Marker.Added',
   UNMARKED: 'Marker.Removed'
-}
+} as const
 
 class Markable {
   id: string
