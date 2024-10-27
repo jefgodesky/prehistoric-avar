@@ -38,15 +38,41 @@ describe('Markable', () => {
 
   describe('Member methods', () => {
     describe('addMarker', () => {
-      const mark = new Markable(emitter)
-      mark.addMarker(marker)
-      expect(mark.markers).toHaveLength(1)
+      it('adds a marker', async () => {
+        const mark = new Markable(emitter)
+        await mark.addMarker(marker)
+        expect(mark.markers).toHaveLength(1)
+      })
+
+      it('emits an event', async () => {
+        let emitted: boolean | string = false
+        emitter.on(MARKABLE_EVENTS.MARKED, ({ id, marker }: { id: string, marker: string }) => {
+          emitted = `${id}: ${marker}`
+        })
+
+        const mark = new Markable(emitter, { id })
+        await mark.addMarker(marker)
+        expect(emitted).toBe(`${id}: ${marker}`)
+      })
     })
 
     describe('removeMarker', () => {
-      const mark = new Markable(emitter, { markers })
-      mark.removeMarker(marker)
-      expect(mark.markers).toHaveLength(0)
+      it('removes a marker', async () => {
+        const mark = new Markable(emitter, {markers})
+        await mark.removeMarker(marker)
+        expect(mark.markers).toHaveLength(0)
+      })
+
+      it('emits an event', async () => {
+        let emitted: boolean | string = false
+        emitter.on(MARKABLE_EVENTS.UNMARKED, ({ id, marker }: { id: string, marker: string }) => {
+          emitted = `${id}: ${marker}`
+        })
+
+        const mark = new Markable(emitter, { id })
+        await mark.removeMarker(marker)
+        expect(emitted).toBe(`${id}: ${marker}`)
+      })
     })
   })
 
