@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { Emitter, IPopulation, IQuest, IQuestReport } from '../index.d.ts'
+import { Emitter, IPopulation, IQuest, IQuestCall, IQuestReport } from '../index.d.ts'
 
 const QUEST_EVENTS = {
   ACCOMPLISHED: 'Quest.Accomplished',
@@ -24,7 +24,8 @@ class Quest {
   }
 
   async call (scope: string): Promise<void> {
-    await this.emitter.emit(QUEST_EVENTS.CALL, { scope, quest: this.toObject() })
+    const call: IQuestCall = { scope, quest: this.toObject() }
+    await this.emitter.emit(QUEST_EVENTS.CALL, call)
   }
 
   async run (pop: IPopulation): Promise<IQuestReport> {

@@ -8,6 +8,7 @@ import type {
   SpeciesName
 } from './enums.ts'
 
+// deno-lint-ignore no-explicit-any
 type Emitter = Emittery<Record<PropertyKey, any>, Record<PropertyKey, any> & OmnipresentEventData, DatalessEventNames<Record<PropertyKey, any>>>
 
 interface IBiome {
