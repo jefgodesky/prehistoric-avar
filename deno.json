@@ -7,6 +7,7 @@
   "imports": {
     "@dice-roller/rpg-dice-roller": "npm:@dice-roller/rpg-dice-roller@^5.5.0",
     "@std/assert": "jsr:@std/assert@1",
+    "@std/collections": "jsr:@std/collections@^1.0.9",
     "@std/expect": "jsr:@std/expect@^1.0.5",
     "@std/testing": "jsr:@std/testing@^1.0.3",
     "@turf/area": "npm:@turf/area@^7.1.0",
