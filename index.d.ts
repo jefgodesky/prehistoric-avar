@@ -26,6 +26,21 @@ interface IHabitable {
   restoreHabitability: () => void
 }
 
+interface IHistoricalRecord {
+  millennium: number
+  description: string
+  tags: string[]
+}
+
+interface IHistoricalQuery {
+  millennium?: number
+  tags?: string[]
+  logic?: {
+    tags?: 'and' | 'or'
+    query?: 'and' | 'or'
+  }
+}
+
 interface IImmortal {
   description: string
   disposition: Disposition
@@ -158,6 +173,8 @@ export type {
   IBiome,
   IFitness,
   IHabitable,
+  IHistoricalQuery,
+  IHistoricalRecord,
   IImmortal,
   ILanguage,
   IPopulation,
