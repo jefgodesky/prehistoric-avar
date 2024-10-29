@@ -1,8 +1,32 @@
 import { parse } from 'yaml'
 import type { IRegionData } from '../index.d.ts'
+import parseRegionId from './parse-region-id.ts'
 
 const yaml = await Deno.readTextFile('./data/data.yml')
 const data = parse(yaml) as IRegionData
+
+/*
+ *   Each volcano on the surface layer should be paired with volcanic pipe
+ *   features in the cave and World Below regions beneath it. This requires
+ *   a bit more coordination than our other features, so we'll need to loop
+ *   through our regions first to get the area for each one, use that to
+ *   determine how many volcanoes each one should have, and then use that
+ *   to create the pipes below it.
+ */
+
+const volcanic = ['MS06', 'MS08', 'MS09', 'MS10', 'MS11', 'MS13', 'MS14']
+const volcanoes: { [key: string]: boolean[] } = {}
+
+for (const id in data) {
+  if (!volcanic.includes(id)) continue
+  const region = data[id]
+  if (!region) continue
+  volcanoes[id] = []
+  const num = Math.round(region.area / 10000)
+  for (let i = 0; i < num; i++) {
+    volcanoes[id].push(Math.random() < 0.01)
+  }
+}
 
 for (const id in data) {
   const region = data[id]
@@ -10,9 +34,10 @@ for (const id in data) {
   const dragons = []
   if (region.tags.includes('coastal')) dragons.push('storm dragon')
   if (region.tags.includes('forest')) dragons.push('forest dragon')
-  if (region.tags.includes('mountains')) dragons.push('flame dragon', 'night dragon')
+  if (region.tags.includes('mountains')) dragons.push('night dragon')
   if (region.tags.includes('polar')) dragons.push('frost dragon')
   if (region.tags.includes('boreal')) dragons.push('frost dragon')
+  if (volcanic.includes(id)) dragons.push('flame dragon')
 
   const features = []
 
@@ -30,11 +55,6 @@ for (const id in data) {
     for (let i = 0; i < glaciers; i++) {
       features.push({ description: 'Glacier', impact: -100 })
     }
-
-    const volcanoes = Math.round(region.area / 1000000)
-    for (let i = 0; i < volcanoes; i++) {
-      features.push({ description: 'Volcano', impact: 0 })
-    }
   }
 
   // Add Grandmother Trees to boreal forests
@@ -42,6 +62,17 @@ for (const id in data) {
     const num = Math.round(region.area / 1000)
     for (let i = 0; i < num; i++) {
       features.push({ description: 'Grandmother Tree', impact: Math.round((Math.random() * 250) + 250) })
+    }
+  }
+
+  // Add volcanoes or volcanic pipes
+  const info = parseRegionId(id)
+  const surfaceRegionId = `${info[0]}S${info[2]}`
+  if (volcanic.includes(surfaceRegionId)) {
+    for (const isSuper of volcanoes[surfaceRegionId]) {
+      const description = id === surfaceRegionId ? isSuper ? 'Supervolcano' : 'Volcano' : 'Volcanic pipe'
+      const impact = id === surfaceRegionId ? 0 : isSuper ? Math.round((Math.random() * 1000) + 1000) : Math.round((Math.random() * 250) + 250)
+      features.push({ description, impact })
     }
   }
 
