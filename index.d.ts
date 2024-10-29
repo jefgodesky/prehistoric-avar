@@ -18,6 +18,11 @@ interface IBiome {
   Regions: string[]
 }
 
+interface IDragons {
+  interest: number
+  fear: number
+}
+
 type IFitness = Record<Biome, number>
 
 interface IHabitable {
@@ -171,6 +176,7 @@ interface IWorld {
 export type {
   Emitter,
   IBiome,
+  IDragons,
   IFitness,
   IHabitable,
   IHistoricalQuery,
