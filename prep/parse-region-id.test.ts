@@ -8,4 +8,11 @@ describe('parseRegionId', () => {
     expect(code).toBe('G')
     expect(id).toBe('12')
   })
+
+  it('parses full region IDs, complete with layer', () => {
+    const [code, layer, id] = parseRegionId('GS12')
+    expect(code).toBe('G')
+    expect(layer).toBe('S')
+    expect(id).toBe('12')
+  })
 })
