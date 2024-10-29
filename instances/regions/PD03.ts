@@ -7,7 +7,24 @@ const PD03: IRegion = {
   biome: 'World Below',
   capacity: 4985,
   dragons: [],
-  features: [],
+  features: [
+    {
+      description: 'Underground lake (5506 sq. km)',
+      impact: 550600
+    },
+    {
+      description: 'Underground lake (2561 sq. km)',
+      impact: 256100
+    },
+    {
+      description: 'Underground lake (514 sq. km)',
+      impact: 51400
+    },
+    {
+      description: 'Underground lake (853 sq. km)',
+      impact: 85300
+    }
+  ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],

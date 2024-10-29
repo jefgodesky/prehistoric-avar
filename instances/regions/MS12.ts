@@ -6,8 +6,76 @@ const MS12: IRegion = {
   area: 357771,
   biome: 'Mountain range',
   capacity: 5962,
-  dragons: ['flame dragon', 'night dragon'],
+  dragons: ['night dragon'],
   features: [
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
     {
       description: 'Glacier',
       impact: -100

@@ -72,7 +72,7 @@ for (const id in data) {
   if (volcanic.includes(surfaceRegionId)) {
     for (const isSuper of volcanoes[surfaceRegionId]) {
       const description = id === surfaceRegionId ? isSuper ? 'Supervolcano' : 'Volcano' : 'Volcanic pipe'
-      const impact = id === surfaceRegionId ? 0 : isSuper ? Math.round((Math.random() * 1000) + 1000) : Math.round((Math.random() * 250) + 250)
+      const impact = id === surfaceRegionId ? 0 : isSuper ? Math.round((Math.random() * 1000) + 1000) * -1 : Math.round((Math.random() * 250) + 250) * -1
       features.push({ description, impact })
     }
   }
@@ -87,19 +87,19 @@ for (const id in data) {
     if (intersect(adjacentSurfaceRegions, volcanic).length === 0) {
       const numLakeCandidates = [8, 7, 7]
       for (let i = 0; i < 3; i++) numLakeCandidates.push(6)
-      for (let i = 0; i < 5; i++) numLakeCandidates.push(5)
-      for (let i = 0; i < 8; i++) numLakeCandidates.push(4)
-      for (let i = 0; i < 13; i++) numLakeCandidates.push(3)
-      for (let i = 0; i < 21; i++) numLakeCandidates.push(2)
-      for (let i = 0; i < 34; i++) numLakeCandidates.push(1)
-      for (let i = 0; i < 55; i++) numLakeCandidates.push(0)
+      for (let i = 0; i < 4; i++) numLakeCandidates.push(5)
+      for (let i = 0; i < 5; i++) numLakeCandidates.push(4)
+      for (let i = 0; i < 6; i++) numLakeCandidates.push(3)
+      for (let i = 0; i < 7; i++) numLakeCandidates.push(2)
+      for (let i = 0; i < 8; i++) numLakeCandidates.push(1)
+      for (let i = 0; i < 9; i++) numLakeCandidates.push(0)
       const numLakes = sample(numLakeCandidates) ?? 0
       const lakes: number[] = []
       const seaArea = Math.round((1 - (Math.random() * 0.2)) * region.area)
       let makeSea = false
       let totalArea = 0
       for (let i = 0; i < numLakes; i++) {
-        const area = Math.round((Math.random() * 1500) + 1500)
+        const area = Math.round((Math.random() * 5000) + 1000)
         totalArea += area
         if (totalArea > seaArea) { makeSea = true; break}
         lakes.push(area)

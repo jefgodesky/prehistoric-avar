@@ -6,16 +6,8 @@ const MS03: IRegion = {
   area: 466427,
   biome: 'Mountain range',
   capacity: 7773,
-  dragons: ['flame dragon', 'night dragon'],
+  dragons: ['night dragon'],
   features: [
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
     {
       description: 'Glacier',
       impact: -100

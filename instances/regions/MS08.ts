@@ -6,7 +6,7 @@ const MS08: IRegion = {
   area: 1290871,
   biome: 'Mountain range',
   capacity: 21514,
-  dragons: ['flame dragon', 'night dragon'],
+  dragons: ['night dragon', 'flame dragon'],
   features: [
     {
       description: 'Glacier',
@@ -523,6 +523,578 @@ const MS08: IRegion = {
     {
       description: 'Glacier',
       impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Supervolcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
     },
     {
       description: 'Volcano',

@@ -7,7 +7,44 @@ const MD11: IRegion = {
   biome: 'World Below',
   capacity: 1543,
   dragons: [],
-  features: [],
+  features: [
+    {
+      description: 'Volcanic pipe',
+      impact: -485
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -471
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -300
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -276
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -320
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -281
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -396
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -440
+    },
+    {
+      description: 'Volcanic pipe',
+      impact: -401
+    }
+  ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],

@@ -6,7 +6,7 @@ const MS11: IRegion = {
   area: 92586,
   biome: 'Mountain range',
   capacity: 1543,
-  dragons: ['flame dragon', 'night dragon'],
+  dragons: ['night dragon', 'flame dragon'],
   features: [
     {
       description: 'Glacier',
@@ -37,12 +37,40 @@ const MS11: IRegion = {
       impact: -100
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
     }
   ],
   feyInfluence: 0,

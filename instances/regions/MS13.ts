@@ -6,7 +6,7 @@ const MS13: IRegion = {
   area: 495282,
   biome: 'Mountain range',
   capacity: 8254,
-  dragons: ['flame dragon', 'night dragon'],
+  dragons: ['night dragon', 'flame dragon'],
   features: [
     {
       description: 'Glacier',
@@ -161,52 +161,204 @@ const MS13: IRegion = {
       impact: -100
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
     },
     {
-      description: 'Glacier',
-      impact: -100
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Supervolcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
+    },
+    {
+      description: 'Volcano',
+      impact: 0
     }
   ],
   feyInfluence: 0,
