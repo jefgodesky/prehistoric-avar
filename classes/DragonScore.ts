@@ -14,7 +14,7 @@ class DragonScore {
   }
 
   private mod (modifier: number): number {
-    this.value += modifier
+    this.value =  Math.max(this.value + modifier, 0)
     return this.value
   }
 }

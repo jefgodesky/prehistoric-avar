@@ -45,6 +45,12 @@ describe('DragonScore', () => {
         const score = new DragonScore(5)
         expect(score.decr()).toBe(4)
       })
+
+      it('will not decrement the value below zero', () => {
+        const score = new DragonScore()
+        expect(score.decr()).toBe(0)
+        expect(score.value).toBe(0)
+      })
     })
   })
 })
