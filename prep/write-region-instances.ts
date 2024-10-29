@@ -1,3 +1,4 @@
+import { intersect, sample } from '@std/collections'
 import { parse } from 'yaml'
 import type { IRegionData } from '../index.d.ts'
 import parseRegionId from './parse-region-id.ts'
@@ -51,7 +52,7 @@ for (const id in data) {
 
   // Add glaciers and volcanoes to mountains
   if (region.tags.includes('mountains')) {
-    const glaciers = Math.round(region.area / 10000)
+    const glaciers = Math.round(region.area / ((Math.random() * 10000) + 5000))
     for (let i = 0; i < glaciers; i++) {
       features.push({ description: 'Glacier', impact: -100 })
     }
@@ -59,7 +60,7 @@ for (const id in data) {
 
   // Add Grandmother Trees to boreal forests
   if (region.tags.includes('boreal')) {
-    const num = Math.round(region.area / 1000)
+    const num = Math.round(region.area / ((Math.random() * 15000) + 15000) )
     for (let i = 0; i < num; i++) {
       features.push({ description: 'Grandmother Tree', impact: Math.round((Math.random() * 250) + 250) })
     }
@@ -73,6 +74,61 @@ for (const id in data) {
       const description = id === surfaceRegionId ? isSuper ? 'Supervolcano' : 'Volcano' : 'Volcanic pipe'
       const impact = id === surfaceRegionId ? 0 : isSuper ? Math.round((Math.random() * 1000) + 1000) : Math.round((Math.random() * 250) + 250)
       features.push({ description, impact })
+    }
+  }
+
+  // Add underground lakes and seas to the World Below
+  if (region.tags.includes('world-below')) {
+    // Not if it has volcanic pipes or is adjacent to a region with them
+    const adjacentSurfaceRegions = [surfaceRegionId, ...region.adjacent.map(id => {
+      const info = parseRegionId(id)
+      return `${info[0]}S${info[2]}`
+    })]
+    if (intersect(adjacentSurfaceRegions, volcanic).length === 0) {
+      const numLakeCandidates = [8, 7, 7]
+      for (let i = 0; i < 3; i++) numLakeCandidates.push(6)
+      for (let i = 0; i < 5; i++) numLakeCandidates.push(5)
+      for (let i = 0; i < 8; i++) numLakeCandidates.push(4)
+      for (let i = 0; i < 13; i++) numLakeCandidates.push(3)
+      for (let i = 0; i < 21; i++) numLakeCandidates.push(2)
+      for (let i = 0; i < 34; i++) numLakeCandidates.push(1)
+      for (let i = 0; i < 55; i++) numLakeCandidates.push(0)
+      const numLakes = sample(numLakeCandidates) ?? 0
+      const lakes: number[] = []
+      const seaArea = Math.round((1 - (Math.random() * 0.2)) * region.area)
+      let makeSea = false
+      let totalArea = 0
+      for (let i = 0; i < numLakes; i++) {
+        const area = Math.round((Math.random() * 1500) + 1500)
+        totalArea += area
+        if (totalArea > seaArea) { makeSea = true; break}
+        lakes.push(area)
+      }
+
+      if (makeSea) {
+        features.push({ description: `Underground sea (${seaArea} sq. km)`, impact: seaArea * 100 })
+      } else {
+        for (const area of lakes) {
+          features.push({ description: `Underground lake (${area} sq. km)`, impact: area * 100 })
+        }
+      }
+
+      if (numLakes > 6) {
+        const initialArea = Math.round((Math.random() * 50000) + 50000)
+        const area = initialArea > region.area * 0.8
+          ? Math.round(region.area * ((Math.random() * 0.2) + 0.7))
+          : initialArea
+        features.push({ description: `Underground sea (${area} sq. km)`, impact: area * 100 })
+      } else {
+        let totalLakeArea = 0
+        for (let i = 0; i < numLakes; i++) {
+          const area = Math.round((Math.random() * 500) + 500)
+          totalLakeArea += area
+          if (totalLakeArea < region.area) {
+            features.push({ description: `Underground lake (${area} sq. km)`, impact: area * 100 })
+          }
+        }
+      }
     }
   }
 
