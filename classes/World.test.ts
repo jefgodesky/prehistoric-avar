@@ -20,12 +20,12 @@ describe('World', () => {
 
     it('defaults draconic interest to 0', () => {
       const world = new World(emitter)
-      expect(world.dragons.interest).toBe(0)
+      expect(world.dragons.interest.value).toBe(0)
     })
 
     it('defaults draconic fear to 0', () => {
       const world = new World(emitter)
-      expect(world.dragons.fear).toBe(0)
+      expect(world.dragons.fear.value).toBe(0)
     })
 
     it('defaults events to an empty list', () => {
@@ -47,52 +47,6 @@ describe('World', () => {
   })
 
   describe('Member methods', () => {
-    describe('incrDraconicInterest', () => {
-      it('increases the level of draconic interest by 1', () => {
-        const world = new World(emitter)
-        world.incrDraconicInterest()
-        expect(world.dragons.interest).toBe(1)
-      })
-    })
-
-    describe('decrDraconicInterest', () => {
-      it('decreases the level of draconic interest by 1', () => {
-        const world = new World(emitter)
-        world.dragons.interest = 5
-        world.decrDraconicInterest()
-        expect(world.dragons.interest).toBe(4)
-      })
-
-      it('will not decrease draconic interest below 0', () => {
-        const world = new World(emitter)
-        world.decrDraconicInterest()
-        expect(world.dragons.interest).toBe(0)
-      })
-    })
-
-    describe('incrDraconicFear', () => {
-      it('increases the level of draconic fear by 1', () => {
-        const world = new World(emitter)
-        world.incrDraconicFear()
-        expect(world.dragons.fear).toBe(1)
-      })
-    })
-
-    describe('decrDraconicFear', () => {
-      it('decreases the level of draconic fear by 1', () => {
-        const world = new World(emitter)
-        world.dragons.fear = 5
-        world.decrDraconicFear()
-        expect(world.dragons.fear).toBe(4)
-      })
-
-      it('will not decrease draconic fear below 0', () => {
-        const world = new World(emitter)
-        world.decrDraconicFear()
-        expect(world.dragons.fear).toBe(0)
-      })
-    })
-
     describe('reduceHabitability', () => {
       it('reduces habitability by a given percent', () => {
         const world = new World(emitter)
@@ -147,8 +101,8 @@ describe('World', () => {
         const world = new World(emitter)
         const obj = world.toObject()
         expect(obj.habitability).toEqual(world.habitability)
-        expect(obj.dragons.interest).toEqual(world.dragons.interest)
-        expect(obj.dragons.fear).toEqual(world.dragons.fear)
+        expect(obj.dragons.interest).toEqual(world.dragons.interest.value)
+        expect(obj.dragons.fear).toEqual(world.dragons.fear.value)
         expect(obj.events).toEqual(world.events)
         expect(Object.keys(obj.species)).toHaveLength(7)
         expect(Object.keys(obj.regions)).toHaveLength(188)
@@ -164,8 +118,8 @@ describe('World', () => {
       it('rounds habitability to the nearest percent', () => {
         const world = new World(emitter)
         world.habitability = 0.31415
-        world.dragons.interest = 5
-        world.dragons.fear = 4
+        world.dragons.interest.value = 5
+        world.dragons.fear.value = 4
         expect(world.toString()).toEqual('World: 31% [5/4]')
       })
     })
