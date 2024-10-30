@@ -10,6 +10,10 @@ class History {
     this.events = events ?? []
   }
 
+  add (event: IHistoricalRecord) {
+    this.events.push(event)
+  }
+
   get (filters?: IHistoricalQuery): IHistoricalRecord[] {
     if (!filters) return this.events
     const { millennium } = filters

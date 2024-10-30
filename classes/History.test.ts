@@ -25,6 +25,14 @@ describe('History', () => {
   })
 
   describe('Member methods', () => {
+    describe('add', () => {
+      it('adds an event', () => {
+        const history = new History(emitter)
+        history.add(event)
+        expect(history.events).toHaveLength(1)
+      })
+    })
+
     describe('get', () => {
       it('returns all events if not given any filters', () => {
         const history = new History(emitter, [event])
