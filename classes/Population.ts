@@ -70,12 +70,6 @@ class Population extends Markable {
   override toString (): string {
     return `Population: ${this.id}`
   }
-
-  static generateId (region: string, millennium: number, species: SpeciesName): string {
-    const step = millennium.toString().padStart(3, '0')
-    const sp = Species.getCode(species)
-    return `${region}-${step}${sp}`
-  }
 }
 
 export default Population

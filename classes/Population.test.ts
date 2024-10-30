@@ -136,13 +136,4 @@ describe('Population', () => {
       })
     })
   })
-
-  describe('Static methods', () => {
-    describe('generateId', () => {
-      it('generates an id', () => {
-        const id = Population.generateId('GS03', 1, SPECIES_NAMES.WOSAN)
-        expect(id).toBe('GS03-001WO')
-      })
-    })
-  })
 })
