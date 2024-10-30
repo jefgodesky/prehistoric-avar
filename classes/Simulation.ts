@@ -9,7 +9,7 @@ class Simulation {
   millennium: number
   stage: typeof SIMULATION_STAGES[keyof typeof SIMULATION_STAGES]
   world: World
-  private readonly emitter: Emitter
+  emitter: Emitter
 
   constructor () {
     this.emitter = new Emittery()
