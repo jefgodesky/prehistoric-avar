@@ -1,5 +1,5 @@
 import type { ISpeciesLanguagePreferences, ISpecies } from '../index.d.ts'
-import {Biome, SpeciesName} from '../enums.ts'
+import {Biome, SPECIES_NAMES, SpeciesName} from '../enums.ts'
 import Fitness from './Fitness.ts'
 
 class Species {
@@ -23,6 +23,10 @@ class Species {
 
   canSpeak (): boolean {
     return this.languagePreferences !== null
+  }
+
+  getCode (): string {
+    return Species.getCode(this.name ?? SPECIES_NAMES.WOSAN)
   }
 
   toObject (): ISpecies {

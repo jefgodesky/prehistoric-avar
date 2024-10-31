@@ -107,6 +107,13 @@ describe('Species', () => {
       })
     })
 
+    describe('getCode', () => {
+      it('returns the species code', () => {
+        const sp = new Species(HumanData)
+        expect(sp.getCode()).toBe('HU')
+      })
+    })
+
     describe('toObject', () => {
       it('returns an object', () => {
         const sp = new Species(HumanData)
