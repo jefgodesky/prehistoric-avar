@@ -18,6 +18,7 @@ class Population extends Markable {
   viability: number
   scribe: Scribe
   relationships: Relationship[]
+  extinct: boolean
   private fitness: Fitness
 
   constructor (emitter: Emitter, home: Region, data?: IPopulation) {
@@ -35,6 +36,7 @@ class Population extends Markable {
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
     this.relationships = relationships.map(rel => new Relationship(emitter, rel))
     this.markers = data?.markers ?? []
+    this.extinct = false
     this.fitness = Fitness.combine(this.species.fitness, this.tradition.fitness)
   }
 

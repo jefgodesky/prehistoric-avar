@@ -60,6 +60,11 @@ describe('Population', () => {
       expect(p.markers).toHaveLength(0)
     })
 
+    it('defaults not extinct', () => {
+      const p = new Population(emitter, home)
+      expect(p.extinct).toBe(false)
+    })
+
     it('can set an ID', () => {
       const p = new Population(emitter, home, SamplePopulation)
       expect(p.id).toBe(SamplePopulation.id)
