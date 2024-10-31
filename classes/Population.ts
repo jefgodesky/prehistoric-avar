@@ -1,5 +1,5 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
-import {Biome, SPECIES_NAMES, SpeciesName} from '../enums.ts'
+import { Biome, SPECIES_NAMES } from '../enums.ts'
 import type { Emitter, IPopulation } from '../index.d.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
@@ -11,6 +11,7 @@ import Tradition from './Tradition.ts'
 import species from '../instances/species/index.ts'
 
 class Population extends Markable {
+  home: Region
   species: Species
   tradition: Tradition
   size: number
@@ -19,12 +20,13 @@ class Population extends Markable {
   relationships: Relationship[]
   private fitness: Fitness
 
-  constructor (emitter: Emitter, data?: IPopulation) {
+  constructor (emitter: Emitter, home: Region, data?: IPopulation) {
     super(emitter, data)
 
     const sp = data?.species ?? SPECIES_NAMES.WOSAN
     const relationships = data?.relationships ?? []
 
+    this.home = home
     this.id = data?.id ?? 'GS03-001WO'
     this.species = species[sp.toLowerCase()]
     this.tradition = new Tradition(emitter, data?.tradition ?? undefined)

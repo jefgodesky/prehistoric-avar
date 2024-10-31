@@ -3,9 +3,11 @@ import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES } from '../enums.ts'
 import { IQuest } from '../index.d.ts'
-import Population from './Population.ts'
-import Quest, { QUEST_EVENTS } from './Quest.ts'
+import { GS02 } from '../instances/regions/index.ts'
 import { SampleQuest, SamplePopulation } from '../test-examples.ts'
+import Population from './Population.ts'
+import Region from './Region.ts'
+import Quest, { QUEST_EVENTS } from './Quest.ts'
 
 describe('Quest', () => {
   const emitter = new Emittery()
@@ -88,8 +90,9 @@ describe('Quest', () => {
     })
 
     describe('run', () => {
+      const region = new Region(emitter, GS02)
       const quest = new Quest(emitter, SampleQuest)
-      const p = new Population(emitter, SamplePopulation)
+      const p = new Population(emitter, region, SamplePopulation)
       const biome = BIOMES.TEMPERATE_GRASSLAND
 
       it('runs the quest', async () => {

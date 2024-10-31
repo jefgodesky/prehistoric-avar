@@ -42,7 +42,7 @@ class Region extends Markable implements IHabitable {
     this.immortals = immortals.map(immortal => new Immortal(emitter, immortal))
     this.languages = languages.map(lang => new Language(lang))
     this.ogrism = data?.ogrism ?? 0
-    this.populations = populations.map(pop => new Population(emitter, pop))
+    this.populations = populations.map(pop => new Population(emitter, this, pop))
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species

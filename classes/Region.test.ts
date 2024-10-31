@@ -201,7 +201,7 @@ describe('Region', () => {
 
       it('returns true if the region has 1 or more populations', () => {
         const region = new Region(emitter, GS02)
-        region.populations.push(new Population(emitter, SamplePopulation))
+        region.populations.push(new Population(emitter, region, SamplePopulation))
         expect(region.isPopulated()).toBe(true)
       })
     })
@@ -215,13 +215,13 @@ describe('Region', () => {
       it('returns false if the region has a Wosan population', () => {
         const region = new Region(emitter, GS02)
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        region.populations.push(new Population(emitter, wosan))
+        region.populations.push(new Population(emitter, region, wosan))
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
       it('returns true if the region has a population that is not Wosan', () => {
         const region = new Region(emitter, GS02)
-        region.populations.push(new Population(emitter, SamplePopulation))
+        region.populations.push(new Population(emitter, region, SamplePopulation))
         expect(region.hasPopulationCapableOfSpeech()).toBe(true)
       })
     })
@@ -236,20 +236,20 @@ describe('Region', () => {
         const region = new Region(emitter, GS02)
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
         region.languages.push(new Language())
-        region.populations.push(new Population(emitter, wosan))
+        region.populations.push(new Population(emitter, region, wosan))
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
       it('returns false if the region is populated but has no language', () => {
         const region = new Region(emitter, GS02)
-        region.populations.push(new Population(emitter, SamplePopulation))
+        region.populations.push(new Population(emitter, region, SamplePopulation))
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
       it('returns true if the region has a language and people to speak it', () => {
         const region = new Region(emitter, GS02)
         region.languages.push(new Language())
-        region.populations.push(new Population(emitter, SamplePopulation))
+        region.populations.push(new Population(emitter, region, SamplePopulation))
         expect(region.hasSpeechCommunity()).toBe(true)
       })
     })
