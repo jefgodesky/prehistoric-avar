@@ -11,7 +11,7 @@ const MARKABLE_EVENTS = {
 class Markable {
   id: string
   markers: string[]
-  private emitter: Emitter
+  protected emitter: Emitter
 
   // deno-lint-ignore no-explicit-any
   constructor (emitter: Emitter, data?: Record<PropertyKey, any>) {

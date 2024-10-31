@@ -122,6 +122,31 @@ describe('Population', () => {
       })
     })
 
+    describe('split', () => {
+      it('splits off a new population of the specified size', () => {
+        const size = 5000
+        const p = new Population(emitter, home, SamplePopulation)
+        const before = p.size
+        const n = p.split(size)
+        expect(n).toBeInstanceOf(Population)
+        expect(n.home).toBe(p.home)
+        expect(n.tradition.toString()).toBe(p.tradition.toString())
+        expect(n.size).toBe(size)
+        expect(p.size).toBe(before - size)
+      })
+
+      it('splits off 40%-60% if size is not specified', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const n = p.split()
+        const sizes = [p.size, n.size]
+        const total = p.size + n.size
+        for (const size of sizes) {
+          expect(size / total).toBeGreaterThanOrEqual(0.4)
+          expect(size / total).toBeLessThanOrEqual(0.6)
+        }
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SamplePopulation)

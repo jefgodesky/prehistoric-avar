@@ -56,6 +56,13 @@ class Population extends Markable {
     }
   }
 
+  split (num?: number): Population {
+    const n = num ?? ((Math.random() * 0.2) + 0.4) * this.size
+    this.size -= n
+    const data = Object.assign({}, this.toObject(), { size: n })
+    return new Population(this.emitter, this.home, data)
+  }
+
   toObject (): IPopulation {
     return {
       id: this.id,
