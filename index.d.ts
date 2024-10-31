@@ -66,6 +66,7 @@ interface IPopulation {
   species: SpeciesName
   tradition: ITradition
   size: number
+  extinct?: boolean
   viability: number
   relationships: IRelationship[]
   scrolls: IScroll[]

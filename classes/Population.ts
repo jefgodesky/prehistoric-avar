@@ -36,12 +36,23 @@ class Population extends Markable {
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
     this.relationships = relationships.map(rel => new Relationship(emitter, rel))
     this.markers = data?.markers ?? []
-    this.extinct = false
+    this.extinct = data?.extinct ?? false
     this.fitness = Fitness.combine(this.species.fitness, this.tradition.fitness)
   }
 
   getFitness (biome: Biome): number {
     return this.fitness.get(biome)
+  }
+
+  adjustSize (delta: number): void {
+    if (this.extinct) return
+    if (delta > 1 || delta < -1) {
+      this.size += Math.floor(delta)
+    } else {
+      this.size *= 1 + delta
+    }
+    this.size = Math.max(Math.round(this.size), 0)
+    if (this.size === 0) this.extinct = true
   }
 
   adjustViability (): void {
@@ -74,7 +85,8 @@ class Population extends Markable {
       size: this.size,
       viability: this.viability,
       relationships: this.relationships.map(rel => rel.toObject()),
-      scrolls: this.scribe.toObject()
+      scrolls: this.scribe.toObject(),
+      extinct: this.extinct
     }
   }
 

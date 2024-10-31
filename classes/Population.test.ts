@@ -107,6 +107,12 @@ describe('Population', () => {
       const p = new Population(emitter, home, SamplePopulation)
       expect(p.scribe.scrolls).toHaveLength(SamplePopulation.scrolls.length)
     })
+
+    it('can set extinction data', () => {
+      const data = Object.assign({}, SamplePopulation, { size: 0, extinct: true })
+      const p = new Population(emitter, home, data)
+      expect(p.extinct).toBe(true)
+    })
   })
 
   describe('Member methods', () => {
@@ -124,6 +130,52 @@ describe('Population', () => {
         p.adjustViability()
         expect(p.viability).toBeGreaterThanOrEqual(0)
         expect(p.viability).toBeLessThanOrEqual(1)
+      })
+    })
+
+    describe('adjustSize', () => {
+      it('adds if given a positive number > 1', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const before = p.size
+        p.adjustSize(32.7)
+        expect(p.size).toBe(before + 32)
+      })
+
+      it('subtracts if given a negative number < -1', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const before = p.size
+        p.adjustSize(-32.7)
+        expect(p.size).toBe(before - 33)
+      })
+
+      it('increases by percent if given a positive number <= 1', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const before = p.size
+        p.adjustSize(0.1)
+        expect(p.size).toBe(Math.round(before * 1.1))
+      })
+
+      it('decreases by percent if given a negative number >= -1', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const before = p.size
+        p.adjustSize(-0.1)
+        expect(p.size).toBe(Math.round(before * 0.9))
+      })
+
+      it('marks extinct if driven below zero', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        p.adjustSize(p.size * -2)
+        expect(p.size).toBe(0)
+        expect(p.extinct).toBe(true)
+      })
+
+      it('cannot revive an extinct population', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        p.extinct = true
+        p.size = 0
+        p.adjustSize(100000)
+        expect(p.size).toBe(0)
+        expect(p.extinct).toBe(true)
       })
     })
 
@@ -154,8 +206,18 @@ describe('Population', () => {
 
     describe('toObject', () => {
       it('exports an object', () => {
-        const cpy = Object.assign({}, SamplePopulation)
+        const cpy = Object.assign({}, SamplePopulation, { extinct: false })
         const p = new Population(emitter, home, SamplePopulation)
+        cpy.scrolls = p.scribe.toObject()
+        cpy.tradition.scrolls = p.tradition.scribe.toObject()
+        expect(JSON.stringify(p.toObject())).toBe(JSON.stringify(cpy))
+      })
+
+      it('reports on extinction', () => {
+        const cpy = Object.assign({}, SamplePopulation, { size: 0, extinct: true })
+        const p = new Population(emitter, home, SamplePopulation)
+        p.size = 0;
+        p.extinct = true
         cpy.scrolls = p.scribe.toObject()
         cpy.tradition.scrolls = p.tradition.scribe.toObject()
         expect(JSON.stringify(p.toObject())).toBe(JSON.stringify(cpy))
