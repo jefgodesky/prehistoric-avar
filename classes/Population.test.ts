@@ -131,6 +131,14 @@ describe('Population', () => {
         expect(p.viability).toBeGreaterThanOrEqual(0)
         expect(p.viability).toBeLessThanOrEqual(1)
       })
+
+      it('does nothing if the population is extinct', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        p.viability = 0.6
+        p.adjustSize(p.size * -2)
+        p.adjustViability()
+        expect(p.viability).toBe(0.6)
+      })
     })
 
     describe('adjustSize', () => {

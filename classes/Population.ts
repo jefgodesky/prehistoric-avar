@@ -56,6 +56,7 @@ class Population extends Markable {
   }
 
   adjustViability (): void {
+    if (this.extinct) return
     const generations = this.species.generation ?? 1
     for (let g = 0; g < generations; g++) { // High generations change more per tick
       const flip = Math.random() // High viability recovers; low can become death spiral
