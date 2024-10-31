@@ -199,7 +199,15 @@ describe('Region', () => {
         expect(region.isPopulated()).toBe(false)
       })
 
-      it('returns true if the region has 1 or more populations', () => {
+      it('returns false if all populations in the region are extinct', () => {
+        const region = new Region(emitter, GS02)
+        const p = new Population(emitter, region, SamplePopulation)
+        region.populations.push(p)
+        p.adjustSize(p.size * -2)
+        expect(region.isPopulated()).toBe(false)
+      })
+
+      it('returns true if the region has 1 or more extant populations', () => {
         const region = new Region(emitter, GS02)
         region.populations.push(new Population(emitter, region, SamplePopulation))
         expect(region.isPopulated()).toBe(true)
@@ -216,6 +224,14 @@ describe('Region', () => {
         const region = new Region(emitter, GS02)
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
         region.populations.push(new Population(emitter, region, wosan))
+        expect(region.hasPopulationCapableOfSpeech()).toBe(false)
+      })
+
+      it('returns false if the speaking population is extinct', () => {
+        const region = new Region(emitter, GS02)
+        const p = new Population(emitter, region, SamplePopulation)
+        region.populations.push(p)
+        p.adjustSize(p.size * -2)
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
@@ -243,6 +259,15 @@ describe('Region', () => {
       it('returns false if the region is populated but has no language', () => {
         const region = new Region(emitter, GS02)
         region.populations.push(new Population(emitter, region, SamplePopulation))
+        expect(region.hasSpeechCommunity()).toBe(false)
+      })
+
+      it('returns false if the speakers are extinct', () => {
+        const region = new Region(emitter, GS02)
+        const p = new Population(emitter, region, SamplePopulation)
+        region.languages.push(new Language())
+        region.populations.push(p)
+        p.adjustSize(p.size * -2)
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 

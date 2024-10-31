@@ -58,19 +58,19 @@ class Region extends Markable implements IHabitable {
   }
 
   isPopulated (): boolean {
-    return this.populations.length > 0
+    return this.populations.filter(p => !p.extinct).length > 0
   }
 
   hasPopulationCapableOfSpeech (): boolean {
-    const notWosan = this.populations.filter(p => p.species.name !== SPECIES_NAMES.WOSAN)
-    return notWosan.length > 0
+    const areSpeakers = (p: Population): boolean => !p.extinct && p.species.name !== SPECIES_NAMES.WOSAN
+    return this.populations.filter(areSpeakers).length > 0
   }
 
   hasSpeechCommunity (): boolean {
     const { languages, populations } = this
     if (languages.length < 1) return false
     return populations
-      .map(p => p.species.canSpeak())
+      .map(p => !p.extinct && p.species.canSpeak())
       .reduce((acc, curr) => acc && curr, true)
   }
 
