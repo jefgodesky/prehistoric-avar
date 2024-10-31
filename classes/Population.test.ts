@@ -194,21 +194,35 @@ describe('Population', () => {
         const before = p.size
         const n = p.split(size)
         expect(n).toBeInstanceOf(Population)
-        expect(n.home).toBe(p.home)
-        expect(n.tradition.toString()).toBe(p.tradition.toString())
-        expect(n.size).toBe(size)
+        expect(n?.home).toBe(p.home)
+        expect(n?.tradition.toString()).toBe(p.tradition.toString())
+        expect(n?.size).toBe(size)
         expect(p.size).toBe(before - size)
       })
 
       it('splits off 40%-60% if size is not specified', () => {
         const p = new Population(emitter, home, SamplePopulation)
         const n = p.split()
-        const sizes = [p.size, n.size]
-        const total = p.size + n.size
+        const sizes = [p.size, n?.size ?? 0]
+        const total = p.size + (n?.size ?? 0)
         for (const size of sizes) {
           expect(size / total).toBeGreaterThanOrEqual(0.4)
           expect(size / total).toBeLessThanOrEqual(0.6)
         }
+      })
+
+      it('returns null if population is extinct', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        p.adjustSize(p.size * -2)
+        const n = p.split()
+        expect(n).toBeNull()
+      })
+
+      it('returns null if the population is down to just one person', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        p.adjustSize((p.size - 1) * -1)
+        const n = p.split()
+        expect(n).toBeNull()
       })
     })
 

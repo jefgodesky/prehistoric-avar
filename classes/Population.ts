@@ -70,7 +70,8 @@ class Population extends Markable {
     }
   }
 
-  split (num?: number): Population {
+  split (num?: number): Population | null {
+    if (this.extinct || this.size < 2) return null
     const n = num ?? ((Math.random() * 0.2) + 0.4) * this.size
     this.size -= n
     const data = Object.assign({}, this.toObject(), { size: n })
