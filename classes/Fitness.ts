@@ -50,10 +50,10 @@ class Fitness {
     return Math.max(Math.min(Math.round(value), max), min)
   }
 
-  static combine (a: Fitness, b: Fitness): Fitness {
+  static combine (...instances: Fitness[]): Fitness {
     const data = {} as IFitness
     for (const biome of Object.values(BIOMES)) {
-      data[biome] = (a.biomes[biome] ?? 0) + (b.biomes[biome] ?? 0)
+      data[biome] = instances.reduce((acc, curr) => acc + curr.biomes[biome], 0)
     }
     return new Fitness(data)
   }

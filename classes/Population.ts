@@ -7,13 +7,11 @@ import Relationship from './Relationship.ts'
 import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
 import Species from './Species.ts'
-import Tradition from './Tradition.ts'
 import species from '../instances/species/index.ts'
 
 class Population extends Markable {
   home: Region
   species: Species
-  tradition: Tradition
   size: number
   viability: number
   scribe: Scribe
@@ -30,14 +28,15 @@ class Population extends Markable {
     this.home = home
     this.id = data?.id ?? 'GS03-001WO'
     this.species = species[sp.toLowerCase()]
-    this.tradition = new Tradition(emitter, data?.tradition ?? undefined)
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
     this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
     this.relationships = relationships.map(rel => new Relationship(emitter, rel))
     this.markers = data?.markers ?? []
     this.extinct = data?.extinct ?? false
-    this.fitness = Fitness.combine(this.species.fitness, this.tradition.fitness)
+    this.fitness = this.home.society?.fitness
+      ? Fitness.combine(this.species.fitness, this.home.society.fitness)
+      : this.species.fitness
   }
 
   getFitness (biome: Biome): number {
@@ -82,7 +81,6 @@ class Population extends Markable {
     return {
       id: this.id,
       species: this.species.name as string,
-      tradition: this.tradition.toObject(),
       markers: this.markers,
       size: this.size,
       viability: this.viability,

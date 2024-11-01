@@ -12,37 +12,12 @@ import {
   IQuest,
   IRelationship,
   ISociety,
-  ISpecies,
-  ITradition
+  ISpecies
 } from './index.d.ts'
 
 const SamplePopulation: IPopulation = {
   id: 'GS02-123HU',
   species: SPECIES_NAMES.HUMAN,
-  tradition: {
-    fitness: {
-      [BIOMES.BOREAL_FOREST]: 0,
-      [BIOMES.TEMPERATE_FOREST]: 0,
-      [BIOMES.TROPICAL_FOREST]: 0,
-      [BIOMES.DESERT]: 0,
-      [BIOMES.SAVANNA]: 1,
-      [BIOMES.TEMPERATE_GRASSLAND]: 1,
-      [BIOMES.MOUNTAINS]: 0,
-      [BIOMES.POLAR]: 0,
-      [BIOMES.CAVES]: 0,
-      [BIOMES.WORLD_BELOW]: 0
-    },
-    scrolls: [
-      {
-        text: 'We adapt to temperate grasslands',
-        seals: 2
-      },
-      {
-        text: 'We forget the ways of the savanna',
-        seals: 3
-      }
-    ]
-  },
   markers: ['Example marker'],
   size: 54321,
   viability: 0.9,
@@ -165,31 +140,6 @@ const SampleSociety: ISociety = {
   ]
 }
 
-const SampleTradition: ITradition = {
-  fitness: {
-    [BIOMES.BOREAL_FOREST]: 1,
-    [BIOMES.TEMPERATE_FOREST]: 0,
-    [BIOMES.TROPICAL_FOREST]: 0,
-    [BIOMES.DESERT]: 0,
-    [BIOMES.SAVANNA]: 0,
-    [BIOMES.TEMPERATE_GRASSLAND]: 0,
-    [BIOMES.MOUNTAINS]: 0,
-    [BIOMES.POLAR]: 0,
-    [BIOMES.CAVES]: 0,
-    [BIOMES.WORLD_BELOW]: 0
-  },
-  scrolls: [
-    {
-      text: `We better adapt to ${BIOMES.BOREAL_FOREST}`,
-      seals: 2
-    },
-    {
-      text: 'We remember the heroes who slew the ogre bear',
-      seals: 150
-    }
-  ]
-}
-
 const SampleQuest: IQuest = {
   id: 'slay-dragon-queen',
   description: 'Slay the Dragon Queen',
@@ -225,7 +175,6 @@ export {
   SampleQuest,
   SampleRelationship,
   SampleSociety,
-  SampleTradition,
   ElfData,
   HumanData,
   WosanData

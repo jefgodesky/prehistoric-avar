@@ -3,7 +3,7 @@ import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import type { IQuestReport } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
-import { DragonQueen, SamplePopulation } from '../test-examples.ts'
+import { DragonQueen, SamplePopulation, SampleSociety } from '../test-examples.ts'
 import { SPECIES_NAMES } from '../enums.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 import Immortal from './Immortal.ts'
@@ -86,6 +86,11 @@ describe('Region', () => {
       expect(region.populations).toHaveLength(0)
     })
 
+    it('defaults to null for society', () => {
+      const region = new Region(emitter)
+      expect(region.society).toBeNull()
+    })
+
     it('defaults markers to an empty array', () => {
       const region = new Region(emitter)
       expect(region.populations).toHaveLength(0)
@@ -165,6 +170,12 @@ describe('Region', () => {
     it('can take populations', () => {
       const region = new Region(emitter, GS02)
       expect(region.populations).toHaveLength(GS02.populations.length)
+    })
+
+    it('can take a society', () => {
+      const data = Object.assign({}, GS02, { society: SampleSociety })
+      const region = new Region(emitter, data)
+      expect(region.society?.language).not.toBeNull()
     })
 
     it('can take a species', () => {

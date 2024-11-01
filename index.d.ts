@@ -64,7 +64,6 @@ interface ILanguage {
 interface IPopulation {
   id: string
   species: SpeciesName
-  tradition: ITradition
   size: number
   extinct?: boolean
   viability: number
@@ -114,6 +113,7 @@ interface IRegion {
   markers: string[]
   ogrism: number
   populations: IPopulation[]
+  society?: ISociety
   species?: SpeciesName
   tags: string[]
 }
@@ -164,11 +164,6 @@ interface ISpecies {
   appeared?: number
 }
 
-interface ITradition {
-  fitness: IFitness
-  scrolls: IScroll[]
-}
-
 interface IWorld {
   habitability: number
   dragons: {
@@ -204,6 +199,5 @@ export type {
   ISociety,
   ISpecies,
   ISpeciesLanguagePreferences,
-  ITradition,
   IWorld
 }

@@ -129,13 +129,17 @@ describe('Fitness', () => {
 
   describe('Static methods', () => {
     describe('combine', () => {
-      it('combines two fitness instances', () => {
-        const a = new Fitness({ [BIOMES.BOREAL_FOREST]: 1 } as IFitness)
-        const b = new Fitness({ [BIOMES.BOREAL_FOREST]: 2 } as IFitness)
-        const c = Fitness.combine(a, b)
-        const expected = a.biomes[BIOMES.BOREAL_FOREST] + b.biomes[BIOMES.BOREAL_FOREST]
-        expect(c).toBeInstanceOf(Fitness)
-        expect(c.biomes[BIOMES.BOREAL_FOREST]).toBe(expected)
+      const biome = BIOMES.BOREAL_FOREST
+
+      it('combines two or more fitness instances', () => {
+        const instances = [
+          new Fitness({ [biome]: 1 } as IFitness),
+          new Fitness({ [biome]: 1 } as IFitness),
+          new Fitness({ [biome]: 1 } as IFitness)
+        ]
+        const actual = Fitness.combine(...instances)
+        expect(actual).toBeInstanceOf(Fitness)
+        expect(actual.biomes[biome]).toBe(instances.length)
       })
     })
   })

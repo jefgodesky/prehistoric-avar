@@ -6,6 +6,7 @@ import Language from './Language.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import {QUEST_EVENTS} from './Quest.ts'
+import Society from './Society.ts'
 
 class Region extends Markable implements IHabitable {
   adjacentRegions: string[]
@@ -20,6 +21,7 @@ class Region extends Markable implements IHabitable {
   languages: Language[]
   ogrism: number
   populations: Population[]
+  society: Society | null
   species?: SpeciesName
   tags: string[]
 
@@ -43,6 +45,7 @@ class Region extends Markable implements IHabitable {
     this.languages = languages.map(lang => new Language(lang))
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(emitter, this, pop))
+    this.society = data?.society ? new Society(emitter, data.society) : null
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species

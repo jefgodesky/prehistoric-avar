@@ -3,13 +3,15 @@ import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES, SPECIES_NAMES } from '../enums.ts'
 import { GS02 } from '../instances/regions/index.ts'
-import { SamplePopulation } from '../test-examples.ts'
+import { SamplePopulation, SampleSociety } from '../test-examples.ts'
 import Region from './Region.ts'
+import Society from './Society.ts'
 import Population from './Population.ts'
 
 describe('Population', () => {
   const emitter = new Emittery()
   const home = new Region(emitter, GS02)
+  home.society = new Society(emitter, SampleSociety)
 
   describe('constructor', () => {
     it('creates a Population instance', () => {
@@ -25,14 +27,6 @@ describe('Population', () => {
     it('defaults the species to Wosan', () => {
       const p = new Population(emitter, home)
       expect(p.species.name).toBe(SPECIES_NAMES.WOSAN)
-    })
-
-    it('defaults to a new tradition', () => {
-      const p = new Population(emitter, home)
-      expect(p.tradition.scribe.scrolls).toHaveLength(0)
-      for (const biome of Object.values(BIOMES)) {
-        expect(p.tradition.fitness.biomes[biome]).toBe(0)
-      }
     })
 
     it('defaults to a size of 1', () => {
@@ -75,14 +69,6 @@ describe('Population', () => {
       expect(p.species.name).toBe(SamplePopulation.species)
     })
 
-    it('can set tradition', () => {
-      const p = new Population(emitter, home, SamplePopulation)
-      expect(p.tradition.scribe.scrolls).toHaveLength(SamplePopulation.tradition.scrolls.length)
-      for (const biome of Object.values(BIOMES)) {
-        expect(p.tradition.fitness.biomes[biome]).toBe(SamplePopulation.tradition.fitness[biome])
-      }
-    })
-
     it('can set size', () => {
       const p = new Population(emitter, home, SamplePopulation)
       expect(p.size).toBe(SamplePopulation.size)
@@ -119,7 +105,8 @@ describe('Population', () => {
     describe('getFitness', () => {
       it('returns the population fitness for a given biome', () => {
         const p = new Population(emitter, home, SamplePopulation)
-        expect(p.getFitness(BIOMES.SAVANNA)).toBe(3)
+        const actual = [BIOMES.SAVANNA, BIOMES.BOREAL_FOREST].map(biome => p.getFitness(biome))
+        expect(actual).toEqual([2, 1])
       })
     })
 
@@ -195,7 +182,6 @@ describe('Population', () => {
         const n = p.split(size)
         expect(n).toBeInstanceOf(Population)
         expect(n?.home).toBe(p.home)
-        expect(n?.tradition.toString()).toBe(p.tradition.toString())
         expect(n?.size).toBe(size)
         expect(p.size).toBe(before - size)
       })
@@ -231,7 +217,6 @@ describe('Population', () => {
         const cpy = Object.assign({}, SamplePopulation, { extinct: false })
         const p = new Population(emitter, home, SamplePopulation)
         cpy.scrolls = p.scribe.toObject()
-        cpy.tradition.scrolls = p.tradition.scribe.toObject()
         expect(JSON.stringify(p.toObject())).toBe(JSON.stringify(cpy))
       })
 
@@ -241,7 +226,6 @@ describe('Population', () => {
         p.size = 0;
         p.extinct = true
         cpy.scrolls = p.scribe.toObject()
-        cpy.tradition.scrolls = p.tradition.scribe.toObject()
         expect(JSON.stringify(p.toObject())).toBe(JSON.stringify(cpy))
       })
     })
