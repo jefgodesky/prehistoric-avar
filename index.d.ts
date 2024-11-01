@@ -142,6 +142,14 @@ interface IScroll {
   seals: number
 }
 
+interface ISociety {
+  id?: string
+  fitness: IFitness
+  language?: ILanguage
+  markers?: string[]
+  scrolls: IScroll[]
+}
+
 interface ISpeciesLanguagePreferences {
   order?: LangOrder[]
   typology?: LangMorphology[]
@@ -193,6 +201,7 @@ export type {
   IRegionFeature,
   IRegionData,
   IScroll,
+  ISociety,
   ISpecies,
   ISpeciesLanguagePreferences,
   ITradition,

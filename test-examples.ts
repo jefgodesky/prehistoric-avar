@@ -11,6 +11,7 @@ import {
   IPopulation,
   IQuest,
   IRelationship,
+  ISociety,
   ISpecies,
   ITradition
 } from './index.d.ts'
@@ -135,6 +136,35 @@ const HumanData: ISpecies = {
   languagePreferences: {}
 }
 
+const SampleSociety: ISociety = {
+  fitness: {
+    [BIOMES.BOREAL_FOREST]: 1,
+    [BIOMES.TEMPERATE_FOREST]: 0,
+    [BIOMES.TROPICAL_FOREST]: 0,
+    [BIOMES.DESERT]: 0,
+    [BIOMES.SAVANNA]: 0,
+    [BIOMES.TEMPERATE_GRASSLAND]: 0,
+    [BIOMES.MOUNTAINS]: 0,
+    [BIOMES.POLAR]: 0,
+    [BIOMES.CAVES]: 0,
+    [BIOMES.WORLD_BELOW]: 0
+  },
+  language: {
+    order: LANG_ORDER.SOV,
+    morphology: LANG_MORPHOLOGY.ANALYTIC
+  },
+  scrolls: [
+    {
+      text: `We better adapt to ${BIOMES.BOREAL_FOREST}`,
+      seals: 2
+    },
+    {
+      text: 'We remember the heroes who slew the ogre bear',
+      seals: 150
+    }
+  ]
+}
+
 const SampleTradition: ITradition = {
   fitness: {
     [BIOMES.BOREAL_FOREST]: 1,
@@ -194,6 +224,7 @@ export {
   SamplePopulation,
   SampleQuest,
   SampleRelationship,
+  SampleSociety,
   SampleTradition,
   ElfData,
   HumanData,
