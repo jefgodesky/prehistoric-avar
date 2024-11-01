@@ -237,6 +237,17 @@ describe('Region', () => {
         dest.introduce(p)
         expect(p.home).toBe(dest)
       })
+
+      it('has existing populations absorb new ones of the same species', () => {
+        const src = new Region(emitter, DS01)
+        const dest = new Region(emitter, GS02)
+        const p1 = new Population(emitter, src, SamplePopulation)
+        const p2 = new Population(emitter, src, SamplePopulation)
+        dest.introduce(p1)
+        dest.introduce(p2)
+        expect(dest.populations).toHaveLength(1)
+        expect(dest.populations[0].size).toBe(SamplePopulation.size * 2)
+      })
     })
 
     describe('isPopulated', () => {
