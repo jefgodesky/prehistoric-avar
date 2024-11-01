@@ -57,6 +57,16 @@ class Region extends Markable implements IHabitable {
     return (this.capacity * this.habitability * worldHabitability) + featureImpact
   }
 
+  introduce (...populations: Population[]): void {
+    const sameSpecies = (n: Population, p: Population): boolean => n.species.name === p.species.name
+    for (const p of populations) {
+      this.populations.push(p)
+      const count = this.populations.filter(n => sameSpecies(n, p)).length
+      p.id = `${this.id}-${p.species.getCode()}${count.toString().padStart(3, '0')}`
+      p.home = this
+    }
+  }
+
   isPopulated (): boolean {
     return this.populations.filter(p => !p.extinct).length > 0
   }

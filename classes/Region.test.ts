@@ -193,6 +193,41 @@ describe('Region', () => {
       })
     })
 
+    describe('introduce', () => {
+      it('adds a new population', () => {
+        const region = new Region(emitter, GS02)
+        const p = new Population(emitter, region, SamplePopulation)
+        region.introduce(p)
+        expect(region.populations).toHaveLength(1)
+      })
+
+      it('gives the population an ID', () => {
+        const region = new Region(emitter, GS02)
+        const p = new Population(emitter, region, SamplePopulation)
+        region.introduce(p)
+        expect(p.id).toBe('GS02-HU001')
+      })
+
+      it('gives each population a unique ID', () => {
+        const region = new Region(emitter, GS02)
+        const p1 = new Population(emitter, region, SamplePopulation)
+        const p2 = new Population(emitter, region, SamplePopulation)
+        region.introduce(p1)
+        p1.adjustSize(p1.size * -2)
+        region.introduce(p2)
+        expect(p1.id).toBe('GS02-HU001')
+        expect(p2.id).toBe('GS02-HU002')
+      })
+
+      it('sets the population\'s new home', () => {
+        const src = new Region(emitter, DS01)
+        const dest = new Region(emitter, GS02)
+        const p = new Population(emitter, src, SamplePopulation)
+        dest.introduce(p)
+        expect(p.home).toBe(dest)
+      })
+    })
+
     describe('isPopulated', () => {
       it('returns false if the region has no population', () => {
         const region = new Region(emitter, DS01)
