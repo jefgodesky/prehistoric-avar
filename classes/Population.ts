@@ -69,6 +69,13 @@ class Population extends Markable {
     }
   }
 
+  absorb (other: Population): boolean {
+    if (this.species.name !== other.species.name) return false
+    this.viability = ((this.viability * this.size) + (other.viability * other.size)) / (this.size + other.size)
+    this.adjustSize(other.size)
+    return true
+  }
+
   split (num?: number): Population | null {
     if (this.extinct || this.size < 2) return null
     const n = num ?? ((Math.random() * 0.2) + 0.4) * this.size

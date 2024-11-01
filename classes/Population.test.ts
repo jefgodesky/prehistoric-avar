@@ -212,6 +212,24 @@ describe('Population', () => {
       })
     })
 
+    describe('absorb', () => {
+      it('absorbs a second population of the same species', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const n = new Population(emitter, home, SamplePopulation)
+        n.viability = 0.8
+        expect(p.absorb(n)).toBe(true)
+        expect(p.size).toBe(SamplePopulation.size * 2)
+        expect(p.viability).toBeCloseTo(0.85)
+      })
+
+      it('returns false if you try to absorb a population of another species', () => {
+        const other = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.HALFLING })
+        const p = new Population(emitter, home, SamplePopulation)
+        const n = new Population(emitter, home, other)
+        expect(p.absorb(n)).toBe(false)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SamplePopulation, { extinct: false })
