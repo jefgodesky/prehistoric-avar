@@ -86,3 +86,13 @@ export type LangOrder = typeof LANG_ORDER[keyof typeof LANG_ORDER]
 export type Layer = typeof LAYER[keyof typeof LAYER]
 export type SpeciesName = typeof SPECIES_NAMES[keyof typeof SPECIES_NAMES]
 export type UniqueGlobalEvent = typeof EVENTS_GLOBAL_UNIQUE[keyof typeof EVENTS_GLOBAL_UNIQUE]
+
+export const SpeciesPlurals: Record<SpeciesName, string> = {
+  [SPECIES_NAMES.WOSAN]: 'Wosan',
+  [SPECIES_NAMES.DWARF]: 'Dwarves',
+  [SPECIES_NAMES.ELF]: 'Elves',
+  [SPECIES_NAMES.GNOME]: 'Gnomes',
+  [SPECIES_NAMES.HALFLING]: 'Halflings',
+  [SPECIES_NAMES.HUMAN]: 'Humans',
+  [SPECIES_NAMES.ORC]: 'Orcs'
+}

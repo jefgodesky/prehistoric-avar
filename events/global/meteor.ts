@@ -1,4 +1,5 @@
 import { sample } from '@std/collections'
+import { SpeciesPlurals } from '../../enums.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 import getChances from '../get-chances.ts'
@@ -487,11 +488,72 @@ const recordDeathMeteor = async (sim: Simulation, region?: Region | null): Promi
   if (site === null) return
 
   await site.addMarker('Meteor impact site: Struck by a meteor from Shol ' +
-    `Sin  millennium ${sim.millennium}. It was ${massHu},  resulting in the ` +
+    `in  millennium ${sim.millennium}. It was ${massHu},  resulting in the ` +
     'immediate death of everyone in the region and a 50% reduction in ' +
     'global habitability.')
   await site.addMarker('Massive Adamant Deposit: A meteor strike from ' +
     `millennium ${sim.millennium} left ${adamMassHu} of the cured metal in ` +
+    'the region.')
+}
+
+const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const mass = (Math.random() * 3) + 1
+  const massHu = mass.toFixed(2) + ' trillion kilograms'
+  const orcan = (Math.random() * 0.4) + 0.2
+  const orcanPercent = `${(orcan * 100).toFixed(2)}%`
+  const orcanMass = mass * orcan
+  const orcanMassHu = orcanMass.toFixed(2) + ' trillion kilograms'
+
+  const site = region === null ? null : impact(sim, region)
+  const description = site === null
+    ? `A meteor from the Sphere of Time ${massHu} in mass smashed ` +
+      'into the sea. The resulting super-tsunamis that circled the globe ' +
+      'wiped out 10% of all populations living along the coasts. The impact ' +
+      'created an area in the deep ocean where time has never flowed quite ' +
+      'right ever since.'
+    : `A meteor from the Sphere of Time ${massHu}  in mass smashed ` +
+      `into ${site.id}, immediately killing everyone in the region, ` +
+      'devastating all of the regions near it, and reducing global ' +
+      'habitability by half. Those who survived living near the impact ' +
+      'site experienced changes over the following millennium that would ' +
+      'normally have taken two or three times as long, and the flow of time ' +
+      'in the region can be strange even today. The meteor was also ' +
+      `${orcanPercent} orcan, creating a massive deposit of ${orcanMassHu} ` +
+      'of the cured metal in the region.'
+
+  const tags = ['Meteor impact', 'Sphere of Time', 'Orcan']
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  const unseal = (regions: Region[], num: number = 1) => {
+    for (const region of regions) {
+      if (!region.species || !(region.species in SpeciesPlurals)) continue
+      const text = `We become ${SpeciesPlurals[region.species].toLowerCase()}.`
+      for (const p of region.populations) {
+        const scrolls = p.scribe.scrolls.filter(scroll => scroll.text === text)
+        for (const scroll of scrolls) {
+          for (let i = 0; i < num; i++) scroll.unseal()
+        }
+      }
+    }
+  }
+
+  unseal(getZone1(sim, site), 2)
+  unseal(getZone2(sim, site), 1)
+
+  await site.addMarker('Meteor impact site: Struck by a meteor from the ' +
+    `Sphere of Time in  millennium ${sim.millennium}. It was ${massHu}, ` +
+    'resulting in the immediate death of everyone in the region and a 50% ' +
+    'reduction in global habitability.')
+  await site.addMarker('Massive Orcan Deposit: A meteor strike from ' +
+    `millennium ${sim.millennium} left ${orcanMassHu} of the cured metal in ` +
     'the region.')
 }
 
@@ -515,5 +577,6 @@ export {
   recordWarmthMeteor,
   recordWarmthMeteorRock,
   recordWarmthMeteorEntity,
-  recordDeathMeteor
+  recordDeathMeteor,
+  recordTimeMeteor
 }
