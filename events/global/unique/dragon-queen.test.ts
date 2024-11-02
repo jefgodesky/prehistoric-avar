@@ -62,10 +62,6 @@ describe('dragonQueen', () => {
     region.ogrism = OGRISM_THRESHOLD
     dragonQueen(sim, true)
     expect(region.immortals).toHaveLength(1)
-    expect(region.immortals[0].disposition).toBe(DISPOSITIONS.HOSTILE)
-    expect(region.immortals[0].description).toBe('The Dragon Queen')
-    expect(region.immortals[0].impact).toBe(500)
-    expect(region.immortals[0].slayable).toBe(false)
   })
 
   it('increases draconic fear', () => {

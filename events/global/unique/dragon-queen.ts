@@ -1,9 +1,9 @@
 import { sample } from '@std/collections'
-import { DISPOSITIONS, EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
-import Immortal from '../../../classes/Immortal.ts'
+import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'
+import createDragonQueen from '../../immortals/dragon-queen.ts'
 
 const OGRISM_THRESHOLD = 8 as const
 
@@ -20,18 +20,8 @@ const dragonQueen = (sim: Simulation, forceEvent?: boolean): void => {
   const region = sample(regions)
   if (!region) return
 
-  region.immortals.push(new Immortal(
-    sim.emitter,
-    {
-      description: 'The Dragon Queen',
-      disposition: DISPOSITIONS.HOSTILE,
-      impact: 500,
-      slayable: false,
-      relationships: [],
-      scrolls: []
-    }
-  ))
 
+  region.immortals.push(createDragonQueen(sim))
   const description = `The Dragon Queen arises in ${region.id}.`
   sim.world.events.push(event)
   sim.history.add({ millennium: sim.millennium, description, tags: ['Dragon Queen', 'Dragons', region.id] })

@@ -45,6 +45,11 @@ describe('Immortal', () => {
       expect(i.slayable).toBe(false)
     })
 
+    it('has a movement function', () => {
+      const i = new Immortal(emitter)
+      expect(typeof i.move).toBe('function')
+    })
+
     it('starts slain as false', () => {
       const i = new Immortal(emitter)
       expect(i.slain).toBe(false)
