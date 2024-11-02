@@ -595,6 +595,20 @@ const recordFallingStar = async (sim: Simulation, region?: Region | null): Promi
     'devastated by its cataclysmic arrival for a normal humanoid lifespan.')
 }
 
+const meteor = (sim: Simulation): Promise<void> => {
+  const functions = [
+    recordFormMeteor,
+    recordOrderMeteor,
+    recordFluidityMeteor,
+    recordWarmthMeteor,
+    recordDeathMeteor,
+    recordTimeMeteor,
+    recordFallingStar
+  ]
+  const fn = sample(functions) ?? recordFallingStar
+  return fn(sim)
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -619,3 +633,5 @@ export {
   recordTimeMeteor,
   recordFallingStar
 }
+
+export default meteor
