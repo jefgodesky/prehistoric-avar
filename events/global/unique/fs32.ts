@@ -3,6 +3,7 @@ import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../../../enums.ts'
 import type Population from '../../../classes/Population.ts'
 import type Region from '../../../classes/Region.ts'
 import Simulation from '../../../classes/Simulation.ts'
+import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'
 
 const BIG_ENOUGH_POP = 5000 as const
@@ -13,9 +14,7 @@ const fs32 = (sim: Simulation, forceEvent?: boolean): void => {
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.HUMANS]
   if (!uniqueEventCheck(sim, event, prerequisites)) return
 
-  const chances: boolean[] = [true]
-  for (let i = 0; i < 19; i++) chances.push(false)
-  const fireEvent = forceEvent ?? sample(chances)
+  const fireEvent = forceEvent ?? sample(getChances(1, 20))
   if (!fireEvent) return
 
   const isCandidate = (p: Population): boolean => {
