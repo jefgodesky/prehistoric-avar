@@ -7,7 +7,8 @@ import Simulation from '../../classes/Simulation.ts'
 import {
   getImpactRegion,
   getZone1,
-  getZone2
+  getZone2,
+  impactZone0
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -43,6 +44,15 @@ describe('Meteor', () => {
       const actual = getZone2(sim, region)
       expect(actual.length).toBeGreaterThan(0)
       expect(actual.every(r => !zone1.map(r => r.id).includes(r.id))).toBe(true)
+    })
+  })
+
+  describe('impactZone0', () => {
+    it('hits zone 0', () => {
+      impactZone0(sim, region)
+      expect(region.habitability).toBeCloseTo(0.1)
+      expect(region.isPopulated()).toBe(false)
+      expect(population.extinct).toBe(true)
     })
   })
 })
