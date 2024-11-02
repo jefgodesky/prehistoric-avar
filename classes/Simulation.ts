@@ -22,7 +22,7 @@ class Simulation {
     this.history.add({
       description: 'Wosan discover fire',
       millennium: this.millennium,
-      tags: ['GS03', 'Wosan', 'invention']
+      tags: ['GS03', 'Wosan', 'Invention']
     })
   }
 
