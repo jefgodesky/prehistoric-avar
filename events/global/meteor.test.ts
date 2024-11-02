@@ -9,7 +9,8 @@ import {
   getZone1,
   getZone2,
   impactZone0,
-  impactZone1
+  impactZone1,
+  impactZone2
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -63,6 +64,16 @@ describe('Meteor', () => {
       impactZone1(sim, region)
       for (const region of zone1) {
         expect(region.habitability).toBeCloseTo(0.5)
+      }
+    })
+  })
+
+  describe('impactZone2', () => {
+    it('hits each region in zone 2', () => {
+      const zone2 = getZone2(sim, region)
+      impactZone2(sim, region)
+      for (const region of zone2) {
+        expect(region.habitability).toBeCloseTo(0.75)
       }
     })
   })

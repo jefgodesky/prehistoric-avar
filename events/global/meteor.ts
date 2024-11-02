@@ -44,10 +44,18 @@ const impactZone1 = (sim: Simulation, region: Region): void => {
   }
 }
 
+const impactZone2 = (sim: Simulation, region: Region): void => {
+  const zone2 = getZone2(sim, region)
+  for (const region of zone2) {
+    region.reduceHabitability(0.25)
+    for (const p of region.populations) p.adjustSize(-0.25)
+  }
+
 export {
   getImpactRegion,
   getZone1,
   getZone2,
   impactZone0,
-  impactZone1
+  impactZone1,
+  impactZone2
 }
