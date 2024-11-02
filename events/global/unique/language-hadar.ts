@@ -15,7 +15,7 @@ const languageHadar = (sim: Simulation): void => {
 
   const description = `The empyreans of Hadar adopt language.`
   sim.world.events.push(event)
-  sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Hadar', 'Empyreans'] })
+  sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Hadar', 'Empyreans', 'Sphere of Order'] })
   sim.world.dragons.interest.incr()
 }
 

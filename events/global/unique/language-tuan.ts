@@ -14,7 +14,7 @@ const languageTuan = (sim: Simulation, forceEvent?: boolean): void => {
 
   const description = `The elementals of Tuan adopt language.`
   sim.world.events.push(event)
-  sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Tuan', 'Elementals'] })
+  sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Tuan', 'Elementals', 'Sphere of Fluidity'] })
   sim.world.dragons.interest.incr()
 }
 
