@@ -145,15 +145,15 @@ const recordOrderMeteorRock = async (sim: Simulation, region?: Region | null): P
   const aeganMassHu = aeganMass.toFixed(2) + ' trillion kilograms'
 
   const site = region === null ? null : impact(sim, region)
-  let description = site === null
+  const description = site === null
     ? `A chunk of Hadar with a mass of ${massHu}` +
-    'smashed into the sea. The resulting super-tsunamis that circled the ' +
-    'globe wiped out 10% of all populations living along the coasts.'
+      'smashed into the sea. The resulting super-tsunamis that circled the ' +
+      'globe wiped out 10% of all populations living along the coasts.'
     : `A chunk of Hadar with a mass of ${massHu} smashed into ${site.id}, ` +
-    'instantly wiping out all life in the region, devastating the ' +
-    'surrounding regions, and reducing habitability worldwide by half. ' +
-    `The meteor was ${aeganPercent} aegan, creating a massive deposit` +
-    `of ${aeganMassHu} of the cured metal in the region.`
+      'instantly wiping out all life in the region, devastating the ' +
+      'surrounding regions, and reducing habitability worldwide by half. ' +
+      `The meteor was ${aeganPercent} aegan, creating a massive deposit` +
+      `of ${aeganMassHu} of the cured metal in the region.`
 
   const tags = ['Meteor impact', 'Hadar', 'Sphere of Order', 'Aegan']
   if (site) tags.push(site.id)
@@ -175,6 +175,47 @@ const recordOrderMeteorRock = async (sim: Simulation, region?: Region | null): P
     'the region.')
 }
 
+const recordOrderMeteorEmpyrean = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const site = region === null ? null : impact(sim, region)
+  const alignment = sample(['order', 'chaos']) ?? 'order'
+  const description = site === null
+    ? `An empyrean formed from Hadar's dedication to ${alignment} was cast ` +
+      'out of the Sphere of Order for its failure to uphold those ideals. ' +
+      'It was trapped in mortal, humanoid form and sent hurtling to Avar. ' +
+      `It impacted the sea with such force that it caused super-tsunamis ` +
+      'circle the world, reducing the world\'s coastal populations by 10%. ' +
+      'The magic that exiled the empyrean allowed it to survive its journey ' +
+      'through the spheres and its cataclysmic impact, but did not grant it ' +
+      'the superhuman strength and stamina it would need to swim to shore ' +
+      'from where it landed in the middle of the ocean. It drowned shortly ' +
+      'following its arrival.'
+    : `An empyrean formed from Hadar's dedication to ${alignment} was cast ` +
+      'out of the Sphere of Order for its failure to uphold those ideals. ' +
+      'It was trapped in mortal, humanoid form and sent hurtling to Avar. ' +
+      `It smashed into ${site.id}, where the speed of its impact caused the` +
+      'immediate death of all the humanoids living there, devastated the ' +
+      'surrounding regions, and reduced worldwide habitability by half. The ' +
+      'magic that exiled the empyrean allowed it to survive its journey ' +
+      'through the spheres and its cataclysmic impact, allowing it to live ' +
+      'out a mortal lifespan on an Avar blighted for millennia to come by ' +
+      'the manner of its arrival.'
+
+  const tags = ['Meteor impact', 'Hadar', 'Sphere of Order', 'Empyreans', capitalize(alignment)]
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker('Meteor impact site: Struck by an exiled empyrean ' +
+    `cast down by Hadar in millennium ${sim.millennium} for its failure to ` +
+    `uphold the ideals of ${alignment}, causing a global catastrophe.`)
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -186,5 +227,6 @@ export {
   impactZone1,
   impactZone2,
   recordFormMeteor,
-  recordOrderMeteorRock
+  recordOrderMeteorRock,
+  recordOrderMeteorEmpyrean
 }

@@ -14,7 +14,8 @@ import {
   impactZone1,
   impactZone2,
   recordFormMeteor,
-  recordOrderMeteorRock
+  recordOrderMeteorRock,
+  recordOrderMeteorEmpyrean
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -119,11 +120,25 @@ describe('Meteor', () => {
     it('records a meteor from the Sphere of Order hitting a region', async () => {
       await recordOrderMeteorRock(sim, region)
       expect(sim.history.events).toHaveLength(2)
-      expect(region.markers.length).toBeGreaterThanOrEqual(2)
+      expect(region.markers.length).toBe(2)
     })
 
     it('records a meteor from the Sphere of Order hitting the sea', async () => {
       await recordOrderMeteorRock(sim, null)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers).toHaveLength(0)
+    })
+  })
+
+  describe('recordOrderMeteorEmpyrean', () => {
+    it('records an empyrean cast down from the Sphere of Order hitting a region', async () => {
+      await recordOrderMeteorEmpyrean(sim, region)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers.length).toBe(1)
+    })
+
+    it('records an empyrean cast down from the Sphere of Order hitting the sea', async () => {
+      await recordOrderMeteorEmpyrean(sim, null)
       expect(sim.history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
