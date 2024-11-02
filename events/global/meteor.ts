@@ -31,6 +31,10 @@ const getZone2 = (sim: Simulation, region: Region): Region[] => {
   return regions.map(id => sim.world.regions[id])
 }
 
+const impactLand = (sim: Simulation): void => {
+  sim.world.reduceHabitability(0.5)
+}
+
 const impactZone0 = (region: Region): void => {
   region.reduceHabitability(0.9)
   for (const p of region.populations) p.adjustSize(p.size * -1)
@@ -50,11 +54,13 @@ const impactZone2 = (sim: Simulation, region: Region): void => {
     region.reduceHabitability(0.25)
     for (const p of region.populations) p.adjustSize(-0.25)
   }
+}
 
 export {
   getImpactRegion,
   getZone1,
   getZone2,
+  impactLand,
   impactZone0,
   impactZone1,
   impactZone2

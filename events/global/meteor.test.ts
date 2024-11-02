@@ -8,6 +8,7 @@ import {
   getImpactRegion,
   getZone1,
   getZone2,
+  impactLand,
   impactZone0,
   impactZone1,
   impactZone2
@@ -46,6 +47,13 @@ describe('Meteor', () => {
       const actual = getZone2(sim, region)
       expect(actual.length).toBeGreaterThan(0)
       expect(actual.every(r => !zone1.map(r => r.id).includes(r.id))).toBe(true)
+    })
+  })
+
+  describe('impactLand', () => {
+    it('hits the land', () => {
+      impactLand(sim)
+      expect(sim.world.habitability).toBeCloseTo(0.5)
     })
   })
 
