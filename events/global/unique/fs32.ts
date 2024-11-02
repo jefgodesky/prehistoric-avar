@@ -3,6 +3,7 @@ import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../../../enums.ts'
 import type Population from '../../../classes/Population.ts'
 import type Region from '../../../classes/Region.ts'
 import Simulation from '../../../classes/Simulation.ts'
+import uniqueEventCheck from './unique-event-check.ts'
 
 const BIG_ENOUGH_POP = 5000 as const
 const DEST_REGION_ID = 'FS32' as const
@@ -10,8 +11,7 @@ const DEST_REGION_ID = 'FS32' as const
 const fs32 = (sim: Simulation, forceEvent?: boolean): void => {
   const event: string = EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.HUMANS]
-  if (sim.world.events.includes(event)) return
-  if (!prerequisites.every(event => sim.world.events.includes(event))) return
+  if (!uniqueEventCheck(sim, event, prerequisites)) return
 
   const chances: boolean[] = [true]
   for (let i = 0; i < 19; i++) chances.push(false)
