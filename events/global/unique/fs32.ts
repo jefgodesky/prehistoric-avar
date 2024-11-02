@@ -36,7 +36,7 @@ const fs32 = (sim: Simulation, forceEvent?: boolean): void => {
 
   const description = `The Wanderer transports ${transplants.size} humans from ${srcRegion.id} to ${DEST_REGION_ID}.`
   sim.world.events.push(event)
-  sim.history.add({ millennium: sim.millennium, description, tags: ['Wanderer', srcRegion.id, DEST_REGION_ID] })
+  sim.history.add({ millennium: sim.millennium, description, tags: ['Wanderer', 'Empyreans', srcRegion.id, DEST_REGION_ID] })
   if (sim.world.dragons.interest.value >= 50) sim.world.dragons.interest.incr()
 }
 
