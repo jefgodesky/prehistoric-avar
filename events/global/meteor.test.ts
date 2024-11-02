@@ -8,7 +8,8 @@ import {
   getImpactRegion,
   getZone1,
   getZone2,
-  impactZone0
+  impactZone0,
+  impactZone1
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -49,10 +50,20 @@ describe('Meteor', () => {
 
   describe('impactZone0', () => {
     it('hits zone 0', () => {
-      impactZone0(sim, region)
+      impactZone0(region)
       expect(region.habitability).toBeCloseTo(0.1)
       expect(region.isPopulated()).toBe(false)
       expect(population.extinct).toBe(true)
+    })
+  })
+
+  describe('impactZone1', () => {
+    it('hits each region in zone 1', () => {
+      const zone1 = getZone1(sim, region)
+      impactZone1(sim, region)
+      for (const region of zone1) {
+        expect(region.habitability).toBeCloseTo(0.5)
+      }
     })
   })
 })
