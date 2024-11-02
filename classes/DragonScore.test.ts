@@ -52,5 +52,30 @@ describe('DragonScore', () => {
         expect(score.value).toBe(0)
       })
     })
+
+    describe('mod', () => {
+      it('can increase the value', () => {
+        const score = new DragonScore(5)
+        score.mod(5)
+        expect(score.value).toBe(10)
+      })
+
+      it('can decrease the value', () => {
+        const score = new DragonScore(5)
+        score.mod(-5)
+        expect(score.value).toBe(0)
+      })
+
+      it('returns the new value', () => {
+        const score = new DragonScore(5)
+        expect(score.mod(1)).toBe(6)
+      })
+
+      it('will not decrement the value below zero', () => {
+        const score = new DragonScore()
+        expect(score.mod(-5)).toBe(0)
+        expect(score.value).toBe(0)
+      })
+    })
   })
 })
