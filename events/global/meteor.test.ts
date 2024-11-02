@@ -21,7 +21,8 @@ import {
   recordWarmthMeteorRock,
   recordWarmthMeteorEntity,
   recordDeathMeteor,
-  recordTimeMeteor
+  recordTimeMeteor,
+  recordFallingStar
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -230,6 +231,20 @@ describe('Meteor', () => {
 
     it('records a meteor from the Sphere of Time hitting the sea', async () => {
       await recordTimeMeteor(sim, null)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers).toHaveLength(0)
+    })
+  })
+
+  describe('recordFallingStar', () => {
+    it('records a falling star from the Sphere of Space hitting a region', async () => {
+      await recordFallingStar(sim, region)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers.length).toBe(1)
+    })
+
+    it('records a falling star from the Sphere of Space hitting the sea', async () => {
+      await recordFallingStar(sim, null)
       expect(sim.history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })

@@ -557,6 +557,44 @@ const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promis
     'the region.')
 }
 
+const recordFallingStar = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const site = region === null ? null : impact(sim, region)
+  const description = site === null
+    ? 'A star was cast down from the Firmament of the Sphere of Space to ' +
+      'Avar. It struck the sea with such force that it caused super-tsunamis ' +
+      'that circled the world, killing 10% of the populations living along ' +
+      'the coast. The star had been trapped in a mortal, humanoid form, and ' +
+      'though the magic that caused its fall had protected it along its ' +
+      'of millions of kilometers through the spheres and the cataclysmic ' +
+      'impact, it did not grant the entity the superhuman strength or ' +
+      'it would have needed to swim to shore from the middle of the ocean ' +
+      'where it landed. It drowned a few hours after its impact.'
+    : 'A star was cast down from the Firmament of the Sphere of Space to ' +
+      `Avar, crashing into ${site.id}, where it instantly killed the ` +
+      'region\'s entire population, devastated all of the surrounding ' +
+      'regions, and cut worldwide habitability in half. The magic that ' +
+      'cast the star from the Firmament had transformed it in a mortal, ' +
+      'humanoid form, but also protected it in its journey of millions of ' +
+      'kilometers through the spheres and even from its cataclysmic ' +
+      'impact, allowing it to live out a normal, mortal lifespan on an ' +
+      'Avar blighted for millennia to come by the manner of its arrival.'
+
+  const tags = ['Meteor impact', 'Sphere of Space']
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker('Meteor impact site: Struck by a star cast down from ' +
+    'the Firmament and bound to a mortal, humanoid form. It lived in the region ' +
+    'devastated by its cataclysmic arrival for a normal humanoid lifespan.')
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -578,5 +616,6 @@ export {
   recordWarmthMeteorRock,
   recordWarmthMeteorEntity,
   recordDeathMeteor,
-  recordTimeMeteor
+  recordTimeMeteor,
+  recordFallingStar
 }
