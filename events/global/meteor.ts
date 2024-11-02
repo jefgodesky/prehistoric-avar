@@ -4,6 +4,7 @@ import Simulation from '../../classes/Simulation.ts'
 import getChances from '../get-chances.ts'
 import oxford from '../../oxford.ts'
 import capitalize from '../../capitalize.ts'
+import createElemental from '../immortals/elemental.ts'
 
 const getImpactRegion = (sim: Simulation): Region | null => {
   const totalArea = 4 * Math.PI * Math.pow(5000, 2)
@@ -255,6 +256,95 @@ const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null)
     'the region.')
 }
 
+const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const site = region === null ? null : impact(sim, region)
+  const element = sample(['fire', 'air', 'water', 'earth', 'aether']) ?? 'aether'
+  const coastal = Object.values(sim.world.regions).filter(region => region.tags.includes('coastal'))
+  let elementalRegion: Region | null = site
+  let description = ''
+  if (site === null && element === 'water') {
+    description = 'A powerful water elemental was trapped in stone and cast ' +
+      'down to Avar. It landed in the sea, where the ferocity of its impact ' +
+      'caused super-tsunamis that circled the globe, wiping out 10% of all ' +
+      'coastal populations. The impact cracked open its stony prison, and ' +
+      'has roamed the oceans of Avar ever since.'
+  } else if (site === null && element === 'earth') {
+    elementalRegion = sample(coastal) as Region
+    description = 'A powerful earth elemental was cast down to Avar. It ' +
+        'landed in the sea, where the ferocity of its impact caused ' +
+        'super-tsunamis that circled the globe, wiping out 10% of all ' +
+        'coastal populations. It took years of struggle, but the elemental ' +
+        'eventually found its way  to dry land, on the shores of ' +
+        `${elementalRegion.id}.`
+  } else if (site === null && element === 'fire') {
+    const island = sample(getChances(1, 100))
+    const underseaVolcano = sample(getChances(1, 3))
+    description = 'A powerful fire elemental was trapped in stone and cast ' +
+      'down to Avar. It landed in the sea, where the ferocity of its impact ' +
+      'caused super-tsunamis that circled the globe, wiping out 10% of all ' +
+      'coastal populations.'
+    if (island) {
+      description += ' Its stony prison held, protecting it from the ' +
+        'elemental power of the ocean that might have otherwise extinguished ' +
+        'it. Thrashing within its prison, though, it became an undersea ' +
+        'volcano. In time, it had ejected so much lava in its rage that it ' +
+        'formed a new island — potentially providing the fire elemental ' +
+        'a means of escape, after the passage of millennia.'
+    } else if (underseaVolcano) {
+      description += ' Its stony prison held, protecting it from the ' +
+        'elemental power of the ocean that might have otherwise extinguished ' +
+        'it. Thrashing within its prison, though, it became an undersea ' +
+        'volcano. In time, it may eject enough lava in its rage to form ' +
+        'a new island — and through such an island, perhaps, finally, ' +
+        'escape — but that is not something that has happened yet.'
+    } else {
+      description += ' The cataclysmic fall broke open the elemental\'s ' +
+        'rocky prison. As powerful as it was, it was no match for the ' +
+        'elemental power of the ocean, and was extinguished within hours.'
+    }
+  } else if (site === null) {
+    elementalRegion = sample(coastal) as Region
+    description = `A powerful ${element} elemental was trapped in a cage of ` +
+      'stone and cast down to Avar. It landed in the sea, where the ferocity ' +
+      'of its impact caused super-tsunamis that circled the globe, wiping ' +
+      'out 10% of all coastal populations. In its cataclysmic fall, the ' +
+      'shell broke open. It took years of struggle, but the elemental ' +
+      'eventually found its way  to dry land, on the shores of ' +
+      `${elementalRegion.id}.`
+  } else {
+    const wasCast = element === 'earth'
+      ? 'A powerful earth elemental was cast'
+      : `A powerful ${element} elemental was trapped in a cage of stone and cast`
+    const survived = element === 'earth'
+      ? 'survived its fall'
+      : 'not only survived its fall, but was freed from its rocky shell by the impact'
+    description = `${wasCast} down to Avar. It landed in ${site.id}. The ` +
+      'cataclysmic impact immediately wiped out all humanoid populations in ' +
+      'the region, devastated all nearby regions, and reduced habitability ' +
+      `worldwide by half. The elemental ${survived}.`
+  }
+
+  const tags = ['Meteor impact', 'Sphere of Fluidity', 'Elementals', `${capitalize(element)} Elementals`]
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (elementalRegion) {
+    const elemental = createElemental(sim, element)
+    elementalRegion.immortals.push(elemental)
+  }
+
+  if (site === null) return
+
+  await site.addMarker(`Meteor impact site: A powerful ${element} elemental ` +
+    `was cast down to Avar in millennium ${sim.millennium}, causing a global` +
+    'catastrophe.')
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -268,5 +358,6 @@ export {
   recordFormMeteor,
   recordOrderMeteorRock,
   recordOrderMeteorEmpyrean,
-  recordFluidityMeteorRock
+  recordFluidityMeteorRock,
+  recordFluidityMeteorElemental
 }
