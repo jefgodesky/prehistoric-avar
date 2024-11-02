@@ -27,10 +27,12 @@ const fs32 = (sim: Simulation, forceEvent?: boolean): void => {
     return region.populations.filter(isCandidate).length > 0
   })
 
-  const srcRegion = sample(regions) as Region
-  const src = sample(srcRegion.populations.filter(isCandidate)) as Population
+  const srcRegion = sample(regions)
+  if (!srcRegion) return
+  const src = sample(srcRegion.populations.filter(isCandidate))
+  if (!src) return
   const transplants = src.split()
-  if (transplants === null) return
+  if (!transplants) return
   transplants.migrate(sim.world.regions[DEST_REGION_ID])
 
   const description = `The Wanderer transports ${transplants.size} humans from ${srcRegion.id} to ${DEST_REGION_ID}.`

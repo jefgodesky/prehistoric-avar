@@ -21,7 +21,7 @@ const languageSun = (sim: Simulation, forceEvent?: boolean): void => {
       ? sample(getChances(1, 10)) ?? false
       : false
   ]
-  const fireEvent = forceEvent === true || checks.some(check => check)
+  const fireEvent = forceEvent ?? checks.some(check => check)
   if (!fireEvent) return
 
   const solarians = 'Solarians'
