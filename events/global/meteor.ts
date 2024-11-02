@@ -107,7 +107,7 @@ const recordFormMeteor = async (sim: Simulation, region?: Region | null): Promis
       'journey through the spheres on a dead, tumbling rock.'
   }
 
-  const tags = ['Meteor impact', 'Moon', 'Sphere of Form']
+  const tags = ['Meteor impact', 'Moon', 'Sphere of Form', 'Mithril']
   if (site) {
     tags.push(site.id)
     tags.push(...introductions.map(critter => capitalize(critter)))
@@ -136,6 +136,45 @@ const recordFormMeteor = async (sim: Simulation, region?: Region | null): Promis
   }
 }
 
+const recordOrderMeteorRock = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const mass = (Math.random() * 3) + 1
+  const massHu = mass.toFixed(2) + ' trillion kilograms'
+  const aegan = (Math.random() * 0.4) + 0.2
+  const aeganPercent = `${(aegan * 100).toFixed(2)}%`
+  const aeganMass = mass * aegan
+  const aeganMassHu = aeganMass.toFixed(2) + ' trillion kilograms'
+
+  const site = region === null ? null : impact(sim, region)
+  let description = site === null
+    ? `A chunk of Hadar with a mass of ${massHu}` +
+    'smashed into the sea. The resulting super-tsunamis that circled the ' +
+    'globe wiped out 10% of all populations living along the coasts.'
+    : `A chunk of Hadar with a mass of ${massHu} smashed into ${site.id}, ` +
+    'instantly wiping out all life in the region, devastating the ' +
+    'surrounding regions, and reducing habitability worldwide by half. ' +
+    `The meteor was ${aeganPercent} aegan, creating a massive deposit` +
+    `of ${aeganMassHu} of the cured metal in the region.`
+
+  const tags = ['Meteor impact', 'Hadar', 'Sphere of Order', 'Aegan']
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker(`Meteor impact site: Struck by a meteor from Hadar ` +
+    `in  millennium ${sim.millennium}. It was ${massHu}, resulting in ` +
+    'the immediate death of everyone in the region and a 50% reduction in ' +
+    'global habitability.')
+  await site.addMarker('Massive Aegan Deposit: A meteor strike from ' +
+    `millennium ${sim.millennium} left ${aeganMassHu} of the cured metal in ` +
+    'the region.')
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -146,5 +185,6 @@ export {
   impactZone0,
   impactZone1,
   impactZone2,
-  recordFormMeteor
+  recordFormMeteor,
+  recordOrderMeteorRock
 }
