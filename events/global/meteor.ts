@@ -1,5 +1,9 @@
+import { sample } from '@std/collections'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
+import getChances from '../get-chances.ts'
+import oxford from '../../oxford.ts'
+import capitalize from '../../capitalize.ts'
 
 const getImpactRegion = (sim: Simulation): Region | null => {
   const totalArea = 4 * Math.PI * Math.pow(5000, 2)
@@ -31,8 +35,8 @@ const getZone2 = (sim: Simulation, region: Region): Region[] => {
   return regions.map(id => sim.world.regions[id])
 }
 
-const impact = (sim: Simulation): Region | null => {
-  const region = getImpactRegion(sim)
+const impact = (sim: Simulation, site?: Region | null): Region | null => {
+  const region = site ?? getImpactRegion(sim)
   if (!region) { impactSea(sim); return null }
   impactLand(sim)
   impactZone0(region)
@@ -73,6 +77,65 @@ const impactZone2 = (sim: Simulation, region: Region): void => {
   }
 }
 
+const recordFormMeteor = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const mass = (Math.random() * 3) + 1
+  const massHu = mass.toFixed(2) + ' trillion kilograms'
+  const mithril = (Math.random() * 0.4) + 0.2
+  const mithrilPercent = `${(mithril * 100).toFixed(2)}%`
+  const mithrilMass = mass * mithril
+  const mithrilMassHu = mithrilMass.toFixed(2) + ' trillion kilograms'
+  const introductions: string[] = [
+    sample(getChances(1, 10)) ?? false ? 'maedor' : '',
+    sample(getChances(1, 10)) ?? false ? 'basilisks' : '',
+    sample(getChances(1, 10)) ?? false ? 'cockatrices' : '',
+  ].filter(critter => critter.length > 0)
+
+  const site = region === null ? null : impact(sim, region)
+  let description = site === null
+    ? `A chunk of the moon with a mass of ${massHu}` +
+      'smashed into the sea. The resulting super-tsunamis that circled the ' +
+      'globe wiped out 10% of all populations living along the coasts.'
+    : `A chunk of the moon with a mass of ${massHu} smashed into ${site.id}, ` +
+      'instantly wiping out all life in the region, devastating the ' +
+      'surrounding regions, and reducing habitability worldwide by half. ' +
+      `The meteor was ${mithrilPercent} mithril, creating a massive deposit` +
+      `of ${mithrilMassHu} of the cured metal in the region.`
+
+  if (site !== null && introductions.length > 0) {
+    description += ` The meteor also introduced ${oxford(...introductions)} ` +
+      'to the region, somehow descended from creatures that survived the ' +
+      'journey through the spheres on a dead, tumbling rock.'
+  }
+
+  const tags = ['Meteor impact', 'Moon', 'Sphere of Form']
+  if (site) {
+    tags.push(site.id)
+    tags.push(...introductions.map(critter => capitalize(critter)))
+  }
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker(`Meteor impact site: Struck by a meteor from the ` +
+    `moon in  millennium ${sim.millennium}. It was ${massHu}, resulting in ` +
+    'the immediate death of everyone in the region and a 50% reduction in ' +
+    'global habitability.')
+  await site.addMarker('Massive Mithril Deposit: A meteor strike from ' +
+    `millennium ${sim.millennium} left ${mithrilMassHu} of the cured metal in ` +
+    'the region.')
+  for (const critter of introductions) {
+    await site.addMarker(`${capitalize(critter)}: The region is home to a ` +
+      `population of ${critter}, descended from creatures that somehow ` +
+      'survived the journey from the moon through the spheres on a meteor ' +
+      `that fell here in millennium ${sim.millennium}.`)
+  }
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -82,5 +145,6 @@ export {
   impactSea,
   impactZone0,
   impactZone1,
-  impactZone2
+  impactZone2,
+  recordFormMeteor
 }

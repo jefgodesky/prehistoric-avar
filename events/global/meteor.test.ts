@@ -12,7 +12,8 @@ import {
   impactSea,
   impactZone0,
   impactZone1,
-  impactZone2
+  impactZone2,
+  recordFormMeteor
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -23,6 +24,7 @@ describe('Meteor', () => {
   beforeEach(() => {
     sim = new Simulation()
     region = sim.world.regions['MS06']
+    region.markers = []
     population = new Population(sim.emitter, region, SamplePopulation)
     region.introduce(population)
   })
@@ -95,6 +97,20 @@ describe('Meteor', () => {
       for (const region of zone2) {
         expect(region.habitability).toBeCloseTo(0.75)
       }
+    })
+  })
+
+  describe('recordFormMeteor', () => {
+    it('records a meteor from the Sphere of Form hitting a region', async () => {
+      await recordFormMeteor(sim, region)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers.length).toBeGreaterThanOrEqual(2)
+    })
+
+    it('records a meteor from the Sphere of Form hitting the sea', async () => {
+      await recordFormMeteor(sim, null)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers).toHaveLength(0)
     })
   })
 })
