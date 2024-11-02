@@ -35,6 +35,13 @@ const impactLand = (sim: Simulation): void => {
   sim.world.reduceHabitability(0.5)
 }
 
+const impactSea = (sim: Simulation): void => {
+  const coastal = Object.values(sim.world.regions).filter(region => region.tags.includes('coastal'))
+  for (const region of coastal) {
+    for (const p of region.populations) p.adjustSize(-0.1)
+  }
+}
+
 const impactZone0 = (region: Region): void => {
   region.reduceHabitability(0.9)
   for (const p of region.populations) p.adjustSize(p.size * -1)
@@ -61,6 +68,7 @@ export {
   getZone1,
   getZone2,
   impactLand,
+  impactSea,
   impactZone0,
   impactZone1,
   impactZone2

@@ -9,6 +9,7 @@ import {
   getZone1,
   getZone2,
   impactLand,
+  impactSea,
   impactZone0,
   impactZone1,
   impactZone2
@@ -54,6 +55,17 @@ describe('Meteor', () => {
     it('hits the land', () => {
       impactLand(sim)
       expect(sim.world.habitability).toBeCloseTo(0.5)
+    })
+  })
+
+  describe('impactSea', () => {
+    it('hits the sea', () => {
+      const coastal = sim.world.regions['FS11']
+      const coastalPop = new Population(sim.emitter, coastal, SamplePopulation)
+      coastalPop.size = 10000
+      coastal.introduce(coastalPop)
+      impactSea(sim)
+      expect(coastalPop.size).toBe(9000)
     })
   })
 
