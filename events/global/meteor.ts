@@ -13,6 +13,11 @@ const getImpactRegion = (sim: Simulation): Region | null => {
   return null
 }
 
+const getZone1 = (sim: Simulation, region: Region): Region[] => {
+  return region.adjacentRegions.map(id => sim.world.regions[id])
+}
+
 export {
-  getImpactRegion
+  getImpactRegion,
+  getZone1,
 }

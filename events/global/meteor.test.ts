@@ -5,7 +5,8 @@ import Population from '../../classes/Population.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 import {
-  getImpactRegion
+  getImpactRegion,
+  getZone1,
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -24,6 +25,14 @@ describe('Meteor', () => {
     it('returns a region or null, with probability based on area', () => {
       const actual = getImpactRegion(sim)
       expect(actual === null || actual instanceof Region).toBe(true)
+    })
+  })
+
+  describe('getZone1', () => {
+    it('returns an array of regions adjacent to the impact region', () => {
+      const actual = getZone1(sim, region)
+      expect(actual).toHaveLength(region.adjacentRegions.length)
+      expect(actual.every(r => region.adjacentRegions.includes(r.id))).toBe(true)
     })
   })
 })
