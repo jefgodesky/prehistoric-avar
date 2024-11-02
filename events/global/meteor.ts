@@ -17,7 +17,22 @@ const getZone1 = (sim: Simulation, region: Region): Region[] => {
   return region.adjacentRegions.map(id => sim.world.regions[id])
 }
 
+const getZone2 = (sim: Simulation, region: Region): Region[] => {
+  const regions: string[] = []
+  const zone1 = getZone1(sim, region)
+  for (const z1Region of zone1) {
+    for (const id of z1Region.adjacentRegions) {
+      if (id === region.id) continue
+      if (zone1.map(r => r.id).includes(id)) continue
+      if (regions.includes(id)) continue
+      regions.push(id)
+    }
+  }
+  return regions.map(id => sim.world.regions[id])
+}
+
 export {
   getImpactRegion,
   getZone1,
+  getZone2
 }

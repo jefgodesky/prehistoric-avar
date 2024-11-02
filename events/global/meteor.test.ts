@@ -7,6 +7,7 @@ import Simulation from '../../classes/Simulation.ts'
 import {
   getImpactRegion,
   getZone1,
+  getZone2
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -33,6 +34,15 @@ describe('Meteor', () => {
       const actual = getZone1(sim, region)
       expect(actual).toHaveLength(region.adjacentRegions.length)
       expect(actual.every(r => region.adjacentRegions.includes(r.id))).toBe(true)
+    })
+  })
+
+  describe('getZone2', () => {
+    it('returns an array of regions two regions out from the impact region', () => {
+      const zone1 = getZone1(sim, region)
+      const actual = getZone2(sim, region)
+      expect(actual.length).toBeGreaterThan(0)
+      expect(actual.every(r => !zone1.map(r => r.id).includes(r.id))).toBe(true)
     })
   })
 })
