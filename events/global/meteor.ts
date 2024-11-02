@@ -361,6 +361,14 @@ const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | 
     'catastrophe.')
 }
 
+const recordWarmthMeteor = (sim: Simulation): Promise<void> => {
+  if (Math.random() < 0.5) {
+    return recordWarmthMeteorRock(sim)
+  } else {
+    return recordWarmthMeteorEntity(sim)
+  }
+}
+
 const recordWarmthMeteorRock = async (sim: Simulation, region?: Region | null): Promise<void> => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
@@ -459,6 +467,7 @@ export {
   recordFluidityMeteor,
   recordFluidityMeteorRock,
   recordFluidityMeteorElemental,
+  recordWarmthMeteor,
   recordWarmthMeteorRock,
   recordWarmthMeteorEntity
 }
