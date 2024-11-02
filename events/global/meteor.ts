@@ -216,6 +216,45 @@ const recordOrderMeteorEmpyrean = async (sim: Simulation, region?: Region | null
     `uphold the ideals of ${alignment}, causing a global catastrophe.`)
 }
 
+const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const mass = (Math.random() * 3) + 1
+  const massHu = mass.toFixed(2) + ' trillion kilograms'
+  const azoth = (Math.random() * 0.4) + 0.2
+  const azothPercent = `${(azoth * 100).toFixed(2)}%`
+  const azothMass = mass * azoth
+  const azothMassHu = azothMass.toFixed(2) + ' trillion kilograms'
+
+  const site = region === null ? null : impact(sim, region)
+  const description = site === null
+    ? `A meteor from the Sphere of Fluidity with a mass of ${massHu}` +
+    'smashed into the sea. The resulting super-tsunamis that circled the ' +
+    'globe wiped out 10% of all populations living along the coasts.'
+    : `A meteor from the Sphere of Fluidity with a mass of ${massHu} ` +
+    `smashed into ${site.id}, instantly wiping out all life in the region, ` +
+    'devastating the surrounding regions, and reducing habitability ' +
+    `worldwide by half. The meteor was ${azothPercent} azoth, creating a ` +
+    `massive depositof ${azothMassHu} of the cured metal in the region.`
+
+  const tags = ['Meteor impact', 'Sphere of Fluidity', 'Azoth']
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker('Meteor impact site: Struck by a meteor from the ' +
+    `Sphere of Fluidity in  millennium ${sim.millennium}. It was ${massHu},  ` +
+    'resulting in the immediate death of everyone in the region and a 50% ' +
+    'reduction in global habitability.')
+  await site.addMarker('Massive Azoth Deposit: A meteor strike from ' +
+    `millennium ${sim.millennium} left ${azothMassHu} of the cured metal in ` +
+    'the region.')
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -228,5 +267,6 @@ export {
   impactZone2,
   recordFormMeteor,
   recordOrderMeteorRock,
-  recordOrderMeteorEmpyrean
+  recordOrderMeteorEmpyrean,
+  recordFluidityMeteorRock
 }
