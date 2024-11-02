@@ -340,8 +340,8 @@ describe('Region', () => {
       it('reduces habitability by a given percent', () => {
         const region = new Region(emitter, GS02)
         region.habitability = 0.8
-        region.reduceHabitability(0.5)
-        expect(region.habitability).toBe(0.4)
+        region.reduceHabitability(0.25)
+        expect(region.habitability).toBeCloseTo(0.6)
       })
     })
 

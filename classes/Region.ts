@@ -94,7 +94,7 @@ class Region extends Markable implements IHabitable {
   }
 
   reduceHabitability (factor: number): void {
-    this.habitability *= factor
+    this.habitability *= 1 - factor
   }
 
   restoreHabitability (): void {
