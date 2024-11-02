@@ -18,7 +18,8 @@ import {
   recordOrderMeteorEmpyrean,
   recordFluidityMeteorRock,
   recordFluidityMeteorElemental,
-  recordWarmthMeteorRock
+  recordWarmthMeteorRock,
+  recordWarmthMeteorEntity
 } from './meteor.ts'
 
 describe('Meteor', () => {
@@ -185,6 +186,20 @@ describe('Meteor', () => {
 
     it('records a meteor from the Sphere of Warmth hitting the sea', async () => {
       await recordWarmthMeteorRock(sim, null)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers).toHaveLength(0)
+    })
+  })
+
+  describe('recordWarmthMeteorEntity', () => {
+    it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting a region', async () => {
+      await recordWarmthMeteorEntity(sim, region)
+      expect(sim.history.events).toHaveLength(2)
+      expect(region.markers.length).toBe(1)
+    })
+
+    it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting the sea', async () => {
+      await recordWarmthMeteorEntity(sim, null)
       expect(sim.history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })

@@ -400,6 +400,48 @@ const recordWarmthMeteorRock = async (sim: Simulation, region?: Region | null): 
     'the region.')
 }
 
+const recordWarmthMeteorEntity = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const site = region === null ? null : impact(sim, region)
+  const entity = sample(['Solarian', 'Gelid']) ?? 'Solarian'
+  const captors = sample(['Solarian', 'Gelid']) ?? 'Solarian'
+  const cast = entity === captors
+    ? `A ${entity} was cast out of the Sphere of Warmth by its own people`
+    : `A ${entity} was cast out of the sphere of Warmth by the ${captors}s`
+  const description = site === null
+    ? `${cast}, trapped in mortal, humanoid form, and sent hurtling to Avar. ` +
+      `It impacted the sea with such force that it caused super-tsunamis ` +
+      'to circle the world, reducing the world\'s coastal populations by ' +
+      `10%. The magic that exiled the ${entity} allowed it to survive its ` +
+      'journey through the spheres and its cataclysmic impact, but did not ' +
+      'grant it the superhuman strength and stamina it would need to swim ' +
+      'to shore from where it landed in the middle of the ocean. It drowned ' +
+      'shortly following its arrival.'
+    : `${cast}, trapped in mortal, humanoid form, and sent hurtling to Avar. ` +
+      `It smashed into ${site.id}, where the speed of its impact caused the` +
+      'immediate death of all the humanoids living there, devastated the ' +
+      'surrounding regions, and reduced worldwide habitability by half. The ' +
+      `magic that exiled the ${entity} allowed it to survive its journey ` +
+      'through the spheres and its cataclysmic impact, allowing it to live ' +
+      'out a mortal lifespan on an Avar blighted for millennia to come by ' +
+      'the manner of its arrival.'
+
+  const tags = ['Meteor impact', 'Sphere of Warmth', entity]
+  if (entity !== captors) tags.push(captors)
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker(`Meteor impact site: Struck by an exiled ${entity} ` +
+    `cast down by ${entity === captors ? 'its own people' : `the ${captors}`} in ` +
+    `millennium ${sim.millennium}, causing a global catastrophe.`)
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -417,5 +459,6 @@ export {
   recordFluidityMeteor,
   recordFluidityMeteorRock,
   recordFluidityMeteorElemental,
-  recordWarmthMeteorRock
+  recordWarmthMeteorRock,
+  recordWarmthMeteorEntity
 }
