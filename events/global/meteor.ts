@@ -374,8 +374,8 @@ const recordWarmthMeteorRock = async (sim: Simulation, region?: Region | null): 
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const ori = (Math.random() * 0.4) + 0.2
   const oriPercent = `${(ori * 100).toFixed(2)}%`
-  const orihMass = mass * ori
-  const oriMassHu = orihMass.toFixed(2) + ' trillion kilograms'
+  const oriMass = mass * ori
+  const oriMassHu = oriMass.toFixed(2) + ' trillion kilograms'
 
   const site = region === null ? null : impact(sim, region)
   const description = site === null
@@ -450,6 +450,51 @@ const recordWarmthMeteorEntity = async (sim: Simulation, region?: Region | null)
     `millennium ${sim.millennium}, causing a global catastrophe.`)
 }
 
+const recordDeathMeteor = async (sim: Simulation, region?: Region | null): Promise<void> => {
+  const mass = (Math.random() * 3) + 1
+  const massHu = mass.toFixed(2) + ' trillion kilograms'
+  const adam = (Math.random() * 0.4) + 0.2
+  const adamPercent = `${(adam * 100).toFixed(2)}%`
+  const adamMass = mass * adam
+  const adamMassHu = adamMass.toFixed(2) + ' trillion kilograms'
+
+  const site = region === null ? null : impact(sim, region)
+  const description = site === null
+    ? `A chunk of Shol ${massHu} ejected by the Sphere of Death smashed ` +
+      'into the sea. The resulting super-tsunamis that circle the globe ' +
+      'wiped out 10% of all populations living along the coasts. The meteor ' +
+      'carried thousands of tormented ghosts, which haunted the region of ' +
+      'sea where the meteor crashed for many centuries after the impact ' +
+      'until they dissipated.'
+    : `A chunk of Shol ${massHu} ejected by the Sphere of Death smashed ` +
+      `into ${site.id}, immediately killing everyone in the region, ` +
+      'devastating all of the regions near it, and reducing global ' +
+      'habitability by half. The meteor carried thousands of tormented ' +
+      'ghosts, which haunted the region for many centuries after the impact ' +
+      `until they dissipated. The meteor was also ${adamPercent} adamant, ` +
+      `creating a massive deposit of ${adamMassHu} of the cured metal in ` +
+      'the region.'
+
+  const tags = ['Meteor impact', 'Shol', 'Sphere of Death', 'Adamant', 'Ghosts']
+  if (site) tags.push(site.id)
+
+  sim.history.add({
+    millennium: sim.millennium,
+    description,
+    tags
+  })
+
+  if (site === null) return
+
+  await site.addMarker('Meteor impact site: Struck by a meteor from Shol ' +
+    `Sin  millennium ${sim.millennium}. It was ${massHu},  resulting in the ` +
+    'immediate death of everyone in the region and a 50% reduction in ' +
+    'global habitability.')
+  await site.addMarker('Massive Adamant Deposit: A meteor strike from ' +
+    `millennium ${sim.millennium} left ${adamMassHu} of the cured metal in ` +
+    'the region.')
+}
+
 export {
   getImpactRegion,
   getZone1,
@@ -469,5 +514,6 @@ export {
   recordFluidityMeteorElemental,
   recordWarmthMeteor,
   recordWarmthMeteorRock,
-  recordWarmthMeteorEntity
+  recordWarmthMeteorEntity,
+  recordDeathMeteor
 }
