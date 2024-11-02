@@ -24,6 +24,7 @@ describe('language', () => {
   it('does not register an event if there are no humans', () => {
     language(sim)
     expect(sim.world.events).toHaveLength(0)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -31,6 +32,7 @@ describe('language', () => {
     addHumans(sim)
     language(sim, false)
     expect(sim.world.events).toHaveLength(1)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -38,6 +40,7 @@ describe('language', () => {
     addHumans(sim)
     language(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG)
     expect(sim.history.events).toHaveLength(2)
   })
 
@@ -46,6 +49,7 @@ describe('language', () => {
     language(sim, true)
     language(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG)
     expect(sim.history.events).toHaveLength(2)
   })
 

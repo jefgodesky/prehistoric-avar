@@ -14,6 +14,7 @@ describe('languageTuan', () => {
   it('does not register an event if language has not been invented', () => {
     languageTuan(sim)
     expect(sim.world.events).toHaveLength(0)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -21,6 +22,7 @@ describe('languageTuan', () => {
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.LANG)
     languageTuan(sim, false)
     expect(sim.world.events).toHaveLength(1)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -28,6 +30,7 @@ describe('languageTuan', () => {
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.LANG)
     languageTuan(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
     expect(sim.history.events).toHaveLength(2)
   })
 
@@ -36,6 +39,7 @@ describe('languageTuan', () => {
     languageTuan(sim, true)
     languageTuan(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
     expect(sim.history.events).toHaveLength(2)
   })
 

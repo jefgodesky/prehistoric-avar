@@ -26,6 +26,7 @@ describe('fs32', () => {
   it('does not register an event if there are no humans', () => {
     fs32(sim)
     expect(sim.world.events).toHaveLength(0)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -33,6 +34,7 @@ describe('fs32', () => {
     addHumans(sim, Math.floor(BIG_ENOUGH_POP / 2))
     fs32(sim)
     expect(sim.world.events).toHaveLength(1)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -40,6 +42,7 @@ describe('fs32', () => {
     addHumans(sim, BIG_ENOUGH_POP)
     fs32(sim, false)
     expect(sim.world.events).toHaveLength(1)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -47,6 +50,7 @@ describe('fs32', () => {
     addHumans(sim, BIG_ENOUGH_POP)
     fs32(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
     expect(sim.history.events).toHaveLength(2)
   })
 
@@ -55,6 +59,7 @@ describe('fs32', () => {
     fs32(sim, true)
     fs32(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
     expect(sim.history.events).toHaveLength(2)
   })
 

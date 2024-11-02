@@ -5,7 +5,7 @@ import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'
 
 const languageTuan = (sim: Simulation, forceEvent?: boolean): void => {
-  const event: string = EVENTS_GLOBAL_UNIQUE.LANG_HADAR
+  const event: string = EVENTS_GLOBAL_UNIQUE.LANG_TUAN
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.LANG]
   if (!uniqueEventCheck(sim, event, prerequisites)) return
 

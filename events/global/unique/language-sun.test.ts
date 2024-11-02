@@ -14,6 +14,7 @@ describe('languageSun', () => {
   it('does not register an event if language has not been invented', () => {
     languageSun(sim)
     expect(sim.world.events).toHaveLength(0)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_SUN)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -21,6 +22,7 @@ describe('languageSun', () => {
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.LANG)
     languageSun(sim, false)
     expect(sim.world.events).toHaveLength(1)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_SUN)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -28,6 +30,7 @@ describe('languageSun', () => {
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.LANG)
     languageSun(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_SUN)
     expect(sim.history.events).toHaveLength(2)
   })
 
@@ -36,6 +39,7 @@ describe('languageSun', () => {
     languageSun(sim, true)
     languageSun(sim, true)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_SUN)
     expect(sim.history.events).toHaveLength(2)
   })
 

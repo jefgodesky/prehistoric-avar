@@ -14,6 +14,7 @@ describe('language', () => {
   it('does not register an event if language has not been invented', () => {
     languageHadar(sim)
     expect(sim.world.events).toHaveLength(0)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
     expect(sim.history.events).toHaveLength(1)
   })
 
@@ -22,6 +23,7 @@ describe('language', () => {
     sim.history.add({ millennium: sim.millennium, description: 'Language invented', tags: ['Language', 'Invention'] })
     languageHadar(sim)
     expect(sim.world.events).toHaveLength(1)
+    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
     expect(sim.history.events).toHaveLength(2)
   })
 
@@ -31,6 +33,7 @@ describe('language', () => {
     sim.millennium++
     languageHadar(sim)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
     expect(sim.history.events).toHaveLength(3)
   })
 
@@ -41,6 +44,7 @@ describe('language', () => {
     languageHadar(sim)
     languageHadar(sim)
     expect(sim.world.events).toHaveLength(2)
+    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
     expect(sim.history.events).toHaveLength(3)
   })
 
