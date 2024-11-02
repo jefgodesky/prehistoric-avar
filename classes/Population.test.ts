@@ -2,7 +2,7 @@ import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES, SPECIES_NAMES } from '../enums.ts'
-import { GS02 } from '../instances/regions/index.ts'
+import { GS02, GS03 } from '../instances/regions/index.ts'
 import { SamplePopulation, SampleSociety } from '../test-examples.ts'
 import Region from './Region.ts'
 import Society from './Society.ts'
@@ -174,6 +174,24 @@ describe('Population', () => {
       })
     })
 
+    describe('absorb', () => {
+      it('absorbs a second population of the same species', () => {
+        const p = new Population(emitter, home, SamplePopulation)
+        const n = new Population(emitter, home, SamplePopulation)
+        n.viability = 0.8
+        expect(p.absorb(n)).toBe(true)
+        expect(p.size).toBe(SamplePopulation.size * 2)
+        expect(p.viability).toBeCloseTo(0.85)
+      })
+
+      it('returns false if you try to absorb a population of another species', () => {
+        const other = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.HALFLING })
+        const p = new Population(emitter, home, SamplePopulation)
+        const n = new Population(emitter, home, other)
+        expect(p.absorb(n)).toBe(false)
+      })
+    })
+
     describe('split', () => {
       it('splits off a new population of the specified size', () => {
         const size = 5000
@@ -212,21 +230,17 @@ describe('Population', () => {
       })
     })
 
-    describe('absorb', () => {
-      it('absorbs a second population of the same species', () => {
-        const p = new Population(emitter, home, SamplePopulation)
-        const n = new Population(emitter, home, SamplePopulation)
-        n.viability = 0.8
-        expect(p.absorb(n)).toBe(true)
-        expect(p.size).toBe(SamplePopulation.size * 2)
-        expect(p.viability).toBeCloseTo(0.85)
-      })
-
-      it('returns false if you try to absorb a population of another species', () => {
-        const other = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.HALFLING })
-        const p = new Population(emitter, home, SamplePopulation)
-        const n = new Population(emitter, home, other)
-        expect(p.absorb(n)).toBe(false)
+    describe('migrate', () => {
+      it('moves a population from one region to another', () => {
+        const src = new Region(emitter, GS02)
+        const dest = new Region(emitter, GS03)
+        const p = new Population(emitter, src, SamplePopulation)
+        src.introduce(p)
+        p.migrate(dest)
+        expect(p.home).toBe(dest)
+        expect(p.id).toBe('GS03-HU001')
+        expect(src.populations).toHaveLength(0)
+        expect(dest.populations).toHaveLength(1)
       })
     })
 

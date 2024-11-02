@@ -84,6 +84,11 @@ class Population extends Markable {
     return new Population(this.emitter, this.home, data)
   }
 
+  migrate (dest: Region): void {
+    this.home.populations = this.home.populations.filter(p => p !== this)
+    dest.introduce(this)
+  }
+
   toObject (): IPopulation {
     return {
       id: this.id,
