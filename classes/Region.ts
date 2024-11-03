@@ -11,7 +11,7 @@ import Simulation from './Simulation.ts'
 import Society from './Society.ts'
 
 import clamp from '../clamp.ts'
-import createArchfey from '../events/immortals/archfey.ts'
+import createArchfey from '../factories/immortals/archfey.ts'
 
 class Region extends Markable implements IHabitable {
   adjacentRegions: string[]

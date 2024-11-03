@@ -5,7 +5,7 @@ import Simulation from '../../classes/Simulation.ts'
 import getChances from '../get-chances.ts'
 import oxford from '../../oxford.ts'
 import capitalize from '../../capitalize.ts'
-import createElemental from '../immortals/elemental.ts'
+import createElemental from '../../factories/immortals/elemental.ts'
 
 const getImpactRegion = (sim: Simulation): Region | null => {
   const totalArea = 4 * Math.PI * Math.pow(5000, 2)

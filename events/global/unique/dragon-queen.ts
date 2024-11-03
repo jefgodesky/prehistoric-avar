@@ -3,7 +3,7 @@ import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'
-import createDragonQueen from '../../immortals/dragon-queen.ts'
+import createDragonQueen from '../../../factories/immortals/dragon-queen.ts'
 
 const OGRISM_THRESHOLD = 8 as const
 
