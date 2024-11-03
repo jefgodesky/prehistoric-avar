@@ -61,6 +61,11 @@ interface ILanguage {
   morphology?: LangMorphology
 }
 
+interface ILanguageDiffusion {
+  order: Record<LangOrder, number>,
+  morphology: Record<LangMorphology, number>
+}
+
 interface IPopulation {
   id: string
   species: SpeciesName
@@ -187,6 +192,7 @@ export type {
   IHistoricalRecord,
   IImmortal,
   ILanguage,
+  ILanguageDiffusion,
   IPopulation,
   IQuest,
   IQuestCall,

@@ -1,14 +1,12 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
-import { GS03 } from '../instances/regions/index.ts'
-import Region from './Region.ts'
 import Simulation from './Simulation.ts'
 import Language from './Language.ts'
 
 describe('Language', () => {
   const sim = new Simulation()
-  const region = new Region(sim, GS03)
+  const region = sim.world.regions['GS03']
 
   describe('constructor', () => {
     it('creates a Language instance', () => {
@@ -174,6 +172,15 @@ describe('Language', () => {
         const lang = new Language(region, { order: LANG_ORDER.VOS })
         lang.advanceOrder(15)
         expect(lang.order).toBe(LANG_ORDER.VSO)
+      })
+    })
+
+    describe('gatherDiffusion', () => {
+      it('calculates influences from neighboring languages', () => {
+        sim.world.regions['GS02'].languages.push( new Language(sim.world.regions['GS02'], { order: LANG_ORDER.SVO }))
+        const lang = new Language(region)
+        const diffusion = lang.gatherDiffusion()
+        expect(diffusion.order.SVO).toBe(1)
       })
     })
 

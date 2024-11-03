@@ -1,7 +1,7 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
 import type { LangMorphology, LangOrder } from '../enums.ts'
-import { ILanguage } from '../index.d.ts'
+import { ILanguage, ILanguageDiffusion } from '../index.d.ts'
 import Region from './Region.ts'
 
 class Language {
@@ -58,6 +58,19 @@ class Language {
     this.order = newOrder
   }
 
+  gatherDiffusion (): ILanguageDiffusion {
+    const diffusion = Language.getBlankDiffusionChart()
+    for (const neighbor of this.region.adjacentRegions) {
+      const region = this.region.simulation.world.regions[neighbor]
+      if (!region.hasSpeechCommunity()) continue
+      const lang = region.getCurrentLanguage()
+      if (!lang) continue
+      diffusion.order[lang.order]++
+      diffusion.morphology[lang.morphology]++
+    }
+    return diffusion
+  }
+
   toObject (): ILanguage {
     return {
       name: this.name,
@@ -99,6 +112,24 @@ class Language {
     // PNAS, October 10, 2011
     // https://www.pnas.org/doi/10.1073/pnas.1113716108
     return Math.random() < 0.004
+  }
+
+  static getBlankDiffusionChart (): ILanguageDiffusion {
+    return {
+      order: {
+        [LANG_ORDER.SOV]: 0,
+        [LANG_ORDER.SVO]: 0,
+        [LANG_ORDER.OVS]: 0,
+        [LANG_ORDER.OSV]: 0,
+        [LANG_ORDER.VSO]: 0,
+        [LANG_ORDER.VOS]: 0,
+      },
+      morphology: {
+        [LANG_MORPHOLOGY.FUSIONAL]: 0,
+        [LANG_MORPHOLOGY.ANALYTIC]: 0,
+        [LANG_MORPHOLOGY.AGGLUTINATIVE]: 0
+      }
+    }
   }
 }
 
