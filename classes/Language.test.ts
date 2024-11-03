@@ -1,8 +1,10 @@
-import { describe, it } from 'jsr:@std/testing/bdd'
+import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
+import { SamplePopulation } from '../test-examples.ts'
+import Population from './Population.ts'
 import Simulation from './Simulation.ts'
-import Language from './Language.ts'
+import Language, { INFLUENCE_NEEDED } from './Language.ts'
 
 describe('Language', () => {
   const sim = new Simulation()
@@ -183,9 +185,89 @@ describe('Language', () => {
     describe('gatherDiffusion', () => {
       it('calculates influences from neighboring languages', () => {
         sim.world.regions['GS02'].languages.push( new Language(sim.world.regions['GS02'], { order: LANG_ORDER.SVO }))
+        region.introduce(new Population(sim.emitter, region, SamplePopulation))
         const lang = new Language(region)
         const diffusion = lang.gatherDiffusion()
         expect(diffusion.order.SVO).toBe(1)
+      })
+    })
+
+    describe('applyInfluence', () => {
+      beforeEach(() => {
+        sim.world.regions['GS02'].languages = [new Language(sim.world.regions['GS02'], { order: LANG_ORDER.SVO })]
+        region.introduce(new Population(sim.emitter, region, SamplePopulation))
+      })
+
+      it('adds influence based on generation and diffusion', () => {
+        const lang = new Language(region)
+        const { order, morphology } = lang.applyInfluence()
+        expect(lang.influences.order.SVO).toBe(40)
+        expect(lang.influences.order.VSO).toBe(0)
+        expect(order).toBe(lang.order)
+        expect(morphology).toBe(lang.morphology)
+      })
+
+      it('returns order if influence exceeds threshold', () => {
+        const lang = new Language(region)
+        const generation = region.populations[0].species.generation ?? 50
+        lang.influences.order.SVO = INFLUENCE_NEEDED - 5
+        const { order, morphology } = lang.applyInfluence()
+        expect(lang.influences.order.SVO).toBe(INFLUENCE_NEEDED + generation - 5)
+        expect(lang.influences.order.VSO).toBe(0)
+        expect(order).toBe(LANG_ORDER.SVO)
+        expect(morphology).toBe(lang.morphology)
+      })
+
+      it('returns morphology if influence exceeds threshold', () => {
+        const lang = new Language(region)
+        lang.influences.morphology.Agglutinative = INFLUENCE_NEEDED + 20
+        const { order, morphology } = lang.applyInfluence()
+        expect(order).toBe(lang.order)
+        expect(morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
+      })
+
+      it('returns the most influential order if more than one exceed threshold', () => {
+        const lang = new Language(region)
+        lang.influences.order.SVO = INFLUENCE_NEEDED + 50
+        lang.influences.order.VSO = INFLUENCE_NEEDED + 20
+        const { order, morphology } = lang.applyInfluence()
+        expect(order).toBe(LANG_ORDER.SVO)
+        expect(morphology).toBe(lang.morphology)
+      })
+
+      it('returns the most influential morphology if more than one exceed threshold', () => {
+        const lang = new Language(region)
+        lang.influences.morphology.Agglutinative = INFLUENCE_NEEDED + 50
+        lang.influences.morphology.Analytic = INFLUENCE_NEEDED + 20
+        const { order, morphology } = lang.applyInfluence()
+        expect(order).toBe(lang.order)
+        expect(morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
+      })
+
+      it('picks an order randomly in case of a tie', () => {
+        const lang = new Language(region)
+        lang.influences.order.SVO = INFLUENCE_NEEDED + 50
+        lang.influences.order.VSO = INFLUENCE_NEEDED + 50
+        const expected = [
+          LANG_ORDER.SVO,
+          LANG_ORDER.VSO
+        ]
+        const { order, morphology } = lang.applyInfluence()
+        expect(expected).toContain(order)
+        expect(morphology).toBe(lang.morphology)
+      })
+
+      it('picks a morphology randomly in case of a tie', () => {
+        const lang = new Language(region)
+        lang.influences.morphology.Agglutinative = INFLUENCE_NEEDED + 50
+        lang.influences.morphology.Analytic = INFLUENCE_NEEDED + 50
+        const expected = [
+          LANG_MORPHOLOGY.AGGLUTINATIVE,
+          LANG_MORPHOLOGY.ANALYTIC
+        ]
+        const { order, morphology } = lang.applyInfluence()
+        expect(order).toBe(lang.order)
+        expect(expected).toContain(morphology)
       })
     })
 

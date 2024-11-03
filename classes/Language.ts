@@ -1,8 +1,11 @@
+import { sample } from '@std/collections'
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
 import type { LangMorphology, LangOrder } from '../enums.ts'
 import { ILanguage, ILanguageDiffusion } from '../index.d.ts'
 import Region from './Region.ts'
+
+const INFLUENCE_NEEDED = 100
 
 class Language {
   name?: string
@@ -73,6 +76,32 @@ class Language {
     return diffusion
   }
 
+  applyInfluence (): {  order: LangOrder, morphology: LangMorphology } {
+    const diffusion = this.gatherDiffusion()
+    return {
+      order: this.applyOrderInfluence(diffusion),
+      morphology: this.applyMorphologyInfluence(diffusion)
+    }
+  }
+
+  applyOrderInfluence (diffusion: ILanguageDiffusion): LangOrder {
+    const generation = this.region.getAverageGeneration()
+    for (const order of Object.values(LANG_ORDER)) {
+      this.influences.order[order] += diffusion.order[order] * generation
+    }
+
+    return sample(this.getTopInfluences<LangOrder>(this.influences.order)) ?? this.order
+  }
+
+  applyMorphologyInfluence (diffusion: ILanguageDiffusion): LangMorphology {
+    const generation = this.region.getAverageGeneration()
+    for (const morph of Object.values(LANG_MORPHOLOGY)) {
+      this.influences.morphology[morph] += diffusion.morphology[morph] * generation
+    }
+
+    return sample(this.getTopInfluences<LangMorphology>(this.influences.morphology)) ?? this.morphology
+  }
+
   toObject (): ILanguage {
     return {
       name: this.name,
@@ -84,6 +113,15 @@ class Language {
   toString (): string {
     return `Language: ${this.name}`
   }
+
+  private getTopInfluences<K extends LangOrder | LangMorphology>(obj: Record<K, number>): Array<K> {
+    const max = Math.max(...Object.values(obj) as number[])
+    if (max <= INFLUENCE_NEEDED) return []
+    return Object.keys(obj).filter((key): key is K => {
+      return obj[key as K] >= max
+    })
+  }
+
 
   static getMorphologyTypes (): LangMorphology[] {
     return [
@@ -136,3 +174,4 @@ class Language {
 }
 
 export default Language
+export { INFLUENCE_NEEDED }
