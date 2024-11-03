@@ -52,5 +52,14 @@ describe('Simulation', () => {
         }
       })
     })
+
+    describe('refresh', () => {
+      it('recovers global habitability', () => {
+        const sim = new Simulation()
+        sim.world.habitability = 0.5
+        sim.refresh()
+        expect(sim.world.habitability).toBeCloseTo(0.75)
+      })
+    })
   })
 })
