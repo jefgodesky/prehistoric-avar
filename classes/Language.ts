@@ -9,12 +9,14 @@ class Language {
   order: LangOrder
   morphology: LangMorphology
   region: Region
+  influences: ILanguageDiffusion
 
   constructor (region: Region, data?: ILanguage) {
     this.region = region
     this.order = data?.order ?? LANG_ORDER.SOV
     this.morphology = data?.morphology ?? LANG_MORPHOLOGY.FUSIONAL
     this.name = data?.name ?? this.generateName()
+    this.influences = Language.getBlankDiffusionChart()
   }
 
   generateName (): string {

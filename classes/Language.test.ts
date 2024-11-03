@@ -76,6 +76,11 @@ describe('Language', () => {
       const lang = new Language(region, { morphology })
       expect(lang.morphology).toBe(morphology)
     })
+
+    it('sets up a blank influence chart', () => {
+      const lang = new Language(region)
+      expect(lang.influences.order.SVO).toBe(0)
+    })
   })
 
   describe('Member methods', () => {
