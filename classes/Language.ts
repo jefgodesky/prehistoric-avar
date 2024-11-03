@@ -34,7 +34,7 @@ class Language {
     this.morphology = types[next]
   }
 
-  advanceOrder (roll?: number) {
+  advanceOrder (roll?: number): LangOrder {
     let newOrder = this.order
     switch (this.order) {
       case LANG_ORDER.SOV:
@@ -60,7 +60,7 @@ class Language {
         }
         break
     }
-    this.order = newOrder
+    return newOrder
   }
 
   gatherDiffusion (): ILanguageDiffusion {

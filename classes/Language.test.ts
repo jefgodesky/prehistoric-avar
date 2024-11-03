@@ -117,68 +117,57 @@ describe('Language', () => {
     describe('advanceOrder', () => {
       it('usually advances SOV to SVO', () => {
         const lang = new Language(region, { order: LANG_ORDER.SOV })
-        lang.advanceOrder(14)
-        expect(lang.order).toBe(LANG_ORDER.SVO)
+        expect(lang.advanceOrder(14)).toBe(LANG_ORDER.SVO)
       })
 
       it('rarely advances SOV to OSV', () => {
         const lang = new Language(region, { order: LANG_ORDER.SOV })
-        lang.advanceOrder(4)
-        expect(lang.order).toBe(LANG_ORDER.OSV)
+        expect(lang.advanceOrder(4)).toBe(LANG_ORDER.OSV)
       })
 
       it('rarely advances SOV to OVS', () => {
         const lang = new Language(region, { order: LANG_ORDER.SOV })
-        lang.advanceOrder(24)
-        expect(lang.order).toBe(LANG_ORDER.OVS)
+        expect(lang.advanceOrder(24)).toBe(LANG_ORDER.OVS)
       })
 
       it('never advances OSV', () => {
         const lang = new Language(region, { order: LANG_ORDER.OSV })
-        lang.advanceOrder()
-        expect(lang.order).toBe(LANG_ORDER.OSV)
+        expect(lang.advanceOrder()).toBe(LANG_ORDER.OSV)
       })
 
       it('never advances OVS', () => {
         const lang = new Language(region, { order: LANG_ORDER.OVS })
-        lang.advanceOrder()
-        expect(lang.order).toBe(LANG_ORDER.OVS)
+        expect(lang.advanceOrder()).toBe(LANG_ORDER.OVS)
       })
 
       it('usually advances SVO to VSO', () => {
         const lang = new Language(region, { order: LANG_ORDER.SVO })
-        lang.advanceOrder(10)
-        expect(lang.order).toBe(LANG_ORDER.VSO)
+        expect(lang.advanceOrder(10)).toBe(LANG_ORDER.VSO)
       })
 
       it('rarely advances SVO to VOS', () => {
         const lang = new Language(region, { order: LANG_ORDER.SVO })
-        lang.advanceOrder(20)
-        expect(lang.order).toBe(LANG_ORDER.VOS)
+        expect(lang.advanceOrder(20)).toBe(LANG_ORDER.VOS)
       })
 
       it('sometimes advances VSO to SVO', () => {
         const lang = new Language(region, { order: LANG_ORDER.VSO })
-        lang.advanceOrder(5)
-        expect(lang.order).toBe(LANG_ORDER.SVO)
+        expect(lang.advanceOrder(5)).toBe(LANG_ORDER.SVO)
       })
 
       it('sometimes advances VSO to VOS', () => {
         const lang = new Language(region, { order: LANG_ORDER.VSO })
-        lang.advanceOrder(15)
-        expect(lang.order).toBe(LANG_ORDER.VOS)
+        expect(lang.advanceOrder(15)).toBe(LANG_ORDER.VOS)
       })
 
       it('sometimes advances VOS to SVO', () => {
         const lang = new Language(region, { order: LANG_ORDER.VOS })
-        lang.advanceOrder(5)
-        expect(lang.order).toBe(LANG_ORDER.SVO)
+        expect(lang.advanceOrder(5)).toBe(LANG_ORDER.SVO)
       })
 
       it('sometimes advances VOS to VSO', () => {
         const lang = new Language(region, { order: LANG_ORDER.VOS })
-        lang.advanceOrder(15)
-        expect(lang.order).toBe(LANG_ORDER.VSO)
+        expect(lang.advanceOrder(15)).toBe(LANG_ORDER.VSO)
       })
     })
 
