@@ -1,6 +1,7 @@
 import { BIOMES } from '../enums.ts'
 import type { Biome } from '../enums.ts'
 import type { IFitness } from '../index.d.ts'
+import clamp from '../clamp.ts'
 
 class Fitness {
   biomes: IFitness
@@ -47,7 +48,7 @@ class Fitness {
   private clamp (value: number): number {
     const max = this.max ?? Number.MAX_SAFE_INTEGER
     const min = this.min ?? Number.MIN_SAFE_INTEGER
-    return Math.max(Math.min(Math.round(value), max), min)
+    return clamp(Math.round(value), min, max)
   }
 
   static combine (...instances: Fitness[]): Fitness {

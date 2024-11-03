@@ -1,6 +1,7 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
 import type { Emitter, IPopulation } from '../index.d.ts'
+import clamp from '../clamp.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
 import Relationship from './Relationship.ts'
@@ -64,7 +65,7 @@ class Population extends Markable {
       this.viability *= ((roll / 100) * multiplier) + 1 // +/- viability by percent determined
       if (this.viability > 0.95) this.viability = 1 // 95% rounds up to 100%
       if (this.viability < 0.5) this.viability = 0 // 5% rounds down to 0%
-      this.viability = Math.min(Math.max(this.viability, 0), 1) // Clamp between 0 and 1
+      this.viability = clamp(this.viability, 0, 1) // Clamp between 0 and 1
       if (this.viability === 0 || this.viability === 1) return // Stop looping if we hit extremes
     }
   }
