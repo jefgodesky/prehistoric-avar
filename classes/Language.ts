@@ -2,13 +2,16 @@ import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
 import type { LangMorphology, LangOrder } from '../enums.ts'
 import { ILanguage } from '../index.d.ts'
+import Region from './Region.ts'
 
 class Language {
   name?: string
   order: LangOrder
   morphology: LangMorphology
+  region: Region
 
-  constructor (data?: ILanguage) {
+  constructor (region: Region, data?: ILanguage) {
+    this.region = region
     this.order = data?.order ?? LANG_ORDER.SOV
     this.morphology = data?.morphology ?? LANG_MORPHOLOGY.FUSIONAL
     if (data?.name) this.name = data.name

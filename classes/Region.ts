@@ -1,5 +1,5 @@
 import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
-import {Emitter, IHabitable, IQuestReport, IRegion, IRegionFeature} from '../index.d.ts'
+import { Emitter, IHabitable, IQuestReport, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
@@ -42,10 +42,10 @@ class Region extends Markable implements IHabitable {
     this.feyInfluence = data?.feyInfluence ?? 0
     this.habitability = data?.habitability ?? 1
     this.immortals = immortals.map(immortal => new Immortal(emitter, immortal))
-    this.languages = languages.map(lang => new Language(lang))
+    this.languages = languages.map(lang => new Language(this, lang))
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(emitter, this, pop))
-    this.society = data?.society ? new Society(emitter, data.society) : null
+    this.society = data?.society ? new Society(this, data.society) : null
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species

@@ -308,7 +308,7 @@ describe('Region', () => {
       it('returns false if the region is populated by Wosan', () => {
         const region = new Region(emitter, GS02)
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        region.languages.push(new Language())
+        region.languages.push(new Language(region))
         region.populations.push(new Population(emitter, region, wosan))
         expect(region.hasSpeechCommunity()).toBe(false)
       })
@@ -322,7 +322,7 @@ describe('Region', () => {
       it('returns false if the speakers are extinct', () => {
         const region = new Region(emitter, GS02)
         const p = new Population(emitter, region, SamplePopulation)
-        region.languages.push(new Language())
+        region.languages.push(new Language(region))
         region.populations.push(p)
         p.adjustSize(p.size * -2)
         expect(region.hasSpeechCommunity()).toBe(false)
@@ -330,7 +330,7 @@ describe('Region', () => {
 
       it('returns true if the region has a language and people to speak it', () => {
         const region = new Region(emitter, GS02)
-        region.languages.push(new Language())
+        region.languages.push(new Language(region))
         region.populations.push(new Population(emitter, region, SamplePopulation))
         expect(region.hasSpeechCommunity()).toBe(true)
       })
@@ -364,7 +364,7 @@ describe('Region', () => {
     describe('addLanguage', () => {
       it('adds a language to the region', () => {
         const region = new Region(emitter, GS02)
-        region.addLanguage(new Language(), 1)
+        region.addLanguage(new Language(region), 1)
         expect(region.languages).toHaveLength(1)
         expect(region.languages[0].name).toBe(`${GS02.id}-001`)
       })
@@ -379,7 +379,7 @@ describe('Region', () => {
 
       it('returns the region\'s most recent language', () => {
         const region = new Region(emitter, GS02)
-        const lang = new Language()
+        const lang = new Language(region)
         region.languages.push(lang)
         const actual = region.getCurrentLanguage()
         expect(JSON.stringify(actual?.toString())).toBe(JSON.stringify(lang.toString()))

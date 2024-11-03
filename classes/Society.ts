@@ -1,20 +1,23 @@
-import { Emitter, ISociety } from '../index.d.ts'
+import { ISociety } from '../index.d.ts'
 import Fitness from './Fitness.ts'
 import Language from './Language.ts'
 import Markable from './Markable.ts'
+import Region from './Region.ts'
 import Scribe from './Scribe.ts'
 
 class Society extends Markable {
   fitness: Fitness
   language: Language | null
+  region: Region
   scribe: Scribe
 
-  constructor (emitter: Emitter, data?: ISociety) {
-    super(emitter, data)
+  constructor (region: Region, data?: ISociety) {
+    super(region.emitter, data)
 
     this.fitness = new Fitness(data?.fitness ?? undefined)
-    this.language = data?.language ? new Language(data.language) : null
-    this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
+    this.language = data?.language ? new Language(region, data.language) : null
+    this.region = region
+    this.scribe = new Scribe(region.emitter, ...(data?.scrolls ?? []))
   }
 
   toObject (): ISociety {

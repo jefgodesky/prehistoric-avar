@@ -11,7 +11,7 @@ import Population from './Population.ts'
 describe('Population', () => {
   const emitter = new Emittery()
   const home = new Region(emitter, GS02)
-  home.society = new Society(emitter, SampleSociety)
+  home.society = new Society(home, SampleSociety)
 
   describe('constructor', () => {
     it('creates a Population instance', () => {

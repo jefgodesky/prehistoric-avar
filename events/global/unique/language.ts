@@ -21,7 +21,7 @@ const language = (sim: Simulation, forceEvent?: boolean): void => {
   })
 
   const region = sample(regions) as Region
-  const proto = new Language({ morphology: LANG_MORPHOLOGY.AGGLUTINATIVE })
+  const proto = new Language(region, { morphology: LANG_MORPHOLOGY.AGGLUTINATIVE })
   proto.name = `${region.id}-${sim.millennium.toString().padStart(3, '0')}`
   region.languages.push(proto)
 
