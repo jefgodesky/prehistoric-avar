@@ -1,6 +1,6 @@
 import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import type { IQuestReport } from '../index.d.ts'
+import type { IPopulation, IQuestReport } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import { DragonQueen, SamplePopulation, SampleSociety } from '../test-examples.ts'
 import { SPECIES_NAMES } from '../enums.ts'
@@ -14,6 +14,25 @@ import Simulation from './Simulation.ts'
 
 describe('Region', () => {
   let sim: Simulation
+
+  const introducePopulation = (
+    region: Region = new Region(sim, GS02),
+    populationData: IPopulation = SamplePopulation
+  ): { region: Region, population: Population } => {
+    const population = new Population(sim.emitter, region, populationData)
+    region.introduce(population)
+    return { region, population }
+  }
+
+  const addSpeechCommunity = (
+    region: Region = new Region(sim, GS02),
+    populationData: IPopulation = SamplePopulation,
+    language: Language = new Language(region)
+  ): {  region: Region, population: Population, language: Language } => {
+    const { population } = introducePopulation(region, populationData)
+    region.addLanguage(language)
+    return { region, population, language }
+  }
 
   beforeEach(() => { sim = new Simulation() })
 
@@ -208,24 +227,18 @@ describe('Region', () => {
 
     describe('introduce', () => {
       it('adds a new population', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.introduce(p)
+        const { region } = introducePopulation()
         expect(region.populations).toHaveLength(1)
       })
 
       it('gives the population an ID', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.introduce(p)
-        expect(p.id).toBe('GS02-HU001')
+        const { population } = introducePopulation()
+        expect(population.id).toBe('GS02-HU001')
       })
 
       it('gives each population a unique ID', () => {
-        const region = new Region(sim, GS02)
-        const p1 = new Population(sim.emitter, region, SamplePopulation)
+        const { region, population: p1 } = introducePopulation()
         const p2 = new Population(sim.emitter, region, SamplePopulation)
-        region.introduce(p1)
         p1.adjustSize(p1.size * -2)
         region.introduce(p2)
         expect(p1.id).toBe('GS02-HU001')
@@ -243,7 +256,7 @@ describe('Region', () => {
       it('has existing populations absorb new ones of the same species', () => {
         const src = new Region(sim, DS01)
         const dest = new Region(sim, GS02)
-        const p1 = new Population(sim.emitter, src, SamplePopulation)
+        const p1 = new Population(sim.emitter, dest, SamplePopulation)
         const p2 = new Population(sim.emitter, src, SamplePopulation)
         dest.introduce(p1)
         dest.introduce(p2)
@@ -259,16 +272,13 @@ describe('Region', () => {
       })
 
       it('returns false if all populations in the region are extinct', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.populations.push(p)
-        p.adjustSize(p.size * -2)
+        const { region, population } = introducePopulation()
+        population.adjustSize(population.size * -2)
         expect(region.isPopulated()).toBe(false)
       })
 
       it('returns true if the region has 1 or more extant populations', () => {
-        const region = new Region(sim, GS02)
-        region.populations.push(new Population(sim.emitter, region, SamplePopulation))
+        const { region } = introducePopulation()
         expect(region.isPopulated()).toBe(true)
       })
     })
@@ -280,23 +290,19 @@ describe('Region', () => {
       })
 
       it('returns false if the region has a Wosan population', () => {
-        const region = new Region(sim, GS02)
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        region.populations.push(new Population(sim.emitter, region, wosan))
+        const { region } = introducePopulation(new Region(sim, GS02), wosan)
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
       it('returns false if the speaking population is extinct', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.populations.push(p)
-        p.adjustSize(p.size * -2)
+        const { region, population } = introducePopulation()
+        population.adjustSize(population.size * -2)
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
       it('returns true if the region has a population that is not Wosan', () => {
-        const region = new Region(sim, GS02)
-        region.populations.push(new Population(sim.emitter, region, SamplePopulation))
+        const { region } = introducePopulation()
         expect(region.hasPopulationCapableOfSpeech()).toBe(true)
       })
     })
@@ -308,32 +314,24 @@ describe('Region', () => {
       })
 
       it('returns false if the region is populated by Wosan', () => {
-        const region = new Region(sim, GS02)
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        region.languages.push(new Language(region))
-        region.populations.push(new Population(sim.emitter, region, wosan))
+        const { region } = introducePopulation(new Region(sim, GS02), wosan)
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
       it('returns false if the region is populated but has no language', () => {
-        const region = new Region(sim, GS02)
-        region.populations.push(new Population(sim.emitter, region, SamplePopulation))
+        const { region } = introducePopulation()
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
       it('returns false if the speakers are extinct', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.languages.push(new Language(region))
-        region.populations.push(p)
-        p.adjustSize(p.size * -2)
+        const { region, population } = addSpeechCommunity()
+        population.adjustSize(population.size * -2)
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
       it('returns true if the region has a language and people to speak it', () => {
-        const region = new Region(sim, GS02)
-        region.languages.push(new Language(region))
-        region.populations.push(new Population(sim.emitter, region, SamplePopulation))
+        const { region } = addSpeechCommunity()
         expect(region.hasSpeechCommunity()).toBe(true)
       })
     })
@@ -425,9 +423,7 @@ describe('Region', () => {
 
     describe('reduceOgrism', () => {
       it('reduces ogrism if the region has no speech community', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.introduce(p)
+        const { region } = introducePopulation()
         region.ogrism = 5
         region.reduceOgrism()
         expect(region.ogrism).toBe(4)
@@ -441,13 +437,74 @@ describe('Region', () => {
       })
 
       it('does nothing if the region has a speech community', () => {
-        const region = new Region(sim, GS02)
-        const p = new Population(sim.emitter, region, SamplePopulation)
-        region.introduce(p)
-        region.addLanguage(new Language(region))
+        const { region } = addSpeechCommunity()
         region.ogrism = 5
         region.reduceOgrism()
         expect(region.ogrism).toBe(5)
+      })
+    })
+
+    describe('adjustFeyInfluence', () => {
+      it('reduces fey influence if the region has no speech community', () => {
+        const { region } = introducePopulation()
+        region.feyInfluence = 5
+        region.adjustFeyInfluence()
+        expect(region.feyInfluence).toBe(4)
+      })
+
+      it('increases fey influence if the region has a speech community', () => {
+        const { region } = addSpeechCommunity()
+        region.adjustFeyInfluence()
+        expect(region.feyInfluence).toBe(1)
+      })
+
+      it('will never reduce fey influence below 0', () => {
+        const { region } = introducePopulation()
+        region.feyInfluence = 0
+        region.adjustFeyInfluence()
+        expect(region.feyInfluence).toBe(0)
+      })
+
+      it('will never increase fey influence beyond 8', () => {
+        const { region } = addSpeechCommunity()
+        region.feyInfluence = 8
+        region.adjustFeyInfluence()
+        expect(region.feyInfluence).toBe(8)
+      })
+
+      it('adds an archfey if fey influence reaches 8 and it doesn\'t have one', () => {
+        const { region } = addSpeechCommunity()
+        region.feyInfluence = 7
+        region.adjustFeyInfluence()
+        expect(region.immortals).toHaveLength(1)
+        expect(region.immortals[0].description).toBe(`Archfey Sovereign of ${region.id}`)
+      })
+
+      it('won\'t add an archfey to a region that already has one', () => {
+        const { region } = addSpeechCommunity()
+        region.feyInfluence = 8
+        region.adjustFeyInfluence()
+        region.adjustFeyInfluence()
+        expect(region.feyInfluence).toBe(8)
+        expect(region.immortals).toHaveLength(1)
+      })
+
+      it('gets the dragons\' attention', () => {
+        const { region } = addSpeechCommunity()
+        region.feyInfluence = 8
+        region.adjustFeyInfluence()
+        expect(region.immortals).toHaveLength(1)
+        expect(sim.world.dragons.interest.value).toBe(1)
+      })
+
+      it('won\'t get the dragons\' attention a second time', () => {
+        const { region } = addSpeechCommunity()
+        region.feyInfluence = 8
+        region.adjustFeyInfluence()
+        region.immortals[0].slain = true
+        region.adjustFeyInfluence()
+        expect(region.immortals).toHaveLength(2)
+        expect(sim.world.dragons.interest.value).toBe(1)
       })
     })
 

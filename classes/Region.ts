@@ -2,12 +2,16 @@ import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
 import { IHabitable, IQuestReport, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import { QUEST_EVENTS } from './Quest.ts'
+
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'
 import Society from './Society.ts'
+
+import clamp from '../clamp.ts'
+import createArchfey from '../events/immortals/archfey.ts'
 
 class Region extends Markable implements IHabitable {
   adjacentRegions: string[]
@@ -130,6 +134,20 @@ class Region extends Markable implements IHabitable {
 
   reduceOgrism (): void {
     if (!this.hasSpeechCommunity()) this.ogrism = Math.max(this.ogrism - 1, 0)
+  }
+
+  adjustFeyInfluence (): void {
+    const mod = this.hasSpeechCommunity() ? 1 : -1
+    this.feyInfluence = clamp(this.feyInfluence + mod, 0, 8)
+
+    if (this.feyInfluence > 7) {
+      const crown = `Archfey Sovereign of ${this.id}`
+      const sovereigns = this.immortals.filter(immortal => immortal.description === crown)
+      const reigning = sovereigns.filter(sovereign => !sovereign.slain)
+      const coronate = reigning.length < 1
+      if (coronate) this.immortals.push(createArchfey(this.simulation, this))
+      if (sovereigns.length < 1) this.simulation.world.dragons.interest.incr()
+    }
   }
 
   toObject (): IRegion {
