@@ -27,11 +27,11 @@ class Language {
     return `${id}-${simulation.millennium.toString().padStart(3, '0')}`
   }
 
-  advanceMorphology () {
+  advanceMorphology (): LangMorphology {
     const types = Language.getMorphologyTypes()
     const curr = types.indexOf(this.morphology)
     const next = (curr + 1) % types.length
-    this.morphology = types[next]
+    return types[next]
   }
 
   advanceOrder (roll?: number): LangOrder {

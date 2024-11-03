@@ -97,20 +97,17 @@ describe('Language', () => {
     describe('advanceMorphology', () => {
       it('advances from fusional to analytic', () => {
         const lang = new Language(region)
-        lang.advanceMorphology()
-        expect(lang.morphology).toBe(LANG_MORPHOLOGY.ANALYTIC)
+        expect(lang.advanceMorphology()).toBe(LANG_MORPHOLOGY.ANALYTIC)
       })
 
       it('advances from analytic to agglutinative', () => {
         const lang = new Language(region, { morphology: LANG_MORPHOLOGY.ANALYTIC })
-        lang.advanceMorphology()
-        expect(lang.morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
+        expect(lang.advanceMorphology()).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
       })
 
       it('advances from agglutinative to fusional', () => {
         const lang = new Language(region, { morphology: LANG_MORPHOLOGY.AGGLUTINATIVE })
-        lang.advanceMorphology()
-        expect(lang.morphology).toBe(LANG_MORPHOLOGY.FUSIONAL)
+        expect(lang.advanceMorphology()).toBe(LANG_MORPHOLOGY.FUSIONAL)
       })
     })
 
