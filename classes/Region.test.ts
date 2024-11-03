@@ -366,7 +366,7 @@ describe('Region', () => {
     describe('addLanguage', () => {
       it('adds a language to the region', () => {
         const region = new Region(sim, GS02)
-        region.addLanguage(new Language(region), 1)
+        region.addLanguage(new Language(region))
         expect(region.languages).toHaveLength(1)
         expect(region.languages[0].name).toBe(`${GS02.id}-001`)
       })
@@ -420,6 +420,34 @@ describe('Region', () => {
         region.introduce(new Population(sim.emitter, region, dwarves))
         const expected = Math.floor(((4000 * 40) + (2000 * 10) + (3000 * 20)) / (4000 + 2000 + 3000))
         expect(region.getAverageGeneration()).toBe(expected)
+      })
+    })
+
+    describe('reduceOgrism', () => {
+      it('reduces ogrism if the region has no speech community', () => {
+        const region = new Region(sim, GS02)
+        const p = new Population(sim.emitter, region, SamplePopulation)
+        region.introduce(p)
+        region.ogrism = 5
+        region.reduceOgrism()
+        expect(region.ogrism).toBe(4)
+      })
+
+      it('will never reduce ogrism below 0', () => {
+        const region = new Region(sim, GS02)
+        region.ogrism = 0
+        region.reduceOgrism()
+        expect(region.ogrism).toBe(0)
+      })
+
+      it('does nothing if the region has a speech community', () => {
+        const region = new Region(sim, GS02)
+        const p = new Population(sim.emitter, region, SamplePopulation)
+        region.introduce(p)
+        region.addLanguage(new Language(region))
+        region.ogrism = 5
+        region.reduceOgrism()
+        expect(region.ogrism).toBe(5)
       })
     })
 

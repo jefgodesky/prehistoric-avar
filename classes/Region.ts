@@ -106,7 +106,8 @@ class Region extends Markable implements IHabitable {
     if (this.habitability >= ROUND_HABITABILITY_TO_FULL) this.habitability = 1
   }
 
-  addLanguage (language: Language, millennium: number): void {
+  addLanguage (language: Language): void {
+    const { millennium } = this.simulation
     language.name = `${this.id}-${millennium.toString().padStart(3, '0')}`
     this.languages.push(language)
   }
@@ -125,6 +126,10 @@ class Region extends Markable implements IHabitable {
       denominator += p.size
     }
     return Math.floor(nominator / denominator)
+  }
+
+  reduceOgrism (): void {
+    if (!this.hasSpeechCommunity()) this.ogrism = Math.max(this.ogrism - 1, 0)
   }
 
   toObject (): IRegion {
