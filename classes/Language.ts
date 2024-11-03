@@ -14,7 +14,12 @@ class Language {
     this.region = region
     this.order = data?.order ?? LANG_ORDER.SOV
     this.morphology = data?.morphology ?? LANG_MORPHOLOGY.FUSIONAL
-    if (data?.name) this.name = data.name
+    this.name = data?.name ?? this.generateName()
+  }
+
+  generateName (): string {
+    const { id, simulation } = this.region
+    return `${id}-${simulation.millennium.toString().padStart(3, '0')}`
   }
 
   advanceMorphology () {

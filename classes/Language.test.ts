@@ -16,6 +16,11 @@ describe('Language', () => {
       expect(lang).toBeInstanceOf(Language)
     })
 
+    it('generates a name', () => {
+      const lang = new Language(region)
+      expect(lang.name).toBe('GS03-001')
+    })
+
     it('can have a name', () => {
       const name = 'FS32-001'
       const lang = new Language(region, { name })
@@ -76,6 +81,14 @@ describe('Language', () => {
   })
 
   describe('Member methods', () => {
+    describe('generateName', () => {
+      it('generates a name for the language', () => {
+        const expected = 'GS03-001'
+        const lang = new Language(region)
+        expect(lang.generateName()).toBe(expected)
+      })
+    })
+
     describe('advanceMorphology', () => {
       it('advances from fusional to analytic', () => {
         const lang = new Language(region)
