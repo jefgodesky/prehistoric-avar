@@ -116,6 +116,17 @@ class Region extends Markable implements IHabitable {
     return this.languages[this.languages.length - 1]
   }
 
+  getAverageGeneration (): number {
+    if (!this.isPopulated()) return 0
+    let nominator = 0
+    let denominator = 0
+    for (const p of this.populations) {
+      nominator += p.size * (p.species.generation ?? 50)
+      denominator += p.size
+    }
+    return Math.floor(nominator / denominator)
+  }
+
   toObject (): IRegion {
     const obj: IRegion = {
       id: this.id,

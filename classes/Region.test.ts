@@ -1,4 +1,4 @@
-import { describe, it } from 'jsr:@std/testing/bdd'
+import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import type { IQuestReport } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
@@ -13,7 +13,9 @@ import Region from './Region.ts'
 import Simulation from './Simulation.ts'
 
 describe('Region', () => {
-  const sim = new Simulation()
+  let sim: Simulation
+
+  beforeEach(() => { sim = new Simulation() })
 
   describe('constructor', () => {
     it('creates a Region instance', () => {
@@ -383,6 +385,41 @@ describe('Region', () => {
         region.languages.push(lang)
         const actual = region.getCurrentLanguage()
         expect(JSON.stringify(actual?.toString())).toBe(JSON.stringify(lang.toString()))
+      })
+    })
+
+    describe('getAverageGeneration', () => {
+      it('returns 0 if the region is unpopulated', () => {
+        const region = new Region(sim, GS02)
+        expect(region.getAverageGeneration()).toBe(0)
+      })
+
+      it('returns the population generation value if only one population', () => {
+        const region = new Region(sim, GS02)
+        region.introduce(new Population(sim.emitter, region, SamplePopulation))
+        expect(region.getAverageGeneration()).toBe(region.populations[0].species.generation)
+      })
+
+      it('returns the average of two populations', () => {
+        const region = new Region(sim, GS02)
+        const humans = Object.assign({}, SamplePopulation, { size: 4000 })
+        const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
+        region.introduce(new Population(sim.emitter, region, humans))
+        region.introduce(new Population(sim.emitter, region, elves))
+        const expected = ((4000 * 40) + (2000 * 10)) / (4000 + 2000)
+        expect(region.getAverageGeneration()).toBe(expected)
+      })
+
+      it('returns the average of three or more populations', () => {
+        const region = new Region(sim, GS02)
+        const humans = Object.assign({}, SamplePopulation, { size: 4000 })
+        const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
+        const dwarves = Object.assign({}, SamplePopulation, { size: 3000, species: SPECIES_NAMES.DWARF })
+        region.introduce(new Population(sim.emitter, region, humans))
+        region.introduce(new Population(sim.emitter, region, elves))
+        region.introduce(new Population(sim.emitter, region, dwarves))
+        const expected = Math.floor(((4000 * 40) + (2000 * 10) + (3000 * 20)) / (4000 + 2000 + 3000))
+        expect(region.getAverageGeneration()).toBe(expected)
       })
     })
 
