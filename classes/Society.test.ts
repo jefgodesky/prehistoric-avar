@@ -1,15 +1,15 @@
-import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES } from '../enums.ts'
 import { GS03 } from '../instances/regions/index.ts'
 import { SampleSociety } from '../test-examples.ts'
 import Region from './Region.ts'
+import Simulation from './Simulation.ts'
 import Society from './Society.ts'
 
 describe('Society', () => {
-  const emitter = new Emittery()
-  const region = new Region(emitter, GS03)
+  const sim = new Simulation()
+  const region = new Region(sim, GS03)
 
   describe('constructor', () => {
     it('creates a Society instance', () => {

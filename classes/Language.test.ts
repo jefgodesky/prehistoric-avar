@@ -1,14 +1,14 @@
-import Emittery from 'emittery'
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { LANG_MORPHOLOGY, LANG_ORDER } from '../enums.ts'
 import { GS03 } from '../instances/regions/index.ts'
 import Region from './Region.ts'
+import Simulation from './Simulation.ts'
 import Language from './Language.ts'
 
 describe('Language', () => {
-  const emitter = new Emittery()
-  const region = new Region(emitter, GS03)
+  const sim = new Simulation()
+  const region = new Region(sim, GS03)
 
   describe('constructor', () => {
     it('creates a Language instance', () => {

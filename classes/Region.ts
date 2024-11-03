@@ -1,11 +1,12 @@
 import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
-import { Emitter, IHabitable, IQuestReport, IRegion, IRegionFeature } from '../index.d.ts'
+import { IHabitable, IQuestReport, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
+import { QUEST_EVENTS } from './Quest.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
-import {QUEST_EVENTS} from './Quest.ts'
+import Simulation from './Simulation.ts'
 import Society from './Society.ts'
 
 class Region extends Markable implements IHabitable {
@@ -24,9 +25,10 @@ class Region extends Markable implements IHabitable {
   society: Society | null
   species?: SpeciesName
   tags: string[]
+  simulation: Simulation
 
-  constructor (emitter: Emitter, data?: IRegion) {
-    super(emitter, data)
+  constructor (sim: Simulation, data?: IRegion) {
+    super(sim.emitter, data)
 
     const immortals = data?.immortals ?? []
     const languages = data?.languages ?? []
@@ -41,16 +43,17 @@ class Region extends Markable implements IHabitable {
     this.features = data?.features ?? []
     this.feyInfluence = data?.feyInfluence ?? 0
     this.habitability = data?.habitability ?? 1
-    this.immortals = immortals.map(immortal => new Immortal(emitter, immortal))
+    this.immortals = immortals.map(immortal => new Immortal(sim.emitter, immortal))
     this.languages = languages.map(lang => new Language(this, lang))
     this.ogrism = data?.ogrism ?? 0
-    this.populations = populations.map(pop => new Population(emitter, this, pop))
+    this.populations = populations.map(pop => new Population(sim.emitter, this, pop))
+    this.simulation = sim
     this.society = data?.society ? new Society(this, data.society) : null
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species
 
-    emitter.on(QUEST_EVENTS.ACCOMPLISHED, (report: IQuestReport) => this.handleQuestAccomplished(report))
+    sim.emitter.on(QUEST_EVENTS.ACCOMPLISHED, (report: IQuestReport) => this.handleQuestAccomplished(report))
   }
 
   getCapacity (worldHabitability: number): number {

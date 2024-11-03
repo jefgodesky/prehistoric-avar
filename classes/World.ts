@@ -1,7 +1,8 @@
-import { Emitter, IHabitable, ISpecies, IWorld } from '../index.d.ts'
+import { IHabitable, ISpecies, IWorld } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Dragons from './Dragons.ts'
 import Region from './Region.ts'
+import type Simulation from './Simulation.ts'
 import Species from './Species.ts'
 import { getRegions } from '../instances/regions/index.ts'
 import species from '../instances/species/index.ts'
@@ -14,12 +15,12 @@ class World implements IHabitable {
   species: Record<string, Species>
   regions: Record<string, Region>
 
-  constructor (emitter: Emitter) {
+  constructor (sim: Simulation) {
     this.habitability = 1
     this.events = []
     this.dragons = new Dragons()
     this.species = species
-    this.regions = getRegions(emitter)
+    this.regions = getRegions(sim)
   }
 
   reduceHabitability (factor: number): void {

@@ -1,4 +1,3 @@
-import type { Emitter } from '../../index.d.ts'
 import Region from '../../classes/Region.ts'
 
 import DC01 from './DC01.ts'
@@ -190,6 +189,7 @@ import PD03 from './PD03.ts'
 import PS01 from './PS01.ts'
 import PS02 from './PS02.ts'
 import PS03 from './PS03.ts'
+import Simulation from '../../classes/Simulation.ts'
 
 const regionData = [
   DS01, DC01, DD01,
@@ -222,10 +222,10 @@ const regionData = [
   PD01, PD02, PD03
 ]
 
-const getRegions = (emitter: Emitter): Record<string, Region> => {
+const getRegions = (sim: Simulation): Record<string, Region> => {
   const dictionary: Record<string, Region> = {}
   for (const region of regionData) {
-    dictionary[region.id] = new Region(emitter, region)
+    dictionary[region.id] = new Region(sim, region)
   }
   return dictionary
 }
