@@ -1,5 +1,6 @@
 import type { Emitter, IScroll } from '../index.d.ts'
 import Scroll from './Scroll.ts'
+import {IWorld} from '../index.d.ts'
 
 const SCROLL_EVENTS = {
   OPEN: 'Scroll.Open'
@@ -14,6 +15,17 @@ class Scribe {
       return new Scroll(scroll.text, scroll.seals)
     })
     emitter.on('Scroll.Open', (data: IScroll) => this.handleScrollOpen(data))
+  }
+
+  unseal (
+    text: string,
+    seals: number,
+    onUnseal?: (context?: IWorld) => number,
+    onOpen?: (context?: IWorld) => void
+  ): void {
+    const scroll = this.scrolls.find(scroll => scroll.text === text)
+    if (scroll) scroll.unseal()
+    if (!scroll) this.scrolls.push(new Scroll(text, seals, onUnseal, onOpen))
   }
 
   toObject (): IScroll[] {

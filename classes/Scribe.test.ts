@@ -40,6 +40,26 @@ describe('Scribe', () => {
   })
 
   describe('Member methods', () => {
+    describe('unseal', () => {
+      it('creates the scroll if it does not yet exist', () => {
+        const d = new Scribe(emitter)
+        d.unseal('Test', 5, () => 1, () => {})
+        expect(d.scrolls).toHaveLength(1)
+        expect(d.scrolls[0].text).toBe('Test')
+        expect(d.scrolls[0].seals).toBe(5)
+      })
+
+      it('unseals the scroll if it exist', () => {
+        const text = 'Test'
+        const scroll = new Scroll(text, 5)
+        const d = new Scribe(emitter, scroll)
+        d.unseal(text, 5, () => 1, () => {})
+        expect(d.scrolls).toHaveLength(1)
+        expect(d.scrolls[0].text).toBe(text)
+        expect(d.scrolls[0].seals).toBe(4)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const scroll: IScroll = { text: 'Test scroll', seals: 5 }
