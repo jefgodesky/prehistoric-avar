@@ -257,6 +257,18 @@ describe('Language', () => {
       })
     })
 
+    describe('change', () => {
+      it('returns null if the language does not change', () => {
+        const lang = new Language(region)
+        expect(lang.change(false)).toBeNull()
+      })
+
+      it('returns a new language if it changes', () => {
+        const lang = new Language(region)
+        expect(lang.change(true)).toBeInstanceOf(Language)
+      })
+    })
+
     describe('toObject', () => {
       it('returns an object', () => {
         const lang = new Language(region)

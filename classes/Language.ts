@@ -27,6 +27,21 @@ class Language {
     return `${id}-${simulation.millennium.toString().padStart(3, '0')}`
   }
 
+  change (override?: boolean): Language | null {
+    const diffusion = this.applyInfluence()
+    const natural = Language.willNaturallyAdvance()
+    const order = natural.order
+      ? this.advanceOrder()
+      : diffusion.order
+    const morphology = natural.morphology
+      ? this.advanceMorphology()
+      : diffusion.morphology
+
+    const change = order !== this.order || morphology !== this.morphology
+    if (!(override ?? change)) return null
+    return new Language(this.region, { order, morphology })
+  }
+
   advanceMorphology (): LangMorphology {
     const types = Language.getMorphologyTypes()
     const curr = types.indexOf(this.morphology)
