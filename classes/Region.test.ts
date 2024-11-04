@@ -404,7 +404,7 @@ describe('Region', () => {
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
         region.introduce(new Population(sim.emitter, region, humans))
         region.introduce(new Population(sim.emitter, region, elves))
-        const expected = ((4000 * 40) + (2000 * 10)) / (4000 + 2000)
+        const expected = Math.floor(((4000 * 40) + (2000 * 5)) / (4000 + 2000))
         expect(region.getAverageGeneration()).toBe(expected)
       })
 
@@ -416,7 +416,7 @@ describe('Region', () => {
         region.introduce(new Population(sim.emitter, region, humans))
         region.introduce(new Population(sim.emitter, region, elves))
         region.introduce(new Population(sim.emitter, region, dwarves))
-        const expected = Math.floor(((4000 * 40) + (2000 * 10) + (3000 * 20)) / (4000 + 2000 + 3000))
+        const expected = Math.floor(((4000 * 40) + (2000 * 5) + (3000 * 20)) / (4000 + 2000 + 3000))
         expect(region.getAverageGeneration()).toBe(expected)
       })
     })

@@ -4,7 +4,7 @@ import Species from '../../classes/Species.ts'
 export default new Species({
   name: SPECIES_NAMES.ELF,
   ancestor: SPECIES_NAMES.WOSAN,
-  generation: 10,
+  generation: 5,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 3,
     [BIOMES.TEMPERATE_FOREST]: 3,
