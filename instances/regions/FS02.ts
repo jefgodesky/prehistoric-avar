@@ -10,39 +10,83 @@ const FS02: IRegion = {
   features: [
     {
       description: 'Grandmother Tree',
-      impact: 362
+      impact: 381
     },
     {
       description: 'Grandmother Tree',
-      impact: 268
+      impact: 454
     },
     {
       description: 'Grandmother Tree',
-      impact: 430
+      impact: 435
     },
     {
       description: 'Grandmother Tree',
-      impact: 425
+      impact: 331
     },
     {
       description: 'Grandmother Tree',
-      impact: 312
+      impact: 370
     },
     {
       description: 'Grandmother Tree',
-      impact: 443
+      impact: 399
     },
     {
       description: 'Grandmother Tree',
-      impact: 426
+      impact: 257
     },
     {
       description: 'Grandmother Tree',
-      impact: 410
+      impact: 395
     },
     {
       description: 'Grandmother Tree',
-      impact: 429
+      impact: 412
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 433
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 390
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 396
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 487
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 400
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 396
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 488
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 284
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 454
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 462
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 320
     },
     {
       description: 'Grandmother Tree',
@@ -50,43 +94,55 @@ const FS02: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 441
+      impact: 284
     },
     {
       description: 'Grandmother Tree',
-      impact: 252
+      impact: 377
     },
     {
       description: 'Grandmother Tree',
-      impact: 489
+      impact: 460
     },
     {
       description: 'Grandmother Tree',
-      impact: 470
+      impact: 323
     },
     {
       description: 'Grandmother Tree',
-      impact: 431
+      impact: 483
     },
     {
       description: 'Grandmother Tree',
-      impact: 285
+      impact: 428
     },
     {
       description: 'Grandmother Tree',
-      impact: 494
+      impact: 334
     },
     {
       description: 'Grandmother Tree',
-      impact: 279
+      impact: 386
     },
     {
       description: 'Grandmother Tree',
-      impact: 410
+      impact: 367
     },
     {
       description: 'Grandmother Tree',
-      impact: 283
+      impact: 267
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 496
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 337
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 352
     },
     {
       description: 'Grandmother Tree',
@@ -94,39 +150,23 @@ const FS02: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 366
+      impact: 313
     },
     {
       description: 'Grandmother Tree',
-      impact: 275
+      impact: 460
     },
     {
       description: 'Grandmother Tree',
-      impact: 498
+      impact: 425
     },
     {
       description: 'Grandmother Tree',
-      impact: 299
+      impact: 478
     },
     {
       description: 'Grandmother Tree',
-      impact: 274
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 424
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 279
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 261
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 306
+      impact: 376
     }
   ],
   feyInfluence: 0,
@@ -136,6 +176,7 @@ const FS02: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
+  species: Orc,
   tags: ['forest', 'boreal', 'surface', 'coastal'],
 }
 

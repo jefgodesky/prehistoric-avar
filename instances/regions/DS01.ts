@@ -10,19 +10,15 @@ const DS01: IRegion = {
   features: [
     {
       description: 'Oasis',
-      impact: 134
+      impact: 147
     },
     {
       description: 'Oasis',
-      impact: 72
+      impact: 64
     },
     {
       description: 'Oasis',
-      impact: 148
-    },
-    {
-      description: 'Oasis',
-      impact: 121
+      impact: 135
     },
     {
       description: 'Oasis',
@@ -30,35 +26,35 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 128
+      impact: 65
     },
     {
       description: 'Oasis',
-      impact: 144
+      impact: 66
     },
     {
       description: 'Oasis',
-      impact: 134
+      impact: 124
     },
     {
       description: 'Oasis',
-      impact: 52
+      impact: 81
     },
     {
       description: 'Oasis',
-      impact: 60
+      impact: 64
     },
     {
       description: 'Oasis',
-      impact: 115
+      impact: 114
     },
     {
       description: 'Oasis',
-      impact: 86
+      impact: 70
     },
     {
       description: 'Oasis',
-      impact: 82
+      impact: 95
     },
     {
       description: 'Oasis',
@@ -66,55 +62,59 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 140
+      impact: 127
     },
     {
       description: 'Oasis',
-      impact: 117
+      impact: 105
     },
     {
       description: 'Oasis',
-      impact: 139
+      impact: 103
     },
     {
       description: 'Oasis',
-      impact: 61
+      impact: 143
     },
     {
       description: 'Oasis',
-      impact: 126
+      impact: 80
     },
     {
       description: 'Oasis',
-      impact: 137
+      impact: 149
     },
     {
       description: 'Oasis',
-      impact: 132
+      impact: 118
     },
     {
       description: 'Oasis',
-      impact: 108
+      impact: 82
     },
     {
       description: 'Oasis',
-      impact: 52
+      impact: 130
     },
     {
       description: 'Oasis',
-      impact: 104
+      impact: 54
     },
     {
       description: 'Oasis',
-      impact: 98
+      impact: 71
     },
     {
       description: 'Oasis',
-      impact: 147
+      impact: 66
     },
     {
       description: 'Oasis',
-      impact: 106
+      impact: 91
+    },
+    {
+      description: 'Oasis',
+      impact: 92
     }
   ],
   feyInfluence: 0,

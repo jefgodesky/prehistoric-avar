@@ -7,24 +7,7 @@ const MD03: IRegion = {
   biome: 'World Below',
   capacity: 7773,
   dragons: [],
-  features: [
-    {
-      description: 'Underground lake (2922 sq. km)',
-      impact: 292200
-    },
-    {
-      description: 'Underground lake (2551 sq. km)',
-      impact: 255100
-    },
-    {
-      description: 'Underground lake (734 sq. km)',
-      impact: 73400
-    },
-    {
-      description: 'Underground lake (851 sq. km)',
-      impact: 85100
-    }
-  ],
+  features: [],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
@@ -32,6 +15,7 @@ const MD03: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
+  species: Gnome,
   tags: ['world-below'],
 }
 
