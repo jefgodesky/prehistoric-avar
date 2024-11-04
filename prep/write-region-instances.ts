@@ -2,6 +2,7 @@ import { intersect, sample } from '@std/collections'
 import { parse } from 'yaml'
 import type { IRegionData } from '../index.d.ts'
 import parseRegionId from './parse-region-id.ts'
+import {SpeciesName, type Biome, SPECIES_NAMES, BIOMES} from '../enums.ts'
 
 const yaml = await Deno.readTextFile('./data/data.yml')
 const data = parse(yaml) as IRegionData
@@ -15,8 +16,9 @@ const data = parse(yaml) as IRegionData
  *   to create the pipes below it.
  */
 
+let volcanoIndex = 1
 const volcanic = ['MS06', 'MS08', 'MS09', 'MS10', 'MS11', 'MS13', 'MS14']
-const volcanoes: { [key: string]: boolean[] } = {}
+const volcanoes: { [key: string]: Array<[boolean, number]> } = {}
 
 for (const id in data) {
   if (!volcanic.includes(id)) continue
@@ -25,20 +27,25 @@ for (const id in data) {
   volcanoes[id] = []
   const num = Math.round(region.area / 10000)
   for (let i = 0; i < num; i++) {
-    volcanoes[id].push(Math.random() < 0.01)
+    const isSuper = Math.random() < 0.01
+    const impact = isSuper
+      ? Math.round((Math.random() * 1000) + 1000) * -1
+      : Math.round((Math.random() * 250) + 250) * -1
+    volcanoes[id].push([isSuper, impact])
   }
 }
 
 for (const id in data) {
   const region = data[id]
+  if (volcanic.includes(id)) region.tags.push('volcanic')
 
   const dragons = []
   if (region.tags.includes('coastal')) dragons.push('storm dragon')
   if (region.tags.includes('forest')) dragons.push('forest dragon')
   if (region.tags.includes('mountains')) dragons.push('night dragon')
+  if (region.tags.includes('volcanic')) dragons.push('flame dragon')
   if (region.tags.includes('polar')) dragons.push('frost dragon')
   if (region.tags.includes('boreal')) dragons.push('frost dragon')
-  if (volcanic.includes(id)) dragons.push('flame dragon')
 
   const features = []
 
@@ -70,10 +77,15 @@ for (const id in data) {
   const info = parseRegionId(id)
   const surfaceRegionId = `${info[0]}S${info[2]}`
   if (volcanic.includes(surfaceRegionId)) {
-    for (const isSuper of volcanoes[surfaceRegionId]) {
-      const description = id === surfaceRegionId ? isSuper ? 'Supervolcano' : 'Volcano' : 'Volcanic pipe'
-      const impact = id === surfaceRegionId ? 0 : isSuper ? Math.round((Math.random() * 1000) + 1000) * -1 : Math.round((Math.random() * 250) + 250) * -1
+    for (const [isSuper, impact] of volcanoes[surfaceRegionId]) {
+      const vid = `(${volcanoIndex.toString().padStart(4, '0')})`
+      const description = id === surfaceRegionId
+        ? isSuper
+          ? `Supervolcano ${vid}`
+          : `Volcano ${vid}`
+        : `Volcanic pipe ${vid}`
       features.push({ description, impact })
+      volcanoIndex++
     }
   }
 
@@ -136,7 +148,26 @@ for (const id in data) {
     ? ''
     : '\n' + features.map(feature => `    {\n      description: '${feature.description}',\n      impact: ${feature.impact}\n    }`).join(',\n') + '\n  '
 
-  const ts = `import { IRegion } from '../../index.d.ts'
+  const speciesBiomes: Record<Biome, SpeciesName | null> = {
+    [BIOMES.BOREAL_FOREST]: SPECIES_NAMES.ORC,
+    [BIOMES.TEMPERATE_FOREST]: null,
+    [BIOMES.TROPICAL_FOREST]: null,
+    [BIOMES.DESERT]: null,
+    [BIOMES.SAVANNA]: SPECIES_NAMES.HUMAN,
+    [BIOMES.TEMPERATE_GRASSLAND]: null,
+    [BIOMES.MOUNTAINS]: SPECIES_NAMES.DWARF,
+    [BIOMES.POLAR]: SPECIES_NAMES.ORC,
+    [BIOMES.CAVES]: null,
+    [BIOMES.WORLD_BELOW]: SPECIES_NAMES.GNOME,
+  }
+
+  const species = region.biome in speciesBiomes
+    ? speciesBiomes[region.biome]
+    : id === 'FS32'
+      ? SPECIES_NAMES.HALFLING
+      : null
+
+  const before = `import { IRegion } from '../../index.d.ts'
 
 const ${id}: IRegion = {
   id: '${id}',
@@ -152,11 +183,16 @@ const ${id}: IRegion = {
   languages: [],
   markers: [],
   ogrism: 0,
-  populations: [],
+  populations: [],`
+  const sp = species ? `
+  species: ${species},` : ''
+  const after = `
   tags: [${region.tags.map(tag => `'${tag}'`).join(', ')}],
 }
 
 export default ${id}
 `
+
+  const ts = before + sp + after
   await Deno.writeTextFile(`./instances/regions/${id}.ts`, ts)
 }
