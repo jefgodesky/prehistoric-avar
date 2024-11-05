@@ -3,7 +3,7 @@ import { expect } from 'jsr:@std/expect'
 import type { IPopulation, IQuestReport } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import { DragonQueen, SamplePopulation, SampleSociety } from '../test-examples.ts'
-import { SPECIES_NAMES } from '../enums.ts'
+import {EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES} from '../enums.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 import Immortal from './Immortal.ts'
 import Language from './Language.ts'
@@ -11,6 +11,7 @@ import Population from './Population.ts'
 import Quest from './Quest.ts'
 import Region from './Region.ts'
 import Simulation from './Simulation.ts'
+import {getSpeciationScrollText} from '../factories/scrolls/speciation.ts'
 
 describe('Region', () => {
   let sim: Simulation
@@ -418,6 +419,38 @@ describe('Region', () => {
         region.introduce(new Population(sim.emitter, region, dwarves))
         const expected = Math.floor(((4000 * 40) + (2000 * 5) + (3000 * 20)) / (4000 + 2000 + 3000))
         expect(region.getAverageGeneration()).toBe(expected)
+      })
+    })
+
+    describe('speciate', () => {
+      const scrollText = getSpeciationScrollText(FS32.species ?? SPECIES_NAMES.HALFLING)
+
+      it('creates a speciation scroll for an appropriate ancestor population', () => {
+        const region = new Region(sim, FS32)
+        const { population: p } = introducePopulation(region)
+        region.speciate()
+        const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
+        expect(scroll).toBeDefined()
+        expect(scroll?.seals).toBe(500)
+      })
+
+      it('won\'t create a speciation scroll for other populations', () => {
+        const region = new Region(sim, FS32)
+        const popData = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
+        const p = new Population(sim.emitter, region, popData)
+        region.introduce(p)
+        region.speciate()
+        const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
+        expect(scroll).not.toBeDefined()
+      })
+
+      it('won\'t create a speciation scroll if the species already exists', () => {
+        sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HALFLINGS)
+        const region = new Region(sim, FS32)
+        const { population: p } = introducePopulation(region)
+        region.speciate()
+        const scrolls = p.scribe.scrolls.filter(scroll => scroll.text === scrollText)
+        expect(scrolls).toHaveLength(1)
       })
     })
 

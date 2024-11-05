@@ -12,6 +12,7 @@ import Society from './Society.ts'
 
 import clamp from '../clamp.ts'
 import createArchfey from '../factories/immortals/archfey.ts'
+import createSpeciationScroll, { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
 
 class Region extends Markable implements IHabitable {
   adjacentRegions: string[]
@@ -130,6 +131,21 @@ class Region extends Markable implements IHabitable {
       denominator += p.size
     }
     return Math.floor(nominator / denominator)
+  }
+
+  speciate (): void {
+    console.log(this.species)
+    if (!this.species) return
+    const { species } = this.simulation.world
+    const scrollText = getSpeciationScrollText(this.species)
+    const sp = species[this.species.toLowerCase()]
+    for (const p of this.populations) {
+      if (p.species.name !== sp.ancestor) continue
+      let scroll = p.scribe.scrolls.find(s => s.text === scrollText)
+      if (scroll) { scroll.unseal(); continue }
+      scroll = createSpeciationScroll(this.species, p)
+      p.scribe.scrolls.push(scroll)
+    }
   }
 
   reduceOgrism (): void {
