@@ -185,7 +185,7 @@ const ${id}: IRegion = {
   ogrism: 0,
   populations: [],`
   const sp = species ? `
-  species: ${species},` : ''
+  species: '${species}',` : ''
   const after = `
   tags: [${region.tags.map(tag => `'${tag}'`).join(', ')}],
 }
