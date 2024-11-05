@@ -161,11 +161,9 @@ for (const id in data) {
     [BIOMES.WORLD_BELOW]: SPECIES_NAMES.GNOME,
   }
 
-  const species = region.biome in speciesBiomes
-    ? speciesBiomes[region.biome]
-    : id === 'FS32'
-      ? SPECIES_NAMES.HALFLING
-      : null
+  const species = id === 'FS32'
+    ? SPECIES_NAMES.HALFLING
+    : speciesBiomes[region.biome]
 
   const before = `import { IRegion } from '../../index.d.ts'
 
