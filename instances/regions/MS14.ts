@@ -153,300 +153,172 @@ const MS14: IRegion = {
       impact: -100
     },
     {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
       description: 'Volcano (2203)',
-      impact: -273
+      impact: -260
     },
     {
       description: 'Volcano (2204)',
-      impact: -378
+      impact: -374
     },
     {
       description: 'Volcano (2205)',
-      impact: -390
+      impact: -370
     },
     {
       description: 'Volcano (2206)',
-      impact: -446
+      impact: -320
     },
     {
       description: 'Volcano (2207)',
-      impact: -347
+      impact: -446
     },
     {
       description: 'Volcano (2208)',
-      impact: -448
+      impact: -498
     },
     {
       description: 'Volcano (2209)',
-      impact: -288
-    },
-    {
-      description: 'Volcano (2210)',
-      impact: -350
-    },
-    {
-      description: 'Volcano (2211)',
-      impact: -443
-    },
-    {
-      description: 'Volcano (2212)',
-      impact: -470
-    },
-    {
-      description: 'Volcano (2213)',
-      impact: -481
-    },
-    {
-      description: 'Volcano (2214)',
-      impact: -342
-    },
-    {
-      description: 'Volcano (2215)',
-      impact: -415
-    },
-    {
-      description: 'Volcano (2216)',
-      impact: -478
-    },
-    {
-      description: 'Volcano (2217)',
-      impact: -364
-    },
-    {
-      description: 'Volcano (2218)',
-      impact: -449
-    },
-    {
-      description: 'Volcano (2219)',
-      impact: -362
-    },
-    {
-      description: 'Volcano (2220)',
-      impact: -385
-    },
-    {
-      description: 'Volcano (2221)',
-      impact: -378
-    },
-    {
-      description: 'Volcano (2222)',
-      impact: -395
-    },
-    {
-      description: 'Volcano (2223)',
-      impact: -385
-    },
-    {
-      description: 'Volcano (2224)',
-      impact: -456
-    },
-    {
-      description: 'Volcano (2225)',
-      impact: -494
-    },
-    {
-      description: 'Volcano (2226)',
-      impact: -454
-    },
-    {
-      description: 'Volcano (2227)',
-      impact: -461
-    },
-    {
-      description: 'Volcano (2228)',
-      impact: -268
-    },
-    {
-      description: 'Volcano (2229)',
-      impact: -299
-    },
-    {
-      description: 'Volcano (2230)',
-      impact: -442
-    },
-    {
-      description: 'Volcano (2231)',
-      impact: -467
-    },
-    {
-      description: 'Volcano (2232)',
-      impact: -453
-    },
-    {
-      description: 'Volcano (2233)',
-      impact: -462
-    },
-    {
-      description: 'Volcano (2234)',
-      impact: -351
-    },
-    {
-      description: 'Volcano (2235)',
-      impact: -290
-    },
-    {
-      description: 'Supervolcano (2236)',
-      impact: -1876
-    },
-    {
-      description: 'Volcano (2237)',
-      impact: -433
-    },
-    {
-      description: 'Volcano (2238)',
-      impact: -385
-    },
-    {
-      description: 'Volcano (2239)',
-      impact: -425
-    },
-    {
-      description: 'Volcano (2240)',
-      impact: -414
-    },
-    {
-      description: 'Volcano (2241)',
-      impact: -342
-    },
-    {
-      description: 'Volcano (2242)',
-      impact: -427
-    },
-    {
-      description: 'Volcano (2243)',
       impact: -394
     },
     {
+      description: 'Volcano (2210)',
+      impact: -378
+    },
+    {
+      description: 'Volcano (2211)',
+      impact: -292
+    },
+    {
+      description: 'Volcano (2212)',
+      impact: -385
+    },
+    {
+      description: 'Volcano (2213)',
+      impact: -252
+    },
+    {
+      description: 'Volcano (2214)',
+      impact: -469
+    },
+    {
+      description: 'Supervolcano (2215)',
+      impact: -1711
+    },
+    {
+      description: 'Volcano (2216)',
+      impact: -276
+    },
+    {
+      description: 'Volcano (2217)',
+      impact: -252
+    },
+    {
+      description: 'Volcano (2218)',
+      impact: -253
+    },
+    {
+      description: 'Volcano (2219)',
+      impact: -411
+    },
+    {
+      description: 'Volcano (2220)',
+      impact: -253
+    },
+    {
+      description: 'Volcano (2221)',
+      impact: -430
+    },
+    {
+      description: 'Volcano (2222)',
+      impact: -284
+    },
+    {
+      description: 'Volcano (2223)',
+      impact: -460
+    },
+    {
+      description: 'Volcano (2224)',
+      impact: -266
+    },
+    {
+      description: 'Volcano (2225)',
+      impact: -261
+    },
+    {
+      description: 'Volcano (2226)',
+      impact: -412
+    },
+    {
+      description: 'Volcano (2227)',
+      impact: -483
+    },
+    {
+      description: 'Volcano (2228)',
+      impact: -398
+    },
+    {
+      description: 'Volcano (2229)',
+      impact: -433
+    },
+    {
+      description: 'Volcano (2230)',
+      impact: -311
+    },
+    {
+      description: 'Volcano (2231)',
+      impact: -468
+    },
+    {
+      description: 'Volcano (2232)',
+      impact: -253
+    },
+    {
+      description: 'Volcano (2233)',
+      impact: -433
+    },
+    {
+      description: 'Volcano (2234)',
+      impact: -480
+    },
+    {
+      description: 'Volcano (2235)',
+      impact: -402
+    },
+    {
+      description: 'Volcano (2236)',
+      impact: -481
+    },
+    {
+      description: 'Volcano (2237)',
+      impact: -460
+    },
+    {
+      description: 'Volcano (2238)',
+      impact: -285
+    },
+    {
+      description: 'Volcano (2239)',
+      impact: -299
+    },
+    {
+      description: 'Volcano (2240)',
+      impact: -368
+    },
+    {
+      description: 'Volcano (2241)',
+      impact: -390
+    },
+    {
+      description: 'Volcano (2242)',
+      impact: -387
+    },
+    {
+      description: 'Volcano (2243)',
+      impact: -463
+    },
+    {
       description: 'Volcano (2244)',
-      impact: -279
+      impact: -397
     }
   ],
   feyInfluence: 0,

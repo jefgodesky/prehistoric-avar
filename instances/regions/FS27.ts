@@ -10,67 +10,43 @@ const FS27: IRegion = {
   features: [
     {
       description: 'Grandmother Tree',
-      impact: 407
+      impact: 362
     },
     {
       description: 'Grandmother Tree',
-      impact: 402
+      impact: 432
     },
     {
       description: 'Grandmother Tree',
-      impact: 258
+      impact: 480
     },
     {
       description: 'Grandmother Tree',
-      impact: 373
+      impact: 369
     },
     {
       description: 'Grandmother Tree',
-      impact: 333
+      impact: 469
     },
     {
       description: 'Grandmother Tree',
-      impact: 298
+      impact: 435
     },
     {
       description: 'Grandmother Tree',
-      impact: 269
+      impact: 308
     },
     {
       description: 'Grandmother Tree',
-      impact: 392
+      impact: 295
     },
     {
       description: 'Grandmother Tree',
-      impact: 299
+      impact: 405
     },
     {
       description: 'Grandmother Tree',
-      impact: 260
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 387
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 289
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 292
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 415
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 483
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 484
+      impact: 420
     }
   ],
   feyInfluence: 0,

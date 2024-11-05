@@ -10,143 +10,31 @@ const FS06: IRegion = {
   features: [
     {
       description: 'Grandmother Tree',
-      impact: 257
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 296
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 469
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 292
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 473
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 391
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 480
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 298
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 374
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 351
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 430
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 310
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 328
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 406
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 417
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 421
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 269
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 381
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 469
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 481
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 462
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 352
-    },
-    {
-      description: 'Grandmother Tree',
       impact: 338
     },
     {
       description: 'Grandmother Tree',
-      impact: 372
+      impact: 402
     },
     {
       description: 'Grandmother Tree',
-      impact: 379
+      impact: 368
     },
     {
       description: 'Grandmother Tree',
-      impact: 265
+      impact: 364
     },
     {
       description: 'Grandmother Tree',
-      impact: 404
+      impact: 319
     },
     {
       description: 'Grandmother Tree',
-      impact: 272
+      impact: 402
     },
     {
       description: 'Grandmother Tree',
-      impact: 492
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 337
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 346
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 440
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 387
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 295
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 308
+      impact: 399
     },
     {
       description: 'Grandmother Tree',
@@ -154,63 +42,119 @@ const FS06: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 338
+      impact: 345
     },
     {
       description: 'Grandmother Tree',
-      impact: 321
+      impact: 269
     },
     {
       description: 'Grandmother Tree',
-      impact: 386
+      impact: 252
     },
     {
       description: 'Grandmother Tree',
-      impact: 456
+      impact: 498
     },
     {
       description: 'Grandmother Tree',
-      impact: 318
+      impact: 411
     },
     {
       description: 'Grandmother Tree',
-      impact: 386
+      impact: 327
     },
     {
       description: 'Grandmother Tree',
-      impact: 383
+      impact: 277
     },
     {
       description: 'Grandmother Tree',
-      impact: 396
+      impact: 389
     },
     {
       description: 'Grandmother Tree',
-      impact: 401
+      impact: 280
     },
     {
       description: 'Grandmother Tree',
-      impact: 436
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 336
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 478
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 286
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 453
+      impact: 426
     },
     {
       description: 'Grandmother Tree',
       impact: 432
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 257
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 398
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 362
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 311
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 303
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 455
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 410
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 362
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 411
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 330
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 420
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 251
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 264
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 301
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 272
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 387
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 365
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 469
     },
     {
       description: 'Grandmother Tree',
@@ -218,23 +162,7 @@ const FS06: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 413
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 403
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 329
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 428
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 347
+      impact: 299
     },
     {
       description: 'Grandmother Tree',
@@ -242,19 +170,195 @@ const FS06: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 273
+      impact: 325
     },
     {
       description: 'Grandmother Tree',
-      impact: 360
+      impact: 497
     },
     {
       description: 'Grandmother Tree',
-      impact: 432
+      impact: 288
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 419
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 424
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 364
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 475
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 336
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 476
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 274
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 336
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 265
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 260
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 478
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 393
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 472
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 400
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 295
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 311
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 340
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 479
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 445
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 471
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 280
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 349
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 470
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 280
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 392
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 333
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 371
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 368
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 361
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 336
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 498
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 287
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 408
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 338
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 387
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 316
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 266
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 437
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 394
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 470
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 421
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 287
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 351
     },
     {
       description: 'Grandmother Tree',
       impact: 326
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 453
     }
   ],
   feyInfluence: 0,

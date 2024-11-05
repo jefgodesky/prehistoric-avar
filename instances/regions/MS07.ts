@@ -299,6 +299,78 @@ const MS07: IRegion = {
     {
       description: 'Glacier',
       impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
     }
   ],
   feyInfluence: 0,

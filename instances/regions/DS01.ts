@@ -10,31 +10,11 @@ const DS01: IRegion = {
   features: [
     {
       description: 'Oasis',
-      impact: 103
+      impact: 137
     },
     {
       description: 'Oasis',
-      impact: 89
-    },
-    {
-      description: 'Oasis',
-      impact: 76
-    },
-    {
-      description: 'Oasis',
-      impact: 106
-    },
-    {
-      description: 'Oasis',
-      impact: 69
-    },
-    {
-      description: 'Oasis',
-      impact: 73
-    },
-    {
-      description: 'Oasis',
-      impact: 103
+      impact: 146
     },
     {
       description: 'Oasis',
@@ -42,43 +22,43 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 115
+      impact: 147
     },
     {
       description: 'Oasis',
-      impact: 61
+      impact: 144
     },
     {
       description: 'Oasis',
-      impact: 111
+      impact: 90
     },
     {
       description: 'Oasis',
-      impact: 52
+      impact: 108
     },
     {
       description: 'Oasis',
-      impact: 103
+      impact: 73
     },
     {
       description: 'Oasis',
-      impact: 103
+      impact: 106
     },
     {
       description: 'Oasis',
-      impact: 68
+      impact: 94
     },
     {
       description: 'Oasis',
-      impact: 68
+      impact: 124
     },
     {
       description: 'Oasis',
-      impact: 111
+      impact: 116
     },
     {
       description: 'Oasis',
-      impact: 139
+      impact: 146
     },
     {
       description: 'Oasis',
@@ -86,19 +66,31 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 127
+      impact: 60
     },
     {
       description: 'Oasis',
-      impact: 62
+      impact: 94
     },
     {
       description: 'Oasis',
-      impact: 101
+      impact: 100
     },
     {
       description: 'Oasis',
-      impact: 103
+      impact: 59
+    },
+    {
+      description: 'Oasis',
+      impact: 136
+    },
+    {
+      description: 'Oasis',
+      impact: 144
+    },
+    {
+      description: 'Oasis',
+      impact: 98
     },
     {
       description: 'Oasis',
@@ -106,15 +98,23 @@ const DS01: IRegion = {
     },
     {
       description: 'Oasis',
-      impact: 112
+      impact: 73
     },
     {
       description: 'Oasis',
-      impact: 93
+      impact: 121
     },
     {
       description: 'Oasis',
-      impact: 65
+      impact: 70
+    },
+    {
+      description: 'Oasis',
+      impact: 88
+    },
+    {
+      description: 'Oasis',
+      impact: 73
     }
   ],
   feyInfluence: 0,

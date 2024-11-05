@@ -15,6 +15,7 @@ const FS32: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
+  species: 'Halfling',
   tags: ['forest', 'tropical', 'surface', 'coastal'],
 }
 
