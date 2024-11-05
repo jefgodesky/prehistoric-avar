@@ -149,21 +149,25 @@ for (const id in data) {
     : '\n' + features.map(feature => `    {\n      description: '${feature.description}',\n      impact: ${feature.impact}\n    }`).join(',\n') + '\n  '
 
   const speciesBiomes: Record<Biome, SpeciesName | null> = {
-    [BIOMES.BOREAL_FOREST]: SPECIES_NAMES.ORC,
+    [BIOMES.BOREAL_FOREST]: null,
     [BIOMES.TEMPERATE_FOREST]: null,
     [BIOMES.TROPICAL_FOREST]: null,
     [BIOMES.DESERT]: null,
     [BIOMES.SAVANNA]: SPECIES_NAMES.HUMAN,
     [BIOMES.TEMPERATE_GRASSLAND]: null,
     [BIOMES.MOUNTAINS]: SPECIES_NAMES.DWARF,
-    [BIOMES.POLAR]: SPECIES_NAMES.ORC,
+    [BIOMES.POLAR]: null,
     [BIOMES.CAVES]: null,
     [BIOMES.WORLD_BELOW]: SPECIES_NAMES.GNOME,
   }
 
-  const species = id === 'FS32'
+  const halflingRegions = ['FS32']
+  const orcRegions = ['FS02', 'FS03', 'FS04', 'FS05', 'FS07']
+  const species = halflingRegions.includes(id)
     ? SPECIES_NAMES.HALFLING
-    : speciesBiomes[region.biome]
+    : orcRegions.includes(id)
+      ? SPECIES_NAMES.ORC
+      : speciesBiomes[region.biome]
 
   const before = `import { IRegion } from '../../index.d.ts'
 
