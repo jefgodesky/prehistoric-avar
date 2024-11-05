@@ -15,7 +15,6 @@ const PS03: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: 'Orc',
   tags: ['polar', 'surface', 'coastal'],
 }
 

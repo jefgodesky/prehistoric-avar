@@ -9,40 +9,36 @@ const MD07: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (2872 sq. km)',
-      impact: 287200
+      description: 'Underground lake (1748 sq. km)',
+      impact: 174800
     },
     {
-      description: 'Underground lake (3677 sq. km)',
-      impact: 367700
+      description: 'Underground lake (4243 sq. km)',
+      impact: 424300
     },
     {
-      description: 'Underground lake (1692 sq. km)',
-      impact: 169200
+      description: 'Underground lake (3773 sq. km)',
+      impact: 377300
     },
     {
-      description: 'Underground lake (2328 sq. km)',
-      impact: 232800
+      description: 'Underground lake (2065 sq. km)',
+      impact: 206500
     },
     {
-      description: 'Underground lake (2504 sq. km)',
-      impact: 250400
+      description: 'Underground lake (997 sq. km)',
+      impact: 99700
     },
     {
-      description: 'Underground lake (3421 sq. km)',
-      impact: 342100
+      description: 'Underground lake (855 sq. km)',
+      impact: 85500
     },
     {
-      description: 'Underground lake (2735 sq. km)',
-      impact: 273500
+      description: 'Underground lake (631 sq. km)',
+      impact: 63100
     },
     {
-      description: 'Underground lake (1720 sq. km)',
-      impact: 172000
-    },
-    {
-      description: 'Underground sea (58814 sq. km)',
-      impact: 5881400
+      description: 'Underground lake (597 sq. km)',
+      impact: 59700
     }
   ],
   feyInfluence: 0,

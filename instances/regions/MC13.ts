@@ -10,203 +10,203 @@ const MC13: IRegion = {
   features: [
     {
       description: 'Volcanic pipe (2103)',
-      impact: -434
+      impact: -416
     },
     {
       description: 'Volcanic pipe (2104)',
-      impact: -467
+      impact: -259
     },
     {
       description: 'Volcanic pipe (2105)',
-      impact: -361
+      impact: -462
     },
     {
       description: 'Volcanic pipe (2106)',
-      impact: -496
-    },
-    {
-      description: 'Volcanic pipe (2107)',
-      impact: -455
-    },
-    {
-      description: 'Volcanic pipe (2108)',
-      impact: -290
-    },
-    {
-      description: 'Volcanic pipe (2109)',
-      impact: -282
-    },
-    {
-      description: 'Volcanic pipe (2110)',
-      impact: -375
-    },
-    {
-      description: 'Volcanic pipe (2111)',
-      impact: -460
-    },
-    {
-      description: 'Volcanic pipe (2112)',
-      impact: -495
-    },
-    {
-      description: 'Volcanic pipe (2113)',
-      impact: -362
-    },
-    {
-      description: 'Volcanic pipe (2114)',
-      impact: -387
-    },
-    {
-      description: 'Volcanic pipe (2115)',
       impact: -443
     },
     {
-      description: 'Volcanic pipe (2116)',
-      impact: -334
+      description: 'Volcanic pipe (2107)',
+      impact: -479
     },
     {
-      description: 'Volcanic pipe (2117)',
-      impact: -433
+      description: 'Volcanic pipe (2108)',
+      impact: -399
     },
     {
-      description: 'Volcanic pipe (2118)',
-      impact: -320
+      description: 'Volcanic pipe (2109)',
+      impact: -395
     },
     {
-      description: 'Volcanic pipe (2119)',
-      impact: -268
+      description: 'Volcanic pipe (2110)',
+      impact: -379
     },
     {
-      description: 'Volcanic pipe (2120)',
-      impact: -266
+      description: 'Volcanic pipe (2111)',
+      impact: -302
     },
     {
-      description: 'Volcanic pipe (2121)',
-      impact: -465
-    },
-    {
-      description: 'Volcanic pipe (2122)',
-      impact: -490
-    },
-    {
-      description: 'Volcanic pipe (2123)',
-      impact: -448
-    },
-    {
-      description: 'Volcanic pipe (2124)',
-      impact: -311
-    },
-    {
-      description: 'Volcanic pipe (2125)',
-      impact: -300
-    },
-    {
-      description: 'Volcanic pipe (2126)',
-      impact: -335
-    },
-    {
-      description: 'Volcanic pipe (2127)',
-      impact: -256
-    },
-    {
-      description: 'Volcanic pipe (2128)',
-      impact: -387
-    },
-    {
-      description: 'Volcanic pipe (2129)',
-      impact: -432
-    },
-    {
-      description: 'Volcanic pipe (2130)',
-      impact: -334
-    },
-    {
-      description: 'Volcanic pipe (2131)',
-      impact: -448
-    },
-    {
-      description: 'Volcanic pipe (2132)',
-      impact: -312
-    },
-    {
-      description: 'Volcanic pipe (2133)',
-      impact: -361
-    },
-    {
-      description: 'Volcanic pipe (2134)',
-      impact: -424
-    },
-    {
-      description: 'Volcanic pipe (2135)',
+      description: 'Volcanic pipe (2112)',
       impact: -498
     },
     {
-      description: 'Volcanic pipe (2136)',
-      impact: -377
+      description: 'Volcanic pipe (2113)',
+      impact: -276
     },
     {
-      description: 'Volcanic pipe (2137)',
-      impact: -370
-    },
-    {
-      description: 'Volcanic pipe (2138)',
-      impact: -368
-    },
-    {
-      description: 'Volcanic pipe (2139)',
-      impact: -427
-    },
-    {
-      description: 'Volcanic pipe (2140)',
-      impact: -434
-    },
-    {
-      description: 'Volcanic pipe (2141)',
-      impact: -284
-    },
-    {
-      description: 'Volcanic pipe (2142)',
+      description: 'Volcanic pipe (2114)',
       impact: -486
     },
     {
+      description: 'Volcanic pipe (2115)',
+      impact: -373
+    },
+    {
+      description: 'Volcanic pipe (2116)',
+      impact: -345
+    },
+    {
+      description: 'Volcanic pipe (2117)',
+      impact: -411
+    },
+    {
+      description: 'Volcanic pipe (2118)',
+      impact: -422
+    },
+    {
+      description: 'Volcanic pipe (2119)',
+      impact: -351
+    },
+    {
+      description: 'Volcanic pipe (2120)',
+      impact: -444
+    },
+    {
+      description: 'Volcanic pipe (2121)',
+      impact: -323
+    },
+    {
+      description: 'Volcanic pipe (2122)',
+      impact: -396
+    },
+    {
+      description: 'Volcanic pipe (2123)',
+      impact: -322
+    },
+    {
+      description: 'Volcanic pipe (2124)',
+      impact: -355
+    },
+    {
+      description: 'Volcanic pipe (2125)',
+      impact: -268
+    },
+    {
+      description: 'Volcanic pipe (2126)',
+      impact: -329
+    },
+    {
+      description: 'Volcanic pipe (2127)',
+      impact: -283
+    },
+    {
+      description: 'Volcanic pipe (2128)',
+      impact: -315
+    },
+    {
+      description: 'Volcanic pipe (2129)',
+      impact: -437
+    },
+    {
+      description: 'Volcanic pipe (2130)',
+      impact: -482
+    },
+    {
+      description: 'Volcanic pipe (2131)',
+      impact: -452
+    },
+    {
+      description: 'Volcanic pipe (2132)',
+      impact: -273
+    },
+    {
+      description: 'Volcanic pipe (2133)',
+      impact: -325
+    },
+    {
+      description: 'Volcanic pipe (2134)',
+      impact: -462
+    },
+    {
+      description: 'Volcanic pipe (2135)',
+      impact: -499
+    },
+    {
+      description: 'Volcanic pipe (2136)',
+      impact: -397
+    },
+    {
+      description: 'Volcanic pipe (2137)',
+      impact: -292
+    },
+    {
+      description: 'Volcanic pipe (2138)',
+      impact: -251
+    },
+    {
+      description: 'Volcanic pipe (2139)',
+      impact: -353
+    },
+    {
+      description: 'Volcanic pipe (2140)',
+      impact: -332
+    },
+    {
+      description: 'Volcanic pipe (2141)',
+      impact: -338
+    },
+    {
+      description: 'Volcanic pipe (2142)',
+      impact: -469
+    },
+    {
       description: 'Volcanic pipe (2143)',
-      impact: -270
+      impact: -294
     },
     {
       description: 'Volcanic pipe (2144)',
-      impact: -306
+      impact: -277
     },
     {
       description: 'Volcanic pipe (2145)',
-      impact: -433
+      impact: -291
     },
     {
       description: 'Volcanic pipe (2146)',
-      impact: -440
+      impact: -476
     },
     {
       description: 'Volcanic pipe (2147)',
-      impact: -252
+      impact: -347
     },
     {
       description: 'Volcanic pipe (2148)',
-      impact: -391
+      impact: -289
     },
     {
       description: 'Volcanic pipe (2149)',
-      impact: -364
+      impact: -469
     },
     {
       description: 'Volcanic pipe (2150)',
-      impact: -376
+      impact: -489
     },
     {
       description: 'Volcanic pipe (2151)',
-      impact: -282
+      impact: -307
     },
     {
       description: 'Volcanic pipe (2152)',
-      impact: -455
+      impact: -309
     }
   ],
   feyInfluence: 0,

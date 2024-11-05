@@ -10,39 +10,39 @@ const MD11: IRegion = {
   features: [
     {
       description: 'Volcanic pipe (2044)',
-      impact: -366
+      impact: -286
     },
     {
       description: 'Volcanic pipe (2045)',
-      impact: -257
+      impact: -483
     },
     {
       description: 'Volcanic pipe (2046)',
-      impact: -429
+      impact: -405
     },
     {
       description: 'Volcanic pipe (2047)',
-      impact: -278
+      impact: -259
     },
     {
       description: 'Volcanic pipe (2048)',
-      impact: -413
+      impact: -347
     },
     {
       description: 'Volcanic pipe (2049)',
-      impact: -373
+      impact: -419
     },
     {
       description: 'Volcanic pipe (2050)',
-      impact: -432
+      impact: -364
     },
     {
       description: 'Volcanic pipe (2051)',
-      impact: -388
+      impact: -334
     },
     {
       description: 'Volcanic pipe (2052)',
-      impact: -466
+      impact: -301
     }
   ],
   feyInfluence: 0,

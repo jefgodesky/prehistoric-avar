@@ -42,39 +42,39 @@ const MS11: IRegion = {
     },
     {
       description: 'Volcano (2026)',
-      impact: -366
+      impact: -286
     },
     {
       description: 'Volcano (2027)',
-      impact: -257
+      impact: -483
     },
     {
       description: 'Volcano (2028)',
-      impact: -429
+      impact: -405
     },
     {
       description: 'Volcano (2029)',
-      impact: -278
+      impact: -259
     },
     {
       description: 'Volcano (2030)',
-      impact: -413
+      impact: -347
     },
     {
       description: 'Volcano (2031)',
-      impact: -373
+      impact: -419
     },
     {
       description: 'Volcano (2032)',
-      impact: -432
+      impact: -364
     },
     {
       description: 'Volcano (2033)',
-      impact: -388
+      impact: -334
     },
     {
       description: 'Volcano (2034)',
-      impact: -466
+      impact: -301
     }
   ],
   feyInfluence: 0,

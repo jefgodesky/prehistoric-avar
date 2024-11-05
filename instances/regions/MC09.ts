@@ -10,183 +10,183 @@ const MC09: IRegion = {
   features: [
     {
       description: 'Volcanic pipe (1782)',
-      impact: -277
+      impact: -441
     },
     {
       description: 'Volcanic pipe (1783)',
-      impact: -386
-    },
-    {
-      description: 'Volcanic pipe (1784)',
-      impact: -289
-    },
-    {
-      description: 'Volcanic pipe (1785)',
-      impact: -481
-    },
-    {
-      description: 'Volcanic pipe (1786)',
-      impact: -385
-    },
-    {
-      description: 'Volcanic pipe (1787)',
-      impact: -310
-    },
-    {
-      description: 'Volcanic pipe (1788)',
-      impact: -325
-    },
-    {
-      description: 'Volcanic pipe (1789)',
-      impact: -395
-    },
-    {
-      description: 'Volcanic pipe (1790)',
-      impact: -413
-    },
-    {
-      description: 'Volcanic pipe (1791)',
-      impact: -288
-    },
-    {
-      description: 'Volcanic pipe (1792)',
-      impact: -294
-    },
-    {
-      description: 'Volcanic pipe (1793)',
-      impact: -353
-    },
-    {
-      description: 'Volcanic pipe (1794)',
       impact: -252
     },
     {
+      description: 'Volcanic pipe (1784)',
+      impact: -437
+    },
+    {
+      description: 'Volcanic pipe (1785)',
+      impact: -349
+    },
+    {
+      description: 'Volcanic pipe (1786)',
+      impact: -495
+    },
+    {
+      description: 'Volcanic pipe (1787)',
+      impact: -383
+    },
+    {
+      description: 'Volcanic pipe (1788)',
+      impact: -400
+    },
+    {
+      description: 'Volcanic pipe (1789)',
+      impact: -376
+    },
+    {
+      description: 'Volcanic pipe (1790)',
+      impact: -314
+    },
+    {
+      description: 'Volcanic pipe (1791)',
+      impact: -391
+    },
+    {
+      description: 'Volcanic pipe (1792)',
+      impact: -343
+    },
+    {
+      description: 'Volcanic pipe (1793)',
+      impact: -271
+    },
+    {
+      description: 'Volcanic pipe (1794)',
+      impact: -364
+    },
+    {
       description: 'Volcanic pipe (1795)',
-      impact: -445
+      impact: -325
     },
     {
       description: 'Volcanic pipe (1796)',
-      impact: -335
+      impact: -326
     },
     {
       description: 'Volcanic pipe (1797)',
-      impact: -388
+      impact: -408
     },
     {
       description: 'Volcanic pipe (1798)',
-      impact: -427
+      impact: -253
     },
     {
       description: 'Volcanic pipe (1799)',
-      impact: -288
+      impact: -357
     },
     {
       description: 'Volcanic pipe (1800)',
-      impact: -403
+      impact: -269
     },
     {
       description: 'Volcanic pipe (1801)',
-      impact: -456
+      impact: -431
     },
     {
       description: 'Volcanic pipe (1802)',
-      impact: -329
+      impact: -306
     },
     {
       description: 'Volcanic pipe (1803)',
-      impact: -330
+      impact: -373
     },
     {
       description: 'Volcanic pipe (1804)',
-      impact: -327
+      impact: -335
     },
     {
       description: 'Volcanic pipe (1805)',
-      impact: -286
+      impact: -375
     },
     {
       description: 'Volcanic pipe (1806)',
-      impact: -318
+      impact: -295
     },
     {
       description: 'Volcanic pipe (1807)',
-      impact: -286
+      impact: -309
     },
     {
       description: 'Volcanic pipe (1808)',
-      impact: -333
+      impact: -304
     },
     {
       description: 'Volcanic pipe (1809)',
-      impact: -342
+      impact: -461
     },
     {
       description: 'Volcanic pipe (1810)',
-      impact: -468
+      impact: -451
     },
     {
       description: 'Volcanic pipe (1811)',
-      impact: -292
+      impact: -275
     },
     {
       description: 'Volcanic pipe (1812)',
-      impact: -444
+      impact: -344
     },
     {
       description: 'Volcanic pipe (1813)',
-      impact: -481
+      impact: -415
     },
     {
       description: 'Volcanic pipe (1814)',
-      impact: -426
+      impact: -265
     },
     {
       description: 'Volcanic pipe (1815)',
-      impact: -488
-    },
-    {
-      description: 'Volcanic pipe (1816)',
-      impact: -1809
-    },
-    {
-      description: 'Volcanic pipe (1817)',
-      impact: -277
-    },
-    {
-      description: 'Volcanic pipe (1818)',
-      impact: -500
-    },
-    {
-      description: 'Volcanic pipe (1819)',
-      impact: -377
-    },
-    {
-      description: 'Volcanic pipe (1820)',
-      impact: -273
-    },
-    {
-      description: 'Volcanic pipe (1821)',
       impact: -481
     },
     {
+      description: 'Volcanic pipe (1816)',
+      impact: -451
+    },
+    {
+      description: 'Volcanic pipe (1817)',
+      impact: -496
+    },
+    {
+      description: 'Volcanic pipe (1818)',
+      impact: -264
+    },
+    {
+      description: 'Volcanic pipe (1819)',
+      impact: -255
+    },
+    {
+      description: 'Volcanic pipe (1820)',
+      impact: -320
+    },
+    {
+      description: 'Volcanic pipe (1821)',
+      impact: -365
+    },
+    {
       description: 'Volcanic pipe (1822)',
-      impact: -425
+      impact: -400
     },
     {
       description: 'Volcanic pipe (1823)',
-      impact: -336
+      impact: -457
     },
     {
       description: 'Volcanic pipe (1824)',
-      impact: -463
+      impact: -458
     },
     {
       description: 'Volcanic pipe (1825)',
-      impact: -258
+      impact: -1765
     },
     {
       description: 'Volcanic pipe (1826)',
-      impact: -327
+      impact: -419
     },
     {
       description: 'Volcanic pipe (1827)',
@@ -194,67 +194,67 @@ const MC09: IRegion = {
     },
     {
       description: 'Volcanic pipe (1828)',
-      impact: -349
+      impact: -313
     },
     {
       description: 'Volcanic pipe (1829)',
-      impact: -280
+      impact: -254
     },
     {
       description: 'Volcanic pipe (1830)',
-      impact: -311
+      impact: -396
     },
     {
       description: 'Volcanic pipe (1831)',
-      impact: -463
+      impact: -392
     },
     {
       description: 'Volcanic pipe (1832)',
-      impact: -258
+      impact: -351
     },
     {
       description: 'Volcanic pipe (1833)',
-      impact: -487
+      impact: -359
     },
     {
       description: 'Volcanic pipe (1834)',
-      impact: -482
+      impact: -315
     },
     {
       description: 'Volcanic pipe (1835)',
-      impact: -357
+      impact: -360
     },
     {
       description: 'Volcanic pipe (1836)',
-      impact: -478
+      impact: -372
     },
     {
       description: 'Volcanic pipe (1837)',
-      impact: -283
+      impact: -483
     },
     {
       description: 'Volcanic pipe (1838)',
-      impact: -375
+      impact: -456
     },
     {
       description: 'Volcanic pipe (1839)',
-      impact: -281
+      impact: -274
     },
     {
       description: 'Volcanic pipe (1840)',
-      impact: -277
+      impact: -484
     },
     {
       description: 'Volcanic pipe (1841)',
-      impact: -312
+      impact: -446
     },
     {
       description: 'Volcanic pipe (1842)',
-      impact: -345
+      impact: -454
     },
     {
       description: 'Volcanic pipe (1843)',
-      impact: -495
+      impact: -259
     }
   ],
   feyInfluence: 0,
