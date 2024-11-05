@@ -23,7 +23,19 @@ const createSpeciationScroll = (sp: SpeciesName, population: Population): Scroll
   const { simulation: sim } = population.home
   const ancestor = population.species.name ?? 'Wosan'
   const text = getSpeciationScrollText(sp)
-  const onUnseal = () => population.species.generation ?? 50
+
+  const onUnseal = () => {
+    const { species, home } = population
+    console.log({
+      home: { id: home.id, species: home.species },
+      sp,
+      species: { generation: species.generation },
+      test: home.species === sp,
+      value: home.species === sp ? species.generation ?? 50 : 0
+    })
+    return home.species === sp ? species.generation ?? 50 : 0
+  }
+
   const onOpen = () => {
     population.species = species[sp.toLowerCase()]
 
