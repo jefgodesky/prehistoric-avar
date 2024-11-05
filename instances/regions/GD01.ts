@@ -9,12 +9,12 @@ const GD01: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (3189 sq. km)',
-      impact: 318900
+      description: 'Underground lake (5306 sq. km)',
+      impact: 530600
     },
     {
-      description: 'Underground lake (796 sq. km)',
-      impact: 79600
+      description: 'Underground lake (813 sq. km)',
+      impact: 81300
     }
   ],
   feyInfluence: 0,
@@ -24,7 +24,7 @@ const GD01: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Gnome,
+  species: 'Gnome',
   tags: ['world-below'],
 }
 

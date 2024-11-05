@@ -67,54 +67,6 @@ const MS04: IRegion = {
     {
       description: 'Glacier',
       impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
     }
   ],
   feyInfluence: 0,
@@ -124,7 +76,7 @@ const MS04: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Dwarf,
+  species: 'Dwarf',
   tags: ['mountains', 'surface'],
 }
 

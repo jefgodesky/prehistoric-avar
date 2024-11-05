@@ -177,204 +177,216 @@ const MS13: IRegion = {
       impact: -100
     },
     {
-      description: 'Volcano (2053)',
-      impact: -369
+      description: 'Glacier',
+      impact: -100
     },
     {
-      description: 'Volcano (2054)',
-      impact: -313
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Glacier',
+      impact: -100
+    },
+    {
+      description: 'Volcano (2053)',
+      impact: -291
+    },
+    {
+      description: 'Supervolcano (2054)',
+      impact: -1868
     },
     {
       description: 'Volcano (2055)',
-      impact: -495
+      impact: -414
     },
     {
       description: 'Volcano (2056)',
-      impact: -251
+      impact: -347
     },
     {
       description: 'Volcano (2057)',
-      impact: -440
+      impact: -478
     },
     {
       description: 'Volcano (2058)',
-      impact: -422
+      impact: -406
     },
     {
       description: 'Volcano (2059)',
-      impact: -491
+      impact: -361
     },
     {
       description: 'Volcano (2060)',
-      impact: -454
+      impact: -494
     },
     {
       description: 'Volcano (2061)',
-      impact: -427
+      impact: -483
     },
     {
       description: 'Volcano (2062)',
-      impact: -283
+      impact: -298
     },
     {
       description: 'Volcano (2063)',
-      impact: -270
+      impact: -434
     },
     {
       description: 'Volcano (2064)',
-      impact: -309
+      impact: -261
     },
     {
       description: 'Volcano (2065)',
-      impact: -413
+      impact: -464
     },
     {
       description: 'Volcano (2066)',
-      impact: -344
+      impact: -449
     },
     {
       description: 'Volcano (2067)',
-      impact: -484
+      impact: -423
     },
     {
       description: 'Volcano (2068)',
-      impact: -270
+      impact: -349
     },
     {
       description: 'Volcano (2069)',
-      impact: -306
+      impact: -264
     },
     {
       description: 'Volcano (2070)',
-      impact: -350
+      impact: -488
     },
     {
       description: 'Volcano (2071)',
-      impact: -296
+      impact: -387
     },
     {
       description: 'Volcano (2072)',
-      impact: -319
+      impact: -270
     },
     {
       description: 'Volcano (2073)',
-      impact: -350
+      impact: -450
     },
     {
       description: 'Volcano (2074)',
-      impact: -391
+      impact: -332
     },
     {
       description: 'Volcano (2075)',
-      impact: -292
+      impact: -261
     },
     {
       description: 'Volcano (2076)',
-      impact: -379
+      impact: -277
     },
     {
       description: 'Volcano (2077)',
-      impact: -283
+      impact: -306
     },
     {
       description: 'Volcano (2078)',
-      impact: -267
+      impact: -379
     },
     {
       description: 'Volcano (2079)',
-      impact: -382
+      impact: -342
     },
     {
       description: 'Volcano (2080)',
-      impact: -389
+      impact: -427
     },
     {
       description: 'Volcano (2081)',
-      impact: -252
+      impact: -409
     },
     {
       description: 'Volcano (2082)',
-      impact: -304
+      impact: -384
     },
     {
       description: 'Volcano (2083)',
-      impact: -492
+      impact: -481
     },
     {
       description: 'Volcano (2084)',
-      impact: -394
+      impact: -282
     },
     {
       description: 'Volcano (2085)',
-      impact: -263
+      impact: -434
     },
     {
       description: 'Volcano (2086)',
-      impact: -431
+      impact: -360
     },
     {
       description: 'Volcano (2087)',
-      impact: -475
+      impact: -494
     },
     {
       description: 'Volcano (2088)',
-      impact: -254
+      impact: -293
     },
     {
       description: 'Volcano (2089)',
-      impact: -474
+      impact: -445
     },
     {
       description: 'Volcano (2090)',
-      impact: -375
+      impact: -305
     },
     {
       description: 'Volcano (2091)',
-      impact: -497
+      impact: -300
     },
     {
       description: 'Volcano (2092)',
-      impact: -487
+      impact: -258
     },
     {
       description: 'Volcano (2093)',
-      impact: -468
+      impact: -446
     },
     {
       description: 'Volcano (2094)',
-      impact: -317
+      impact: -365
     },
     {
       description: 'Volcano (2095)',
-      impact: -252
+      impact: -431
     },
     {
       description: 'Volcano (2096)',
-      impact: -417
+      impact: -421
     },
     {
       description: 'Volcano (2097)',
-      impact: -383
+      impact: -314
     },
     {
       description: 'Volcano (2098)',
-      impact: -383
+      impact: -431
     },
     {
       description: 'Volcano (2099)',
-      impact: -407
+      impact: -348
     },
     {
       description: 'Volcano (2100)',
-      impact: -290
+      impact: -320
     },
     {
       description: 'Volcano (2101)',
-      impact: -400
+      impact: -339
     },
     {
       description: 'Volcano (2102)',
-      impact: -255
+      impact: -479
     }
   ],
   feyInfluence: 0,
@@ -384,7 +396,7 @@ const MS13: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Dwarf,
+  species: 'Dwarf',
   tags: ['mountains', 'surface', 'volcanic'],
 }
 

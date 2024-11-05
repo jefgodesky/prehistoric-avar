@@ -10,39 +10,39 @@ const MD11: IRegion = {
   features: [
     {
       description: 'Volcanic pipe (2044)',
-      impact: -321
+      impact: -331
     },
     {
       description: 'Volcanic pipe (2045)',
-      impact: -256
+      impact: -401
     },
     {
       description: 'Volcanic pipe (2046)',
-      impact: -335
+      impact: -392
     },
     {
       description: 'Volcanic pipe (2047)',
-      impact: -388
+      impact: -411
     },
     {
       description: 'Volcanic pipe (2048)',
-      impact: -321
+      impact: -381
     },
     {
       description: 'Volcanic pipe (2049)',
-      impact: -466
+      impact: -348
     },
     {
       description: 'Volcanic pipe (2050)',
-      impact: -379
+      impact: -484
     },
     {
       description: 'Volcanic pipe (2051)',
-      impact: -486
+      impact: -492
     },
     {
       description: 'Volcanic pipe (2052)',
-      impact: -415
+      impact: -409
     }
   ],
   feyInfluence: 0,
@@ -52,7 +52,7 @@ const MD11: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Gnome,
+  species: 'Gnome',
   tags: ['world-below'],
 }
 

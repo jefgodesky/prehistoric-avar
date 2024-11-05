@@ -9,36 +9,12 @@ const MD04: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (5361 sq. km)',
-      impact: 536100
+      description: 'Underground lake (5319 sq. km)',
+      impact: 531900
     },
     {
-      description: 'Underground lake (4188 sq. km)',
-      impact: 418800
-    },
-    {
-      description: 'Underground lake (5316 sq. km)',
-      impact: 531600
-    },
-    {
-      description: 'Underground lake (3645 sq. km)',
-      impact: 364500
-    },
-    {
-      description: 'Underground lake (5989 sq. km)',
-      impact: 598900
-    },
-    {
-      description: 'Underground lake (2145 sq. km)',
-      impact: 214500
-    },
-    {
-      description: 'Underground lake (2778 sq. km)',
-      impact: 277800
-    },
-    {
-      description: 'Underground sea (82822 sq. km)',
-      impact: 8282200
+      description: 'Underground lake (863 sq. km)',
+      impact: 86300
     }
   ],
   feyInfluence: 0,
@@ -48,7 +24,7 @@ const MD04: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Gnome,
+  species: 'Gnome',
   tags: ['world-below'],
 }
 

@@ -10,23 +10,19 @@ const FS27: IRegion = {
   features: [
     {
       description: 'Grandmother Tree',
-      impact: 293
+      impact: 407
     },
     {
       description: 'Grandmother Tree',
-      impact: 412
+      impact: 402
     },
     {
       description: 'Grandmother Tree',
-      impact: 291
+      impact: 258
     },
     {
       description: 'Grandmother Tree',
-      impact: 485
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 492
+      impact: 373
     },
     {
       description: 'Grandmother Tree',
@@ -34,23 +30,47 @@ const FS27: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 278
+      impact: 298
     },
     {
       description: 'Grandmother Tree',
-      impact: 488
+      impact: 269
     },
     {
       description: 'Grandmother Tree',
-      impact: 341
+      impact: 392
     },
     {
       description: 'Grandmother Tree',
-      impact: 355
+      impact: 299
     },
     {
       description: 'Grandmother Tree',
-      impact: 261
+      impact: 260
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 387
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 289
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 292
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 415
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 483
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 484
     }
   ],
   feyInfluence: 0,
@@ -60,7 +80,7 @@ const FS27: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Orc,
+  species: 'Orc',
   tags: ['forest', 'boreal', 'surface', 'coastal'],
 }
 

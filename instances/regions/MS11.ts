@@ -37,84 +37,40 @@ const MS11: IRegion = {
       impact: -100
     },
     {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
       description: 'Volcano (2026)',
-      impact: -321
+      impact: -331
     },
     {
       description: 'Volcano (2027)',
-      impact: -256
+      impact: -401
     },
     {
       description: 'Volcano (2028)',
-      impact: -335
+      impact: -392
     },
     {
       description: 'Volcano (2029)',
-      impact: -388
+      impact: -411
     },
     {
       description: 'Volcano (2030)',
-      impact: -321
+      impact: -381
     },
     {
       description: 'Volcano (2031)',
-      impact: -466
+      impact: -348
     },
     {
       description: 'Volcano (2032)',
-      impact: -379
+      impact: -484
     },
     {
       description: 'Volcano (2033)',
-      impact: -486
+      impact: -492
     },
     {
       description: 'Volcano (2034)',
-      impact: -415
+      impact: -409
     }
   ],
   feyInfluence: 0,
@@ -124,7 +80,7 @@ const MS11: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Dwarf,
+  species: 'Dwarf',
   tags: ['mountains', 'surface', 'volcanic'],
 }
 

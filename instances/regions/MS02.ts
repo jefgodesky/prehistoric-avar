@@ -72,7 +72,7 @@ const MS02: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Dwarf,
+  species: 'Dwarf',
   tags: ['mountains', 'surface'],
 }
 

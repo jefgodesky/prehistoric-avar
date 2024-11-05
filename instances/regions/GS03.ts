@@ -15,7 +15,7 @@ const GS03: IRegion = {
   markers: [],
   ogrism: 0,
   populations: [],
-  species: Human,
+  species: 'Human',
   tags: ['grassland', 'tropical', 'surface', 'coastal'],
 }
 
