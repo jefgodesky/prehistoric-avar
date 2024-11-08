@@ -9,50 +9,57 @@ const FD17: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (1945 sq. km)',
-      impact: 194500
+      description: 'Underground lake (3420 sq. km)',
+      impact: 342000
     },
     {
-      description: 'Underground lake (1856 sq. km)',
-      impact: 185600
+      description: 'Underground lake (4685 sq. km)',
+      impact: 468500
     },
     {
-      description: 'Underground lake (1546 sq. km)',
-      impact: 154600
+      description: 'Underground lake (1886 sq. km)',
+      impact: 188600
     },
     {
-      description: 'Underground lake (5121 sq. km)',
-      impact: 512100
+      description: 'Underground lake (3281 sq. km)',
+      impact: 328100
     },
     {
-      description: 'Underground lake (5373 sq. km)',
-      impact: 537300
+      description: 'Underground lake (3358 sq. km)',
+      impact: 335800
     },
     {
-      description: 'Underground lake (608 sq. km)',
-      impact: 60800
-    },
-    {
-      description: 'Underground lake (656 sq. km)',
-      impact: 65600
-    },
-    {
-      description: 'Underground lake (827 sq. km)',
-      impact: 82700
+      description: 'Underground lake (2307 sq. km)',
+      impact: 230700
     },
     {
       description: 'Underground lake (616 sq. km)',
       impact: 61600
     },
     {
-      description: 'Underground lake (658 sq. km)',
-      impact: 65800
+      description: 'Underground lake (979 sq. km)',
+      impact: 97900
+    },
+    {
+      description: 'Underground lake (912 sq. km)',
+      impact: 91200
+    },
+    {
+      description: 'Underground lake (597 sq. km)',
+      impact: 59700
+    },
+    {
+      description: 'Underground lake (903 sq. km)',
+      impact: 90300
+    },
+    {
+      description: 'Underground lake (828 sq. km)',
+      impact: 82800
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

@@ -10,11 +10,23 @@ const FS02: IRegion = {
   features: [
     {
       description: 'Grandmother Tree',
-      impact: 387
+      impact: 277
     },
     {
       description: 'Grandmother Tree',
-      impact: 486
+      impact: 461
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 454
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 321
+    },
+    {
+      description: 'Grandmother Tree',
+      impact: 349
     },
     {
       description: 'Grandmother Tree',
@@ -22,121 +34,96 @@ const FS02: IRegion = {
     },
     {
       description: 'Grandmother Tree',
-      impact: 292
+      impact: 371
     },
     {
       description: 'Grandmother Tree',
-      impact: 394
+      impact: 377
     },
     {
       description: 'Grandmother Tree',
-      impact: 279
+      impact: 288
     },
     {
       description: 'Grandmother Tree',
-      impact: 381
+      impact: 414
     },
     {
       description: 'Grandmother Tree',
-      impact: 291
+      impact: 263
     },
     {
       description: 'Grandmother Tree',
-      impact: 319
+      impact: 380
     },
     {
       description: 'Grandmother Tree',
-      impact: 333
+      impact: 396
     },
     {
       description: 'Grandmother Tree',
-      impact: 304
+      impact: 280
     },
     {
       description: 'Grandmother Tree',
-      impact: 381
+      impact: 414
     },
     {
       description: 'Grandmother Tree',
-      impact: 432
+      impact: 462
     },
     {
       description: 'Grandmother Tree',
-      impact: 255
+      impact: 313
     },
     {
       description: 'Grandmother Tree',
-      impact: 283
+      impact: 427
     },
     {
       description: 'Grandmother Tree',
-      impact: 410
+      impact: 441
     },
     {
       description: 'Grandmother Tree',
-      impact: 304
+      impact: 403
     },
     {
       description: 'Grandmother Tree',
-      impact: 382
+      impact: 453
     },
     {
       description: 'Grandmother Tree',
-      impact: 443
+      impact: 398
     },
     {
       description: 'Grandmother Tree',
-      impact: 350
+      impact: 475
     },
     {
       description: 'Grandmother Tree',
-      impact: 325
+      impact: 485
     },
     {
       description: 'Grandmother Tree',
-      impact: 352
+      impact: 456
     },
     {
       description: 'Grandmother Tree',
-      impact: 353
+      impact: 404
     },
     {
       description: 'Grandmother Tree',
-      impact: 488
+      impact: 492
     },
     {
       description: 'Grandmother Tree',
-      impact: 394
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 428
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 383
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 478
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 303
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 309
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 450
+      impact: 425
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

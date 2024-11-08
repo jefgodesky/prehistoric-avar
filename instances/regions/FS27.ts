@@ -10,53 +10,44 @@ const FS27: IRegion = {
   features: [
     {
       description: 'Grandmother Tree',
-      impact: 323
+      impact: 424
     },
     {
       description: 'Grandmother Tree',
-      impact: 434
+      impact: 268
     },
     {
       description: 'Grandmother Tree',
-      impact: 276
+      impact: 393
     },
     {
       description: 'Grandmother Tree',
-      impact: 313
+      impact: 304
     },
     {
       description: 'Grandmother Tree',
-      impact: 405
+      impact: 310
     },
     {
       description: 'Grandmother Tree',
-      impact: 390
+      impact: 426
     },
     {
       description: 'Grandmother Tree',
-      impact: 327
+      impact: 279
     },
     {
       description: 'Grandmother Tree',
-      impact: 375
+      impact: 383
     },
     {
       description: 'Grandmother Tree',
-      impact: 468
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 398
-    },
-    {
-      description: 'Grandmother Tree',
-      impact: 439
+      impact: 329
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

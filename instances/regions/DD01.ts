@@ -11,7 +11,6 @@ const DD01: IRegion = {
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

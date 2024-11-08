@@ -9,42 +9,41 @@ const MD01: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (4846 sq. km)',
-      impact: 484600
+      description: 'Underground lake (1715 sq. km)',
+      impact: 171500
     },
     {
-      description: 'Underground lake (1999 sq. km)',
-      impact: 199900
+      description: 'Underground lake (3520 sq. km)',
+      impact: 352000
     },
     {
-      description: 'Underground lake (4361 sq. km)',
-      impact: 436100
+      description: 'Underground lake (1430 sq. km)',
+      impact: 143000
     },
     {
-      description: 'Underground lake (1388 sq. km)',
-      impact: 138800
+      description: 'Underground lake (5716 sq. km)',
+      impact: 571600
     },
     {
-      description: 'Underground lake (734 sq. km)',
-      impact: 73400
+      description: 'Underground lake (1667 sq. km)',
+      impact: 166700
     },
     {
-      description: 'Underground lake (861 sq. km)',
-      impact: 86100
+      description: 'Underground lake (2936 sq. km)',
+      impact: 293600
     },
     {
-      description: 'Underground lake (598 sq. km)',
-      impact: 59800
+      description: 'Underground lake (4945 sq. km)',
+      impact: 494500
     },
     {
-      description: 'Underground lake (568 sq. km)',
-      impact: 56800
+      description: 'Underground sea (92920 sq. km)',
+      impact: 9292000
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

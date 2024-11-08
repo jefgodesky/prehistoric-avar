@@ -7,11 +7,19 @@ const FD09: IRegion = {
   biome: 'World Below',
   capacity: 82824,
   dragons: [],
-  features: [],
+  features: [
+    {
+      description: 'Underground lake (5675 sq. km)',
+      impact: 567500
+    },
+    {
+      description: 'Underground lake (702 sq. km)',
+      impact: 70200
+    }
+  ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

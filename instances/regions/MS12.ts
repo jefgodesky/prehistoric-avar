@@ -275,24 +275,11 @@ const MS12: IRegion = {
     {
       description: 'Glacier',
       impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

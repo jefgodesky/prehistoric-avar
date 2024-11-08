@@ -141,190 +141,177 @@ const MS14: IRegion = {
       impact: -100
     },
     {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
-      description: 'Glacier',
-      impact: -100
-    },
-    {
       description: 'Volcano (2203)',
-      impact: -251
+      impact: -293
     },
     {
       description: 'Volcano (2204)',
-      impact: -437
+      impact: -372
     },
     {
       description: 'Volcano (2205)',
-      impact: -336
+      impact: -427
     },
     {
       description: 'Volcano (2206)',
-      impact: -375
+      impact: -473
     },
     {
       description: 'Volcano (2207)',
-      impact: -342
+      impact: -302
     },
     {
       description: 'Volcano (2208)',
-      impact: -420
+      impact: -342
     },
     {
       description: 'Volcano (2209)',
-      impact: -377
+      impact: -271
     },
     {
       description: 'Volcano (2210)',
-      impact: -336
+      impact: -491
     },
     {
       description: 'Volcano (2211)',
-      impact: -252
+      impact: -354
     },
     {
       description: 'Volcano (2212)',
-      impact: -324
+      impact: -285
     },
     {
       description: 'Volcano (2213)',
-      impact: -391
+      impact: -452
     },
     {
       description: 'Volcano (2214)',
-      impact: -311
+      impact: -286
     },
     {
       description: 'Volcano (2215)',
-      impact: -299
+      impact: -269
     },
     {
       description: 'Volcano (2216)',
-      impact: -492
+      impact: -323
     },
     {
       description: 'Volcano (2217)',
-      impact: -353
+      impact: -352
     },
     {
       description: 'Volcano (2218)',
-      impact: -390
+      impact: -485
     },
     {
       description: 'Volcano (2219)',
-      impact: -383
+      impact: -377
     },
     {
       description: 'Volcano (2220)',
-      impact: -334
+      impact: -400
     },
     {
       description: 'Volcano (2221)',
-      impact: -255
+      impact: -317
     },
     {
       description: 'Volcano (2222)',
-      impact: -305
+      impact: -493
     },
     {
       description: 'Volcano (2223)',
-      impact: -350
+      impact: -495
     },
     {
       description: 'Volcano (2224)',
-      impact: -278
+      impact: -436
     },
     {
       description: 'Volcano (2225)',
-      impact: -363
+      impact: -411
     },
     {
       description: 'Volcano (2226)',
-      impact: -318
-    },
-    {
-      description: 'Volcano (2227)',
       impact: -304
     },
     {
+      description: 'Volcano (2227)',
+      impact: -498
+    },
+    {
       description: 'Volcano (2228)',
-      impact: -279
+      impact: -317
     },
     {
       description: 'Volcano (2229)',
-      impact: -387
+      impact: -479
     },
     {
       description: 'Volcano (2230)',
-      impact: -272
+      impact: -493
     },
     {
       description: 'Volcano (2231)',
-      impact: -401
+      impact: -377
     },
     {
       description: 'Volcano (2232)',
-      impact: -298
+      impact: -410
     },
     {
       description: 'Volcano (2233)',
-      impact: -336
+      impact: -464
     },
     {
       description: 'Volcano (2234)',
-      impact: -391
+      impact: -438
     },
     {
       description: 'Volcano (2235)',
-      impact: -358
+      impact: -443
     },
     {
       description: 'Volcano (2236)',
-      impact: -320
+      impact: -250
     },
     {
       description: 'Volcano (2237)',
-      impact: -390
+      impact: -405
     },
     {
       description: 'Volcano (2238)',
-      impact: -454
+      impact: -352
     },
     {
       description: 'Volcano (2239)',
-      impact: -433
+      impact: -343
     },
     {
       description: 'Volcano (2240)',
-      impact: -395
+      impact: -391
     },
     {
       description: 'Volcano (2241)',
-      impact: -363
+      impact: -306
     },
     {
       description: 'Volcano (2242)',
-      impact: -383
+      impact: -396
     },
     {
       description: 'Volcano (2243)',
-      impact: -383
+      impact: -274
     },
     {
       description: 'Volcano (2244)',
-      impact: -419
+      impact: -350
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

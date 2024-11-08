@@ -10,45 +10,44 @@ const MD11: IRegion = {
   features: [
     {
       description: 'Volcanic pipe (2044)',
-      impact: -286
+      impact: -340
     },
     {
       description: 'Volcanic pipe (2045)',
-      impact: -483
+      impact: -457
     },
     {
       description: 'Volcanic pipe (2046)',
-      impact: -405
+      impact: -411
     },
     {
       description: 'Volcanic pipe (2047)',
-      impact: -259
+      impact: -440
     },
     {
       description: 'Volcanic pipe (2048)',
-      impact: -347
+      impact: -463
     },
     {
       description: 'Volcanic pipe (2049)',
-      impact: -419
+      impact: -467
     },
     {
       description: 'Volcanic pipe (2050)',
-      impact: -364
+      impact: -383
     },
     {
       description: 'Volcanic pipe (2051)',
-      impact: -334
+      impact: -434
     },
     {
       description: 'Volcanic pipe (2052)',
-      impact: -301
+      impact: -405
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

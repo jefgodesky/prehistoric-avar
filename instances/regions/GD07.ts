@@ -9,42 +9,17 @@ const GD07: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (4984 sq. km)',
-      impact: 498400
+      description: 'Underground lake (4277 sq. km)',
+      impact: 427700
     },
     {
-      description: 'Underground lake (1284 sq. km)',
-      impact: 128400
-    },
-    {
-      description: 'Underground lake (5281 sq. km)',
-      impact: 528100
-    },
-    {
-      description: 'Underground lake (1595 sq. km)',
-      impact: 159500
-    },
-    {
-      description: 'Underground lake (938 sq. km)',
-      impact: 93800
-    },
-    {
-      description: 'Underground lake (733 sq. km)',
-      impact: 73300
-    },
-    {
-      description: 'Underground lake (569 sq. km)',
-      impact: 56900
-    },
-    {
-      description: 'Underground lake (812 sq. km)',
-      impact: 81200
+      description: 'Underground lake (867 sq. km)',
+      impact: 86700
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],

@@ -9,46 +9,33 @@ const FD27: IRegion = {
   dragons: [],
   features: [
     {
-      description: 'Underground lake (3731 sq. km)',
-      impact: 373100
+      description: 'Underground lake (5885 sq. km)',
+      impact: 588500
     },
     {
-      description: 'Underground lake (1534 sq. km)',
-      impact: 153400
+      description: 'Underground lake (1409 sq. km)',
+      impact: 140900
     },
     {
-      description: 'Underground lake (5698 sq. km)',
-      impact: 569800
+      description: 'Underground lake (4648 sq. km)',
+      impact: 464800
     },
     {
-      description: 'Underground lake (3277 sq. km)',
-      impact: 327700
+      description: 'Underground lake (737 sq. km)',
+      impact: 73700
     },
     {
-      description: 'Underground lake (4870 sq. km)',
-      impact: 487000
+      description: 'Underground lake (640 sq. km)',
+      impact: 64000
     },
     {
-      description: 'Underground lake (5769 sq. km)',
-      impact: 576900
-    },
-    {
-      description: 'Underground lake (2690 sq. km)',
-      impact: 269000
-    },
-    {
-      description: 'Underground lake (5308 sq. km)',
-      impact: 530800
-    },
-    {
-      description: 'Underground sea (90582 sq. km)',
-      impact: 9058200
+      description: 'Underground lake (753 sq. km)',
+      impact: 75300
     }
   ],
   feyInfluence: 0,
   habitability: 1,
   immortals: [],
-  languages: [],
   markers: [],
   ogrism: 0,
   populations: [],
