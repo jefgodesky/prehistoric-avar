@@ -1,8 +1,6 @@
 import {
   BIOMES,
   DISPOSITIONS,
-  LANG_MORPHOLOGY,
-  LANG_ORDER,
   SPECIES_NAMES
 } from './enums.ts'
 
@@ -56,6 +54,7 @@ const SampleRelationship: IRelationship = {
 const WosanData: ISpecies = {
   name: SPECIES_NAMES.WOSAN,
   generation: 50,
+  canSpeak: false,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 0,
     [BIOMES.TEMPERATE_FOREST]: 1,
@@ -74,6 +73,7 @@ const ElfData: ISpecies = {
   name: SPECIES_NAMES.ELF,
   ancestor: SPECIES_NAMES.WOSAN,
   generation: 10,
+  canSpeak: true,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 3,
     [BIOMES.TEMPERATE_FOREST]: 3,
@@ -85,10 +85,6 @@ const ElfData: ISpecies = {
     [BIOMES.POLAR]: -3,
     [BIOMES.CAVES]: -3,
     [BIOMES.WORLD_BELOW]: 1
-  },
-  languagePreferences: {
-    typology: [LANG_MORPHOLOGY.ANALYTIC],
-    order: [LANG_ORDER.VSO, LANG_ORDER.VOS]
   }
 }
 
@@ -96,6 +92,7 @@ const HumanData: ISpecies = {
   name: SPECIES_NAMES.HUMAN,
   ancestor: SPECIES_NAMES.WOSAN,
   generation: 40,
+  canSpeak: true,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 0,
     [BIOMES.TEMPERATE_FOREST]: 1,
@@ -107,8 +104,7 @@ const HumanData: ISpecies = {
     [BIOMES.POLAR]: -3,
     [BIOMES.CAVES]: -3,
     [BIOMES.WORLD_BELOW]: -1
-  },
-  languagePreferences: {}
+  }
 }
 
 const SampleSociety: ISociety = {
@@ -123,10 +119,6 @@ const SampleSociety: ISociety = {
     [BIOMES.POLAR]: 0,
     [BIOMES.CAVES]: 0,
     [BIOMES.WORLD_BELOW]: 0
-  },
-  language: {
-    order: LANG_ORDER.SOV,
-    morphology: LANG_MORPHOLOGY.ANALYTIC
   },
   scrolls: [
     {

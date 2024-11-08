@@ -3,8 +3,6 @@ import type { DatalessEventNames, OmnipresentEventData } from 'emittery'
 import type {
   Biome,
   Disposition,
-  LangMorphology,
-  LangOrder,
   SpeciesName
 } from './enums.ts'
 
@@ -56,14 +54,8 @@ interface IImmortal {
 }
 
 interface ILanguage {
-  name?: string
-  order?: LangOrder
-  morphology?: LangMorphology
-}
-
-interface ILanguageDiffusion {
-  order: Record<LangOrder, number>,
-  morphology: Record<LangMorphology, number>
+  name: string,
+  ancestor?: string
 }
 
 interface IPopulation {
@@ -114,7 +106,6 @@ interface IRegion {
   feyInfluence: number
   habitability: number
   immortals: IImmortal[]
-  languages: ILanguage[]
   markers: string[]
   ogrism: number
   populations: IPopulation[]
@@ -155,18 +146,13 @@ interface ISociety {
   scrolls: IScroll[]
 }
 
-interface ISpeciesLanguagePreferences {
-  order?: LangOrder[]
-  typology?: LangMorphology[]
-}
-
 interface ISpecies {
   name: SpeciesName
   ancestor?: SpeciesName
   fitness: IFitness
   generation: number
-  languagePreferences?: ISpeciesLanguagePreferences
   appeared?: number
+  canSpeak?: boolean
 }
 
 interface IWorld {
@@ -192,7 +178,6 @@ export type {
   IHistoricalRecord,
   IImmortal,
   ILanguage,
-  ILanguageDiffusion,
   IPopulation,
   IQuest,
   IQuestCall,
@@ -204,6 +189,5 @@ export type {
   IScroll,
   ISociety,
   ISpecies,
-  ISpeciesLanguagePreferences,
   IWorld
 }

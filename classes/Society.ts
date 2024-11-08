@@ -15,9 +15,16 @@ class Society extends Markable {
     super(region.emitter, data)
 
     this.fitness = new Fitness(data?.fitness ?? undefined)
-    this.language = data?.language ? new Language(region, data.language) : null
+    this.language = data?.language ? new Language(this, data.language) : null
     this.region = region
     this.scribe = new Scribe(region.emitter, ...(data?.scrolls ?? []))
+  }
+
+  addLanguage (): void {
+    const { id, simulation } = this.region
+    const { millennium } = simulation
+    const name = `${id}-${millennium.toString().padStart(3, '0')}`
+    this.language = new Language(this, { name })
   }
 
   toObject (): ISociety {

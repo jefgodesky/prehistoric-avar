@@ -1,6 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { BIOMES, LANG_ORDER, LANG_MORPHOLOGY, SPECIES_NAMES } from '../enums.ts'
+import { BIOMES, SPECIES_NAMES } from '../enums.ts'
 import { ElfData, HumanData, WosanData } from '../test-examples.ts'
 import Species from './Species.ts'
 
@@ -26,9 +26,9 @@ describe('Species', () => {
       expect(sp.generation).toEqual(null)
     })
 
-    it('sets null for language preferences by default', () => {
+    it('defaults to false for ability to speak', () => {
       const sp = new Species()
-      expect(sp.languagePreferences).toEqual(null)
+      expect(sp.canSpeak).toEqual(false)
     })
 
     it('instantiates an empty fitness instance by default', () => {
@@ -61,22 +61,9 @@ describe('Species', () => {
       expect(sp.fitness.min).toBe(-3)
     })
 
-    it('uses languagePreferences to determine capacity for speech', () => {
+    it('can set ability to speak', () => {
       const sp = new Species(HumanData)
-      expect(sp.languagePreferences).not.toEqual(null)
-    })
-
-    it('can set a preference for morphological types in language', () => {
-      const sp = new Species(ElfData)
-      expect(sp.languagePreferences?.typology).toHaveLength(1)
-      expect(sp.languagePreferences?.typology).toContain(LANG_MORPHOLOGY.ANALYTIC)
-    })
-
-    it('can set a preference for word order', () => {
-      const sp = new Species(ElfData)
-      expect(sp.languagePreferences?.order).toHaveLength(2)
-      expect(sp.languagePreferences?.order).toContain(LANG_ORDER.VOS)
-      expect(sp.languagePreferences?.order).toContain(LANG_ORDER.VSO)
+      expect(sp.canSpeak).toEqual(true)
     })
   })
 
@@ -87,23 +74,6 @@ describe('Species', () => {
         for (const biome of Object.values(BIOMES)) {
           expect(sp.getFitness(biome)).toEqual(WosanData.fitness[biome])
         }
-      })
-    })
-
-    describe('canSpeak', () => {
-      it('returns false if the species has null for languagePreferences', () => {
-        const sp = new Species(WosanData)
-        expect(sp.canSpeak()).toEqual(false)
-      })
-
-      it('returns false if the species has languagePreferences', () => {
-        const sp = new Species(ElfData)
-        expect(sp.canSpeak()).toEqual(true)
-      })
-
-      it('returns false if the species has languagePreferences, even with nothing specified', () => {
-        const sp = new Species(HumanData)
-        expect(sp.canSpeak()).toEqual(true)
       })
     })
 
@@ -122,8 +92,8 @@ describe('Species', () => {
         expect(actual.name).toEqual(sp.name)
         expect(actual.ancestor).toEqual(sp.ancestor)
         expect(actual.generation).toEqual(sp.generation)
+        expect(actual.canSpeak).toEqual(sp.canSpeak)
         expect(actual.fitness[biome]).toEqual(sp.getFitness(biome))
-        expect(JSON.stringify(actual.languagePreferences)).toEqual(JSON.stringify(sp.languagePreferences))
       })
     })
 

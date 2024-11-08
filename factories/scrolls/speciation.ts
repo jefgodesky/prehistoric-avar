@@ -26,13 +26,6 @@ const createSpeciationScroll = (sp: SpeciesName, population: Population): Scroll
 
   const onUnseal = () => {
     const { species, home } = population
-    console.log({
-      home: { id: home.id, species: home.species },
-      sp,
-      species: { generation: species.generation },
-      test: home.species === sp,
-      value: home.species === sp ? species.generation ?? 50 : 0
-    })
     return home.species === sp ? species.generation ?? 50 : 0
   }
 

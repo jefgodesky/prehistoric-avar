@@ -41,21 +41,6 @@ export const EVENTS_GLOBAL_UNIQUE = {
   NOVA_SISTERS: 'A New Star: The Nine Sisters'
 } as const
 
-export const LANG_MORPHOLOGY = {
-  FUSIONAL: 'Fusional',
-  ANALYTIC: 'Analytic',
-  AGGLUTINATIVE: 'Agglutinative'
-} as const
-
-export const LANG_ORDER = {
-  SOV: 'SOV',
-  SVO: 'SVO',
-  OSV: 'OSV',
-  OVS: 'OVS',
-  VSO: 'VSO',
-  VOS: 'VOS'
-} as const
-
 export const LAYER = {
   SURFACE: 'S',
   NEAR_SURFACE: 'C',
@@ -81,8 +66,6 @@ export const SPECIES_NAMES = {
 
 export type Biome = typeof BIOMES[keyof typeof BIOMES]
 export type Disposition = typeof DISPOSITIONS[keyof typeof DISPOSITIONS]
-export type LangMorphology = typeof LANG_MORPHOLOGY[keyof typeof LANG_MORPHOLOGY]
-export type LangOrder = typeof LANG_ORDER[keyof typeof LANG_ORDER]
 export type Layer = typeof LAYER[keyof typeof LAYER]
 export type SpeciesName = typeof SPECIES_NAMES[keyof typeof SPECIES_NAMES]
 export type UniqueGlobalEvent = typeof EVENTS_GLOBAL_UNIQUE[keyof typeof EVENTS_GLOBAL_UNIQUE]

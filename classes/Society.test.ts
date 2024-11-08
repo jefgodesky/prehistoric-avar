@@ -1,7 +1,7 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { BIOMES } from '../enums.ts'
-import { GS03 } from '../instances/regions/index.ts'
+import { GS02, GS03 } from '../instances/regions/index.ts'
 import { SampleSociety } from '../test-examples.ts'
 import Region from './Region.ts'
 import Simulation from './Simulation.ts'
@@ -43,11 +43,6 @@ describe('Society', () => {
       expect(society.fitness.get(biome)).toBe(SampleSociety.fitness[biome])
     })
 
-    it('can set language', () => {
-      const society = new Society(region, SampleSociety)
-      expect(society.language?.order).toBe(SampleSociety.language?.order)
-    })
-
     it('can set markers', () => {
       const markers = ['Test']
       const data = Object.assign({}, SampleSociety, { markers })
@@ -63,13 +58,20 @@ describe('Society', () => {
   })
 
   describe('Member methods', () => {
+    describe('addLanguage', () => {
+      it('adds a language to the society', () => {
+        const society = new Society(sim.world.regions.GS02)
+        society.addLanguage()
+        expect(society.language?.name).toBe(`${GS02.id}-001`)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const biome = BIOMES.BOREAL_FOREST
         const society = new Society(region, SampleSociety)
         const actual = society.toObject()
         expect(actual.fitness[biome]).toBe(SampleSociety.fitness[biome])
-        expect(actual.language?.order).toBe(SampleSociety.language?.order)
         expect(actual.scrolls.length).toBe(SampleSociety.scrolls.length)
         expect(actual.scrolls[0].text).toBe(SampleSociety.scrolls[0].text)
       })

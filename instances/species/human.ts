@@ -5,6 +5,7 @@ export default new Species({
   name: SPECIES_NAMES.HUMAN,
   ancestor: SPECIES_NAMES.WOSAN,
   generation: 40,
+  canSpeak: true,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 0,
     [BIOMES.TEMPERATE_FOREST]: 1,
@@ -16,6 +17,5 @@ export default new Species({
     [BIOMES.POLAR]: -3,
     [BIOMES.CAVES]: -3,
     [BIOMES.WORLD_BELOW]: -1
-  },
-  languagePreferences: {}
+  }
 })

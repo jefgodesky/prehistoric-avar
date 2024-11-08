@@ -1,10 +1,11 @@
-import { BIOMES, LANG_MORPHOLOGY, SPECIES_NAMES } from '../../enums.ts'
+import { BIOMES, SPECIES_NAMES } from '../../enums.ts'
 import Species from '../../classes/Species.ts'
 
 export default new Species({
   name: SPECIES_NAMES.GNOME,
   ancestor: SPECIES_NAMES.DWARF,
   generation: 20,
+  canSpeak: true,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 1,
     [BIOMES.TEMPERATE_FOREST]: 2,
@@ -16,8 +17,5 @@ export default new Species({
     [BIOMES.POLAR]: -1,
     [BIOMES.CAVES]: 2,
     [BIOMES.WORLD_BELOW]: 3
-  },
-  languagePreferences: {
-    typology: [LANG_MORPHOLOGY.ANALYTIC]
   }
 })

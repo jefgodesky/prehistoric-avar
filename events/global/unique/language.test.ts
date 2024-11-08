@@ -1,6 +1,6 @@
 import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { EVENTS_GLOBAL_UNIQUE, LANG_MORPHOLOGY, LANG_ORDER } from '../../../enums.ts'
+import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import Population from '../../../classes/Population.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import language from './language.ts'
@@ -57,10 +57,9 @@ describe('language', () => {
     addHumans(sim)
     const region = sim.world.regions[homeRegion]
     language(sim, true)
-    expect(region.languages).toHaveLength(1)
-    expect(region.languages[0].name).toBe('GS03-001')
-    expect(region.languages[0].order).toBe(LANG_ORDER.SOV)
-    expect(region.languages[0].morphology).toBe(LANG_MORPHOLOGY.AGGLUTINATIVE)
+    const actual = region.society?.language
+    expect(actual?.name).toBe('GS03-001')
+    expect(actual?.ancestor).not.toBeDefined()
   })
 
   it('interests dragons', () => {

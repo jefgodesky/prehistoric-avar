@@ -6,12 +6,11 @@ import { DragonQueen, SamplePopulation, SampleSociety } from '../test-examples.t
 import {EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES} from '../enums.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 import Immortal from './Immortal.ts'
-import Language from './Language.ts'
 import Population from './Population.ts'
 import Quest from './Quest.ts'
 import Region from './Region.ts'
 import Simulation from './Simulation.ts'
-import {getSpeciationScrollText} from '../factories/scrolls/speciation.ts'
+import { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
 
 describe('Region', () => {
   let sim: Simulation
@@ -27,12 +26,11 @@ describe('Region', () => {
 
   const addSpeechCommunity = (
     region: Region = new Region(sim, GS02),
-    populationData: IPopulation = SamplePopulation,
-    language: Language = new Language(region)
-  ): {  region: Region, population: Population, language: Language } => {
+    populationData: IPopulation = SamplePopulation
+  ): {  region: Region, population: Population } => {
     const { population } = introducePopulation(region, populationData)
-    region.addLanguage(language)
-    return { region, population, language }
+    region.society!.addLanguage()
+    return { region, population }
   }
 
   beforeEach(() => { sim = new Simulation() })
@@ -93,9 +91,9 @@ describe('Region', () => {
       expect(region.immortals).toHaveLength(0)
     })
 
-    it('defaults languages to an empty array', () => {
+    it('defaults society to null', () => {
       const region = new Region(sim)
-      expect(region.languages).toHaveLength(0)
+      expect(region.society).toBeNull()
     })
 
     it('defaults ogrism to 0', () => {
@@ -179,11 +177,6 @@ describe('Region', () => {
       expect(region.immortals).toHaveLength(GS02.immortals.length)
     })
 
-    it('can take languages', () => {
-      const region = new Region(sim, GS02)
-      expect(region.languages).toHaveLength(GS02.languages.length)
-    })
-
     it('can take ogrism', () => {
       const region = new Region(sim, GS02)
       expect(region.ogrism).toBe(GS02.ogrism)
@@ -197,7 +190,7 @@ describe('Region', () => {
     it('can take a society', () => {
       const data = Object.assign({}, GS02, { society: SampleSociety })
       const region = new Region(sim, data)
-      expect(region.society?.language).not.toBeNull()
+      expect(region.society).not.toBeNull()
     })
 
     it('can take a species', () => {
@@ -235,6 +228,18 @@ describe('Region', () => {
       it('gives the population an ID', () => {
         const { population } = introducePopulation()
         expect(population.id).toBe('GS02-HU001')
+      })
+
+      it('creates a society', () => {
+        const { region } = introducePopulation()
+        expect(region.society).toBeDefined()
+      })
+
+      it('doesn\'t replace an existing society', () => {
+        const { region } = introducePopulation()
+        const before = region.society
+        introducePopulation(region)
+        expect(region.society).toBe(before)
       })
 
       it('gives each population a unique ID', () => {
@@ -359,31 +364,6 @@ describe('Region', () => {
         region.habitability = 0.9
         region.restoreHabitability()
         expect(region.habitability).toBe(1)
-      })
-    })
-
-    describe('addLanguage', () => {
-      it('adds a language to the region', () => {
-        const region = new Region(sim, GS02)
-        region.addLanguage(new Language(region))
-        expect(region.languages).toHaveLength(1)
-        expect(region.languages[0].name).toBe(`${GS02.id}-001`)
-      })
-    })
-
-    describe('getCurrentLanguage', () => {
-      it('returns undefined if the region has never had a language', () => {
-        const region = new Region(sim, GS02)
-        const actual = region.getCurrentLanguage()
-        expect(actual).not.toBeDefined()
-      })
-
-      it('returns the region\'s most recent language', () => {
-        const region = new Region(sim, GS02)
-        const lang = new Language(region)
-        region.languages.push(lang)
-        const actual = region.getCurrentLanguage()
-        expect(JSON.stringify(actual?.toString())).toBe(JSON.stringify(lang.toString()))
       })
     })
 

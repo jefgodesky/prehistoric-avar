@@ -4,7 +4,6 @@ import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 
 import Immortal from './Immortal.ts'
-import Language from './Language.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'
@@ -24,7 +23,6 @@ class Region extends Markable implements IHabitable {
   feyInfluence: number
   habitability: number
   immortals: Immortal[]
-  languages: Language[]
   ogrism: number
   populations: Population[]
   society: Society | null
@@ -36,7 +34,6 @@ class Region extends Markable implements IHabitable {
     super(sim.emitter, data)
 
     const immortals = data?.immortals ?? []
-    const languages = data?.languages ?? []
     const populations = data?.populations ?? []
 
     this.id = data?.id ?? ''
@@ -49,7 +46,6 @@ class Region extends Markable implements IHabitable {
     this.feyInfluence = data?.feyInfluence ?? 0
     this.habitability = data?.habitability ?? 1
     this.immortals = immortals.map(immortal => new Immortal(sim.emitter, immortal))
-    this.languages = languages.map(lang => new Language(this, lang))
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(sim.emitter, this, pop))
     this.simulation = sim
@@ -69,6 +65,7 @@ class Region extends Markable implements IHabitable {
   }
 
   introduce (...populations: Population[]): void {
+    this.society = this.society ?? new Society(this)
     const sameSpecies = (n: Population, p: Population): boolean => n.species.name === p.species.name
     for (const p of populations) {
       const conspecific = this.populations.filter(n => sameSpecies(n, p))
@@ -94,10 +91,9 @@ class Region extends Markable implements IHabitable {
   }
 
   hasSpeechCommunity (): boolean {
-    const { languages, populations } = this
-    if (languages.length < 1) return false
-    return populations
-      .map(p => !p.extinct && p.species.canSpeak())
+    if (!this.society?.language) return false
+    return this.populations
+      .map(p => !p.extinct && p.species.canSpeak)
       .reduce((acc, curr) => acc && curr, true)
   }
 
@@ -109,17 +105,6 @@ class Region extends Markable implements IHabitable {
     const gap = 1 - this.habitability
     this.habitability += gap / 2
     if (this.habitability >= ROUND_HABITABILITY_TO_FULL) this.habitability = 1
-  }
-
-  addLanguage (language: Language): void {
-    const { millennium } = this.simulation
-    language.name = `${this.id}-${millennium.toString().padStart(3, '0')}`
-    this.languages.push(language)
-  }
-
-  getCurrentLanguage (): Language | undefined {
-    if (this.languages.length < 1) return undefined
-    return this.languages[this.languages.length - 1]
   }
 
   getAverageGeneration (): number {
@@ -134,7 +119,6 @@ class Region extends Markable implements IHabitable {
   }
 
   speciate (): void {
-    console.log(this.species)
     if (!this.species) return
     const { species } = this.simulation.world
     const scrollText = getSpeciationScrollText(this.species)
@@ -178,7 +162,6 @@ class Region extends Markable implements IHabitable {
       feyInfluence: this.feyInfluence,
       habitability: this.habitability,
       immortals: this.immortals.map(immortal => immortal.toObject()),
-      languages: this.languages.map(lang => lang.toObject()),
       markers: this.markers,
       ogrism: this.ogrism,
       populations: this.populations.map(pop => pop.toObject()),
@@ -186,6 +169,7 @@ class Region extends Markable implements IHabitable {
     }
 
     if (this.species) obj.species = this.species
+    if (this.society) obj.society = this.society.toObject()
     return obj
   }
 

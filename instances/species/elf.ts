@@ -1,10 +1,11 @@
-import { BIOMES, LANG_MORPHOLOGY, LANG_ORDER, SPECIES_NAMES } from '../../enums.ts'
+import { BIOMES, SPECIES_NAMES } from '../../enums.ts'
 import Species from '../../classes/Species.ts'
 
 export default new Species({
   name: SPECIES_NAMES.ELF,
   ancestor: SPECIES_NAMES.WOSAN,
   generation: 5,
+  canSpeak: true,
   fitness: {
     [BIOMES.BOREAL_FOREST]: 3,
     [BIOMES.TEMPERATE_FOREST]: 3,
@@ -16,9 +17,5 @@ export default new Species({
     [BIOMES.POLAR]: -3,
     [BIOMES.CAVES]: 0,
     [BIOMES.WORLD_BELOW]: 1
-  },
-  languagePreferences: {
-    typology: [LANG_MORPHOLOGY.FUSIONAL],
-    order: [LANG_ORDER.VSO, LANG_ORDER.VOS]
   }
 })
