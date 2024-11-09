@@ -62,7 +62,7 @@ describe('Society', () => {
       it('adds a language to the society', () => {
         const society = new Society(sim, region)
         society.addLanguage()
-        expect(society.language?.name).toBe(`${society.region}-001`)
+        expect(society.language).toBe(`${society.region}-001`)
       })
     })
 

@@ -53,11 +53,6 @@ interface IImmortal {
   slayable: IQuest | false
 }
 
-interface ILanguage {
-  name: string,
-  ancestor?: string
-}
-
 interface IPopulation {
   id: string
   species: SpeciesName
@@ -141,7 +136,7 @@ interface IScroll {
 interface ISociety {
   id?: string
   fitness: IFitness
-  language?: ILanguage
+  language?: string
   markers?: string[]
   scrolls: IScroll[]
 }
@@ -163,7 +158,6 @@ export type {
   IHistoricalQuery,
   IHistoricalRecord,
   IImmortal,
-  ILanguage,
   IPopulation,
   IQuest,
   IQuestCall,

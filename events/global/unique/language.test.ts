@@ -58,8 +58,8 @@ describe('language', () => {
     const region = sim.world.regions[homeRegion]
     language(sim, true)
     const actual = region.society?.language
-    expect(actual?.name).toBe('GS03-001')
-    expect(actual?.ancestor).not.toBeDefined()
+    expect(actual).toBe('GS03-001')
+    expect(sim.world.languages['GS03-001']).toBeNull()
   })
 
   it('interests dragons', () => {

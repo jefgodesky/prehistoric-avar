@@ -23,7 +23,7 @@ const language = (sim: Simulation, forceEvent?: boolean): void => {
   if (!region.society) return
   region.society.addLanguage()
 
-  const description = `The first language (${region.society.language?.name}) develops among the humans of ${region.id}.`
+  const description = `The first language (${region.society.language}) develops among the humans of ${region.id}.`
   sim.world.events.push(event)
   sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Invention', 'Humans', region.id] })
   sim.world.dragons.interest.incr()

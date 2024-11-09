@@ -18,6 +18,7 @@ class World implements IHabitable {
   events: string[]
   dragons: Dragons
   immortals: Record<string, Immortal>
+  languages: Record<string, string | null>
   populations: Record<string, Population>
   quests: Record<string, Quest>
   societies: Record<string, Society>
@@ -29,6 +30,7 @@ class World implements IHabitable {
     this.events = []
     this.dragons = new Dragons()
     this.immortals = {}
+    this.languages = {}
     this.populations = {}
     this.quests = {}
     this.societies = {}

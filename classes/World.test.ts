@@ -35,6 +35,11 @@ describe('World', () => {
       expect(world.immortals).toEqual({})
     })
 
+    it('defaults languages to an empty dictionary', () => {
+      const world = new World(sim)
+      expect(world.languages).toEqual({})
+    })
+
     it('defaults populations to an empty dictionary', () => {
       const world = new World(sim)
       expect(world.populations).toEqual({})
