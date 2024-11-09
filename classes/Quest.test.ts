@@ -69,6 +69,11 @@ describe('Quest', () => {
       const quest = new Quest(sim, SampleQuest)
       expect(quest.lethality).toBe(SampleQuest.lethality)
     })
+
+    it('adds quest to the world', () => {
+      const quest = new Quest(sim)
+      expect(sim.world.quests[quest.id]).toBe(quest)
+    })
   })
 
   describe('Member methods', () => {

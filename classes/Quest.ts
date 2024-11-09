@@ -19,11 +19,13 @@ class Quest {
 
   constructor (sim: Simulation, data?: IQuest) {
     this.simulation = sim
-    this.id = data?.id || nanoid()
+    this.id = sim.world.makeUnique(data?.id ?? nanoid(), sim.world.quests)
     this.description = data?.description ?? 'Complete the quest'
     this.courage = data?.courage ?? 0.1
     this.skill = data?.skill ?? 0.1
     this.lethality = data?.lethality ?? 1/3
+
+    this.simulation.world.quests[this.id] = this
   }
 
   async call (scope: string): Promise<void> {
