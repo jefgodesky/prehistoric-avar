@@ -105,4 +105,35 @@ describe('Immortal', () => {
       })
     })
   })
+
+  describe('Static methods', () => {
+    describe('find', () => {
+      let dq: Immortal
+
+      beforeEach(() => {
+        dq = new Immortal(sim, DragonQueen)
+        sim.world.regions.MS06.immortals.push(dq)
+      })
+
+      it('returns null if not given a query', () => {
+        expect(Immortal.find(sim)).toBeNull()
+      })
+
+      it('returns null if the immortal cannot be found', () => {
+        expect(Immortal.find(sim, 'Immortal: The Moderate Republican')).toBeNull()
+      })
+
+      it('returns the immortal if it can be found', () => {
+        expect(Immortal.find(sim, dq.toString())).toBe(dq)
+      })
+
+      it('can normalize the query', () => {
+        expect(Immortal.find(sim, `IMMORTAL:${dq.description}`)).toBe(dq)
+      })
+
+      it('can handle the description alone', () => {
+        expect(Immortal.find(sim, dq.description)).toBe(dq)
+      })
+    })
+  })
 })
