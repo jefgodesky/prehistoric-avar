@@ -8,12 +8,12 @@ import Simulation from '../../classes/Simulation.ts'
 const createArchfey = (sim: Simulation, region: Region): Immortal => {
   const description = `Archfey Sovereign of ${region.id}`
   const archfey = new Immortal(
-    sim.emitter,
+    sim,
     {
       description,
       disposition: DISPOSITIONS.INDIFFERENT,
       impact: -250,
-      slayable: new Quest(sim.emitter, {
+      slayable: new Quest(sim, {
         id: nanoid(),
         description: `Slay the ${description}`,
         courage: 0.001,

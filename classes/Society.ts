@@ -12,12 +12,12 @@ class Society extends Markable {
   scribe: Scribe
 
   constructor (region: Region, data?: ISociety) {
-    super(region.emitter, data)
+    super(region.simulation, data)
 
     this.fitness = new Fitness(data?.fitness ?? undefined)
     this.language = data?.language ? new Language(this, data.language) : null
     this.region = region
-    this.scribe = new Scribe(region.emitter, ...(data?.scrolls ?? []))
+    this.scribe = new Scribe(region.simulation, ...(data?.scrolls ?? []))
   }
 
   addLanguage (): void {

@@ -28,10 +28,9 @@ class Region extends Markable implements IHabitable {
   society: Society | null
   species?: SpeciesName
   tags: string[]
-  simulation: Simulation
 
   constructor (sim: Simulation, data?: IRegion) {
-    super(sim.emitter, data)
+    super(sim, data)
 
     const immortals = data?.immortals ?? []
     const populations = data?.populations ?? []
@@ -45,10 +44,9 @@ class Region extends Markable implements IHabitable {
     this.features = data?.features ?? []
     this.feyInfluence = data?.feyInfluence ?? 0
     this.habitability = data?.habitability ?? 1
-    this.immortals = immortals.map(immortal => new Immortal(sim.emitter, immortal))
+    this.immortals = immortals.map(immortal => new Immortal(sim, immortal))
     this.ogrism = data?.ogrism ?? 0
-    this.populations = populations.map(pop => new Population(sim.emitter, this, pop))
-    this.simulation = sim
+    this.populations = populations.map(pop => new Population(this, pop))
     this.society = data?.society ? new Society(this, data.society) : null
     this.tags = data?.tags ?? []
 

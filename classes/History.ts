@@ -1,12 +1,10 @@
 import { intersect } from '@std/collections'
-import type { Emitter, IHistoricalQuery, IHistoricalRecord } from '../index.d.ts'
+import type { IHistoricalQuery, IHistoricalRecord } from '../index.d.ts'
 
 class History {
   events: IHistoricalRecord[]
-  private emitter: Emitter
 
-  constructor (emitter: Emitter, events?: IHistoricalRecord[]) {
-    this.emitter = emitter
+  constructor (events?: IHistoricalRecord[]) {
     this.events = events ?? []
   }
 

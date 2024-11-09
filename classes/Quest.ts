@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { Biome } from '../enums.ts'
-import { Emitter, IQuest, IQuestCall, IQuestReport } from '../index.d.ts'
+import { IQuest, IQuestCall, IQuestReport } from '../index.d.ts'
+import type Simulation from './Simulation.ts'
 import type Population from './Population.ts'
 
 const QUEST_EVENTS = {
@@ -14,10 +15,10 @@ class Quest {
   courage: number
   skill: number
   lethality: number
-  private emitter: Emitter
+  simulation: Simulation
 
-  constructor (emitter: Emitter, data?: IQuest) {
-    this.emitter = emitter
+  constructor (sim: Simulation, data?: IQuest) {
+    this.simulation = sim
     this.id = data?.id || nanoid()
     this.description = data?.description ?? 'Complete the quest'
     this.courage = data?.courage ?? 0.1
@@ -27,7 +28,7 @@ class Quest {
 
   async call (scope: string): Promise<void> {
     const call: IQuestCall = { scope, quest: this.toObject() }
-    await this.emitter.emit(QUEST_EVENTS.CALL, call)
+    await this.simulation.emitter.emit(QUEST_EVENTS.CALL, call)
   }
 
   async run (p: Population, biome: Biome): Promise<IQuestReport> {
@@ -66,7 +67,7 @@ class Quest {
       }
     }
 
-    if (report.success) await this.emitter.emit(QUEST_EVENTS.ACCOMPLISHED, report.quest)
+    if (report.success) await this.simulation.emitter.emit(QUEST_EVENTS.ACCOMPLISHED, report.quest)
     return report
   }
 

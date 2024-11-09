@@ -6,7 +6,7 @@ import Simulation from '../../classes/Simulation.ts'
 
 const createDragonQueen = (sim: Simulation): Immortal => {
   const dragonQueen = new Immortal(
-    sim.emitter,
+    sim,
     {
       description: 'The Dragon Queen',
       disposition: DISPOSITIONS.HOSTILE,

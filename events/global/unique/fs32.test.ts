@@ -12,7 +12,7 @@ describe('fs32', () => {
 
   const addHumans = (sim: Simulation, num: number) => {
     const home = sim.world.regions[srcRegion]
-    const p = new Population(sim.emitter, home)
+    const p = new Population(home)
     p.adjustSize(num)
     p.species = sim.world.species.human
     home.introduce(p)

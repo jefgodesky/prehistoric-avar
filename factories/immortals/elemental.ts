@@ -71,12 +71,12 @@ const createElemental = (sim: Simulation, element: string): Immortal => {
   }
 
   const elemental = new Immortal(
-    sim.emitter,
+    sim,
     {
       description,
       disposition: DISPOSITIONS.INDIFFERENT,
       impact: 250,
-      slayable: new Quest(sim.emitter, {
+      slayable: new Quest(sim, {
         id: nanoid(),
         description: `Slay the Powerful ${el} Elemental`,
         courage: 0.001,

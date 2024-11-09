@@ -16,7 +16,7 @@ class Simulation {
 
   constructor () {
     this.emitter = new Emittery()
-    this.history = new History(this.emitter)
+    this.history = new History()
     this.millennium = 1
     this.stage = SIMULATION_STAGES.REFRESH
     this.world = new World(this)

@@ -19,7 +19,7 @@ describe('Region', () => {
     region: Region = new Region(sim, GS02),
     populationData: IPopulation = SamplePopulation
   ): { region: Region, population: Population } => {
-    const population = new Population(sim.emitter, region, populationData)
+    const population = new Population(region, populationData)
     region.introduce(population)
     return { region, population }
   }
@@ -244,7 +244,7 @@ describe('Region', () => {
 
       it('gives each population a unique ID', () => {
         const { region, population: p1 } = introducePopulation()
-        const p2 = new Population(sim.emitter, region, SamplePopulation)
+        const p2 = new Population(region, SamplePopulation)
         p1.adjustSize(p1.size * -2)
         region.introduce(p2)
         expect(p1.id).toBe('GS02-HU001')
@@ -254,7 +254,7 @@ describe('Region', () => {
       it('sets the population\'s new home', () => {
         const src = new Region(sim, DS01)
         const dest = new Region(sim, GS02)
-        const p = new Population(sim.emitter, src, SamplePopulation)
+        const p = new Population(src, SamplePopulation)
         dest.introduce(p)
         expect(p.home).toBe(dest)
       })
@@ -262,8 +262,8 @@ describe('Region', () => {
       it('has existing populations absorb new ones of the same species', () => {
         const src = new Region(sim, DS01)
         const dest = new Region(sim, GS02)
-        const p1 = new Population(sim.emitter, dest, SamplePopulation)
-        const p2 = new Population(sim.emitter, src, SamplePopulation)
+        const p1 = new Population(dest, SamplePopulation)
+        const p2 = new Population(src, SamplePopulation)
         dest.introduce(p1)
         dest.introduce(p2)
         expect(dest.populations).toHaveLength(1)
@@ -375,7 +375,7 @@ describe('Region', () => {
 
       it('returns the population generation value if only one population', () => {
         const region = new Region(sim, GS02)
-        region.introduce(new Population(sim.emitter, region, SamplePopulation))
+        region.introduce(new Population(region, SamplePopulation))
         expect(region.getAverageGeneration()).toBe(region.populations[0].species.generation)
       })
 
@@ -383,8 +383,8 @@ describe('Region', () => {
         const region = new Region(sim, GS02)
         const humans = Object.assign({}, SamplePopulation, { size: 4000 })
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
-        region.introduce(new Population(sim.emitter, region, humans))
-        region.introduce(new Population(sim.emitter, region, elves))
+        region.introduce(new Population(region, humans))
+        region.introduce(new Population(region, elves))
         const expected = Math.floor(((4000 * 40) + (2000 * 5)) / (4000 + 2000))
         expect(region.getAverageGeneration()).toBe(expected)
       })
@@ -394,9 +394,9 @@ describe('Region', () => {
         const humans = Object.assign({}, SamplePopulation, { size: 4000 })
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
         const dwarves = Object.assign({}, SamplePopulation, { size: 3000, species: SPECIES_NAMES.DWARF })
-        region.introduce(new Population(sim.emitter, region, humans))
-        region.introduce(new Population(sim.emitter, region, elves))
-        region.introduce(new Population(sim.emitter, region, dwarves))
+        region.introduce(new Population(region, humans))
+        region.introduce(new Population(region, elves))
+        region.introduce(new Population(region, dwarves))
         const expected = Math.floor(((4000 * 40) + (2000 * 5) + (3000 * 20)) / (4000 + 2000 + 3000))
         expect(region.getAverageGeneration()).toBe(expected)
       })
@@ -417,7 +417,7 @@ describe('Region', () => {
       it('won\'t create a speciation scroll for other populations', () => {
         const region = new Region(sim, FS32)
         const popData = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const p = new Population(sim.emitter, region, popData)
+        const p = new Population(region, popData)
         region.introduce(p)
         region.speciate()
         const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
@@ -542,7 +542,7 @@ describe('Region', () => {
 
       it('leaves unharmed immortals alone', async () => {
         const region = new Region(sim, GS02)
-        region.immortals.push(new Immortal(sim.emitter, DragonQueen))
+        region.immortals.push(new Immortal(sim, DragonQueen))
         const report: IQuestReport = {
           quest: (region.immortals[0].slayable as Quest).toObject(),
           attempted: 100,
@@ -556,7 +556,7 @@ describe('Region', () => {
 
       it('slays', async () => {
         const region = new Region(sim, GS02)
-        const i = new Immortal(sim.emitter, DragonQueen)
+        const i = new Immortal(sim, DragonQueen)
         region.immortals.push(i)
         const report: IQuestReport = {
           quest: (region.immortals[0].slayable as Quest).toObject(),

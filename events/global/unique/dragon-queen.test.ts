@@ -1,6 +1,6 @@
 import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { DISPOSITIONS, EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
+import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import type Region from '../../../classes/Region.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import dragonQueen, { OGRISM_THRESHOLD } from './dragon-queen.ts'

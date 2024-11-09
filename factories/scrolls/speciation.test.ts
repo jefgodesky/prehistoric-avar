@@ -33,7 +33,7 @@ describe('createSpeciationScroll', () => {
     region?: Region
   ): { region: Region, population: Population } => {
     const home = region ?? sim.regions[0]
-    const population = new Population(sim.emitter, home, data)
+    const population = new Population(home, data)
     home.introduce(population)
     return { region: home, population }
   }

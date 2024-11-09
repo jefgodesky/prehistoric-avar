@@ -34,7 +34,7 @@ describe('Meteor', () => {
     sim = new Simulation()
     region = sim.world.regions['MS06']
     region.markers = []
-    population = new Population(sim.emitter, region, SamplePopulation)
+    population = new Population(region, SamplePopulation)
     region.introduce(population)
   })
 
@@ -72,7 +72,7 @@ describe('Meteor', () => {
   describe('impactSea', () => {
     it('hits the sea', () => {
       const coastal = sim.world.regions['FS11']
-      const coastalPop = new Population(sim.emitter, coastal, SamplePopulation)
+      const coastalPop = new Population(coastal, SamplePopulation)
       coastalPop.size = 10000
       coastal.introduce(coastalPop)
       impactSea(sim)

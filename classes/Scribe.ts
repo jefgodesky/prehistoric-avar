@@ -1,6 +1,7 @@
-import type { Emitter, IScroll } from '../index.d.ts'
+import type { IScroll } from '../index.d.ts'
+import { IWorld } from '../index.d.ts'
 import Scroll from './Scroll.ts'
-import {IWorld} from '../index.d.ts'
+import Simulation from './Simulation.ts'
 
 const SCROLL_EVENTS = {
   OPEN: 'Scroll.Open'
@@ -9,12 +10,12 @@ const SCROLL_EVENTS = {
 class Scribe {
   scrolls: Scroll[]
 
-  constructor (emitter: Emitter, ...scrolls: Array<Scroll | IScroll>) {
+  constructor (sim: Simulation, ...scrolls: Array<Scroll | IScroll>) {
     this.scrolls = scrolls.map(scroll => {
       if (scroll instanceof Scroll) return scroll
       return new Scroll(scroll.text, scroll.seals)
     })
-    emitter.on('Scroll.Open', (data: IScroll) => this.handleScrollOpen(data))
+    sim.emitter.on('Scroll.Open', (data: IScroll) => this.handleScrollOpen(data))
   }
 
   unseal (

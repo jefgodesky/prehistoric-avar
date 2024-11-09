@@ -1,5 +1,5 @@
 import type { ISpecies } from '../index.d.ts'
-import {Biome, SPECIES_NAMES, SpeciesName} from '../enums.ts'
+import { Biome, SPECIES_NAMES, SpeciesName } from '../enums.ts'
 import Fitness from './Fitness.ts'
 
 class Species {

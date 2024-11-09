@@ -11,7 +11,7 @@ describe('language', () => {
 
   const addHumans = (sim: Simulation) => {
     const home = sim.world.regions[homeRegion]
-    const p = new Population(sim.emitter, home)
+    const p = new Population(home)
     p.species = sim.world.species.human
     home.introduce(p)
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)

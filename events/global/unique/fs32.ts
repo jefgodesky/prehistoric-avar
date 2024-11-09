@@ -1,7 +1,6 @@
 import { sample } from '@std/collections'
 import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../../../enums.ts'
 import type Population from '../../../classes/Population.ts'
-import type Region from '../../../classes/Region.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'

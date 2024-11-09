@@ -1,6 +1,6 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
-import type { Emitter, IPopulation } from '../index.d.ts'
+import type { IPopulation } from '../index.d.ts'
 import clamp from '../clamp.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
@@ -20,8 +20,8 @@ class Population extends Markable {
   extinct: boolean
   private fitness: Fitness
 
-  constructor (emitter: Emitter, home: Region, data?: IPopulation) {
-    super(emitter, data)
+  constructor (home: Region, data?: IPopulation) {
+    super(home.simulation, data)
 
     const sp = data?.species ?? SPECIES_NAMES.WOSAN
     const relationships = data?.relationships ?? []
@@ -31,8 +31,8 @@ class Population extends Markable {
     this.species = species[sp.toLowerCase()]
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
-    this.scribe = new Scribe(emitter, ...(data?.scrolls ?? []))
-    this.relationships = relationships.map(rel => new Relationship(emitter, rel))
+    this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
+    this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
     this.markers = data?.markers ?? []
     this.extinct = data?.extinct ?? false
     this.fitness = this.home.society?.fitness
@@ -82,7 +82,7 @@ class Population extends Markable {
     const n = num ?? ((Math.random() * 0.2) + 0.4) * this.size
     this.size -= n
     const data = Object.assign({}, this.toObject(), { size: n })
-    return new Population(this.emitter, this.home, data)
+    return new Population(this.home, data)
   }
 
   migrate (dest: Region): void {
