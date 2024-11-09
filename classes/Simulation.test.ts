@@ -28,9 +28,9 @@ describe('Simulation', () => {
     it('creates a world', () => {
       const { world } = new Simulation()
       expect(world.events).toHaveLength(0)
-      expect(Object.keys(world.regions)).toHaveLength(188)
+      expect(world.regions.size()).toBe(189)
       for (const species of Object.values(SPECIES_NAMES)) {
-        expect(Object.keys(world.species)).toContain(species.toLowerCase())
+        expect(world.species.keys()).toContain(species.toLowerCase())
       }
     })
   })

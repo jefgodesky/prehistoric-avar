@@ -90,8 +90,8 @@ class Region extends Markable implements IHabitable {
 
   hasSpeechCommunity (): boolean {
     if (!this.society) return false
-    const society = this.simulation.world.societies[this.society]
-    if (!society.language) return false
+    const society = this.simulation.world.societies.get(this.society)
+    if (!society?.language) return false
     return this.populations
       .map(p => !p.extinct && p.species.canSpeak)
       .reduce((acc, curr) => acc && curr, true)
@@ -122,9 +122,9 @@ class Region extends Markable implements IHabitable {
     if (!this.species) return
     const { species } = this.simulation.world
     const scrollText = getSpeciationScrollText(this.species)
-    const sp = species[this.species.toLowerCase()]
+    const sp = species.get(this.species.toLowerCase())
     for (const p of this.populations) {
-      if (p.species.name !== sp.ancestor) continue
+      if (p.species.name !== sp?.ancestor) continue
       let scroll = p.scribe.scrolls.find(s => s.text === scrollText)
       if (scroll) { scroll.unseal(); continue }
       scroll = createSpeciationScroll(this.species, p)

@@ -80,11 +80,11 @@ describe('createSpeciationScroll', () => {
 
   it('unseals in proper regions', () => {
     const scenarios: Array<[string, Population, number]> = [
-      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, sim.world.regions.MS06), 50],
-      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, sim.world.regions.MD06), 20],
-      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, sim.world.regions.FS32), 40],
-      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, sim.world.regions.GS03), 50],
-      [SPECIES_NAMES.ORC, createWosanPopulation(sim, sim.world.regions.FS02), 50]
+      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, sim.world.regions.get('MS06')!), 50],
+      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, sim.world.regions.get('MD06')!), 20],
+      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, sim.world.regions.get('FS32')!), 40],
+      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, sim.world.regions.get('GS03')!), 50],
+      [SPECIES_NAMES.ORC, createWosanPopulation(sim, sim.world.regions.get('FS02')!), 50]
     ]
 
     for (const [species, p, generation] of scenarios) {
@@ -95,11 +95,11 @@ describe('createSpeciationScroll', () => {
 
   it('will not unseal in other regions', () => {
     const scenarios: Array<[string, Population]> = [
-      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, sim.world.regions.GS02)],
-      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, sim.world.regions.GS02)],
-      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, sim.world.regions.GS02)],
-      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, sim.world.regions.GS02)],
-      [SPECIES_NAMES.ORC, createWosanPopulation(sim, sim.world.regions.GS02)]
+      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, sim.world.regions.get('GS02')!)],
+      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, sim.world.regions.get('GS02')!)],
+      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, sim.world.regions.get('GS02')!)],
+      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, sim.world.regions.get('GS02')!)],
+      [SPECIES_NAMES.ORC, createWosanPopulation(sim, sim.world.regions.get('GS02')!)]
     ]
 
     for (const [species, p] of scenarios) {
@@ -110,18 +110,18 @@ describe('createSpeciationScroll', () => {
 
   it('won\'t unseal if you migrate somewhere without that species', () => {
     const scenarios: Array<[string, Population]> = [
-      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, sim.world.regions.MS06)],
-      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, sim.world.regions.MD06)],
-      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, sim.world.regions.FS32)],
-      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, sim.world.regions.GS03)],
-      [SPECIES_NAMES.ORC, createWosanPopulation(sim, sim.world.regions.FS02)]
+      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, sim.world.regions.get('MS06')!)],
+      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, sim.world.regions.get('MD06')!)],
+      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, sim.world.regions.get('FS32')!)],
+      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, sim.world.regions.get('GS03')!)],
+      [SPECIES_NAMES.ORC, createWosanPopulation(sim, sim.world.regions.get('FS02')!)]
     ]
 
     for (const [species, p] of scenarios) {
       const scroll = createSpeciationScroll(species, p)
-      p.migrate(sim.world.regions.GS02)
+      p.migrate(sim.world.regions.get('GS02')!)
       expect(scroll.onUnseal()).toBe(0)
-      sim.world.regions.GS02.populations = []
+      sim.world.regions.get('GS02')!.populations = []
     }
   })
 

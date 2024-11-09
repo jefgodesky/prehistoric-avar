@@ -19,9 +19,11 @@ class Directory<T> {
     return unique
   }
 
-  add (key: string, value: T): string {
-    const actualKey = this.generateKey(key)
-    this.records[actualKey] = value
+  add (key: string | (T & { id?: string }), value?: T): string | false {
+    const suggestedKey = typeof key === 'string' ? key : key.id
+    if (!suggestedKey) return false
+    const actualKey = this.generateKey(suggestedKey)
+    this.records[actualKey] = value !== undefined ? value : key as T
     return actualKey
   }
 

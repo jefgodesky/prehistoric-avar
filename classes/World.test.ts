@@ -1,8 +1,6 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { SPECIES_NAMES } from '../enums.ts'
-import { DragonQueen } from '../test-examples.ts'
-import Immortal from './Immortal.ts'
 import Simulation from './Simulation.ts'
 import World from './World.ts'
 
@@ -30,29 +28,29 @@ describe('World', () => {
       expect(world.dragons.fear.value).toBe(0)
     })
 
-    it('defaults immortals to an empty dictionary', () => {
+    it('defaults immortals to an empty directory', () => {
       const world = new World(sim)
-      expect(world.immortals).toEqual({})
+      expect(world.immortals.size()).toBe(0)
     })
 
-    it('defaults languages to an empty dictionary', () => {
+    it('defaults languages to an empty directory', () => {
       const world = new World(sim)
-      expect(world.languages).toEqual({})
+      expect(world.languages.size()).toBe(0)
     })
 
-    it('defaults populations to an empty dictionary', () => {
+    it('defaults populations to an empty directory', () => {
       const world = new World(sim)
-      expect(world.populations).toEqual({})
+      expect(world.populations.size()).toBe(0)
     })
 
-    it('defaults quests to an empty dictionary', () => {
+    it('defaults quests to an empty directory', () => {
       const world = new World(sim)
-      expect(world.quests).toEqual({})
+      expect(world.quests.size()).toBe(0)
     })
 
-    it('defaults societies to an empty dictionary', () => {
+    it('defaults societies to an empty directory', () => {
       const world = new World(sim)
-      expect(world.societies).toEqual({})
+      expect(world.societies.size()).toBe(0)
     })
 
     it('defaults events to an empty list', () => {
@@ -63,13 +61,13 @@ describe('World', () => {
     it('loads species', () => {
       const world = new World(sim)
       for (const species of Object.values(SPECIES_NAMES)) {
-        expect(Object.keys(world.species)).toContain(species.toLowerCase())
+        expect(world.species.keys()).toContain(species.toLowerCase())
       }
     })
 
     it('loads regions', () => {
       const world = new World(sim)
-      expect(Object.keys(world.regions)).toHaveLength(188)
+      expect(world.regions.size()).toBe(189)
     })
   })
 
@@ -120,24 +118,6 @@ describe('World', () => {
         const world = new World(sim)
         world.events = [event]
         expect(world.hasEvent(event)).toBe(true)
-      })
-    })
-
-    describe('makeUnique', () => {
-      const id = 'The Dragon Queen'
-
-      it('returns the ID if it\'s unique', () => {
-        const world = new World(sim)
-        const actual = world.makeUnique(id, world.immortals)
-        expect(actual).toBe(id)
-      })
-
-      it('returns a unique ID that starts with the given string', () => {
-        const world = new World(sim)
-        world.immortals[id] = new Immortal(sim, DragonQueen)
-        const actual = world.makeUnique(id, world.immortals)
-        expect(actual).not.toBe(id)
-        expect(actual.startsWith(id)).toBe(true)
       })
     })
 

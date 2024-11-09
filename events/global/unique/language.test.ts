@@ -10,9 +10,9 @@ describe('language', () => {
   const homeRegion = 'GS03'
 
   const addHumans = (sim: Simulation) => {
-    const home = sim.world.regions[homeRegion]
+    const home = sim.world.regions.get(homeRegion)!
     const p = new Population(home)
-    p.species = sim.world.species.human
+    p.species = sim.world.species.get('human')!
     home.introduce(p)
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
   }
@@ -55,12 +55,12 @@ describe('language', () => {
 
   it('adds the first language', () => {
     addHumans(sim)
-    const region = sim.world.regions[homeRegion]
+    const region = sim.world.regions.get(homeRegion)
     language(sim, true)
-    const society = sim.world.societies[region.society ?? '']
+    const society = sim.world.societies.get(region?.society ?? '')
     const actual = society?.language
     expect(actual).toBe('GS03-001')
-    expect(sim.world.languages['GS03-001']).toBeNull()
+    expect(sim.world.languages.get('GS03-001')).toBeNull()
   })
 
   it('interests dragons', () => {

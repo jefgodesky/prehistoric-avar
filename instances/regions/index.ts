@@ -1,3 +1,4 @@
+import Directory from '../../classes/Directory.ts'
 import Region from '../../classes/Region.ts'
 
 import DC01 from './DC01.ts'
@@ -222,12 +223,12 @@ const regionData = [
   PD01, PD02, PD03
 ]
 
-const getRegions = (sim: Simulation): Record<string, Region> => {
-  const dictionary: Record<string, Region> = {}
+const getRegions = (sim: Simulation): Directory<Region> => {
+  const dir: Directory<Region> = new Directory<Region>()
   for (const region of regionData) {
-    dictionary[region.id] = new Region(sim, region)
+    dir.add(region.id, new Region(sim, region))
   }
-  return dictionary
+  return dir
 }
 
 export {

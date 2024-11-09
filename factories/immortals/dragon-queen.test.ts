@@ -20,7 +20,7 @@ describe('createDragonQueen', () => {
   })
 
   it('moves the Dragon Queen to a region with dragons', () => {
-    const regions = Object.values(sim.world.regions)
+    const regions = sim.world.regions.values()
       .filter(region => region.dragons.length > 0)
     const ids = regions.map(region => region.id)
     const queen = createDragonQueen(sim)

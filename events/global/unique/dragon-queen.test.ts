@@ -11,7 +11,7 @@ describe('dragonQueen', () => {
 
   beforeEach(() => {
     sim = new Simulation()
-    region = sim.world.regions['MS06']
+    region = sim.world.regions.get('MS06')!
   })
 
   it('does not register an event if language has not appeared', () => {

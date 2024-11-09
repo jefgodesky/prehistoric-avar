@@ -18,7 +18,8 @@ const createDragonQueen = (sim: Simulation): Immortal => {
   )
 
   dragonQueen.move = (sim: Simulation): Region | null => {
-    const dragonRegions = Object.values(sim.world.regions).filter(region => region.dragons.length > 0)
+    const dragonRegions = sim.world.regions.values()
+      .filter(region => region.dragons.length > 0)
     const region = sample(dragonRegions)
     return region ?? null
   }

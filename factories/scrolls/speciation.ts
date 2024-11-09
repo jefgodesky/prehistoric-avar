@@ -30,7 +30,9 @@ const createSpeciationScroll = (sp: SpeciesName, population: Population): Scroll
   }
 
   const onOpen = () => {
-    population.species = species[sp.toLowerCase()]
+    const spp = species.get(sp.toLowerCase())
+    if (!spp) return
+    population.species = spp
 
     // Remove other scrolls
     for (const region of sim.regions) {

@@ -32,8 +32,8 @@ class Immortal {
     this.slayable = data?.slayable ? new Quest(this.simulation, data.slayable) : false
     this.move = () => null
 
-    this.id = sim.world.makeUnique(this.description, sim.world.immortals)
-    sim.world.immortals[this.id] = this
+    this.id = sim.world.immortals.generateKey(this.description)
+    sim.world.immortals.add(this)
   }
 
   toObject (): IImmortal {

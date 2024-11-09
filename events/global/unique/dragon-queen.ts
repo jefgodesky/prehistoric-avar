@@ -12,7 +12,7 @@ const dragonQueen = (sim: Simulation, forceEvent?: boolean): void => {
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.LANG]
   if (!uniqueEventCheck(sim, event, prerequisites)) return
 
-  const regions = Object.values(sim.world.regions).filter(region => {
+  const regions = sim.world.regions.values().filter(region => {
     if (region.dragons.length < 1) return false
     if (region.ogrism < OGRISM_THRESHOLD) return false
     return forceEvent ?? sample(getChances(1, 1000)) ?? false

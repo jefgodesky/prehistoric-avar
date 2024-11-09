@@ -1,6 +1,6 @@
-import { customAlphabet } from 'nanoid'
 import { IHabitable } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
+import Directory from './Directory.ts'
 import Dragons from './Dragons.ts'
 import Immortal from './Immortal.ts'
 import Population from './Population.ts'
@@ -17,23 +17,23 @@ class World implements IHabitable {
   habitability: number
   events: string[]
   dragons: Dragons
-  immortals: Record<string, Immortal>
-  languages: Record<string, string | null>
-  populations: Record<string, Population>
-  quests: Record<string, Quest>
-  societies: Record<string, Society>
-  species: Record<string, Species>
-  regions: Record<string, Region>
+  immortals: Directory<Immortal>
+  languages: Directory<string | null>
+  populations: Directory<Population>
+  quests: Directory<Quest>
+  societies: Directory<Society>
+  species: Directory<Species>
+  regions: Directory<Region>
 
   constructor (sim: Simulation) {
     this.habitability = 1
     this.events = []
     this.dragons = new Dragons()
-    this.immortals = {}
-    this.languages = {}
-    this.populations = {}
-    this.quests = {}
-    this.societies = {}
+    this.immortals = new Directory<Immortal>()
+    this.languages = new Directory<string | null>()
+    this.populations = new Directory<Population>()
+    this.quests = new Directory<Quest>()
+    this.societies = new Directory<Society>()
     this.species = species
     this.regions = getRegions(sim)
   }
@@ -54,18 +54,6 @@ class World implements IHabitable {
 
   hasEvent (event: string): boolean {
     return this.events.includes(event)
-  }
-
-  makeUnique (id: string, dict: Record<string, unknown>): string {
-    let candidate = id
-    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const lower = upper.toUpperCase()
-    const numerals = '0123456789'
-    const nanoid = customAlphabet(upper + lower + numerals, 6)
-    while (candidate in dict) {
-      candidate = `${id} (${nanoid()})`
-    }
-    return candidate
   }
 
   toString (): string {

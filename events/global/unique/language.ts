@@ -15,13 +15,13 @@ const language = (sim: Simulation, forceEvent?: boolean): void => {
   if (!fireEvent) return
 
   const isHuman = (p: Population): boolean => p.species.name === SPECIES_NAMES.HUMAN
-  const regions = Object.values(sim.world.regions).filter(region => {
+  const regions = sim.world.regions.values().filter(region => {
     return region.populations.filter(isHuman).length > 0
   })
 
   const region = sample(regions) as Region
   if (!region.society) return
-  const society = sim.world.societies[region.society]
+  const society = sim.world.societies.get(region.society)
   if (!society) return
   society.addLanguage()
 

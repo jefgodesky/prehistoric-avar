@@ -11,7 +11,7 @@ describe('createArchfey', () => {
 
   beforeEach(() => {
     sim = new Simulation()
-    region = sim.world.regions['FS11']
+    region = sim.world.regions.get('FS11')!
   })
 
   it('creates an archfey', () => {

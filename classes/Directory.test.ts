@@ -39,6 +39,20 @@ describe('Directory', () => {
         const dir = new Directory<string>()
         expect(dir.add(key, val)).toBe(key)
       })
+
+      it('can take an object with an ID', () => {
+        const obj = { id: key, val }
+        const dir = new Directory<{ id: string, val: string }>()
+        expect(dir.add(obj)).toBe(key)
+        expect(dir.get(key)).toEqual(obj)
+      })
+
+      it('returns false if the object does not have an id property', () => {
+        const obj = { key, val }
+        const dir = new Directory<{ key: string, val: string }>()
+        expect(dir.add(obj)).toBe(false)
+        expect(dir.get(key)).toBeNull()
+      })
     })
 
     describe('get', () => {

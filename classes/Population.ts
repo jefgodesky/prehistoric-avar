@@ -1,6 +1,7 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
 import type { IPopulation } from '../index.d.ts'
+import { wosan } from '../instances/species/index.ts'
 import clamp from '../clamp.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
@@ -31,7 +32,7 @@ class Population extends Markable {
 
     this.home = home
     this.id = data?.id ?? 'GS03-001WO'
-    this.species = species[sp.toLowerCase()]
+    this.species = species.get(sp.toLowerCase()) ?? wosan
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
     this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
@@ -40,8 +41,8 @@ class Population extends Markable {
     this.extinct = data?.extinct ?? false
 
     const { regions, societies } = this.simulation.world
-    const region = regions[home.id]
-    const society = societies[region.society ?? '']
+    const region = regions.get(home.id)
+    const society = societies.get(region?.society ?? '')
     this.fitness = society?.fitness
       ? Fitness.combine(this.species.fitness, society.fitness)
       : this.species.fitness

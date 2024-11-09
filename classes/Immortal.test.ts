@@ -89,7 +89,7 @@ describe('Immortal', () => {
 
     it('adds immortal to the world', () => {
       const i = new Immortal(sim)
-      expect(sim.world.immortals[i.id]).toBe(i)
+      expect(sim.world.immortals.get(i.id)).toBe(i)
     })
   })
 
@@ -117,7 +117,7 @@ describe('Immortal', () => {
 
       beforeEach(() => {
         dq = new Immortal(sim, DragonQueen)
-        sim.world.regions.MS06.immortals.push(dq)
+        sim.world.regions.get('MS06')!.immortals.push(dq)
       })
 
       it('returns null if not given a query', () => {

@@ -11,10 +11,10 @@ describe('fs32', () => {
   const destRegion = DEST_REGION_ID
 
   const addHumans = (sim: Simulation, num: number) => {
-    const home = sim.world.regions[srcRegion]
+    const home = sim.world.regions.get(srcRegion)!
     const p = new Population(home)
     p.adjustSize(num)
-    p.species = sim.world.species.human
+    p.species = sim.world.species.get('human')!
     home.introduce(p)
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
   }
@@ -66,8 +66,8 @@ describe('fs32', () => {
   it('moves humans from source region to FS32', () => {
     addHumans(sim, BIG_ENOUGH_POP)
     const { regions } = sim.world
-    const src = regions[srcRegion]
-    const dest = regions[destRegion]
+    const src = regions.get(srcRegion)!
+    const dest = regions.get(destRegion)!
     const p = src.populations[0]
     const before = p.size
     fs32(sim, true)

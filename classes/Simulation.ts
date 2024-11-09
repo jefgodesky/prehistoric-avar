@@ -20,7 +20,7 @@ class Simulation {
     this.millennium = 1
     this.stage = SIMULATION_STAGES.REFRESH
     this.world = new World(this)
-    this.regions = Object.values(this.world.regions)
+    this.regions = this.world.regions.values()
 
     // Add our "inciting incident"
     this.history.add({

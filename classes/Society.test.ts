@@ -63,7 +63,7 @@ describe('Society', () => {
 
     it('adds society to the world', () => {
       const society = new Society(sim, region)
-      expect(sim.world.societies[society.id]).toBe(society)
+      expect(sim.world.societies.get(society.id)!).toBe(society)
     })
   })
 

@@ -17,7 +17,7 @@ describe('desiredElementalRegions', () => {
     for (const element of elements) {
       const actual = desiredElementalRegions(sim, element)
       expect(actual.length).toBeGreaterThan(0)
-      expect(actual.length).toBeLessThanOrEqual(Object.keys(sim.world.regions).length)
+      expect(actual.length).toBeLessThanOrEqual(sim.world.regions.size())
     }
   })
 })
@@ -28,7 +28,7 @@ describe('createElemental', () => {
 
   beforeEach(() => {
     sim = new Simulation()
-    region = sim.world.regions['MS06']
+    region = sim.world.regions.get('MS06')!
   })
 
   it('can create a fire elemental', () => {
@@ -72,7 +72,7 @@ describe('createElemental', () => {
   })
 
   it('moves a terrestrial elemental', () => {
-    const ids = Object.values(sim.world.regions).map(region => region.id)
+    const ids = sim.world.regions.values().map(region => region.id)
     const elemental = createElemental(sim, 'water')
     expect(ids).toContain(elemental.move(sim, region)?.id)
   })

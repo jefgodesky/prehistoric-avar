@@ -10,7 +10,7 @@ import createElemental from '../../factories/immortals/elemental.ts'
 const getImpactRegion = (sim: Simulation): Region | null => {
   const totalArea = 4 * Math.PI * Math.pow(5000, 2)
   const impact = Math.random() * totalArea
-  const regions = Object.values(sim.world.regions).filter(region => region.tags.includes('surface'))
+  const regions = sim.world.regions.values().filter(region => region.tags.includes('surface'))
   let acc = 0
   for (const region of regions) {
     acc += region.area
@@ -20,7 +20,9 @@ const getImpactRegion = (sim: Simulation): Region | null => {
 }
 
 const getZone1 = (sim: Simulation, region: Region): Region[] => {
-  return region.adjacentRegions.map(id => sim.world.regions[id])
+  return region.adjacentRegions
+    .map(id => sim.world.regions.get(id))
+    .filter(item => item !== null)
 }
 
 const getZone2 = (sim: Simulation, region: Region): Region[] => {
@@ -34,7 +36,9 @@ const getZone2 = (sim: Simulation, region: Region): Region[] => {
       regions.push(id)
     }
   }
-  return regions.map(id => sim.world.regions[id])
+  return regions
+    .map(id => sim.world.regions.get(id))
+    .filter(item => item !== null)
 }
 
 const impact = (sim: Simulation, site?: Region | null): Region | null => {
@@ -52,7 +56,7 @@ const impactLand = (sim: Simulation): void => {
 }
 
 const impactSea = (sim: Simulation): void => {
-  const coastal = Object.values(sim.world.regions).filter(region => region.tags.includes('coastal'))
+  const coastal = sim.world.regions.values().filter(region => region.tags.includes('coastal'))
   for (const region of coastal) {
     for (const p of region.populations) p.adjustSize(-0.1)
   }
@@ -276,7 +280,7 @@ const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null)
 const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | null): Promise<void> => {
   const site = region === null ? null : impact(sim, region)
   const element = sample(['fire', 'air', 'water', 'earth', 'aether']) ?? 'aether'
-  const coastal = Object.values(sim.world.regions).filter(region => region.tags.includes('coastal'))
+  const coastal = sim.world.regions.values().filter(region => region.tags.includes('coastal'))
   let elementalRegion: Region | null = site
   let description
   if (site === null && element === 'water') {

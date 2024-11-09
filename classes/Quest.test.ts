@@ -72,7 +72,7 @@ describe('Quest', () => {
 
     it('adds quest to the world', () => {
       const quest = new Quest(sim)
-      expect(sim.world.quests[quest.id]).toBe(quest)
+      expect(sim.world.quests.get(quest.id)).toBe(quest)
     })
   })
 

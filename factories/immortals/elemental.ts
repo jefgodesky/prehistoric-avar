@@ -7,7 +7,7 @@ import type Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 
 const desiredFireElementalRegions = (sim: Simulation): string[] => {
-  return Object.values(sim.world.regions)
+  return sim.world.regions.values()
     .filter(region => {
       const volcanicFeatures = ['Volcano', 'Volcanic pipe']
       const isVolcanic = region.features.map(feature => feature.description).some(feature => volcanicFeatures.includes(feature))
@@ -18,7 +18,7 @@ const desiredFireElementalRegions = (sim: Simulation): string[] => {
 }
 
 const desiredAirElementalRegions = (sim: Simulation): string[] => {
-  return Object.values(sim.world.regions)
+  return sim.world.regions.values()
     .filter(region => {
       const isMountainous = region.tags.includes('mountains')
       const isGrassland = region.tags.includes('grassland')
@@ -29,7 +29,7 @@ const desiredAirElementalRegions = (sim: Simulation): string[] => {
 }
 
 const desiredWaterElementalRegions = (sim: Simulation): string[] => {
-  return Object.values(sim.world.regions)
+  return sim.world.regions.values()
     .filter(region => {
       const isCoastal = region.tags.includes('coastal')
       const hasStormDragons = region.dragons.includes('storm dragon')
@@ -39,7 +39,7 @@ const desiredWaterElementalRegions = (sim: Simulation): string[] => {
 }
 
 const desiredEarthElementalRegions = (sim: Simulation): string[] => {
-  return Object.values(sim.world.regions)
+  return sim.world.regions.values()
     .filter(region => {
       const isCave = region.tags.includes('cave')
       const hasForestDragons = region.dragons.includes('forest dragon')
@@ -95,7 +95,7 @@ const createElemental = (sim: Simulation, element: string): Immortal => {
     const desiredAdjacentIds = intersect(desiredRegions, current.adjacentRegions)
     const choices = desiredAdjacentIds.length > 0 ? desiredAdjacentIds : current.adjacentRegions
     const id = sample(choices)
-    return id ? sim.world.regions[id] : null
+    return id ? sim.world.regions.get(id) : null
   }
 
   return elemental
