@@ -14,7 +14,7 @@ describe('Population', () => {
   
   beforeEach(() => {
     sim = new Simulation()
-    home = new Region(sim, GS02)
+    home = sim.world.regions.GS02
     home.society = new Society(home, SampleSociety)
   })
 
@@ -271,6 +271,37 @@ describe('Population', () => {
       it('exports a string', () => {
         const p = new Population(home, SamplePopulation)
         expect(p.toString()).toBe(`Population: ${p.id}`)
+      })
+    })
+  })
+
+  describe('Static methods', () => {
+    describe('find', () => {
+      let population: Population
+
+      beforeEach(() => {
+        population = new Population(home, SamplePopulation)
+        home.introduce(population)
+      })
+
+      it('returns null if not given a query', () => {
+        expect(Population.find(sim)).toBeNull()
+      })
+
+      it('returns null if the population cannot be found', () => {
+        expect(Population.find(sim, 'Population: GS02-999GB')).toBeNull()
+      })
+
+      it('returns the population if it can be found', () => {
+        expect(Population.find(sim, population.toString())).toBe(population)
+      })
+
+      it('can normalize the query', () => {
+        expect(Population.find(sim, `POPULATION:${population.id}`)).toBe(population)
+      })
+
+      it('can handle the ID alone', () => {
+        expect(Population.find(sim, population.id)).toBe(population)
       })
     })
   })

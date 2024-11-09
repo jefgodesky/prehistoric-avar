@@ -9,6 +9,9 @@ import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
 import Species from './Species.ts'
 import species from '../instances/species/index.ts'
+import Simulation from './Simulation.ts'
+
+const TO_STRING_PREFIX = 'Population:' as const
 
 class Population extends Markable {
   home: Region
@@ -104,7 +107,22 @@ class Population extends Markable {
   }
 
   override toString (): string {
-    return `Population: ${this.id}`
+    return `${TO_STRING_PREFIX} ${this.id}`
+  }
+
+  static find (sim: Simulation, q: string = ''): Population | null {
+    const r = q.toLowerCase().startsWith(TO_STRING_PREFIX.toLowerCase())
+      ? q.slice(TO_STRING_PREFIX.length).trim()
+      : q
+    const str = `${TO_STRING_PREFIX} ${r}`
+
+    for (const region of sim.regions) {
+      for (const population of region.populations) {
+        if (population.toString() === str) return population
+      }
+    }
+
+    return null
   }
 }
 
