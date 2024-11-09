@@ -13,10 +13,13 @@ class Society extends Markable {
   constructor (sim: Simulation, region: string, data?: ISociety) {
     super(sim, data)
 
+    this.id = sim.world.regions[region].generateId()
     this.fitness = new Fitness(data?.fitness ?? undefined)
     this.language = data?.language ?? null
     this.region = region
     this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
+
+    sim.world.societies[this.id] = this
   }
 
   addLanguage (): void {

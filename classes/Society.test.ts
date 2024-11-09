@@ -17,6 +17,11 @@ describe('Society', () => {
       expect(society).toBeInstanceOf(Society)
     })
 
+    it('sets a default ID', () => {
+      const society = new Society(sim, region)
+      expect(society.id).toBe(`${region}-001`)
+    })
+
     it('sets a default fitness', () => {
       const society = new Society(sim, region)
       expect(society.fitness.get(BIOMES.BOREAL_FOREST)).toBe(0)
@@ -54,6 +59,11 @@ describe('Society', () => {
     it('can set scrolls', () => {
       const society = new Society(sim, region, SampleSociety)
       expect(society.scribe.scrolls).toHaveLength(SampleSociety.scrolls.length)
+    })
+
+    it('adds society to the world', () => {
+      const society = new Society(sim, region)
+      expect(sim.world.societies[society.id]).toBe(society)
     })
   })
 
