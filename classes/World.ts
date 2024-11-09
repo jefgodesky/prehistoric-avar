@@ -1,4 +1,5 @@
-import { IHabitable, ISpecies } from '../index.d.ts'
+import { customAlphabet } from 'nanoid'
+import { IHabitable } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Dragons from './Dragons.ts'
 import Immortal from './Immortal.ts'
@@ -45,6 +46,18 @@ class World implements IHabitable {
 
   hasEvent (event: string): boolean {
     return this.events.includes(event)
+  }
+
+  makeUnique (id: string, dict: Record<string, unknown>): string {
+    let candidate = id
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const lower = upper.toUpperCase()
+    const numerals = '0123456789'
+    const nanoid = customAlphabet(upper + lower + numerals, 6)
+    while (candidate in dict) {
+      candidate = `${id} (${nanoid()})`
+    }
+    return candidate
   }
 
   toString (): string {

@@ -1,6 +1,8 @@
 import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { SPECIES_NAMES } from '../enums.ts'
+import { DragonQueen } from '../test-examples.ts'
+import Immortal from './Immortal.ts'
 import Simulation from './Simulation.ts'
 import World from './World.ts'
 
@@ -103,6 +105,24 @@ describe('World', () => {
         const world = new World(sim)
         world.events = [event]
         expect(world.hasEvent(event)).toBe(true)
+      })
+    })
+
+    describe('makeUnique', () => {
+      const id = 'The Dragon Queen'
+
+      it('returns the ID if it\'s unique', () => {
+        const world = new World(sim)
+        const actual = world.makeUnique(id, world.immortals)
+        expect(actual).toBe(id)
+      })
+
+      it('returns a unique ID that starts with the given string', () => {
+        const world = new World(sim)
+        world.immortals[id] = new Immortal(sim, DragonQueen)
+        const actual = world.makeUnique(id, world.immortals)
+        expect(actual).not.toBe(id)
+        expect(actual.startsWith(id)).toBe(true)
       })
     })
 
