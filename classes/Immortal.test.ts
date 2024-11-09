@@ -17,9 +17,9 @@ describe('Immortal', () => {
       expect(i).toBeInstanceOf(Immortal)
     })
 
-    it('defaults description to a null string', () => {
+    it('defaults description to \'Immortal\'', () => {
       const i = new Immortal(sim)
-      expect(i.description).toBe('')
+      expect(i.description).toBe('Immortal')
     })
 
     it('defaults disposition to indifferent', () => {
@@ -85,6 +85,11 @@ describe('Immortal', () => {
     it('can set slayable', () => {
       const i = new Immortal(sim, DragonQueen)
       expect((i.slayable as Quest).toObject()).toEqual(DragonQueen.slayable)
+    })
+
+    it('adds immortal to the world', () => {
+      const i = new Immortal(sim)
+      expect(sim.world.immortals[i.id]).toBe(i)
     })
   })
 

@@ -9,6 +9,7 @@ import Simulation from './Simulation.ts'
 const TO_STRING_PREFIX = 'Immortal:' as const
 
 class Immortal {
+  id: string
   description: string
   disposition: Disposition
   impact: number
@@ -23,13 +24,16 @@ class Immortal {
     const relationships = data?.relationships ?? []
     this.simulation = sim
 
-    this.description = data?.description ?? ''
+    this.description = data?.description ?? 'Immortal'
     this.disposition = data?.disposition ?? DISPOSITIONS.INDIFFERENT
     this.impact = data?.impact ?? 0
     this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
     this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
     this.slayable = data?.slayable ? new Quest(this.simulation, data.slayable) : false
     this.move = () => null
+
+    this.id = sim.world.makeUnique(this.description, sim.world.immortals)
+    sim.world.immortals[this.id] = this
   }
 
   toObject (): IImmortal {
