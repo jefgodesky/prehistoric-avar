@@ -1,5 +1,4 @@
 import type { IScroll } from '../index.d.ts'
-import { IWorld } from '../index.d.ts'
 import Scroll from './Scroll.ts'
 import Simulation from './Simulation.ts'
 
@@ -21,8 +20,8 @@ class Scribe {
   unseal (
     text: string,
     seals: number,
-    onUnseal?: (context?: IWorld) => number,
-    onOpen?: (context?: IWorld) => void
+    onUnseal?: (sim?: Simulation) => number,
+    onOpen?: (sim?: Simulation) => void
   ): void {
     const scroll = this.scrolls.find(scroll => scroll.text === text)
     if (scroll) scroll.unseal()

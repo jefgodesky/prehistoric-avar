@@ -28,6 +28,16 @@ describe('World', () => {
       expect(world.dragons.fear.value).toBe(0)
     })
 
+    it('defaults immortals to an empty dictionary', () => {
+      const world = new World(sim)
+      expect(world.immortals).toEqual({})
+    })
+
+    it('defaults populations to an empty dictionary', () => {
+      const world = new World(sim)
+      expect(world.populations).toEqual({})
+    })
+
     it('defaults events to an empty list', () => {
       const world = new World(sim)
       expect(world.events).toHaveLength(0)
@@ -93,19 +103,6 @@ describe('World', () => {
         const world = new World(sim)
         world.events = [event]
         expect(world.hasEvent(event)).toBe(true)
-      })
-    })
-
-    describe('toObject', () => {
-      it('returns an object', () => {
-        const world = new World(sim)
-        const obj = world.toObject()
-        expect(obj.habitability).toEqual(world.habitability)
-        expect(obj.dragons.interest).toEqual(world.dragons.interest.value)
-        expect(obj.dragons.fear).toEqual(world.dragons.fear.value)
-        expect(obj.events).toEqual(world.events)
-        expect(Object.keys(obj.species)).toHaveLength(7)
-        expect(Object.keys(obj.regions)).toHaveLength(188)
       })
     })
 

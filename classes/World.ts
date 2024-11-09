@@ -1,6 +1,8 @@
-import { IHabitable, ISpecies, IWorld } from '../index.d.ts'
+import { IHabitable, ISpecies } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Dragons from './Dragons.ts'
+import Immortal from './Immortal.ts'
+import Population from './Population.ts'
 import Region from './Region.ts'
 import type Simulation from './Simulation.ts'
 import Species from './Species.ts'
@@ -12,6 +14,8 @@ class World implements IHabitable {
   habitability: number
   events: string[]
   dragons: Dragons
+  immortals: Record<string, Immortal>
+  populations: Record<string, Population>
   species: Record<string, Species>
   regions: Record<string, Region>
 
@@ -19,6 +23,8 @@ class World implements IHabitable {
     this.habitability = 1
     this.events = []
     this.dragons = new Dragons()
+    this.immortals = {}
+    this.populations = {}
     this.species = species
     this.regions = getRegions(sim)
   }
@@ -39,21 +45,6 @@ class World implements IHabitable {
 
   hasEvent (event: string): boolean {
     return this.events.includes(event)
-  }
-
-  toObject (): IWorld {
-    const species: Record<string, ISpecies> = {}
-    for (const sp in this.species) {
-      species[sp] = this.species[sp].toObject()
-    }
-
-    return {
-      habitability: this.habitability,
-      dragons: this.dragons.toObject(),
-      events: this.events,
-      species,
-      regions: Object.values(this.regions).map(region => region.toObject())
-    }
   }
 
   toString (): string {

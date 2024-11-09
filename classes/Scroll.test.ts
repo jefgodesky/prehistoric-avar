@@ -1,6 +1,6 @@
-import { describe, it } from 'jsr:@std/testing/bdd'
+import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { IWorld } from '../index.d.ts'
+import Simulation from './Simulation.ts'
 import Scroll, { defaultScrollOnUnseal } from './Scroll.ts'
 
 describe('Scroll', () => {
@@ -8,6 +8,9 @@ describe('Scroll', () => {
   const seals = 4
   const unseal = () => 2
   const open = () => { return }
+  let sim: Simulation
+
+  beforeEach(() => { sim = new Simulation() })
 
   describe('constructor', () => {
     it('creates a Scroll instance', () => {
@@ -81,29 +84,22 @@ describe('Scroll', () => {
       })
 
       it('can use context', () => {
-        const context: IWorld = {
-          habitability: 1,
-          dragons: { interest: 0, fear: 0 },
-          events: [],
-          species: {},
-          regions: []
-        }
-        const fn = (context?: IWorld) => context?.events.length || 0
+        const fn = (sim?: Simulation) => sim?.world.events.length || 0
         const scroll = new Scroll(text, 5, fn)
 
-        expect(scroll.unseal(context)).toBe(false)
+        expect(scroll.unseal(sim)).toBe(false)
         expect(scroll.seals).toBe(5)
 
-        context.events.push('New event')
-        expect(scroll.unseal(context)).toBe(false)
+        sim.world.events.push('New event')
+        expect(scroll.unseal(sim)).toBe(false)
         expect(scroll.seals).toBe(4)
 
-        context.events.push('Second event', 'Third event')
-        expect(scroll.unseal(context)).toBe(false)
+        sim.world.events.push('Second event', 'Third event')
+        expect(scroll.unseal(sim)).toBe(false)
         expect(scroll.seals).toBe(1)
 
-        context.events.push('Fourth event', 'Fifth event')
-        expect(scroll.unseal(context)).toBe(true)
+        sim.world.events.push('Fourth event', 'Fifth event')
+        expect(scroll.unseal(sim)).toBe(true)
         expect(scroll.seals).toBe(0)
       })
 
@@ -119,18 +115,12 @@ describe('Scroll', () => {
     describe('open', () => {
       it('can use context', () => {
         let number = 0
-        const context: IWorld = {
-          habitability: 1,
-          dragons: { interest: 0, fear: 0 },
-          events: ['First event', 'Second event'],
-          species: {},
-          regions: []
-        }
-        const fn = (context?: IWorld) => {
-          number = context?.events.length ?? 1
+        sim.world.events = ['First event', 'Second event']
+        const fn = (sim?: Simulation) => {
+          number = sim?.world.events.length ?? 1
         }
         const scroll = new Scroll(text, 1, defaultScrollOnUnseal, fn)
-        scroll.open(context)
+        scroll.open(sim)
         expect(number).toBe(2)
       })
     })

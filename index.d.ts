@@ -154,19 +154,6 @@ interface ISpecies {
   canSpeak?: boolean
 }
 
-interface IWorld {
-  habitability: number
-  dragons: {
-    interest: number
-    fear: number
-  }
-  species: {
-    [key: string]: ISpecies
-  }
-  events: string[]
-  regions: IRegion[]
-}
-
 export type {
   Emitter,
   IBiome,
@@ -187,6 +174,5 @@ export type {
   IRegionData,
   IScroll,
   ISociety,
-  ISpecies,
-  IWorld
+  ISpecies
 }
