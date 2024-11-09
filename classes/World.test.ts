@@ -40,6 +40,11 @@ describe('World', () => {
       expect(world.populations).toEqual({})
     })
 
+    it('defaults quests to an empty dictionary', () => {
+      const world = new World(sim)
+      expect(world.quests).toEqual({})
+    })
+
     it('defaults events to an empty list', () => {
       const world = new World(sim)
       expect(world.events).toHaveLength(0)
