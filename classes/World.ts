@@ -7,6 +7,7 @@ import Population from './Population.ts'
 import Quest from './Quest.ts'
 import Region from './Region.ts'
 import type Simulation from './Simulation.ts'
+import Society from './Society.ts'
 import Species from './Species.ts'
 import { getRegions } from '../instances/regions/index.ts'
 import species from '../instances/species/index.ts'
@@ -19,6 +20,7 @@ class World implements IHabitable {
   immortals: Record<string, Immortal>
   populations: Record<string, Population>
   quests: Record<string, Quest>
+  societies: Record<string, Society>
   species: Record<string, Species>
   regions: Record<string, Region>
 
@@ -29,6 +31,7 @@ class World implements IHabitable {
     this.immortals = {}
     this.populations = {}
     this.quests = {}
+    this.societies = {}
     this.species = species
     this.regions = getRegions(sim)
   }
