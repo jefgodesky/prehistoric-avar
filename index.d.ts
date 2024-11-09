@@ -151,7 +151,6 @@ interface ISpecies {
   ancestor?: SpeciesName
   fitness: IFitness
   generation: number
-  appeared?: number
   canSpeak?: boolean
 }
 
