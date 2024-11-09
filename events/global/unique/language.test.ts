@@ -57,7 +57,8 @@ describe('language', () => {
     addHumans(sim)
     const region = sim.world.regions[homeRegion]
     language(sim, true)
-    const actual = region.society?.language
+    const society = sim.world.societies[region.society ?? '']
+    const actual = society?.language
     expect(actual).toBe('GS03-001')
     expect(sim.world.languages['GS03-001']).toBeNull()
   })

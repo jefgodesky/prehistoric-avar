@@ -29,7 +29,7 @@ describe('Region', () => {
     populationData: IPopulation = SamplePopulation
   ): {  region: Region, population: Population } => {
     const { population } = introducePopulation(region, populationData)
-    region.society!.addLanguage()
+    sim.world.societies[region.society ?? ''].addLanguage()
     return { region, population }
   }
 

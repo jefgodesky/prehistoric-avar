@@ -38,8 +38,12 @@ class Population extends Markable {
     this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
     this.markers = data?.markers ?? []
     this.extinct = data?.extinct ?? false
-    this.fitness = this.home.society?.fitness
-      ? Fitness.combine(this.species.fitness, this.home.society.fitness)
+
+    const { regions, societies } = this.simulation.world
+    const region = regions[home.id]
+    const society = societies[region.society ?? '']
+    this.fitness = society?.fitness
+      ? Fitness.combine(this.species.fitness, society.fitness)
       : this.species.fitness
   }
 

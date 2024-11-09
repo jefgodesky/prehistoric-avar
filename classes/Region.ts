@@ -25,7 +25,7 @@ class Region extends Markable implements IHabitable {
   immortals: Immortal[]
   ogrism: number
   populations: Population[]
-  society: Society | null
+  society: string | null
   species?: SpeciesName
   tags: string[]
 
@@ -47,7 +47,7 @@ class Region extends Markable implements IHabitable {
     this.immortals = immortals.map(immortal => new Immortal(sim, immortal))
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(this, pop))
-    this.society = data?.society ? new Society(this.simulation, this.id, data.society) : null
+    this.society = data?.society ?? null
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species
@@ -63,7 +63,7 @@ class Region extends Markable implements IHabitable {
   }
 
   introduce (...populations: Population[]): void {
-    this.society = this.society ?? new Society(this.simulation, this.id)
+    this.society = this.society ?? new Society(this.simulation, this.id).id
     const sameSpecies = (n: Population, p: Population): boolean => n.species.name === p.species.name
     for (const p of populations) {
       const conspecific = this.populations.filter(n => sameSpecies(n, p))
@@ -89,7 +89,9 @@ class Region extends Markable implements IHabitable {
   }
 
   hasSpeechCommunity (): boolean {
-    if (!this.society?.language) return false
+    if (!this.society) return false
+    const society = this.simulation.world.societies[this.society]
+    if (!society.language) return false
     return this.populations
       .map(p => !p.extinct && p.species.canSpeak)
       .reduce((acc, curr) => acc && curr, true)
@@ -172,7 +174,7 @@ class Region extends Markable implements IHabitable {
     }
 
     if (this.species) obj.species = this.species
-    if (this.society) obj.society = this.society.toObject()
+    if (this.society) obj.society = this.society
     return obj
   }
 

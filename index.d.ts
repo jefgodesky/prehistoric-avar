@@ -104,7 +104,7 @@ interface IRegion {
   markers: string[]
   ogrism: number
   populations: IPopulation[]
-  society?: ISociety
+  society?: string
   species?: SpeciesName
   tags: string[]
 }
