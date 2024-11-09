@@ -521,6 +521,13 @@ describe('Region', () => {
       })
     })
 
+    describe('generateId', () => {
+      it('generates an ID based on the region ID and millennium', () => {
+        const region = new Region(sim, DS01)
+        expect(region.generateId()).toBe('DS01-001')
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const region = new Region(sim, FS32)

@@ -148,6 +148,11 @@ class Region extends Markable implements IHabitable {
     }
   }
 
+  generateId (): string {
+    const millennium = this.simulation.millennium.toString().padStart(3, '0')
+    return `${this.id}-${millennium}`
+  }
+
   toObject (): IRegion {
     const obj: IRegion = {
       id: this.id,
