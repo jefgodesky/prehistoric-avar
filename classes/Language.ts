@@ -13,8 +13,8 @@ class Language {
   }
 
   generateName (): string {
-    const { id, simulation } = this.society.region
-    return `${id}-${simulation.millennium.toString().padStart(3, '0')}`
+    const { simulation } = this.society
+    return `${this.society.region}-${simulation.millennium.toString().padStart(3, '0')}`
   }
 
   toObject (): ILanguage {

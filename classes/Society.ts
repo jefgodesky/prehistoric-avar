@@ -2,26 +2,26 @@ import { ISociety } from '../index.d.ts'
 import Fitness from './Fitness.ts'
 import Language from './Language.ts'
 import Markable from './Markable.ts'
-import Region from './Region.ts'
 import Scribe from './Scribe.ts'
+import Simulation from './Simulation.ts'
 
 class Society extends Markable {
   fitness: Fitness
   language: Language | null
-  region: Region
+  region: string
   scribe: Scribe
 
-  constructor (region: Region, data?: ISociety) {
-    super(region.simulation, data)
+  constructor (sim: Simulation, region: string, data?: ISociety) {
+    super(sim, data)
 
     this.fitness = new Fitness(data?.fitness ?? undefined)
     this.language = data?.language ? new Language(this, data.language) : null
     this.region = region
-    this.scribe = new Scribe(region.simulation, ...(data?.scrolls ?? []))
+    this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
   }
 
   addLanguage (): void {
-    const { id, simulation } = this.region
+    const { id, simulation } = this.simulation.world.regions[this.region]
     const { millennium } = simulation
     const name = `${id}-${millennium.toString().padStart(3, '0')}`
     this.language = new Language(this, { name })

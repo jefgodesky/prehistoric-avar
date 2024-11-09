@@ -15,7 +15,7 @@ describe('Population', () => {
   beforeEach(() => {
     sim = new Simulation()
     home = sim.world.regions.GS02
-    home.society = new Society(home, SampleSociety)
+    home.society = new Society(sim, home.id, SampleSociety)
   })
 
   describe('constructor', () => {

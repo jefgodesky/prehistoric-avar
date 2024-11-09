@@ -7,8 +7,7 @@ import Language from './Language.ts'
 
 describe('Language', () => {
   const sim = new Simulation()
-  const region = sim.world.regions['GS03']
-  const society = new Society(region, SampleSociety)
+  const society = new Society(sim, 'GS03', SampleSociety)
 
   describe('constructor', () => {
     it('creates a Language instance', () => {

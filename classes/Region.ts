@@ -47,7 +47,7 @@ class Region extends Markable implements IHabitable {
     this.immortals = immortals.map(immortal => new Immortal(sim, immortal))
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(this, pop))
-    this.society = data?.society ? new Society(this, data.society) : null
+    this.society = data?.society ? new Society(this.simulation, this.id, data.society) : null
     this.tags = data?.tags ?? []
 
     if (data?.species) this.species = data.species
@@ -63,7 +63,7 @@ class Region extends Markable implements IHabitable {
   }
 
   introduce (...populations: Population[]): void {
-    this.society = this.society ?? new Society(this)
+    this.society = this.society ?? new Society(this.simulation, this.id)
     const sameSpecies = (n: Population, p: Population): boolean => n.species.name === p.species.name
     for (const p of populations) {
       const conspecific = this.populations.filter(n => sameSpecies(n, p))
