@@ -16,21 +16,25 @@ describe('Region', () => {
   let sim: Simulation
 
   const introducePopulation = (
-    region: Region = sim.world.regions.get('GS02')!,
+    simulation: Simulation = sim,
+    region: string = 'GS02',
     populationData: IPopulation = SamplePopulation
   ): { region: Region, population: Population } => {
-    const population = new Population(region, populationData)
-    region.introduce(population)
-    return { region, population }
+    const r = simulation.world.regions.get(region)!
+    const population = new Population(r, populationData)
+    r.introduce(population)
+    return { region: r, population }
   }
 
   const addSpeechCommunity = (
-    region: Region = sim.world.regions.get('GS02')!,
+    simulation: Simulation = sim,
+    region: string = 'GS02',
     populationData: IPopulation = SamplePopulation
   ): {  region: Region, population: Population } => {
-    const { population } = introducePopulation(region, populationData)
-    sim.world.societies.get(region.society ?? '')?.addLanguage()
-    return { region, population }
+    const r = simulation.world.regions.get(region)!
+    const { population } = introducePopulation(simulation, region, populationData)
+    sim.world.societies.get(r.society ?? '')?.addLanguage()
+    return { region: r, population }
   }
 
   beforeEach(() => { sim = new Simulation() })
@@ -238,7 +242,7 @@ describe('Region', () => {
       it('doesn\'t replace an existing society', () => {
         const { region } = introducePopulation()
         const before = region.society
-        introducePopulation(region)
+        introducePopulation(sim, region.id)
         expect(region.society).toBe(before)
       })
 
@@ -297,7 +301,7 @@ describe('Region', () => {
 
       it('returns false if the region has a Wosan population', () => {
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const { region } = introducePopulation(new Region(sim, GS02), wosan)
+        const { region } = introducePopulation(sim, 'GS02', wosan)
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
@@ -321,7 +325,7 @@ describe('Region', () => {
 
       it('returns false if the region is populated by Wosan', () => {
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const { region } = introducePopulation(new Region(sim, GS02), wosan)
+        const { region } = introducePopulation(sim, 'GS02', wosan)
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
@@ -406,9 +410,9 @@ describe('Region', () => {
       const scrollText = getSpeciationScrollText(FS32.species ?? SPECIES_NAMES.HALFLING)
 
       it('creates a speciation scroll for an appropriate ancestor population', () => {
-        const region = new Region(sim, FS32)
-        const { population: p } = introducePopulation(region)
-        region.speciate()
+        const region = 'FS32'
+        const { population: p } = introducePopulation(sim, region)
+        sim.world.regions.get(region)!.speciate()
         const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
         expect(scroll).toBeDefined()
         expect(scroll?.seals).toBe(500)
@@ -426,9 +430,9 @@ describe('Region', () => {
 
       it('won\'t create a speciation scroll if the species already exists', () => {
         sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HALFLINGS)
-        const region = new Region(sim, FS32)
-        const { population: p } = introducePopulation(region)
-        region.speciate()
+        const region = 'FS32'
+        const { population: p } = introducePopulation(sim, region)
+        sim.world.regions.get(region)!.speciate()
         const scrolls = p.scribe.scrolls.filter(scroll => scroll.text === scrollText)
         expect(scrolls).toHaveLength(1)
       })
@@ -516,6 +520,10 @@ describe('Region', () => {
         region.adjustFeyInfluence()
         const archfey = sim.world.immortals.get(region.immortals[0])!
         archfey.slain = true
+        console.log(region.immortals.map(id => {
+          const { slain } = sim.world.immortals.get(id)!
+          return { id, slain }
+        }))
         region.adjustFeyInfluence()
         expect(region.immortals).toHaveLength(2)
         expect(sim.world.dragons.interest.value).toBe(1)
@@ -552,7 +560,7 @@ describe('Region', () => {
         const region = sim.world.regions.get('GS02')!
         for (const id of region.immortals) sim.world.immortals.remove(id)
         region.immortals = []
-        const queen = new Immortal(sim, DragonQueen)
+        const queen = new Immortal(sim, region.id, DragonQueen)
         if (!region.immortals.includes(queen.id)) region.immortals.push(queen.id)
         await sim.emitter.emit(event, (queen?.slayable as Quest)?.id ?? 'FAIL')
         expect(region.immortals).toHaveLength(1)
@@ -560,7 +568,7 @@ describe('Region', () => {
 
       it('slays', async () => {
         const region = sim.world.regions.get('GS02')!
-        const i = new Immortal(sim, DragonQueen)
+        const i = new Immortal(sim, region.id, DragonQueen)
         if (!region.immortals.includes(i.id)) region.immortals.push(i.id)
         const quest = sim.world.quests.get((i.slayable as Quest).id)!
         quest.accomplished = true

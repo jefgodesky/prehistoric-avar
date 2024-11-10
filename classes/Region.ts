@@ -38,15 +38,15 @@ class Region extends Markable implements IHabitable {
     this.area = data?.area ?? 0
     this.biome = data?.biome ?? null
     this.capacity = data?.capacity ?? 0
-    this.dragons = data?.dragons ?? []
-    this.features = data?.features ?? []
+    this.dragons = data?.dragons ? [...data.dragons] : []
+    this.features = data?.features ? [...data.features] : []
     this.feyInfluence = data?.feyInfluence ?? 0
     this.habitability = data?.habitability ?? 1
-    this.immortals = data?.immortals ?? []
+    this.immortals = data?.immortals ? [...data.immortals] : []
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(this, pop))
     this.society = data?.society ?? null
-    this.tags = data?.tags ?? []
+    this.tags = data?.tags ? [...data.tags] : []
 
     if (data?.species) this.species = data.species
 
@@ -144,10 +144,7 @@ class Region extends Markable implements IHabitable {
       const sovereigns = immortals.filter(immortal => immortal.description === crown)
       const reigning = sovereigns.filter(sovereign => !sovereign.slain)
       const coronate = reigning.length < 1
-      if (coronate) {
-        const archfey = createArchfey(this.simulation, this)
-        if (!this.immortals.includes(archfey.id)) this.immortals.push(archfey.id)
-      }
+      if (coronate) createArchfey(this.simulation, this)
       if (sovereigns.length < 1) this.simulation.world.dragons.interest.incr()
     }
   }

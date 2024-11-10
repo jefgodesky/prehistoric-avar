@@ -12,25 +12,30 @@ class Immortal {
   description: string
   disposition: Disposition
   impact: number
+  region: string
   relationships: Relationship[]
   scribe: Scribe
   slayable: Quest | false
   slain: boolean = false
   simulation: Simulation
 
-  constructor (sim: Simulation, data?: IImmortal) {
+  constructor (sim: Simulation, region: string, data?: IImmortal) {
     const relationships = data?.relationships ?? []
     this.simulation = sim
 
     this.description = data?.description ?? 'Immortal'
     this.disposition = data?.disposition ?? DISPOSITIONS.INDIFFERENT
     this.impact = data?.impact ?? 0
+    this.region = region
     this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
     this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
     this.slayable = data?.slayable ? new Quest(this.simulation, data.slayable) : false
 
     this.id = sim.world.immortals.generateKey(this.description)
     sim.world.immortals.add(this)
+
+    const r = sim.world.regions.get(region)
+    if (r) r.immortals.push(this.id)
   }
 
   toObject (): IImmortal {

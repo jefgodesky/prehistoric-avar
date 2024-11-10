@@ -12,6 +12,8 @@ describe('dragonQueen', () => {
   beforeEach(() => {
     sim = new Simulation()
     region = sim.world.regions.get('MS06')!
+    for (const id of region.immortals) sim.world.immortals.remove(id)
+    region.immortals = []
   })
 
   it('does not register an event if language has not appeared', () => {

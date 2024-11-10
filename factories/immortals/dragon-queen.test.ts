@@ -12,7 +12,7 @@ describe('createDragonQueen', () => {
   })
 
   it('creates the Dragon Queen', () => {
-    const queen = createDragonQueen(sim)
+    const queen = createDragonQueen(sim, 'MS06')
     expect(queen.disposition).toBe(DISPOSITIONS.HOSTILE)
     expect(queen.description).toBe('The Dragon Queen')
     expect(queen.impact).toBe(500)

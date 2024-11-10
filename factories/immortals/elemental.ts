@@ -70,6 +70,7 @@ const createElemental = (sim: Simulation, element: string): Immortal => {
 
   return new Immortal(
     sim,
+    'MS06',
     {
       description,
       disposition: DISPOSITIONS.INDIFFERENT,

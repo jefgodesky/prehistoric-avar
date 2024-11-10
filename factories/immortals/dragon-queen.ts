@@ -2,9 +2,10 @@ import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from '../../classes/immortals/Immortal.ts'
 import Simulation from '../../classes/Simulation.ts'
 
-const createDragonQueen = (sim: Simulation): Immortal => {
+const createDragonQueen = (sim: Simulation, region: string): Immortal => {
   return new Immortal(
     sim,
+    region,
     {
       description: 'The Dragon Queen',
       disposition: DISPOSITIONS.HOSTILE,

@@ -9,6 +9,7 @@ const createArchfey = (sim: Simulation, region: Region): Immortal => {
   const description = `Archfey Sovereign of ${region.id}`
   return new Immortal(
     sim,
+    region.id,
     {
       description,
       disposition: DISPOSITIONS.INDIFFERENT,

@@ -354,11 +354,7 @@ const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | 
     tags
   })
 
-  if (elementalRegion) {
-    const elemental = createElemental(sim, element)
-    elementalRegion.immortals.push(elemental.id)
-  }
-
+  if (elementalRegion) createElemental(sim, element)
   if (site === null) return
 
   await site.addMarker(`Meteor impact site: A powerful ${element} elemental ` +
