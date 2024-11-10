@@ -520,10 +520,6 @@ describe('Region', () => {
         region.adjustFeyInfluence()
         const archfey = sim.world.immortals.get(region.immortals[0])!
         archfey.slain = true
-        console.log(region.immortals.map(id => {
-          const { slain } = sim.world.immortals.get(id)!
-          return { id, slain }
-        }))
         region.adjustFeyInfluence()
         expect(region.immortals).toHaveLength(2)
         expect(sim.world.dragons.interest.value).toBe(1)

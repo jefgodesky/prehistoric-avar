@@ -3,13 +3,13 @@ import { IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 
+import Archfey from './immortals/Archfey.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'
 import Society from './Society.ts'
 
 import clamp from '../clamp.ts'
-import createArchfey from '../factories/immortals/archfey.ts'
 import createSpeciationScroll, { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
 
 class Region extends Markable implements IHabitable {
@@ -144,7 +144,7 @@ class Region extends Markable implements IHabitable {
       const sovereigns = immortals.filter(immortal => immortal.description === crown)
       const reigning = sovereigns.filter(sovereign => !sovereign.slain)
       const coronate = reigning.length < 1
-      if (coronate) createArchfey(this.simulation, this)
+      if (coronate) new Archfey(this.simulation, this.id)
       if (sovereigns.length < 1) this.simulation.world.dragons.interest.incr()
     }
   }
