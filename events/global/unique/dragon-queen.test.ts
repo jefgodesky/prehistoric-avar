@@ -2,6 +2,7 @@ import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import type Region from '../../../classes/Region.ts'
+import DragonQueen from '../../../classes/immortals/DragonQueen.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import dragonQueen, { OGRISM_THRESHOLD } from './dragon-queen.ts'
 
@@ -10,10 +11,9 @@ describe('dragonQueen', () => {
   let region: Region
 
   beforeEach(() => {
+    DragonQueen.reset()
     sim = new Simulation()
     region = sim.world.regions.get('MS06')!
-    for (const id of region.immortals) sim.world.immortals.remove(id)
-    region.immortals = []
   })
 
   it('does not register an event if language has not appeared', () => {
