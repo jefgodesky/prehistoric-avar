@@ -51,6 +51,12 @@ class Directory<T> {
   size (): number {
     return this.keys().length
   }
+
+  populate (keys: string[]): T[] {
+    return keys
+      .map(key => this.get(key))
+      .filter(item => item !== null)
+  }
 }
 
 export default Directory

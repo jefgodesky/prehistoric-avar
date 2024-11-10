@@ -113,5 +113,14 @@ describe('Directory', () => {
         expect(dir.size()).toBe(1)
       })
     })
+
+    describe('populate', () => {
+      it('returns an array of items matching the given keys', () => {
+        const dir = new Directory<string>()
+        dir.add(key, val)
+        dir.add(key, val)
+        expect(dir.populate([key])).toEqual([val])
+      })
+    })
   })
 })
