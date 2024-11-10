@@ -137,7 +137,10 @@ const SampleQuest: IQuest = {
   description: 'Slay the Dragon Queen',
   courage: 0.0001,
   skill: 0.000001,
-  lethality: 0.9
+  lethality: 0.9,
+  accomplished: false,
+  attempts: [],
+  calls: []
 }
 
 const DragonQueen: IImmortal = {

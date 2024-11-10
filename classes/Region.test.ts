@@ -1,6 +1,6 @@
 import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import type { IPopulation, IQuestReport } from '../index.d.ts'
+import type { IPopulation } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import { DragonQueen, SamplePopulation, SampleSociety } from '../test-examples.ts'
 import {EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES} from '../enums.ts'
@@ -550,14 +550,8 @@ describe('Region', () => {
       it('leaves unharmed immortals alone', async () => {
         const region = new Region(sim, GS02)
         region.immortals.push(new Immortal(sim, DragonQueen))
-        const report: IQuestReport = {
-          quest: (region.immortals[0].slayable as Quest).toObject(),
-          attempted: 100,
-          abandoned: 50,
-          killed: 50,
-          success: false
-        }
-        await sim.emitter.emit(event, report)
+        const queen = sim.world.immortals.get(DragonQueen.description)
+        await sim.emitter.emit(event, (queen?.slayable as Quest)?.id ?? 'FAIL')
         expect(region.immortals).toHaveLength(1)
       })
 
@@ -565,14 +559,15 @@ describe('Region', () => {
         const region = new Region(sim, GS02)
         const i = new Immortal(sim, DragonQueen)
         region.immortals.push(i)
-        const report: IQuestReport = {
-          quest: (region.immortals[0].slayable as Quest).toObject(),
+        const quest = sim.world.quests.get((i.slayable as Quest).id)!
+        quest.accomplished = true
+        quest.attempts.push({
           attempted: 100,
           abandoned: 50,
           killed: 49,
           success: true
-        }
-        await sim.emitter.emit(event, report)
+        })
+        await sim.emitter.emit(event, quest.id)
         expect(i.slain).toBe(true)
         expect(region.immortals).toHaveLength(0)
       })

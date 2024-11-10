@@ -45,6 +45,21 @@ describe('Quest', () => {
       expect(quest.lethality).toEqual(1/3)
     })
 
+    it('defaults to not yet accomplished', () => {
+      const quest = new Quest(sim)
+      expect(quest.accomplished).toBe(false)
+    })
+
+    it('defaults to an empty array of attempts', () => {
+      const quest = new Quest(sim)
+      expect(quest.attempts).toHaveLength(0)
+    })
+
+    it('defaults to an empty array of calls', () => {
+      const quest = new Quest(sim)
+      expect(quest.calls).toHaveLength(0)
+    })
+
     it('can take an id', () => {
       const quest = new Quest(sim, SampleQuest)
       expect(quest.id).toBe(SampleQuest.id)
@@ -70,6 +85,28 @@ describe('Quest', () => {
       expect(quest.lethality).toBe(SampleQuest.lethality)
     })
 
+    it('can be accomplished', () => {
+      const obj = Object.assign({}, SampleQuest, { accomplished: true })
+      const quest = new Quest(sim, obj)
+      expect(quest.accomplished).toBe(true)
+    })
+
+    it('can have attempts', () => {
+      const obj = Object.assign({}, SampleQuest, {
+        attempts: [{ attempted: 100, abandoned: 90, killed: 9, success: true }]
+      })
+      const quest = new Quest(sim, obj)
+      expect(quest.attempts[0].success).toBe(true)
+    })
+
+    it('can have calls', () => {
+      const obj = Object.assign({}, SampleQuest, {
+        calls: [{ millennium: 100, populations: ['MS06-100DW'] }]
+      })
+      const quest = new Quest(sim, obj)
+      expect(quest.calls[0].populations).toHaveLength(1)
+    })
+
     it('adds quest to the world', () => {
       const quest = new Quest(sim)
       expect(sim.world.quests.get(quest.id)).toBe(quest)
@@ -80,9 +117,13 @@ describe('Quest', () => {
     describe('call', () => {
       it('emits a call', async () => {
         let emitted: boolean | string = false
-        sim.emitter.on(QUEST_EVENTS.CALL, ({ scope, quest }: { scope: string, quest: IQuest }) => {
-          emitted = `${scope}: ${quest.id}`
+        sim.emitter.on(QUEST_EVENTS.CALL, (id: string) => {
+          emitted = id
         })
+        const call = {
+          millennium: 100,
+          populations: [SamplePopulation.id]
+        }
         const quest = new Quest(sim, {
           id: 'test-quest',
           description: 'A quest that you literally cannot fail',
@@ -91,8 +132,9 @@ describe('Quest', () => {
           lethality: 0
         })
 
-        await quest.call(SamplePopulation.id)
-        expect(emitted).toEqual(`${SamplePopulation.id}: ${quest.id}`)
+        await quest.call(call)
+        expect(emitted).toEqual(quest.id)
+        expect(quest.calls).toHaveLength(1)
       })
     })
 
@@ -110,7 +152,6 @@ describe('Quest', () => {
 
       it('runs the quest', async () => {
         const report = await quest.run(p, biome)
-        expect(report.quest.id).toBe(SampleQuest.id)
         expect(report.attempted).toBeDefined()
         expect(report.abandoned).toBeDefined()
         expect(report.killed).toBeDefined()
@@ -119,8 +160,8 @@ describe('Quest', () => {
 
       it('emits an event when the quest is accomplished', async () => {
         let emitted: boolean | string = false
-        sim.emitter.on(QUEST_EVENTS.ACCOMPLISHED, (quest: IQuest) => {
-          emitted = quest.id
+        sim.emitter.on(QUEST_EVENTS.ACCOMPLISHED, (quest_id: string) => {
+          emitted = quest_id
         })
         const quest = new Quest(sim, {
           id: 'test-quest',
@@ -130,8 +171,7 @@ describe('Quest', () => {
           lethality: 0
         })
 
-        const report = await quest.run(p, biome)
-        expect(report.quest.id).toBe(quest.id)
+        await quest.run(p, biome)
         expect(emitted).toEqual(quest.id)
       })
     })

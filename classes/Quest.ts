@@ -15,7 +15,10 @@ class Quest {
   courage: number
   skill: number
   lethality: number
+  accomplished: boolean
   simulation: Simulation
+  calls: IQuestCall[]
+  attempts: IQuestReport[]
 
   constructor (sim: Simulation, data?: IQuest) {
     this.simulation = sim
@@ -24,18 +27,20 @@ class Quest {
     this.courage = data?.courage ?? 0.1
     this.skill = data?.skill ?? 0.1
     this.lethality = data?.lethality ?? 1/3
+    this.accomplished = data?.accomplished ?? false
+    this.calls = data?.calls ?? []
+    this.attempts = data?.attempts ?? []
 
     this.simulation.world.quests.add(this)
   }
 
-  async call (scope: string): Promise<void> {
-    const call: IQuestCall = { scope, quest: this.toObject() }
-    await this.simulation.emitter.emit(QUEST_EVENTS.CALL, call)
+  async call (data: IQuestCall): Promise<void> {
+    this.calls.push(data)
+    await this.simulation.emitter.emit(QUEST_EVENTS.CALL, this.id)
   }
 
   async run (p: Population, biome: Biome): Promise<IQuestReport> {
     const report = {
-      quest: this.toObject(),
       attempted: 0,
       abandoned: 0,
       killed: 0,
@@ -55,6 +60,7 @@ class Quest {
         if (skill <= this.skill) {
           // This person succeeded on the quest
           report.success = true
+          this.accomplished = true
           break
         } else {
           const die = Math.random() > this.lethality
@@ -69,7 +75,8 @@ class Quest {
       }
     }
 
-    if (report.success) await this.simulation.emitter.emit(QUEST_EVENTS.ACCOMPLISHED, report.quest)
+    this.attempts.push(report)
+    if (report.success) await this.simulation.emitter.emit(QUEST_EVENTS.ACCOMPLISHED, this.id)
     return report
   }
 
@@ -79,7 +86,10 @@ class Quest {
       description: this.description,
       courage: this.courage,
       skill: this.skill,
-      lethality: this.lethality
+      lethality: this.lethality,
+      accomplished: this.accomplished,
+      attempts: this.attempts,
+      calls: this.calls
     }
   }
 

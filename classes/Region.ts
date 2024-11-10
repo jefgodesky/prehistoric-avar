@@ -1,5 +1,5 @@
 import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
-import { IHabitable, IQuestReport, IRegion, IRegionFeature } from '../index.d.ts'
+import { IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 
@@ -52,7 +52,7 @@ class Region extends Markable implements IHabitable {
 
     if (data?.species) this.species = data.species
 
-    sim.emitter.on(QUEST_EVENTS.ACCOMPLISHED, (report: IQuestReport) => this.handleQuestAccomplished(report))
+    sim.emitter.on(QUEST_EVENTS.ACCOMPLISHED, (quest_id: string) => this.handleQuestAccomplished(quest_id))
   }
 
   getCapacity (worldHabitability: number): number {
@@ -182,10 +182,11 @@ class Region extends Markable implements IHabitable {
     return this.id
   }
 
-  private handleQuestAccomplished (report: IQuestReport): void {
-    if (!report.success) return
+  private handleQuestAccomplished (quest_id: string): void {
+    const quest = this.simulation.world.quests.get(quest_id)
+    if (!quest?.accomplished) return
     const slain = this.immortals
-      .filter(immortal => immortal.slayable !== false && immortal.slayable.id === report.quest.id)
+      .filter(immortal => immortal.slayable !== false && immortal.slayable.id === quest.id)
     if (slain.length < 1) return
     slain.forEach(immortal => { immortal.slain = true })
     this.immortals = this.immortals.filter(immortal => !immortal.slain)

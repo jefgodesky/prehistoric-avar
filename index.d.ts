@@ -70,15 +70,17 @@ interface IQuest {
   courage: number
   skill: number
   lethality: number
+  accomplished?: boolean
+  calls?: IQuestCall[]
+  attempts?: IQuestReport[]
 }
 
 interface IQuestCall {
-  scope: string
-  quest: IQuest
+  millennium: number
+  populations: string[]
 }
 
 interface IQuestReport {
-  quest: IQuest
   attempted: number
   abandoned: number
   killed: number
