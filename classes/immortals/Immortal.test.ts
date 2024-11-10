@@ -101,6 +101,15 @@ describe('Immortal', () => {
   })
 
   describe('Member methods', () => {
+    describe('move', () => {
+      it('does nothing', () => {
+        const i = new Immortal(sim, region, DragonQueen)
+        i.move()
+        expect(i.region).toBe(region)
+        expect(sim.world.regions.get(region)?.immortals).toContain(i.id)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, DragonQueen)

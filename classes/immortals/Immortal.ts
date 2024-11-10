@@ -38,6 +38,10 @@ class Immortal {
     if (r) r.immortals.push(this.id)
   }
 
+  move (): void {
+    return
+  }
+
   toObject (): IImmortal {
     return {
       description: this.description,
