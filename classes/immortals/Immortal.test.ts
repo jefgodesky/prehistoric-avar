@@ -1,9 +1,9 @@
 import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { DISPOSITIONS } from '../enums.ts'
-import { DragonQueen } from '../test-examples.ts'
-import Quest from './Quest.ts'
-import Simulation from './Simulation.ts'
+import { DISPOSITIONS } from '../../enums.ts'
+import { DragonQueen } from '../../test-examples.ts'
+import Quest from '../Quest.ts'
+import Simulation from '../Simulation.ts'
 import Immortal from './Immortal.ts'
 
 describe('Immortal', () => {
@@ -45,11 +45,6 @@ describe('Immortal', () => {
     it('defaults slayable to false', () => {
       const i = new Immortal(sim)
       expect(i.slayable).toBe(false)
-    })
-
-    it('has a movement function', () => {
-      const i = new Immortal(sim)
-      expect(typeof i.move).toBe('function')
     })
 
     it('starts slain as false', () => {

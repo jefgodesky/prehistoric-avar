@@ -1,13 +1,13 @@
 import { nanoid } from 'nanoid'
 import { DISPOSITIONS } from '../../enums.ts'
-import Immortal from '../../classes/Immortal.ts'
+import Immortal from '../../classes/immortals/Immortal.ts'
 import Quest from '../../classes/Quest.ts'
 import type Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 
 const createArchfey = (sim: Simulation, region: Region): Immortal => {
   const description = `Archfey Sovereign of ${region.id}`
-  const archfey = new Immortal(
+  return new Immortal(
     sim,
     {
       description,
@@ -24,9 +24,6 @@ const createArchfey = (sim: Simulation, region: Region): Immortal => {
       scrolls: [],
     }
   )
-
-  archfey.move = () => null
-  return archfey
 }
 
 export default createArchfey

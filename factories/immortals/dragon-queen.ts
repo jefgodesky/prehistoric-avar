@@ -1,11 +1,11 @@
 import { sample } from '@std/collections'
 import { DISPOSITIONS } from '../../enums.ts'
-import Immortal from '../../classes/Immortal.ts'
+import Immortal from '../../classes/immortals/Immortal.ts'
 import type Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 
 const createDragonQueen = (sim: Simulation): Immortal => {
-  const dragonQueen = new Immortal(
+  return new Immortal(
     sim,
     {
       description: 'The Dragon Queen',
@@ -17,14 +17,12 @@ const createDragonQueen = (sim: Simulation): Immortal => {
     }
   )
 
-  dragonQueen.move = (sim: Simulation): Region | null => {
+  /* dragonQueen.move = (sim: Simulation): Region | null => {
     const dragonRegions = sim.world.regions.values()
       .filter(region => region.dragons.length > 0)
     const region = sample(dragonRegions)
     return region ?? null
-  }
-
-  return dragonQueen
+  } */
 }
 
 export default createDragonQueen

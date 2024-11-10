@@ -1,10 +1,9 @@
-import { IImmortal } from '../index.d.ts'
-import { Disposition, DISPOSITIONS } from '../enums.ts'
-import Quest from './Quest.ts'
-import type Region from './Region.ts'
-import Relationship from './Relationship.ts'
-import Scribe from './Scribe.ts'
-import Simulation from './Simulation.ts'
+import { IImmortal } from '../../index.d.ts'
+import { Disposition, DISPOSITIONS } from '../../enums.ts'
+import Quest from '../Quest.ts'
+import Relationship from '../Relationship.ts'
+import Scribe from '../Scribe.ts'
+import Simulation from '../Simulation.ts'
 
 const TO_STRING_PREFIX = 'Immortal:' as const
 
@@ -18,7 +17,6 @@ class Immortal {
   slayable: Quest | false
   slain: boolean = false
   simulation: Simulation
-  move: (sim: Simulation, current: Region) => Region | null
 
   constructor (sim: Simulation, data?: IImmortal) {
     const relationships = data?.relationships ?? []
@@ -30,7 +28,6 @@ class Immortal {
     this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
     this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
     this.slayable = data?.slayable ? new Quest(this.simulation, data.slayable) : false
-    this.move = () => null
 
     this.id = sim.world.immortals.generateKey(this.description)
     sim.world.immortals.add(this)

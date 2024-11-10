@@ -1,9 +1,7 @@
 import { nanoid } from 'nanoid'
-import { intersect, sample } from '@std/collections'
 import { DISPOSITIONS } from '../../enums.ts'
-import Immortal from '../../classes/Immortal.ts'
+import Immortal from '../../classes/immortals/Immortal.ts'
 import Quest from '../../classes/Quest.ts'
-import type Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 
 const desiredFireElementalRegions = (sim: Simulation): string[] => {
@@ -70,7 +68,7 @@ const createElemental = (sim: Simulation, element: string): Immortal => {
     default: description = 'Powerful Aether Elemental'; break
   }
 
-  const elemental = new Immortal(
+  return new Immortal(
     sim,
     {
       description,
@@ -88,7 +86,7 @@ const createElemental = (sim: Simulation, element: string): Immortal => {
     }
   )
 
-  elemental.move = (sim: Simulation, current: Region): Region | null => {
+  /*elemental.move = (sim: Simulation, current: Region): Region | null => {
     if (el === 'aether') return null
     const desiredRegions = desiredElementalRegions(sim, el)
     if (desiredRegions.includes(current.id)) return null
@@ -96,9 +94,7 @@ const createElemental = (sim: Simulation, element: string): Immortal => {
     const choices = desiredAdjacentIds.length > 0 ? desiredAdjacentIds : current.adjacentRegions
     const id = sample(choices)
     return id ? sim.world.regions.get(id) : null
-  }
-
-  return elemental
+  }*/
 }
 
 export default createElemental

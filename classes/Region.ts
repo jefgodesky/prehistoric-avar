@@ -3,7 +3,7 @@ import { IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 
-import Immortal from './Immortal.ts'
+import Immortal from './immortals/Immortal.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'

@@ -21,9 +21,4 @@ describe('createArchfey', () => {
     expect(archfey.impact).toBe(-250)
     expect(archfey.slayable).not.toBe(false)
   })
-
-  it('does not move', () => {
-    const archfey = createArchfey(sim, region)
-    expect(archfey.move(sim, region)).toBeNull()
-  })
 })
