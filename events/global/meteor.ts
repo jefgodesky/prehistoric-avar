@@ -2,10 +2,13 @@ import { sample } from '@std/collections'
 import { SpeciesPlurals } from '../../enums.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
+import AirElemental from '../../classes/immortals/elementals/Air.ts'
+import EarthElemental from '../../classes/immortals/elementals/Earth.ts'
+import FireElemental from '../../classes/immortals/elementals/Fire.ts'
+import WaterElemental from '../../classes/immortals/elementals/Water.ts'
 import getChances from '../get-chances.ts'
 import oxford from '../../oxford.ts'
 import capitalize from '../../capitalize.ts'
-import createElemental from '../../factories/immortals/elemental.ts'
 
 const getImpactRegion = (sim: Simulation): Region | null => {
   const totalArea = 4 * Math.PI * Math.pow(5000, 2)
@@ -279,7 +282,7 @@ const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null)
 
 const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | null): Promise<void> => {
   const site = region === null ? null : impact(sim, region)
-  const element = sample(['fire', 'air', 'water', 'earth', 'aether']) ?? 'aether'
+  const element = sample(['fire', 'air', 'water', 'earth']) ?? 'earth'
   const coastal = sim.world.regions.values().filter(region => region.tags.includes('coastal'))
   let elementalRegion: Region | null = site
   let description
@@ -354,7 +357,14 @@ const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | 
     tags
   })
 
-  if (elementalRegion) createElemental(sim, element)
+  if (elementalRegion) {
+    switch (element) {
+      case 'fire': new FireElemental(sim, elementalRegion.id); break
+      case 'air': new AirElemental(sim, elementalRegion.id); break
+      case 'water': new WaterElemental(sim, elementalRegion.id); break
+      default: new EarthElemental(sim, elementalRegion.id); break
+    }
+  }
   if (site === null) return
 
   await site.addMarker(`Meteor impact site: A powerful ${element} elemental ` +
