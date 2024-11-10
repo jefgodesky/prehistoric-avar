@@ -102,7 +102,7 @@ interface IRegion {
   features: IRegionFeature[]
   feyInfluence: number
   habitability: number
-  immortals: IImmortal[]
+  immortals: string[]
   markers: string[]
   ogrism: number
   populations: IPopulation[]

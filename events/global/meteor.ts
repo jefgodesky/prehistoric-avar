@@ -356,7 +356,7 @@ const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | 
 
   if (elementalRegion) {
     const elemental = createElemental(sim, element)
-    elementalRegion.immortals.push(elemental)
+    elementalRegion.immortals.push(elemental.id)
   }
 
   if (site === null) return

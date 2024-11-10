@@ -3,7 +3,6 @@ import { IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import { QUEST_EVENTS } from './Quest.ts'
 
-import Immortal from './immortals/Immortal.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'
@@ -22,7 +21,7 @@ class Region extends Markable implements IHabitable {
   features: IRegionFeature[]
   feyInfluence: number
   habitability: number
-  immortals: Immortal[]
+  immortals: string[]
   ogrism: number
   populations: Population[]
   society: string | null
@@ -32,7 +31,6 @@ class Region extends Markable implements IHabitable {
   constructor (sim: Simulation, data?: IRegion) {
     super(sim, data)
 
-    const immortals = data?.immortals ?? []
     const populations = data?.populations ?? []
 
     this.id = data?.id ?? ''
@@ -44,7 +42,7 @@ class Region extends Markable implements IHabitable {
     this.features = data?.features ?? []
     this.feyInfluence = data?.feyInfluence ?? 0
     this.habitability = data?.habitability ?? 1
-    this.immortals = immortals.map(immortal => new Immortal(sim, immortal))
+    this.immortals = data?.immortals ?? []
     this.ogrism = data?.ogrism ?? 0
     this.populations = populations.map(pop => new Population(this, pop))
     this.society = data?.society ?? null
@@ -142,10 +140,14 @@ class Region extends Markable implements IHabitable {
 
     if (this.feyInfluence > 7) {
       const crown = `Archfey Sovereign of ${this.id}`
-      const sovereigns = this.immortals.filter(immortal => immortal.description === crown)
+      const immortals = this.simulation.world.immortals.populate(this.immortals)
+      const sovereigns = immortals.filter(immortal => immortal.description === crown)
       const reigning = sovereigns.filter(sovereign => !sovereign.slain)
       const coronate = reigning.length < 1
-      if (coronate) this.immortals.push(createArchfey(this.simulation, this))
+      if (coronate) {
+        const archfey = createArchfey(this.simulation, this)
+        if (!this.immortals.includes(archfey.id)) this.immortals.push(archfey.id)
+      }
       if (sovereigns.length < 1) this.simulation.world.dragons.interest.incr()
     }
   }
@@ -166,7 +168,7 @@ class Region extends Markable implements IHabitable {
       features: this.features,
       feyInfluence: this.feyInfluence,
       habitability: this.habitability,
-      immortals: this.immortals.map(immortal => immortal.toObject()),
+      immortals: this.immortals,
       markers: this.markers,
       ogrism: this.ogrism,
       populations: this.populations.map(pop => pop.toObject()),
@@ -185,11 +187,17 @@ class Region extends Markable implements IHabitable {
   private handleQuestAccomplished (quest_id: string): void {
     const quest = this.simulation.world.quests.get(quest_id)
     if (!quest?.accomplished) return
-    const slain = this.immortals
+    const immortals = this.simulation.world.immortals.populate(this.immortals)
+    const slain = immortals
       .filter(immortal => immortal.slayable !== false && immortal.slayable.id === quest.id)
     if (slain.length < 1) return
-    slain.forEach(immortal => { immortal.slain = true })
-    this.immortals = this.immortals.filter(immortal => !immortal.slain)
+    slain.forEach(immortal => {
+      immortal.slain = true
+      this.simulation.world.immortals.remove(immortal.id)
+    })
+    this.immortals = this.simulation.world.immortals.populate(this.immortals)
+      .filter(immortal => !immortal.slain)
+      .map(immortal => immortal.id)
   }
 }
 

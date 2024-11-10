@@ -47,21 +47,6 @@ class Immortal {
   toString (): string {
     return `${TO_STRING_PREFIX} ${this.description}`
   }
-
-  static find (sim: Simulation, q: string = ''): Immortal | null {
-    const r = q.toLowerCase().startsWith(TO_STRING_PREFIX.toLowerCase())
-      ? q.slice(TO_STRING_PREFIX.length).trim()
-      : q
-    const str = `${TO_STRING_PREFIX} ${r}`
-
-    for (const region of sim.regions) {
-      for (const immortal of region.immortals) {
-        if (immortal.toString() === str) return immortal
-      }
-    }
-
-    return null
-  }
 }
 
 export default Immortal

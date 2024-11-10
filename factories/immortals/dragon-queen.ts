@@ -1,7 +1,5 @@
-import { sample } from '@std/collections'
 import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from '../../classes/immortals/Immortal.ts'
-import type Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 
 const createDragonQueen = (sim: Simulation): Immortal => {

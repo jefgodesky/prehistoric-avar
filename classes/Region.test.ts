@@ -16,7 +16,7 @@ describe('Region', () => {
   let sim: Simulation
 
   const introducePopulation = (
-    region: Region = new Region(sim, GS02),
+    region: Region = sim.world.regions.get('GS02')!,
     populationData: IPopulation = SamplePopulation
   ): { region: Region, population: Population } => {
     const population = new Population(region, populationData)
@@ -25,7 +25,7 @@ describe('Region', () => {
   }
 
   const addSpeechCommunity = (
-    region: Region = new Region(sim, GS02),
+    region: Region = sim.world.regions.get('GS02')!,
     populationData: IPopulation = SamplePopulation
   ): {  region: Region, population: Population } => {
     const { population } = introducePopulation(region, populationData)
@@ -490,7 +490,7 @@ describe('Region', () => {
         region.feyInfluence = 7
         region.adjustFeyInfluence()
         expect(region.immortals).toHaveLength(1)
-        expect(region.immortals[0].description).toBe(`Archfey Sovereign of ${region.id}`)
+        expect(region.immortals[0]).toBe(`Archfey Sovereign of ${region.id}`)
       })
 
       it('won\'t add an archfey to a region that already has one', () => {
@@ -514,7 +514,8 @@ describe('Region', () => {
         const { region } = addSpeechCommunity()
         region.feyInfluence = 8
         region.adjustFeyInfluence()
-        region.immortals[0].slain = true
+        const archfey = sim.world.immortals.get(region.immortals[0])!
+        archfey.slain = true
         region.adjustFeyInfluence()
         expect(region.immortals).toHaveLength(2)
         expect(sim.world.dragons.interest.value).toBe(1)
@@ -548,17 +549,19 @@ describe('Region', () => {
       const event = QUEST_EVENTS.ACCOMPLISHED
 
       it('leaves unharmed immortals alone', async () => {
-        const region = new Region(sim, GS02)
-        region.immortals.push(new Immortal(sim, DragonQueen))
-        const queen = sim.world.immortals.get(DragonQueen.description)
+        const region = sim.world.regions.get('GS02')!
+        for (const id of region.immortals) sim.world.immortals.remove(id)
+        region.immortals = []
+        const queen = new Immortal(sim, DragonQueen)
+        if (!region.immortals.includes(queen.id)) region.immortals.push(queen.id)
         await sim.emitter.emit(event, (queen?.slayable as Quest)?.id ?? 'FAIL')
         expect(region.immortals).toHaveLength(1)
       })
 
       it('slays', async () => {
-        const region = new Region(sim, GS02)
+        const region = sim.world.regions.get('GS02')!
         const i = new Immortal(sim, DragonQueen)
-        region.immortals.push(i)
+        if (!region.immortals.includes(i.id)) region.immortals.push(i.id)
         const quest = sim.world.quests.get((i.slayable as Quest).id)!
         quest.accomplished = true
         quest.attempts.push({
@@ -570,6 +573,7 @@ describe('Region', () => {
         await sim.emitter.emit(event, quest.id)
         expect(i.slain).toBe(true)
         expect(region.immortals).toHaveLength(0)
+        expect(sim.world.immortals.has(i.id)).toBe(false)
       })
     })
   })
