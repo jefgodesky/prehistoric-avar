@@ -1,7 +1,7 @@
 import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { IQuestCall } from '../index.d.ts'
 import { BIOMES } from '../enums.ts'
-import { IQuest } from '../index.d.ts'
 import { GS02 } from '../instances/regions/index.ts'
 import { SampleQuest, SamplePopulation } from '../test-examples.ts'
 import Population from './Population.ts'
@@ -120,9 +120,9 @@ describe('Quest', () => {
         sim.emitter.on(QUEST_EVENTS.CALL, (id: string) => {
           emitted = id
         })
-        const call = {
+        const call: IQuestCall = {
           millennium: 100,
-          populations: [SamplePopulation.id]
+          populations: [SamplePopulation.id!]
         }
         const quest = new Quest(sim, {
           id: 'test-quest',
@@ -147,7 +147,7 @@ describe('Quest', () => {
       beforeEach(() => {
         region = new Region(sim, GS02)
         quest = new Quest(sim, SampleQuest)
-        p = new Population(region, SamplePopulation)
+        p = new Population(sim, region.id, SamplePopulation)
       })
 
       it('runs the quest', async () => {

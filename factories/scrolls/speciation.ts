@@ -1,7 +1,8 @@
-import { SpeciesName, SpeciesPlurals, EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../../enums.ts'
-import species from '../../instances/species/index.ts'
+import { SpeciesName, EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../../enums.ts'
 import Scroll from '../../classes/Scroll.ts'
 import Population from '../../classes/Population.ts'
+import Simulation from '../../classes/Simulation.ts'
+import type Species from '../../classes/Species.ts'
 
 const SpeciationEvents: Record<SpeciesName, string> = {
   [SPECIES_NAMES.DWARF]: EVENTS_GLOBAL_UNIQUE.DWARVES,
@@ -11,42 +12,37 @@ const SpeciationEvents: Record<SpeciesName, string> = {
   [SPECIES_NAMES.ORC]: EVENTS_GLOBAL_UNIQUE.ORCS
 }
 
-const getPlural = (sp: SpeciesName): string => {
-  return SpeciesPlurals[sp] ?? 'Wosan'
+const getSpeciationScrollText = (species: Species): string => {
+  return `We become ${species.getPlural().toLowerCase()}.`
 }
 
-const getSpeciationScrollText = (sp: SpeciesName): string => {
-  return `We become ${getPlural(sp).toLowerCase()}.`
-}
-
-const createSpeciationScroll = (sp: SpeciesName, population: Population): Scroll => {
-  const { simulation: sim } = population.home
-  const ancestor = population.species.name ?? 'Wosan'
-  const text = getSpeciationScrollText(sp)
+const createSpeciationScroll = (sim: Simulation, name: SpeciesName, population: Population): Scroll => {
+  const ancestor = population.getSpecies()
+  const descendant = sim.world.species.get(name.toLowerCase())!
+  const text = getSpeciationScrollText(descendant)
 
   const onUnseal = () => {
-    const { species, home } = population
-    return home.species === sp ? species.generation ?? 50 : 0
+    return population.getHome().species === descendant.name
+      ? population.getSpecies().generation ?? 50
+      : 0
   }
 
   const onOpen = () => {
-    const spp = species.get(sp.toLowerCase())
-    if (!spp) return
-    population.species = spp
+    population.species = name
 
     // Remove other scrolls
-    for (const region of sim.regions) {
-      for (const p of region.populations) {
-        p.scribe.scrolls = p.scribe.scrolls.filter(scroll => scroll.text !== text)
-      }
+    const populations = sim.world.populations.values()
+    for (const p of populations) {
+      p.scribe.scrolls = p.scribe.scrolls.filter(scroll => scroll.text !== text)
     }
 
     // Record this moment in history
-    if (sp in SpeciationEvents) sim.world.events.push(SpeciationEvents[sp])
+    if (name in SpeciationEvents) sim.world.events.push(SpeciationEvents[name])
+    const homeId = population.getHome().id
     sim.history.add({
       millennium: sim.millennium,
-      description: `The ${SpeciesPlurals[ancestor].toLowerCase() ?? 'wosan'} of ${population.home.id} become the first ${getPlural(sp).toLowerCase()}.`,
-      tags: [getPlural(sp), population.home.id]
+      description: `The ${ancestor.getPlural().toLowerCase() ?? 'wosan'} of ${homeId} become the first ${descendant.getPlural().toLowerCase()}.`,
+      tags: [descendant.getPlural(), homeId]
     })
   }
 

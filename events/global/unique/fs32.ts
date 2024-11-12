@@ -1,6 +1,5 @@
 import { sample } from '@std/collections'
 import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../../../enums.ts'
-import type Population from '../../../classes/Population.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'
@@ -16,9 +15,10 @@ const fs32 = (sim: Simulation, forceEvent?: boolean): void => {
   const fireEvent = forceEvent ?? sample(getChances(1, 20))
   if (!fireEvent) return
 
-  const isCandidate = (p: Population): boolean => {
-    const isHuman = p.species.name === SPECIES_NAMES.HUMAN
-    const isBigEnough = p.size > BIG_ENOUGH_POP
+  const isCandidate = (id: string): boolean => {
+    const population = sim.world.populations.get(id)
+    const isHuman = population?.getSpecies().name === SPECIES_NAMES.HUMAN
+    const isBigEnough = (population?.size ?? 0) > BIG_ENOUGH_POP
     return isHuman && isBigEnough
   }
 
@@ -28,15 +28,14 @@ const fs32 = (sim: Simulation, forceEvent?: boolean): void => {
 
   const srcRegion = sample(regions)
   if (!srcRegion) return
-  const src = sample(srcRegion.populations.filter(isCandidate))
+  const srcId = sample(srcRegion.populations.filter(isCandidate))
+  const src = srcId ? sim.world.populations.get(srcId) : null
   if (!src) return
-  const transplants = src.split()
-  if (!transplants) return
-  const destRegion = sim.world.regions.get(DEST_REGION_ID)
-  if (!destRegion) return
-  transplants.migrate(destRegion)
+  const percent =(Math.random() * 0.2) + 0.4 // 40%-60%, randomized
+  const n =  Math.round(percent * src.size)
+  src.migrate(DEST_REGION_ID, n, false)
 
-  const description = `The Wanderer transports ${transplants.size} humans from ${srcRegion.id} to ${DEST_REGION_ID}.`
+  const description = `The Wanderer transports ${n} humans from ${srcRegion.id} to ${DEST_REGION_ID}.`
   sim.world.events.push(event)
   sim.history.add({ millennium: sim.millennium, description, tags: ['Wanderer', 'Empyreans', srcRegion.id, DEST_REGION_ID] })
   if (sim.world.dragons.interest.value >= 50) sim.world.dragons.interest.incr()

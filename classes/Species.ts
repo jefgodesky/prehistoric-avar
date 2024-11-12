@@ -1,5 +1,5 @@
 import type { ISpecies } from '../index.d.ts'
-import { Biome, SPECIES_NAMES, SpeciesName } from '../enums.ts'
+import { Biome, SPECIES_NAMES, SpeciesName, SpeciesPlurals } from '../enums.ts'
 import Fitness from './Fitness.ts'
 
 class Species {
@@ -23,6 +23,10 @@ class Species {
 
   getCode (): string {
     return Species.getCode(this.name ?? SPECIES_NAMES.WOSAN)
+  }
+
+  getPlural (): string {
+    return SpeciesPlurals[this.name ?? 'Wosan']
   }
 
   toObject (): ISpecies {

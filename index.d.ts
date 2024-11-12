@@ -54,7 +54,7 @@ interface IImmortal {
 }
 
 interface IPopulation {
-  id: string
+  id?: string
   species: SpeciesName
   size: number
   extinct?: boolean
@@ -105,7 +105,7 @@ interface IRegion {
   immortals: string[]
   markers: string[]
   ogrism: number
-  populations: IPopulation[]
+  populations: string[]
   society?: string
   species?: SpeciesName
   tags: string[]

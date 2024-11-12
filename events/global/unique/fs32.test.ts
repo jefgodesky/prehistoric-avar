@@ -11,11 +11,9 @@ describe('fs32', () => {
   const destRegion = DEST_REGION_ID
 
   const addHumans = (sim: Simulation, num: number) => {
-    const home = sim.world.regions.get(srcRegion)!
-    const p = new Population(home)
+    const p = new Population(sim, srcRegion)
     p.adjustSize(num)
-    p.species = sim.world.species.get('human')!
-    home.introduce(p)
+    p.species = 'human'
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
   }
 
@@ -68,16 +66,16 @@ describe('fs32', () => {
     const { regions } = sim.world
     const src = regions.get(srcRegion)!
     const dest = regions.get(destRegion)!
-    const p = src.populations[0]
+    const p = sim.world.populations.get(src.populations[0])!
     const before = p.size
     fs32(sim, true)
-    const transplants = dest.populations[0]
+    const transplants = sim.world.populations.get(dest.populations[0])!
     expect(transplants).toBeDefined()
     expect(p.size).toBeLessThan(before)
     expect(transplants.size + p.size).toBe(before)
-    expect(transplants.home).toBe(dest)
+    expect(transplants.home).toBe(dest.id)
     expect(dest.populations).toHaveLength(1)
-    expect(dest.populations[0]).toBe(transplants)
+    expect(dest.populations[0]).toBe(transplants.id)
   })
 
   it('doesn\'t interest dragons if draconic interest is less than 50', () => {

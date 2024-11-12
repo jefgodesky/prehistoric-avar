@@ -84,6 +84,13 @@ describe('Species', () => {
       })
     })
 
+    describe('getPlural', () => {
+      it('returns the plural', () => {
+        const sp = new Species(HumanData)
+        expect(sp.getPlural()).toBe('Humans')
+      })
+    })
+
     describe('toObject', () => {
       it('returns an object', () => {
         const sp = new Species(HumanData)

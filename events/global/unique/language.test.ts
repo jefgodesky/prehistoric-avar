@@ -10,10 +10,8 @@ describe('language', () => {
   const homeRegion = 'GS03'
 
   const addHumans = (sim: Simulation) => {
-    const home = sim.world.regions.get(homeRegion)!
-    const p = new Population(home)
-    p.species = sim.world.species.get('human')!
-    home.introduce(p)
+    const p = new Population(sim, homeRegion)
+    p.species = 'human'
     sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
   }
 

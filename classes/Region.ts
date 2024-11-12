@@ -23,15 +23,13 @@ class Region extends Markable implements IHabitable {
   habitability: number
   immortals: string[]
   ogrism: number
-  populations: Population[]
+  populations: string[]
   society: string | null
   species?: SpeciesName
   tags: string[]
 
   constructor (sim: Simulation, data?: IRegion) {
     super(sim, data)
-
-    const populations = data?.populations ?? []
 
     this.id = data?.id ?? ''
     this.adjacentRegions = data?.adjacentRegions ?? []
@@ -44,7 +42,7 @@ class Region extends Markable implements IHabitable {
     this.habitability = data?.habitability ?? 1
     this.immortals = data?.immortals ? [...data.immortals] : []
     this.ogrism = data?.ogrism ?? 0
-    this.populations = populations.map(pop => new Population(this, pop))
+    this.populations = data?.populations ? [...data.populations] : []
     this.society = data?.society ?? null
     this.tags = data?.tags ? [...data.tags] : []
 
@@ -62,36 +60,43 @@ class Region extends Markable implements IHabitable {
 
   introduce (...populations: Population[]): void {
     this.society = this.society ?? new Society(this.simulation, this.id).id
-    const sameSpecies = (n: Population, p: Population): boolean => n.species.name === p.species.name
     for (const p of populations) {
-      const conspecific = this.populations.filter(n => sameSpecies(n, p))
-      const extant = conspecific.filter(p => !p.extinct)
-      if (extant.length > 0) {
-        extant[0].absorb(p)
+      const conspecific = this.getSpeciesPopulation(p.species)
+      if (conspecific) {
+        conspecific.absorb(p.size, p.viability)
+        this.simulation.world.populations.remove(p.id)
       } else {
-        this.populations.push(p)
-        const num = (conspecific.length + 1).toString().padStart(3, '0')
-        p.id = `${this.id}-${p.species.getCode()}${num}`
-        p.home = this
+        p.id = this.simulation.world.populations.generateKey(this.generatePopulationId(p.species))
+        this.populations.push(p.id)
+        p.home = this.id
       }
     }
   }
 
   isPopulated (): boolean {
-    return this.populations.filter(p => !p.extinct).length > 0
+    const populations = this.simulation.world.populations.populate(this.populations)
+    return populations.filter(p => !p.extinct).length > 0
+  }
+
+  getSpeciesPopulation (sp: SpeciesName): Population | false {
+    if (!this.isPopulated()) return false
+    return this.simulation.world.populations.populate(this.populations)
+      .find(p => p.species === sp && !p.extinct) ?? false
   }
 
   hasPopulationCapableOfSpeech (): boolean {
-    const areSpeakers = (p: Population): boolean => !p.extinct && p.species.name !== SPECIES_NAMES.WOSAN
-    return this.populations.filter(areSpeakers).length > 0
+    const areSpeakers = (p: Population): boolean => !p.extinct && p.getSpecies().name !== SPECIES_NAMES.WOSAN
+    const populations = this.simulation.world.populations.populate(this.populations)
+    return populations.filter(areSpeakers).length > 0
   }
 
   hasSpeechCommunity (): boolean {
     if (!this.society) return false
     const society = this.simulation.world.societies.get(this.society)
     if (!society?.language) return false
-    return this.populations
-      .map(p => !p.extinct && p.species.canSpeak)
+    const populations = this.simulation.world.populations.populate(this.populations)
+    return populations
+      .map(p => !p.extinct && p.getSpecies().canSpeak)
       .reduce((acc, curr) => acc && curr, true)
   }
 
@@ -107,10 +112,11 @@ class Region extends Markable implements IHabitable {
 
   getAverageGeneration (): number {
     if (!this.isPopulated()) return 0
+    const populations = this.simulation.world.populations.populate(this.populations)
     let nominator = 0
     let denominator = 0
-    for (const p of this.populations) {
-      nominator += p.size * (p.species.generation ?? 50)
+    for (const p of populations) {
+      nominator += p.size * (p.getSpecies().generation ?? 50)
       denominator += p.size
     }
     return Math.floor(nominator / denominator)
@@ -119,13 +125,14 @@ class Region extends Markable implements IHabitable {
   speciate (): void {
     if (!this.species) return
     const { species } = this.simulation.world
-    const scrollText = getSpeciationScrollText(this.species)
-    const sp = species.get(this.species.toLowerCase())
-    for (const p of this.populations) {
-      if (p.species.name !== sp?.ancestor) continue
+    const sp = species.get(this.species.toLowerCase())!
+    const scrollText = getSpeciationScrollText(sp)
+    const populations = this.simulation.world.populations.populate(this.populations)
+    for (const p of populations) {
+      if (p.getSpecies().name !== sp?.ancestor) continue
       let scroll = p.scribe.scrolls.find(s => s.text === scrollText)
       if (scroll) { scroll.unseal(); continue }
-      scroll = createSpeciationScroll(this.species, p)
+      scroll = createSpeciationScroll(this.simulation, this.species, p)
       p.scribe.scrolls.push(scroll)
     }
   }
@@ -149,9 +156,17 @@ class Region extends Markable implements IHabitable {
     }
   }
 
-  generateId (): string {
+  generateSocietyId (): string {
     const millennium = this.simulation.millennium.toString().padStart(3, '0')
     return `${this.id}-${millennium}`
+  }
+
+  generatePopulationId (species: SpeciesName): string {
+    const code = this.simulation.world.species.get(species.toLowerCase())?.getCode() ?? 'WO'
+    const populations = this.simulation.world.populations.populate(this.populations)
+    const conspecific = populations.filter(p => p.species === species)
+    const num = (conspecific.length + 1).toString().padStart(3, '0')
+    return `${this.id}-${code}${num}`
   }
 
   toObject (): IRegion {
@@ -168,7 +183,7 @@ class Region extends Markable implements IHabitable {
       immortals: this.immortals,
       markers: this.markers,
       ogrism: this.ogrism,
-      populations: this.populations.map(pop => pop.toObject()),
+      populations: this.populations,
       tags: this.tags
     }
 

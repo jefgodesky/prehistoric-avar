@@ -10,6 +10,7 @@ import Population from './Population.ts'
 import Quest from './Quest.ts'
 import Region from './Region.ts'
 import Simulation from './Simulation.ts'
+import Species from './Species.ts'
 import { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
 
 describe('Region', () => {
@@ -21,8 +22,7 @@ describe('Region', () => {
     populationData: IPopulation = SamplePopulation
   ): { region: Region, population: Population } => {
     const r = simulation.world.regions.get(region)!
-    const population = new Population(r, populationData)
-    r.introduce(population)
+    const population = new Population(sim, region, populationData)
     return { region: r, population }
   }
 
@@ -248,7 +248,7 @@ describe('Region', () => {
 
       it('gives each population a unique ID', () => {
         const { region, population: p1 } = introducePopulation()
-        const p2 = new Population(region, SamplePopulation)
+        const p2 = new Population(sim, region.id, SamplePopulation)
         p1.adjustSize(p1.size * -2)
         region.introduce(p2)
         expect(p1.id).toBe('GS02-HU001')
@@ -256,22 +256,19 @@ describe('Region', () => {
       })
 
       it('sets the population\'s new home', () => {
-        const src = new Region(sim, DS01)
-        const dest = new Region(sim, GS02)
-        const p = new Population(src, SamplePopulation)
+        const dest = sim.world.regions.get('GS02')!
+        const p = new Population(sim, 'DS01', SamplePopulation)
         dest.introduce(p)
-        expect(p.home).toBe(dest)
+        expect(p.home).toBe(dest.id)
       })
 
       it('has existing populations absorb new ones of the same species', () => {
-        const src = new Region(sim, DS01)
-        const dest = new Region(sim, GS02)
-        const p1 = new Population(dest, SamplePopulation)
-        const p2 = new Population(src, SamplePopulation)
-        dest.introduce(p1)
-        dest.introduce(p2)
-        expect(dest.populations).toHaveLength(1)
-        expect(dest.populations[0].size).toBe(SamplePopulation.size * 2)
+        const id = 'DS01'
+        new Population(sim, id, SamplePopulation)
+        new Population(sim, id, SamplePopulation)
+        const region = sim.world.regions.get(id)!
+        expect(region.populations).toHaveLength(1)
+        expect(sim.world.populations.get(region.populations[0])?.size).toBe(SamplePopulation.size * 2)
       })
     })
 
@@ -290,6 +287,29 @@ describe('Region', () => {
       it('returns true if the region has 1 or more extant populations', () => {
         const { region } = introducePopulation()
         expect(region.isPopulated()).toBe(true)
+      })
+    })
+
+    describe('getSpeciesPopulation', () => {
+      it('returns false if the region has no such population', () => {
+        const region = new Region(sim, DS01)
+        expect(region.getSpeciesPopulation(SPECIES_NAMES.HUMAN)).toBe(false)
+      })
+
+      it('returns false if all populations in the region are extinct', () => {
+        const { region, population } = introducePopulation()
+        population.adjustSize(population.size * -2)
+        expect(region.getSpeciesPopulation(SPECIES_NAMES.HUMAN)).toBe(false)
+      })
+
+      it('returns false if no populations are of the given species', () => {
+        const { region } = introducePopulation()
+        expect(region.getSpeciesPopulation(SPECIES_NAMES.ORC)).toBe(false)
+      })
+
+      it('returns the population if the region has a population of the given species', () => {
+        const { region } = introducePopulation()
+        expect(region.getSpeciesPopulation(SPECIES_NAMES.HUMAN)).toBeInstanceOf(Population)
       })
     })
 
@@ -378,36 +398,42 @@ describe('Region', () => {
       })
 
       it('returns the population generation value if only one population', () => {
-        const region = new Region(sim, GS02)
-        region.introduce(new Population(region, SamplePopulation))
-        expect(region.getAverageGeneration()).toBe(region.populations[0].species.generation)
+        const p = new Population(sim, 'GS02', SamplePopulation)
+        const expected = sim.world.populations.get(p.getHome().populations[0])?.getSpecies().generation!
+        expect(p.getHome().getAverageGeneration()).toBe(expected)
       })
 
       it('returns the average of two populations', () => {
-        const region = new Region(sim, GS02)
         const humans = Object.assign({}, SamplePopulation, { size: 4000 })
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
-        region.introduce(new Population(region, humans))
-        region.introduce(new Population(region, elves))
+        const p = new Population(sim, 'GS02', humans)
+        new Population(sim, 'GS02', elves)
         const expected = Math.floor(((4000 * 40) + (2000 * 5)) / (4000 + 2000))
-        expect(region.getAverageGeneration()).toBe(expected)
+        expect(p.getHome().getAverageGeneration()).toBe(expected)
       })
 
       it('returns the average of three or more populations', () => {
-        const region = new Region(sim, GS02)
+        const home = 'GS02'
         const humans = Object.assign({}, SamplePopulation, { size: 4000 })
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
         const dwarves = Object.assign({}, SamplePopulation, { size: 3000, species: SPECIES_NAMES.DWARF })
-        region.introduce(new Population(region, humans))
-        region.introduce(new Population(region, elves))
-        region.introduce(new Population(region, dwarves))
+        const p = new Population(sim, home, humans)
+        new Population(sim, home, elves)
+        new Population(sim, home, dwarves)
         const expected = Math.floor(((4000 * 40) + (2000 * 5) + (3000 * 20)) / (4000 + 2000 + 3000))
-        expect(region.getAverageGeneration()).toBe(expected)
+        expect(p.getHome().getAverageGeneration()).toBe(expected)
       })
     })
 
     describe('speciate', () => {
-      const scrollText = getSpeciationScrollText(FS32.species ?? SPECIES_NAMES.HALFLING)
+      const key = FS32.species ?? SPECIES_NAMES.HALFLING
+      let species: Species
+      let scrollText = ''
+
+      beforeEach(() => {
+        species = sim.world.species.get(key.toLowerCase())!
+        scrollText = getSpeciationScrollText(species)
+      })
 
       it('creates a speciation scroll for an appropriate ancestor population', () => {
         const region = 'FS32'
@@ -419,11 +445,9 @@ describe('Region', () => {
       })
 
       it('won\'t create a speciation scroll for other populations', () => {
-        const region = new Region(sim, FS32)
         const popData = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const p = new Population(region, popData)
-        region.introduce(p)
-        region.speciate()
+        const p = new Population(sim, 'FS32', popData)
+        p.getHome().speciate()
         const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
         expect(scroll).not.toBeDefined()
       })
@@ -526,10 +550,18 @@ describe('Region', () => {
       })
     })
 
-    describe('generateId', () => {
+    describe('generateSocietyId', () => {
       it('generates an ID based on the region ID and millennium', () => {
-        const region = new Region(sim, DS01)
-        expect(region.generateId()).toBe('DS01-001')
+        const region = sim.world.regions.get('DS01')!
+        expect(region.generateSocietyId()).toBe('DS01-001')
+      })
+    })
+
+    describe('generatePopulationId', () => {
+      it('generates an ID based on the region ID and number of predecessors', () => {
+        const region = sim.world.regions.get('DS01')!
+        new Population(sim, region.id, SamplePopulation)
+        expect(region.generatePopulationId(SamplePopulation.species)).toBe('DS01-HU002')
       })
     })
 

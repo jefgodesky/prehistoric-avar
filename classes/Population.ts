@@ -1,22 +1,21 @@
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
 import type { IPopulation } from '../index.d.ts'
-import { wosan } from '../instances/species/index.ts'
 import clamp from '../clamp.ts'
+import { wosan } from '../instances/species/index.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
 import Relationship from './Relationship.ts'
 import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
-import Species from './Species.ts'
-import species from '../instances/species/index.ts'
 import Simulation from './Simulation.ts'
+import Species from './Species.ts'
 
 const TO_STRING_PREFIX = 'Population:' as const
 
 class Population extends Markable {
-  home: Region
-  species: Species
+  home: string
+  species: string
   size: number
   viability: number
   scribe: Scribe
@@ -24,15 +23,14 @@ class Population extends Markable {
   extinct: boolean
   private fitness: Fitness
 
-  constructor (home: Region, data?: IPopulation) {
-    super(home.simulation, data)
+  constructor (sim: Simulation, home: string, data?: IPopulation) {
+    super(sim, data)
 
-    const sp = data?.species ?? SPECIES_NAMES.WOSAN
     const relationships = data?.relationships ?? []
 
     this.home = home
-    this.id = data?.id ?? 'GS03-001WO'
-    this.species = species.get(sp.toLowerCase()) ?? wosan
+    this.id = this.simulation.world.populations.generateKey(data?.id ?? 'GS03-001WO')
+    this.species = data?.species ?? SPECIES_NAMES.WOSAN
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
     this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
@@ -40,16 +38,29 @@ class Population extends Markable {
     this.markers = data?.markers ?? []
     this.extinct = data?.extinct ?? false
 
-    const { regions, societies } = this.simulation.world
-    const region = regions.get(home.id)
-    const society = societies.get(region?.society ?? '')
+    const region = this.getHome()
+    const species = this.getSpecies()
+    const society = this.simulation.world.societies.get(region.society ?? '')
+    const id = data?.id ?? region.generatePopulationId(this.species) ?? 'GS03-0001WO'
+    this.id = this.simulation.world.populations.generateKey(id)
     this.fitness = society?.fitness
-      ? Fitness.combine(this.species.fitness, society.fitness)
-      : this.species.fitness
+      ? Fitness.combine(species.fitness, society.fitness)
+      : species.fitness
+    region.introduce(this)
+    this.simulation.world.populations.add(this)
   }
 
   getFitness (biome: Biome): number {
     return this.fitness.get(biome)
+  }
+
+  getSpecies (): Species {
+    return this.simulation.world.species.get(this.species.toLowerCase()) ?? wosan
+  }
+
+  getHome (): Region {
+    const regions = this.simulation.world.regions.values()
+    return this.simulation.world.regions.get(this.home) ?? regions[0]
   }
 
   adjustSize (delta: number): void {
@@ -60,12 +71,23 @@ class Population extends Markable {
       this.size *= 1 + delta
     }
     this.size = Math.max(Math.round(this.size), 0)
-    if (this.size === 0) this.extinct = true
+
+    if (this.size === 0) {
+      this.extinct = true
+      const region = this.getHome()
+      const populations = this.simulation.world.populations.populate(region.populations)
+      const extant = populations.filter(p => !p.extinct && p.size > 0)
+      if (region.society !== null && extant.length < 1) {
+        this.simulation.world.societies.remove(region.society)
+        region.society = null
+      }
+    }
   }
 
   adjustViability (): void {
     if (this.extinct) return
-    const generations = this.species.generation ?? 1
+    const species = this.getSpecies()
+    const generations = species?.generation ?? 1
     for (let g = 0; g < generations; g++) { // High generations change more per tick
       const flip = Math.random() // High viability recovers; low can become death spiral
       const roll = new DiceRoll('1d3').total // Change between 1% and 3%
@@ -78,30 +100,52 @@ class Population extends Markable {
     }
   }
 
-  absorb (other: Population): boolean {
-    if (this.species.name !== other.species.name) return false
-    this.viability = ((this.viability * this.size) + (other.viability * other.size)) / (this.size + other.size)
-    this.adjustSize(other.size)
+  absorb (n: number, viability: number): boolean {
+    this.viability = ((this.viability * this.size) + (viability * n)) / (this.size + n)
+    this.adjustSize(n)
     return true
   }
 
-  split (num?: number): Population | null {
-    if (this.extinct || this.size < 2) return null
-    const n = num ?? ((Math.random() * 0.2) + 0.4) * this.size
-    this.size -= n
-    const data = Object.assign({}, this.toObject(), { size: n })
-    return new Population(this.home, data)
-  }
+  migrate (dest: string, n: number, record: boolean = true): void {
+    const region = this.simulation.world.regions.get(dest)
+    if (!region) return
 
-  migrate (dest: Region): void {
-    this.home.populations = this.home.populations.filter(p => p !== this)
-    dest.introduce(this)
+    const species = this.getSpecies()
+    const pl = species?.getPlural() ?? 'Humanoids'
+    const tags = ['Migration', dest, this.home, pl]
+    let description = `${n} ${pl} from ${this.home} (${this.id}) migrated to ${dest}`
+
+    this.adjustSize(n * -1)
+    const receiving = region.getSpeciesPopulation(this.species)
+    if (receiving) {
+      receiving.absorb(n, this.viability)
+      description += ` and were absorbed into ${receiving.id}.`
+    } else {
+      const p = new Population(this.simulation, dest, {
+        species: this.species,
+        markers: [],
+        size: n,
+        viability: this.viability,
+        relationships: [],
+        scrolls: [],
+        extinct: false
+      })
+      description += `, where they founded a new population (${p.id}).`
+    }
+
+    if (!record) return
+
+    this.simulation.history.add({
+      description,
+      millennium: this.simulation.millennium,
+      tags
+    })
   }
 
   toObject (): IPopulation {
     return {
       id: this.id,
-      species: this.species.name as string,
+      species: this.species,
       markers: this.markers,
       size: this.size,
       viability: this.viability,
@@ -113,21 +157,6 @@ class Population extends Markable {
 
   override toString (): string {
     return `${TO_STRING_PREFIX} ${this.id}`
-  }
-
-  static find (sim: Simulation, q: string = ''): Population | null {
-    const r = q.toLowerCase().startsWith(TO_STRING_PREFIX.toLowerCase())
-      ? q.slice(TO_STRING_PREFIX.length).trim()
-      : q
-    const str = `${TO_STRING_PREFIX} ${r}`
-
-    for (const region of sim.regions) {
-      for (const population of region.populations) {
-        if (population.toString() === str) return population
-      }
-    }
-
-    return null
   }
 }
 

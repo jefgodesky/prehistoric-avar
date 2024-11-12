@@ -14,9 +14,10 @@ const language = (sim: Simulation, forceEvent?: boolean): void => {
   const fireEvent = forceEvent ?? sample(getChances(1, 10))
   if (!fireEvent) return
 
-  const isHuman = (p: Population): boolean => p.species.name === SPECIES_NAMES.HUMAN
+  const isHuman = (p: Population): boolean => p.getSpecies().name === SPECIES_NAMES.HUMAN
+  const populations = sim.world.populations.values()
   const regions = sim.world.regions.values().filter(region => {
-    return region.populations.filter(isHuman).length > 0
+    return populations.filter(p => region.populations.includes(p.id) && isHuman(p)).length > 0
   })
 
   const region = sample(regions) as Region

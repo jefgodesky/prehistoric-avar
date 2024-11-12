@@ -1,5 +1,4 @@
 import { sample } from '@std/collections'
-import { SpeciesPlurals } from '../../enums.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 import AirElemental from '../../classes/immortals/elementals/Air.ts'
@@ -59,30 +58,42 @@ const impactLand = (sim: Simulation): void => {
 }
 
 const impactSea = (sim: Simulation): void => {
+  const populations = sim.world.populations.values()
   const coastal = sim.world.regions.values().filter(region => region.tags.includes('coastal'))
   for (const region of coastal) {
-    for (const p of region.populations) p.adjustSize(-0.1)
+    for (const p of populations) {
+      if (region.populations.includes(p.id)) p.adjustSize(-0.1)
+    }
   }
 }
 
 const impactZone0 = (region: Region): void => {
   region.reduceHabitability(0.9)
-  for (const p of region.populations) p.adjustSize(p.size * -1)
+  const populations = region.simulation.world.populations.values()
+  for (const p of populations) {
+    if (region.populations.includes(p.id)) p.adjustSize(p.size * -1)
+  }
 }
 
 const impactZone1 = (sim: Simulation, region: Region): void => {
   const zone1 = getZone1(sim, region)
+  const populations = region.simulation.world.populations.values()
   for (const region of zone1) {
     region.reduceHabitability(0.5)
-    for (const p of region.populations) p.adjustSize(-0.5)
+    for (const p of populations) {
+      if (region.populations.includes(p.id)) p.adjustSize(-0.5)
+    }
   }
 }
 
 const impactZone2 = (sim: Simulation, region: Region): void => {
   const zone2 = getZone2(sim, region)
+  const populations = region.simulation.world.populations.values()
   for (const region of zone2) {
     region.reduceHabitability(0.25)
-    for (const p of region.populations) p.adjustSize(-0.25)
+    for (const p of populations) {
+      if (region.populations.includes(p.id)) p.adjustSize(-0.25)
+    }
   }
 }
 
@@ -544,9 +555,11 @@ const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promis
 
   const unseal = (regions: Region[], num: number = 1) => {
     for (const region of regions) {
-      if (!region.species || !(region.species in SpeciesPlurals)) continue
-      const text = `We become ${SpeciesPlurals[region.species].toLowerCase()}.`
-      for (const p of region.populations) {
+      const species = sim.world.species.get(region.species?.toLowerCase() ?? '')
+      if (!species) continue
+      const text = `We become ${species.getPlural().toLowerCase()}.`
+      const populations = region.simulation.world.populations.populate(region.populations)
+      for (const p of populations) {
         const scrolls = p.scribe.scrolls.filter(scroll => scroll.text === text)
         for (const scroll of scrolls) {
           for (let i = 0; i < num; i++) scroll.unseal()
