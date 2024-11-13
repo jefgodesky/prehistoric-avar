@@ -3,11 +3,10 @@ import { IImmortal } from '../../index.d.ts'
 import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from './Immortal.ts'
 import Simulation from '../Simulation.ts'
+import Singleton from '../../Singleton.ts'
 
-class DragonQueen extends Immortal {
-  private static queen: DragonQueen | null = null
-
-  private constructor (sim: Simulation, region: string, data?: IImmortal) {
+class DragonOgre extends Immortal {
+  constructor (sim: Simulation, region: string, data?: IImmortal) {
     const dragonQueenData: IImmortal = Object.assign({}, {
       description: 'The Dragon Queen',
       disposition: DISPOSITIONS.HOSTILE,
@@ -33,20 +32,7 @@ class DragonQueen extends Immortal {
     this.region = dest.id
     dest.immortals = [...new Set([...dest.immortals, this.id])]
   }
-
-  public static create (sim: Simulation, region: string, data?: IImmortal): DragonQueen {
-    if (DragonQueen.queen) return DragonQueen.queen
-    DragonQueen.queen = new DragonQueen(sim, region, data)
-    return DragonQueen.queen
-  }
-
-  public static get (): DragonQueen | null {
-    return DragonQueen.queen ?? null
-  }
-
-  public static reset (): void {
-    DragonQueen.queen = null
-  }
 }
 
+const DragonQueen = Singleton(DragonOgre)
 export default DragonQueen

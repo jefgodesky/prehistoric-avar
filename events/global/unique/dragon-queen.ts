@@ -20,7 +20,7 @@ const dragonQueen = (sim: Simulation, forceEvent?: boolean): void => {
   const region = sample(regions)
   if (!region) return
 
-  DragonQueen.create(sim, region.id)
+  DragonQueen.instance(sim, region.id)
   const description = `The Dragon Queen arises in ${region.id}.`
   sim.world.events.push(event)
   sim.history.add({ millennium: sim.millennium, description, tags: ['Dragon Queen', 'Dragons', region.id] })
