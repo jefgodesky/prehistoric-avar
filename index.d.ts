@@ -9,6 +9,9 @@ import type {
 // deno-lint-ignore no-explicit-any
 type Emitter = Emittery<Record<PropertyKey, any>, Record<PropertyKey, any> & OmnipresentEventData, DatalessEventNames<Record<PropertyKey, any>>>
 
+// deno-lint-ignore no-explicit-any ban-types
+type Constructor<T = {}> = new (...args: any[]) => T;
+
 interface IBiome {
   'Carrying capacity score': number
   'Class names': string[]
@@ -153,6 +156,7 @@ interface ISpecies {
 
 export type {
   Emitter,
+  Constructor,
   IBiome,
   IDragons,
   IFitness,
