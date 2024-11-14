@@ -8,6 +8,7 @@ import Simulation from './Simulation.ts'
 import Region from './Region.ts'
 import World from './World.ts'
 import createPopulation from '../factories/population.ts'
+import createQuest from '../factories/quest.ts'
 import Quest from './Quest.ts'
 
 describe('Quest', () => {
@@ -116,7 +117,7 @@ describe('Quest', () => {
 
       beforeEach(() => {
         region = new Region(GS02)
-        quest = new Quest(world, SampleQuest)
+        quest = createQuest(SampleQuest)
         p = createPopulation(region.id, SamplePopulation)
       })
 
@@ -131,14 +132,14 @@ describe('Quest', () => {
 
     describe('toObject', () => {
       it('exports an object', () => {
-        const quest = new Quest(world, SampleQuest)
+        const quest = createQuest(SampleQuest)
         expect(JSON.stringify(quest.toObject())).toBe(JSON.stringify(SampleQuest))
       })
     })
 
     describe('toString', () => {
       it('exports a string', () => {
-        const quest = new Quest(world, SampleQuest)
+        const quest = createQuest(SampleQuest)
         expect(quest.toString()).toBe(SampleQuest.description)
       })
     })
