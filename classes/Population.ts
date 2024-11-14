@@ -10,6 +10,7 @@ import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
 import Simulation from './Simulation.ts'
 import Species from './Species.ts'
+import World from './World.ts'
 
 const TO_STRING_PREFIX = 'Population:' as const
 
@@ -23,31 +24,30 @@ class Population extends Markable {
   extinct: boolean
   private fitness: Fitness
 
-  constructor (sim: Simulation, home: string, data?: IPopulation) {
-    super(sim, data)
-
+  constructor (world: World, home: string, data?: IPopulation) {
+    super(data)
     const relationships = data?.relationships ?? []
 
     this.home = home
-    this.id = this.simulation.world.populations.generateKey(data?.id ?? 'GS03-001WO')
+    this.id = world.populations.generateKey(data?.id ?? 'GS03-001WO')
     this.species = data?.species ?? SPECIES_NAMES.WOSAN
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
-    this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
-    this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
+    this.scribe = new Scribe(...(data?.scrolls ?? []))
+    this.relationships = relationships.map(rel => new Relationship(rel))
     this.markers = data?.markers ?? []
     this.extinct = data?.extinct ?? false
 
     const region = this.getHome()
     const species = this.getSpecies()
-    const society = this.simulation.world.societies.get(region.society ?? '')
+    const society = world.societies.get(region.society ?? '')
     const id = data?.id ?? region.generatePopulationId(this.species) ?? 'GS03-0001WO'
-    this.id = this.simulation.world.populations.generateKey(id)
+    this.id = world.populations.generateKey(id)
     this.fitness = society?.fitness
       ? Fitness.combine(species.fitness, society.fitness)
       : species.fitness
     region.introduce(this)
-    this.simulation.world.populations.add(this)
+    world.populations.add(this)
   }
 
   getFitness (biome: Biome): number {
@@ -55,12 +55,14 @@ class Population extends Markable {
   }
 
   getSpecies (): Species {
-    return this.simulation.world.species.get(this.species.toLowerCase()) ?? wosan
+    const { world } = Simulation.instance()
+    return world.species.get(this.species.toLowerCase()) ?? wosan
   }
 
   getHome (): Region {
-    const regions = this.simulation.world.regions.values()
-    return this.simulation.world.regions.get(this.home) ?? regions[0]
+    const { world } = Simulation.instance()
+    const regions = world.regions.values()
+    return world.regions.get(this.home) ?? regions[0]
   }
 
   adjustSize (delta: number): void {
@@ -73,12 +75,13 @@ class Population extends Markable {
     this.size = Math.max(Math.round(this.size), 0)
 
     if (this.size === 0) {
+      const { world } = Simulation.instance()
       this.extinct = true
       const region = this.getHome()
-      const populations = this.simulation.world.populations.populate(region.populations)
+      const populations = world.populations.populate(region.populations)
       const extant = populations.filter(p => !p.extinct && p.size > 0)
       if (region.society !== null && extant.length < 1) {
-        this.simulation.world.societies.remove(region.society)
+        world.societies.remove(region.society)
         region.society = null
       }
     }
@@ -107,7 +110,8 @@ class Population extends Markable {
   }
 
   migrate (dest: string, n: number, record: boolean = true): void {
-    const region = this.simulation.world.regions.get(dest)
+    const { world } = Simulation.instance()
+    const region = world.regions.get(dest)
     if (!region) return
 
     const species = this.getSpecies()
@@ -121,7 +125,7 @@ class Population extends Markable {
       receiving.absorb(n, this.viability)
       description += ` and were absorbed into ${receiving.id}.`
     } else {
-      const p = new Population(this.simulation, dest, {
+      const p = new Population(world, dest, {
         species: this.species,
         markers: [],
         size: n,
@@ -135,11 +139,8 @@ class Population extends Markable {
 
     if (!record) return
 
-    this.simulation.history.add({
-      description,
-      millennium: this.simulation.millennium,
-      tags
-    })
+    const { history, millennium } = Simulation.instance()
+    history.add({ description, millennium, tags })
   }
 
   toObject (): IPopulation {

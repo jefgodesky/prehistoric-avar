@@ -1,13 +1,8 @@
-import Emittery from 'emittery'
-import type { DatalessEventNames, OmnipresentEventData } from 'emittery'
 import type {
   Biome,
   Disposition,
   SpeciesName
 } from './enums.ts'
-
-// deno-lint-ignore no-explicit-any
-type Emitter = Emittery<Record<PropertyKey, any>, Record<PropertyKey, any> & OmnipresentEventData, DatalessEventNames<Record<PropertyKey, any>>>
 
 // deno-lint-ignore no-explicit-any ban-types
 type Constructor<T = {}> = new (...args: any[]) => T;
@@ -74,13 +69,7 @@ interface IQuest {
   skill: number
   lethality: number
   accomplished?: boolean
-  calls?: IQuestCall[]
   attempts?: IQuestReport[]
-}
-
-interface IQuestCall {
-  millennium: number
-  populations: string[]
 }
 
 interface IQuestReport {
@@ -155,7 +144,6 @@ interface ISpecies {
 }
 
 export type {
-  Emitter,
   Constructor,
   IBiome,
   IDragons,
@@ -166,7 +154,6 @@ export type {
   IImmortal,
   IPopulation,
   IQuest,
-  IQuestCall,
   IQuestReport,
   IRelationship,
   IRegion,

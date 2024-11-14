@@ -1,9 +1,11 @@
-import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
+import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { SamplePopulation} from '../../test-examples.ts'
+import History from '../../classes/History.ts'
 import Population from '../../classes/Population.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
+import World from '../../classes/World.ts'
 import {
   getImpactRegion,
   getZone1,
@@ -26,27 +28,34 @@ import {
 } from './meteor.ts'
 
 describe('Meteor', () => {
-  let sim: Simulation
+  let history: History
   let region: Region
   let population: Population
+  let world: World
 
   beforeEach(() => {
-    sim = new Simulation()
-    region = sim.world.regions.get('MS06')!
+    const sim = Simulation.instance()
+    world = sim.world
+    history = sim.history
+    region = world.regions.get('MS06')!
     region.markers = []
-    population = new Population(sim, 'MS06', SamplePopulation)
+    population = new Population(world, 'MS06', SamplePopulation)
+  })
+  
+  afterEach(() => {
+    Simulation.reset()
   })
 
   describe('getImpactRegion', () => {
     it('returns a region or null, with probability based on area', () => {
-      const actual = getImpactRegion(sim)
+      const actual = getImpactRegion()
       expect(actual === null || actual instanceof Region).toBe(true)
     })
   })
 
   describe('getZone1', () => {
     it('returns an array of regions adjacent to the impact region', () => {
-      const actual = getZone1(sim, region)
+      const actual = getZone1(region)
       expect(actual).toHaveLength(region.adjacentRegions.length)
       expect(actual.every(r => region.adjacentRegions.includes(r.id))).toBe(true)
     })
@@ -54,8 +63,8 @@ describe('Meteor', () => {
 
   describe('getZone2', () => {
     it('returns an array of regions two regions out from the impact region', () => {
-      const zone1 = getZone1(sim, region)
-      const actual = getZone2(sim, region)
+      const zone1 = getZone1(region)
+      const actual = getZone2(region)
       expect(actual.length).toBeGreaterThan(0)
       expect(actual.every(r => !zone1.map(r => r.id).includes(r.id))).toBe(true)
     })
@@ -63,16 +72,16 @@ describe('Meteor', () => {
 
   describe('impactLand', () => {
     it('hits the land', () => {
-      impactLand(sim)
-      expect(sim.world.habitability).toBeCloseTo(0.5)
+      impactLand()
+      expect(world.habitability).toBeCloseTo(0.5)
     })
   })
 
   describe('impactSea', () => {
     it('hits the sea', () => {
-      const coastalPop = new Population(sim, 'FS11', SamplePopulation)
+      const coastalPop = new Population(world, 'FS11', SamplePopulation)
       coastalPop.size = 10000
-      impactSea(sim)
+      impactSea()
       expect(coastalPop.size).toBe(9000)
     })
   })
@@ -88,8 +97,8 @@ describe('Meteor', () => {
 
   describe('impactZone1', () => {
     it('hits each region in zone 1', () => {
-      const zone1 = getZone1(sim, region)
-      impactZone1(sim, region)
+      const zone1 = getZone1(region)
+      impactZone1(region)
       for (const region of zone1) {
         expect(region.habitability).toBeCloseTo(0.5)
       }
@@ -98,8 +107,8 @@ describe('Meteor', () => {
 
   describe('impactZone2', () => {
     it('hits each region in zone 2', () => {
-      const zone2 = getZone2(sim, region)
-      impactZone2(sim, region)
+      const zone2 = getZone2(region)
+      impactZone2(region)
       for (const region of zone2) {
         expect(region.habitability).toBeCloseTo(0.75)
       }
@@ -107,142 +116,142 @@ describe('Meteor', () => {
   })
 
   describe('recordFormMeteor', () => {
-    it('records a meteor from the Sphere of Form hitting a region', async () => {
-      await recordFormMeteor(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Form hitting a region', () => {
+      recordFormMeteor(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBeGreaterThanOrEqual(2)
     })
 
-    it('records a meteor from the Sphere of Form hitting the sea', async () => {
-      await recordFormMeteor(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Form hitting the sea', () => {
+      recordFormMeteor(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordOrderMeteorRock', () => {
-    it('records a meteor from the Sphere of Order hitting a region', async () => {
-      await recordOrderMeteorRock(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Order hitting a region', () => {
+      recordOrderMeteorRock(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(2)
     })
 
-    it('records a meteor from the Sphere of Order hitting the sea', async () => {
-      await recordOrderMeteorRock(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Order hitting the sea', () => {
+      recordOrderMeteorRock(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordOrderMeteorEmpyrean', () => {
-    it('records an empyrean cast down from the Sphere of Order hitting a region', async () => {
-      await recordOrderMeteorEmpyrean(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records an empyrean cast down from the Sphere of Order hitting a region', () => {
+      recordOrderMeteorEmpyrean(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(1)
     })
 
-    it('records an empyrean cast down from the Sphere of Order hitting the sea', async () => {
-      await recordOrderMeteorEmpyrean(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records an empyrean cast down from the Sphere of Order hitting the sea', () => {
+      recordOrderMeteorEmpyrean(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordFluidityMeteorRock', () => {
-    it('records a meteor from the Sphere of Fluidity hitting a region', async () => {
-      await recordFluidityMeteorRock(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Fluidity hitting a region', () => {
+      recordFluidityMeteorRock(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(2)
     })
 
-    it('records a meteor from the Sphere of Fluidity hitting the sea', async () => {
-      await recordFluidityMeteorRock(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Fluidity hitting the sea', () => {
+      recordFluidityMeteorRock(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordFluidityMeteorElemental', () => {
-    it('records an elemental cast down from the Sphere of Fluidity hitting a region', async () => {
-      await recordFluidityMeteorElemental(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records an elemental cast down from the Sphere of Fluidity hitting a region', () => {
+      recordFluidityMeteorElemental(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(1)
       expect(region.immortals).toHaveLength(1)
     })
 
-    it('records an elemental cast down from the Sphere of Fluidity hitting the sea', async () => {
-      await recordFluidityMeteorElemental(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records an elemental cast down from the Sphere of Fluidity hitting the sea', () => {
+      recordFluidityMeteorElemental(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordWarmthMeteorRock', () => {
-    it('records a meteor from the Sphere of Warmth hitting a region', async () => {
-      await recordWarmthMeteorRock(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Warmth hitting a region', () => {
+      recordWarmthMeteorRock(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(2)
     })
 
-    it('records a meteor from the Sphere of Warmth hitting the sea', async () => {
-      await recordWarmthMeteorRock(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Warmth hitting the sea', () => {
+      recordWarmthMeteorRock(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordWarmthMeteorEntity', () => {
-    it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting a region', async () => {
-      await recordWarmthMeteorEntity(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting a region', () => {
+      recordWarmthMeteorEntity(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(1)
     })
 
-    it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting the sea', async () => {
-      await recordWarmthMeteorEntity(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting the sea', () => {
+      recordWarmthMeteorEntity(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordDeathMeteor', () => {
-    it('records a meteor from the Sphere of Death hitting a region', async () => {
-      await recordDeathMeteor(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Death hitting a region', () => {
+      recordDeathMeteor(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(2)
     })
 
-    it('records a meteor from the Sphere of Death hitting the sea', async () => {
-      await recordDeathMeteor(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Death hitting the sea', () => {
+      recordDeathMeteor(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordTimeMeteor', () => {
-    it('records a meteor from the Sphere of Time hitting a region', async () => {
-      await recordTimeMeteor(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Time hitting a region', () => {
+      recordTimeMeteor(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(2)
     })
 
-    it('records a meteor from the Sphere of Time hitting the sea', async () => {
-      await recordTimeMeteor(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a meteor from the Sphere of Time hitting the sea', () => {
+      recordTimeMeteor(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })
 
   describe('recordFallingStar', () => {
-    it('records a falling star from the Sphere of Space hitting a region', async () => {
-      await recordFallingStar(sim, region)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a falling star from the Sphere of Space hitting a region', () => {
+      recordFallingStar(region)
+      expect(history.events).toHaveLength(2)
       expect(region.markers.length).toBe(1)
     })
 
-    it('records a falling star from the Sphere of Space hitting the sea', async () => {
-      await recordFallingStar(sim, null)
-      expect(sim.history.events).toHaveLength(2)
+    it('records a falling star from the Sphere of Space hitting the sea', () => {
+      recordFallingStar(null)
+      expect(history.events).toHaveLength(2)
       expect(region.markers).toHaveLength(0)
     })
   })

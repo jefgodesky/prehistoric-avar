@@ -1,69 +1,78 @@
-import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
+import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
+import History from '../../../classes/History.ts'
 import Population from '../../../classes/Population.ts'
 import Simulation from '../../../classes/Simulation.ts'
+import World from '../../../classes/World.ts'
 import language from './language.ts'
 
 describe('language', () => {
-  let sim: Simulation
+  let history: History
+  let world: World
   const homeRegion = 'GS03'
 
-  const addHumans = (sim: Simulation) => {
-    const p = new Population(sim, homeRegion)
+  const addHumans = () => {
+    const p = new Population(world, homeRegion)
     p.species = 'human'
-    sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
+    world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
   }
 
   beforeEach(() => {
-    sim = new Simulation()
+    const sim = Simulation.instance()
+    history = sim.history
+    world = sim.world
+  })
+
+  afterEach(() => {
+    Simulation.reset()
   })
 
   it('does not register an event if there are no humans', () => {
-    language(sim)
-    expect(sim.world.events).toHaveLength(0)
-    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG)
-    expect(sim.history.events).toHaveLength(1)
+    language()
+    expect(world.events).toHaveLength(0)
+    expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG)
+    expect(history.events).toHaveLength(1)
   })
 
   it('does not register an event 9 times in 10', () => {
-    addHumans(sim)
-    language(sim, false)
-    expect(sim.world.events).toHaveLength(1)
-    expect(sim.world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG)
-    expect(sim.history.events).toHaveLength(1)
+    addHumans()
+    language(false)
+    expect(world.events).toHaveLength(1)
+    expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG)
+    expect(history.events).toHaveLength(1)
   })
 
   it('registers an event 1 time in 10', () => {
-    addHumans(sim)
-    language(sim, true)
-    expect(sim.world.events).toHaveLength(2)
-    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG)
-    expect(sim.history.events).toHaveLength(2)
+    addHumans()
+    language(true)
+    expect(world.events).toHaveLength(2)
+    expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG)
+    expect(history.events).toHaveLength(2)
   })
 
   it('will not register an event twice', () => {
-    addHumans(sim)
-    language(sim, true)
-    language(sim, true)
-    expect(sim.world.events).toHaveLength(2)
-    expect(sim.world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG)
-    expect(sim.history.events).toHaveLength(2)
+    addHumans()
+    language(true)
+    language(true)
+    expect(world.events).toHaveLength(2)
+    expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG)
+    expect(history.events).toHaveLength(2)
   })
 
   it('adds the first language', () => {
-    addHumans(sim)
-    const region = sim.world.regions.get(homeRegion)
-    language(sim, true)
-    const society = sim.world.societies.get(region?.society ?? '')
+    addHumans()
+    const region = world.regions.get(homeRegion)
+    language(true)
+    const society = world.societies.get(region?.society ?? '')
     const actual = society?.language
     expect(actual).toBe('GS03-001')
-    expect(sim.world.languages.get('GS03-001')).toBeNull()
+    expect(world.languages.get('GS03-001')).toBeNull()
   })
 
   it('interests dragons', () => {
-    addHumans(sim)
-    language(sim, true)
-    expect(sim.world.dragons.interest.value).toBe(1)
+    addHumans()
+    language(true)
+    expect(world.dragons.interest.value).toBe(1)
   })
 })

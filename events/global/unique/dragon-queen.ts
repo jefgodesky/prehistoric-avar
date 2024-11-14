@@ -7,12 +7,13 @@ import uniqueEventCheck from './unique-event-check.ts'
 
 const OGRISM_THRESHOLD = 8 as const
 
-const dragonQueen = (sim: Simulation, forceEvent?: boolean): void => {
+const dragonQueen = (forceEvent?: boolean): void => {
+  const { world, history, millennium } = Simulation.instance()
   const event: string = EVENTS_GLOBAL_UNIQUE.DRAGON_QUEEN
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.LANG]
-  if (!uniqueEventCheck(sim, event, prerequisites)) return
+  if (!uniqueEventCheck(event, prerequisites)) return
 
-  const regions = sim.world.regions.values().filter(region => {
+  const regions = world.regions.values().filter(region => {
     if (region.dragons.length < 1) return false
     if (region.ogrism < OGRISM_THRESHOLD) return false
     return forceEvent ?? sample(getChances(1, 1000)) ?? false
@@ -20,11 +21,11 @@ const dragonQueen = (sim: Simulation, forceEvent?: boolean): void => {
   const region = sample(regions)
   if (!region) return
 
-  DragonQueen.instance(sim, region.id)
+  DragonQueen.instance(world, region.id)
   const description = `The Dragon Queen arises in ${region.id}.`
-  sim.world.events.push(event)
-  sim.history.add({ millennium: sim.millennium, description, tags: ['Dragon Queen', 'Dragons', region.id] })
-  sim.world.dragons.fear.mod(5)
+  world.events.push(event)
+  history.add({ millennium, description, tags: ['Dragon Queen', 'Dragons', region.id] })
+  world.dragons.fear.mod(5)
 }
 
 export default dragonQueen

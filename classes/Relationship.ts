@@ -1,7 +1,6 @@
 import { Disposition, DISPOSITIONS } from '../enums.ts'
 import type { IRelationship } from '../index.d.ts'
 import Scribe from './Scribe.ts'
-import Simulation from './Simulation.ts'
 
 class Relationship {
   a: string
@@ -9,11 +8,11 @@ class Relationship {
   disposition: Disposition
   scribe: Scribe
 
-  constructor (sim: Simulation, data?: IRelationship) {
+  constructor (data?: IRelationship) {
     this.a = data?.a ?? ''
     this.b = data?.b ?? ''
     this.disposition = data?.disposition ?? DISPOSITIONS.INDIFFERENT
-    this.scribe = new Scribe(sim, ...(data?.scrolls ?? []))
+    this.scribe = new Scribe(...(data?.scrolls ?? []))
   }
 
   toObject (): IRelationship {

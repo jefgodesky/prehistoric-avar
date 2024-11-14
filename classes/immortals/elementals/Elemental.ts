@@ -1,12 +1,13 @@
 import type { IImmortal } from '../../../index.d.ts'
 import { DISPOSITIONS } from '../../../enums.ts'
 import Immortal from '../Immortal.ts'
-import type Simulation from '../../Simulation.ts'
+import Simulation from '../../Simulation.ts'
+import World from '../../World.ts'
 import { intersect } from "@std/collections/intersect";
 import { sample } from "@std/random/sample";
 
 abstract class Elemental extends Immortal {
-  protected constructor (sim: Simulation, region: string, element: string, data?: IImmortal) {
+  protected constructor (world: World, region: string, element: string, data?: IImmortal) {
     const elementalData: IImmortal = Object.assign({}, {
       description: `Powerful ${element} Elemental`,
       disposition: DISPOSITIONS.INDIFFERENT,
@@ -22,11 +23,12 @@ abstract class Elemental extends Immortal {
       scrolls: []
     }, data ?? {})
 
-    super(sim, region, elementalData)
+    super(world, region, elementalData)
   }
 
   override move (): void {
-    const region = this.simulation.world.regions.get(this.region)
+    const { world } = Simulation.instance()
+    const region = world.regions.get(this.region)
     if (!region) return
     const desirable = this.desiredRegions()
     if (desirable.includes(this.region)) return
@@ -35,7 +37,7 @@ abstract class Elemental extends Immortal {
     if (candidates.length < 1) candidates = [...region.adjacentRegions]
     const destId = sample(candidates) ?? this.region
 
-    const dest = this.simulation.world.regions.get(destId)
+    const dest = world.regions.get(destId)
     if (!dest) return
     region.immortals = region.immortals.filter(id => id !== this.id)
     this.region = dest.id

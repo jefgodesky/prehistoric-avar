@@ -190,7 +190,6 @@ import PD03 from './PD03.ts'
 import PS01 from './PS01.ts'
 import PS02 from './PS02.ts'
 import PS03 from './PS03.ts'
-import Simulation from '../../classes/Simulation.ts'
 
 const regionData = [
   DS01, DC01, DD01,
@@ -223,10 +222,10 @@ const regionData = [
   PD01, PD02, PD03
 ]
 
-const getRegions = (sim: Simulation): Directory<Region> => {
+const getRegions = (): Directory<Region> => {
   const dir: Directory<Region> = new Directory<Region>()
   for (const region of regionData) {
-    dir.add(region.id, new Region(sim, region))
+    dir.add(region.id, new Region(region))
   }
   return dir
 }

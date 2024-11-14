@@ -1,10 +1,10 @@
 import { IImmortal } from '../../index.d.ts'
 import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from './Immortal.ts'
-import Simulation from '../Simulation.ts'
+import World from '../World.ts'
 
 class Archfey extends Immortal {
-  constructor (sim: Simulation, region: string, data?: IImmortal) {
+  constructor (world: World, region: string, data?: IImmortal) {
     const archfeyData: IImmortal = Object.assign({}, {
       description: `Archfey Sovereign of ${region}`,
       disposition: DISPOSITIONS.INDIFFERENT,
@@ -20,7 +20,7 @@ class Archfey extends Immortal {
       scrolls: []
     }, data ?? {})
 
-    super(sim, region, archfeyData)
+    super(world, region, archfeyData)
   }
 }
 

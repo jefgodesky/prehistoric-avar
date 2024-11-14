@@ -1,13 +1,8 @@
 import { nanoid } from 'nanoid'
 import { Biome } from '../enums.ts'
-import { IQuest, IQuestCall, IQuestReport } from '../index.d.ts'
-import type Simulation from './Simulation.ts'
+import { IQuest, IQuestReport } from '../index.d.ts'
 import type Population from './Population.ts'
-
-const QUEST_EVENTS = {
-  ACCOMPLISHED: 'Quest.Accomplished',
-  CALL: 'Quest.Call'
-} as const
+import World from './World.ts'
 
 class Quest {
   id: string
@@ -16,30 +11,21 @@ class Quest {
   skill: number
   lethality: number
   accomplished: boolean
-  simulation: Simulation
-  calls: IQuestCall[]
   attempts: IQuestReport[]
 
-  constructor (sim: Simulation, data?: IQuest) {
-    this.simulation = sim
-    this.id = sim.world.quests.generateKey(data?.id ?? nanoid())
+  constructor (world: World, data?: IQuest) {
+    this.id = world.quests.generateKey(data?.id ?? nanoid())
     this.description = data?.description ?? 'Complete the quest'
     this.courage = data?.courage ?? 0.1
     this.skill = data?.skill ?? 0.1
     this.lethality = data?.lethality ?? 1/3
     this.accomplished = data?.accomplished ?? false
-    this.calls = data?.calls ?? []
     this.attempts = data?.attempts ?? []
 
-    this.simulation.world.quests.add(this)
+    world.quests.add(this)
   }
 
-  async call (data: IQuestCall): Promise<void> {
-    this.calls.push(data)
-    await this.simulation.emitter.emit(QUEST_EVENTS.CALL, this.id)
-  }
-
-  async run (p: Population, biome: Biome): Promise<IQuestReport> {
+  run (p: Population, biome: Biome): IQuestReport {
     const report = {
       attempted: 0,
       abandoned: 0,
@@ -76,7 +62,6 @@ class Quest {
     }
 
     this.attempts.push(report)
-    if (report.success) await this.simulation.emitter.emit(QUEST_EVENTS.ACCOMPLISHED, this.id)
     return report
   }
 
@@ -88,8 +73,7 @@ class Quest {
       skill: this.skill,
       lethality: this.lethality,
       accomplished: this.accomplished,
-      attempts: this.attempts,
-      calls: this.calls
+      attempts: this.attempts
     }
   }
 
@@ -99,4 +83,3 @@ class Quest {
 }
 
 export default Quest
-export { QUEST_EVENTS }

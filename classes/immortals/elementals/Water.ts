@@ -1,18 +1,20 @@
 import { IImmortal } from '../../../index.d.ts'
 import Simulation from '../../Simulation.ts'
 import Elemental from './Elemental.ts'
+import World from '../../World.ts'
 
 class WaterElemental extends Elemental {
-  constructor (sim: Simulation, region: string, data?: IImmortal) {
-    super(sim, region, 'Water', data)
+  constructor (world: World, region: string, data?: IImmortal) {
+    super(world, region, 'Water', data)
   }
 
   override desiredRegions(): string[] {
-    return WaterElemental.desiredRegions(this.simulation)
+    return WaterElemental.desiredRegions()
   }
 
-  static desiredRegions (sim: Simulation): string[] {
-    const all = sim.world.regions.values()
+  static desiredRegions (): string[] {
+    const { world } = Simulation.instance()
+    const all = world.regions.values()
     const coastal = all.filter(region => region.tags.includes('coastal'))
     const hasUndergroundSea = all.filter(region => {
       const seas = region.features.filter(feature => feature.description.startsWith('Underground sea'))

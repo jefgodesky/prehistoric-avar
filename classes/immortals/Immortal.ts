@@ -3,7 +3,7 @@ import { Disposition, DISPOSITIONS } from '../../enums.ts'
 import Quest from '../Quest.ts'
 import Relationship from '../Relationship.ts'
 import Scribe from '../Scribe.ts'
-import Simulation from '../Simulation.ts'
+import World from '../World.ts'
 
 const TO_STRING_PREFIX = 'Immortal:' as const
 
@@ -17,24 +17,22 @@ class Immortal {
   scribe: Scribe
   slayable: Quest | false
   slain: boolean = false
-  simulation: Simulation
 
-  constructor (sim: Simulation, region: string, data?: IImmortal) {
+  constructor (world: World, region: string, data?: IImmortal) {
     const relationships = data?.relationships ?? []
-    this.simulation = sim
 
     this.description = data?.description ?? 'Immortal'
     this.disposition = data?.disposition ?? DISPOSITIONS.INDIFFERENT
     this.impact = data?.impact ?? 0
     this.region = region
-    this.relationships = relationships.map(rel => new Relationship(this.simulation, rel))
-    this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
-    this.slayable = data?.slayable ? new Quest(this.simulation, data.slayable) : false
+    this.relationships = relationships.map(rel => new Relationship(rel))
+    this.scribe = new Scribe(...(data?.scrolls ?? []))
+    this.slayable = data?.slayable ? new Quest(world, data.slayable) : false
 
-    this.id = sim.world.immortals.generateKey(this.description)
-    sim.world.immortals.add(this)
+    this.id = world.immortals.generateKey(this.description)
+    world.immortals.add(this)
 
-    const r = sim.world.regions.get(region)
+    const r = world.regions.get(region)
     if (r) r.immortals.push(this.id)
   }
 

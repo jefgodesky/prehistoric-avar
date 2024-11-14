@@ -4,9 +4,10 @@ import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from './Immortal.ts'
 import Simulation from '../Simulation.ts'
 import Singleton from '../../Singleton.ts'
+import World from '../World.ts'
 
 class DragonOgre extends Immortal {
-  constructor (sim: Simulation, region: string, data?: IImmortal) {
+  constructor (world: World, region: string, data?: IImmortal) {
     const dragonQueenData: IImmortal = Object.assign({}, {
       description: 'The Dragon Queen',
       disposition: DISPOSITIONS.HOSTILE,
@@ -16,16 +17,17 @@ class DragonOgre extends Immortal {
       scrolls: []
     }, data ?? {})
 
-    super(sim, region, dragonQueenData)
+    super(world, region, dragonQueenData)
   }
 
   override move (): void {
-    const regions = this.simulation.world.regions.values()
+    const { world } = Simulation.instance()
+    const regions = world.regions.values()
       .filter(region => region.dragons.length > 0)
     const dest = sample(regions)
     if (!dest) return
 
-    const origin = this.simulation.world.regions.get(this.region)
+    const origin = world.regions.get(this.region)
     if (!origin) return
 
     origin.immortals = origin.immortals.filter(id => id !== this.id)

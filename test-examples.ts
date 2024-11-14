@@ -139,8 +139,7 @@ const SampleQuest: IQuest = {
   skill: 0.000001,
   lethality: 0.9,
   accomplished: false,
-  attempts: [],
-  calls: []
+  attempts: []
 }
 
 const DragonQueen: IImmortal = {

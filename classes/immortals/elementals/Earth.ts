@@ -1,18 +1,20 @@
 import { IImmortal } from '../../../index.d.ts'
 import Simulation from '../../Simulation.ts'
 import Elemental from './Elemental.ts'
+import World from '../../World.ts'
 
 class EarthElemental extends Elemental {
-  constructor (sim: Simulation, region: string, data?: IImmortal) {
-    super(sim, region, 'Earth', data)
+  constructor (world: World, region: string, data?: IImmortal) {
+    super(world, region, 'Earth', data)
   }
 
   override desiredRegions(): string[] {
-    return EarthElemental.desiredRegions(this.simulation)
+    return EarthElemental.desiredRegions()
   }
 
-  static desiredRegions (sim: Simulation): string[] {
-    return sim.world.regions.values()
+  static desiredRegions (): string[] {
+    const { world } = Simulation.instance()
+    return world.regions.values()
       .filter(region => region.tags.includes('near-surface'))
       .map(region => region.id)
   }

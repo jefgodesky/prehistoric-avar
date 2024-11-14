@@ -6,7 +6,6 @@ import Immortal from './immortals/Immortal.ts'
 import Population from './Population.ts'
 import Quest from './Quest.ts'
 import Region from './Region.ts'
-import type Simulation from './Simulation.ts'
 import Society from './Society.ts'
 import Species from './Species.ts'
 import { getRegions } from '../instances/regions/index.ts'
@@ -25,7 +24,7 @@ class World implements IHabitable {
   species: Directory<Species>
   regions: Directory<Region>
 
-  constructor (sim: Simulation) {
+  constructor () {
     this.habitability = 1
     this.events = []
     this.dragons = new Dragons()
@@ -35,7 +34,7 @@ class World implements IHabitable {
     this.quests = new Directory<Quest>()
     this.societies = new Directory<Society>()
     this.species = species
-    this.regions = getRegions(sim)
+    this.regions = getRegions()
   }
 
   reduceHabitability (factor: number): void {

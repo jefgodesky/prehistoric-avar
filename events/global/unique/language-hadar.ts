@@ -3,20 +3,21 @@ import { IHistoricalQuery } from '../../../index.d.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import uniqueEventCheck from './unique-event-check.ts'
 
-const languageHadar = (sim: Simulation): void => {
+const languageHadar = (): void => {
   const event: string = EVENTS_GLOBAL_UNIQUE.LANG_HADAR
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.LANG]
-  if (!uniqueEventCheck(sim, event, prerequisites)) return
+  if (!uniqueEventCheck(event, prerequisites)) return
 
+  const { world, history, millennium } = Simulation.instance()
   const q: IHistoricalQuery = { tags: ['Language', 'Invention'], logic: { tags: 'and' }}
-  const results = sim.history.get(q)
-  const when = results.length > 0 ? results[0].millennium : sim.millennium - 1
-  if (when >= sim.millennium) return
+  const results = history.get(q)
+  const when = results.length > 0 ? results[0].millennium : millennium - 1
+  if (when >= millennium) return
 
   const description = `The empyreans of Hadar adopt language.`
-  sim.world.events.push(event)
-  sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Hadar', 'Empyreans', 'Sphere of Order'] })
-  sim.world.dragons.interest.incr()
+  world.events.push(event)
+  history.add({ millennium, description, tags: ['Language', 'Hadar', 'Empyreans', 'Sphere of Order'] })
+  world.dragons.interest.incr()
 }
 
 export default languageHadar

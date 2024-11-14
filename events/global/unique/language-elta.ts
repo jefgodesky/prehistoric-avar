@@ -4,20 +4,21 @@ import Simulation from '../../../classes/Simulation.ts'
 import getChances from '../../get-chances.ts'
 import uniqueEventCheck from './unique-event-check.ts'
 
-const languageElta = (sim: Simulation, forceEvent?: boolean): void => {
+const languageElta = (forceEvent?: boolean): void => {
   const event: string = EVENTS_GLOBAL_UNIQUE.LANG_ELTA
   const prerequisites: string[] = [EVENTS_GLOBAL_UNIQUE.LANG]
-  if (!uniqueEventCheck(sim, event, prerequisites)) return
+  if (!uniqueEventCheck(event, prerequisites)) return
 
+  const { world, history, millennium } = Simulation.instance()
   const checks = [
     sample(getChances(1, 20)) ?? false,
-    sim.world.events.includes(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
+    world.events.includes(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
       ? sample(getChances(1, 10)) ?? false
       : false,
-    sim.world.events.includes(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
+    world.events.includes(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
       ? sample(getChances(1, 10)) ?? false
       : false,
-    sim.world.events.includes(EVENTS_GLOBAL_UNIQUE.LANG_SUN)
+    world.events.includes(EVENTS_GLOBAL_UNIQUE.LANG_SUN)
       ? sample(getChances(1, 10)) ?? false
       : false
   ]
@@ -25,9 +26,9 @@ const languageElta = (sim: Simulation, forceEvent?: boolean): void => {
   if (!fireEvent) return
 
   const description = `The Eltans adopt language.`
-  sim.world.events.push(event)
-  sim.history.add({ millennium: sim.millennium, description, tags: ['Language', 'Eltans', 'Sphere of Time'] })
-  sim.world.dragons.interest.incr()
+  world.events.push(event)
+  history.add({ millennium, description, tags: ['Language', 'Eltans', 'Sphere of Time'] })
+  world.dragons.interest.incr()
 }
 
 export default languageElta

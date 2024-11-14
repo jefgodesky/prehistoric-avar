@@ -9,10 +9,11 @@ import getChances from '../get-chances.ts'
 import oxford from '../../oxford.ts'
 import capitalize from '../../capitalize.ts'
 
-const getImpactRegion = (sim: Simulation): Region | null => {
+const getImpactRegion = (): Region | null => {
+  const { world } = Simulation.instance()
   const totalArea = 4 * Math.PI * Math.pow(5000, 2)
   const impact = Math.random() * totalArea
-  const regions = sim.world.regions.values().filter(region => region.tags.includes('surface'))
+  const regions = world.regions.values().filter(region => region.tags.includes('surface'))
   let acc = 0
   for (const region of regions) {
     acc += region.area
@@ -21,15 +22,17 @@ const getImpactRegion = (sim: Simulation): Region | null => {
   return null
 }
 
-const getZone1 = (sim: Simulation, region: Region): Region[] => {
+const getZone1 = (region: Region): Region[] => {
+  const { world } = Simulation.instance()
   return region.adjacentRegions
-    .map(id => sim.world.regions.get(id))
+    .map(id => world.regions.get(id))
     .filter(item => item !== null)
 }
 
-const getZone2 = (sim: Simulation, region: Region): Region[] => {
+const getZone2 = (region: Region): Region[] => {
+  const { world } = Simulation.instance()
   const regions: string[] = []
-  const zone1 = getZone1(sim, region)
+  const zone1 = getZone1(region)
   for (const z1Region of zone1) {
     for (const id of z1Region.adjacentRegions) {
       if (id === region.id) continue
@@ -39,27 +42,29 @@ const getZone2 = (sim: Simulation, region: Region): Region[] => {
     }
   }
   return regions
-    .map(id => sim.world.regions.get(id))
+    .map(id => world.regions.get(id))
     .filter(item => item !== null)
 }
 
-const impact = (sim: Simulation, site?: Region | null): Region | null => {
-  const region = site ?? getImpactRegion(sim)
-  if (!region) { impactSea(sim); return null }
-  impactLand(sim)
+const impact = (site?: Region | null): Region | null => {
+  const region = site ?? getImpactRegion()
+  if (!region) { impactSea(); return null }
+  impactLand()
   impactZone0(region)
-  impactZone1(sim, region)
-  impactZone2(sim, region)
+  impactZone1(region)
+  impactZone2(region)
   return region
 }
 
-const impactLand = (sim: Simulation): void => {
-  sim.world.reduceHabitability(0.5)
+const impactLand = (): void => {
+  const { world } = Simulation.instance()
+  world.reduceHabitability(0.5)
 }
 
-const impactSea = (sim: Simulation): void => {
-  const populations = sim.world.populations.values()
-  const coastal = sim.world.regions.values().filter(region => region.tags.includes('coastal'))
+const impactSea = (): void => {
+  const { world } = Simulation.instance()
+  const populations = world.populations.values()
+  const coastal = world.regions.values().filter(region => region.tags.includes('coastal'))
   for (const region of coastal) {
     for (const p of populations) {
       if (region.populations.includes(p.id)) p.adjustSize(-0.1)
@@ -68,16 +73,18 @@ const impactSea = (sim: Simulation): void => {
 }
 
 const impactZone0 = (region: Region): void => {
+  const { world } = Simulation.instance()
   region.reduceHabitability(0.9)
-  const populations = region.simulation.world.populations.values()
+  const populations = world.populations.values()
   for (const p of populations) {
     if (region.populations.includes(p.id)) p.adjustSize(p.size * -1)
   }
 }
 
-const impactZone1 = (sim: Simulation, region: Region): void => {
-  const zone1 = getZone1(sim, region)
-  const populations = region.simulation.world.populations.values()
+const impactZone1 = (region: Region): void => {
+  const { world } = Simulation.instance()
+  const zone1 = getZone1(region)
+  const populations = world.populations.values()
   for (const region of zone1) {
     region.reduceHabitability(0.5)
     for (const p of populations) {
@@ -86,9 +93,10 @@ const impactZone1 = (sim: Simulation, region: Region): void => {
   }
 }
 
-const impactZone2 = (sim: Simulation, region: Region): void => {
-  const zone2 = getZone2(sim, region)
-  const populations = region.simulation.world.populations.values()
+const impactZone2 = (region: Region): void => {
+  const { world } = Simulation.instance()
+  const zone2 = getZone2(region)
+  const populations = world.populations.values()
   for (const region of zone2) {
     region.reduceHabitability(0.25)
     for (const p of populations) {
@@ -97,7 +105,7 @@ const impactZone2 = (sim: Simulation, region: Region): void => {
   }
 }
 
-const recordFormMeteor = async (sim: Simulation, region?: Region | null): Promise<void> => {
+const recordFormMeteor = (region?: Region | null): void => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const mithril = (Math.random() * 0.4) + 0.2
@@ -110,7 +118,7 @@ const recordFormMeteor = async (sim: Simulation, region?: Region | null): Promis
     sample(getChances(1, 10)) ?? false ? 'cockatrices' : '',
   ].filter(critter => critter.length > 0)
 
-  const site = region === null ? null : impact(sim, region)
+  const site = region === null ? null : impact(region)
   let description = site === null
     ? `A chunk of the moon with a mass of ${massHu}` +
       'smashed into the sea. The resulting super-tsunamis that circled the ' +
@@ -133,38 +141,35 @@ const recordFormMeteor = async (sim: Simulation, region?: Region | null): Promis
     tags.push(...introductions.map(critter => capitalize(critter)))
   }
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker(`Meteor impact site: Struck by a meteor from the ` +
-    `moon in  millennium ${sim.millennium}. It was ${massHu}, resulting in ` +
+  site.addMarker(`Meteor impact site: Struck by a meteor from the ` +
+    `moon in  millennium ${millennium}. It was ${massHu}, resulting in ` +
     'the immediate death of everyone in the region and a 50% reduction in ' +
     'global habitability.')
-  await site.addMarker('Massive Mithril Deposit: A meteor strike from ' +
-    `millennium ${sim.millennium} left ${mithrilMassHu} of the cured metal in ` +
+  site.addMarker('Massive Mithril Deposit: A meteor strike from ' +
+    `millennium ${millennium} left ${mithrilMassHu} of the cured metal in ` +
     'the region.')
   for (const critter of introductions) {
-    await site.addMarker(`${capitalize(critter)}: The region is home to a ` +
+    site.addMarker(`${capitalize(critter)}: The region is home to a ` +
       `population of ${critter}, descended from creatures that somehow ` +
       'survived the journey from the moon through the spheres on a meteor ' +
-      `that fell here in millennium ${sim.millennium}.`)
+      `that fell here in millennium ${millennium}.`)
   }
 }
 
-const recordOrderMeteor = (sim: Simulation): Promise<void> => {
+const recordOrderMeteor = (): void => {
   if (Math.random() < 0.5) {
-    return recordOrderMeteorRock(sim)
+    return recordOrderMeteorRock()
   } else {
-    return recordOrderMeteorEmpyrean(sim)
+    return recordOrderMeteorEmpyrean()
   }
 }
 
-const recordOrderMeteorRock = async (sim: Simulation, region?: Region | null): Promise<void> => {
+const recordOrderMeteorRock = (region?: Region | null): void => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const aegan = (Math.random() * 0.4) + 0.2
@@ -172,7 +177,7 @@ const recordOrderMeteorRock = async (sim: Simulation, region?: Region | null): P
   const aeganMass = mass * aegan
   const aeganMassHu = aeganMass.toFixed(2) + ' trillion kilograms'
 
-  const site = region === null ? null : impact(sim, region)
+  const site = region === null ? null : impact(region)
   const description = site === null
     ? `A chunk of Hadar with a mass of ${massHu}` +
       'smashed into the sea. The resulting super-tsunamis that circled the ' +
@@ -186,25 +191,22 @@ const recordOrderMeteorRock = async (sim: Simulation, region?: Region | null): P
   const tags = ['Meteor impact', 'Hadar', 'Sphere of Order', 'Aegan']
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker(`Meteor impact site: Struck by a meteor from Hadar ` +
-    `in  millennium ${sim.millennium}. It was ${massHu}, resulting in ` +
+  site.addMarker(`Meteor impact site: Struck by a meteor from Hadar ` +
+    `in  millennium ${millennium}. It was ${massHu}, resulting in ` +
     'the immediate death of everyone in the region and a 50% reduction in ' +
     'global habitability.')
-  await site.addMarker('Massive Aegan Deposit: A meteor strike from ' +
-    `millennium ${sim.millennium} left ${aeganMassHu} of the cured metal in ` +
+  site.addMarker('Massive Aegan Deposit: A meteor strike from ' +
+    `millennium ${millennium} left ${aeganMassHu} of the cured metal in ` +
     'the region.')
 }
 
-const recordOrderMeteorEmpyrean = async (sim: Simulation, region?: Region | null): Promise<void> => {
-  const site = region === null ? null : impact(sim, region)
+const recordOrderMeteorEmpyrean = (region?: Region | null): void => {
+  const site = region === null ? null : impact(region)
   const alignment = sample(['order', 'chaos']) ?? 'order'
   const description = site === null
     ? `An empyrean formed from Hadar's dedication to ${alignment} was cast ` +
@@ -231,28 +233,25 @@ const recordOrderMeteorEmpyrean = async (sim: Simulation, region?: Region | null
   const tags = ['Meteor impact', 'Hadar', 'Sphere of Order', 'Empyreans', capitalize(alignment)]
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker('Meteor impact site: Struck by an exiled empyrean ' +
-    `cast down by Hadar in millennium ${sim.millennium} for its failure to ` +
+  site.addMarker('Meteor impact site: Struck by an exiled empyrean ' +
+    `cast down by Hadar in millennium ${millennium} for its failure to ` +
     `uphold the ideals of ${alignment}, causing a global catastrophe.`)
 }
 
-const recordFluidityMeteor = (sim: Simulation): Promise<void> => {
+const recordFluidityMeteor = (): void => {
   if (Math.random() < 0.5) {
-    return recordFluidityMeteorRock(sim)
+    return recordFluidityMeteorRock()
   } else {
-    return recordFluidityMeteorElemental(sim)
+    return recordFluidityMeteorElemental()
   }
 }
 
-const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null): Promise<void> => {
+const recordFluidityMeteorRock = (region?: Region | null): void => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const azoth = (Math.random() * 0.4) + 0.2
@@ -260,7 +259,7 @@ const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null)
   const azothMass = mass * azoth
   const azothMassHu = azothMass.toFixed(2) + ' trillion kilograms'
 
-  const site = region === null ? null : impact(sim, region)
+  const site = region === null ? null : impact(region)
   const description = site === null
     ? `A meteor from the Sphere of Fluidity with a mass of ${massHu}` +
     'smashed into the sea. The resulting super-tsunamis that circled the ' +
@@ -274,27 +273,25 @@ const recordFluidityMeteorRock = async (sim: Simulation, region?: Region | null)
   const tags = ['Meteor impact', 'Sphere of Fluidity', 'Azoth']
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker('Meteor impact site: Struck by a meteor from the ' +
-    `Sphere of Fluidity in  millennium ${sim.millennium}. It was ${massHu},  ` +
+  site.addMarker('Meteor impact site: Struck by a meteor from the ' +
+    `Sphere of Fluidity in  millennium ${millennium}. It was ${massHu},  ` +
     'resulting in the immediate death of everyone in the region and a 50% ' +
     'reduction in global habitability.')
-  await site.addMarker('Massive Azoth Deposit: A meteor strike from ' +
-    `millennium ${sim.millennium} left ${azothMassHu} of the cured metal in ` +
+  site.addMarker('Massive Azoth Deposit: A meteor strike from ' +
+    `millennium ${millennium} left ${azothMassHu} of the cured metal in ` +
     'the region.')
 }
 
-const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | null): Promise<void> => {
-  const site = region === null ? null : impact(sim, region)
+const recordFluidityMeteorElemental = (region?: Region | null): void => {
+  const { world, history, millennium } = Simulation.instance()
+  const site = region === null ? null : impact(region)
   const element = sample(['fire', 'air', 'water', 'earth']) ?? 'earth'
-  const coastal = sim.world.regions.values().filter(region => region.tags.includes('coastal'))
+  const coastal = world.regions.values().filter(region => region.tags.includes('coastal'))
   let elementalRegion: Region | null = site
   let description
   if (site === null && element === 'water') {
@@ -361,37 +358,32 @@ const recordFluidityMeteorElemental = async (sim: Simulation, region?: Region | 
 
   const tags = ['Meteor impact', 'Sphere of Fluidity', 'Elementals', `${capitalize(element)} Elementals`]
   if (site) tags.push(site.id)
-
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  history.add({ millennium, description, tags })
 
   if (elementalRegion) {
     switch (element) {
-      case 'fire': new FireElemental(sim, elementalRegion.id); break
-      case 'air': new AirElemental(sim, elementalRegion.id); break
-      case 'water': new WaterElemental(sim, elementalRegion.id); break
-      default: new EarthElemental(sim, elementalRegion.id); break
+      case 'fire': new FireElemental(world, elementalRegion.id); break
+      case 'air': new AirElemental(world, elementalRegion.id); break
+      case 'water': new WaterElemental(world, elementalRegion.id); break
+      default: new EarthElemental(world, elementalRegion.id); break
     }
   }
   if (site === null) return
 
-  await site.addMarker(`Meteor impact site: A powerful ${element} elemental ` +
-    `was cast down to Avar in millennium ${sim.millennium}, causing a global` +
+  site.addMarker(`Meteor impact site: A powerful ${element} elemental ` +
+    `was cast down to Avar in millennium ${millennium}, causing a global` +
     'catastrophe.')
 }
 
-const recordWarmthMeteor = (sim: Simulation): Promise<void> => {
+const recordWarmthMeteor = (): void => {
   if (Math.random() < 0.5) {
-    return recordWarmthMeteorRock(sim)
+    return recordWarmthMeteorRock()
   } else {
-    return recordWarmthMeteorEntity(sim)
+    return recordWarmthMeteorEntity()
   }
 }
 
-const recordWarmthMeteorRock = async (sim: Simulation, region?: Region | null): Promise<void> => {
+const recordWarmthMeteorRock = (region?: Region | null): void => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const ori = (Math.random() * 0.4) + 0.2
@@ -399,7 +391,7 @@ const recordWarmthMeteorRock = async (sim: Simulation, region?: Region | null): 
   const oriMass = mass * ori
   const oriMassHu = oriMass.toFixed(2) + ' trillion kilograms'
 
-  const site = region === null ? null : impact(sim, region)
+  const site = region === null ? null : impact(region)
   const description = site === null
     ? `A meteor from the Sphere of Warmth with a mass of ${massHu}` +
     'smashed into the sea. The resulting super-tsunamis that circled the ' +
@@ -413,25 +405,22 @@ const recordWarmthMeteorRock = async (sim: Simulation, region?: Region | null): 
   const tags = ['Meteor impact', 'Sphere of Warmth', 'Orichalcum']
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker('Meteor impact site: Struck by a meteor from the ' +
-    `Sphere of Warmth in  millennium ${sim.millennium}. It was ${massHu},  ` +
+  site.addMarker('Meteor impact site: Struck by a meteor from the ' +
+    `Sphere of Warmth in  millennium ${millennium}. It was ${massHu},  ` +
     'resulting in the immediate death of everyone in the region and a 50% ' +
     'reduction in global habitability.')
-  await site.addMarker('Massive Orichalcum Deposit: A meteor strike from ' +
-    `millennium ${sim.millennium} left ${oriMassHu} of the cured metal in ` +
+  site.addMarker('Massive Orichalcum Deposit: A meteor strike from ' +
+    `millennium ${millennium} left ${oriMassHu} of the cured metal in ` +
     'the region.')
 }
 
-const recordWarmthMeteorEntity = async (sim: Simulation, region?: Region | null): Promise<void> => {
-  const site = region === null ? null : impact(sim, region)
+const recordWarmthMeteorEntity = (region?: Region | null): void => {
+  const site = region === null ? null : impact(region)
   const entity = sample(['Solarian', 'Gelid']) ?? 'Solarian'
   const captors = sample(['Solarian', 'Gelid']) ?? 'Solarian'
   const cast = entity === captors
@@ -459,20 +448,17 @@ const recordWarmthMeteorEntity = async (sim: Simulation, region?: Region | null)
   if (entity !== captors) tags.push(captors)
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker(`Meteor impact site: Struck by an exiled ${entity} ` +
+  site.addMarker(`Meteor impact site: Struck by an exiled ${entity} ` +
     `cast down by ${entity === captors ? 'its own people' : `the ${captors}`} in ` +
-    `millennium ${sim.millennium}, causing a global catastrophe.`)
+    `millennium ${millennium}, causing a global catastrophe.`)
 }
 
-const recordDeathMeteor = async (sim: Simulation, region?: Region | null): Promise<void> => {
+const recordDeathMeteor = (region?: Region | null): void => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const adam = (Math.random() * 0.4) + 0.2
@@ -480,7 +466,7 @@ const recordDeathMeteor = async (sim: Simulation, region?: Region | null): Promi
   const adamMass = mass * adam
   const adamMassHu = adamMass.toFixed(2) + ' trillion kilograms'
 
-  const site = region === null ? null : impact(sim, region)
+  const site = region === null ? null : impact(region)
   const description = site === null
     ? `A chunk of Shol ${massHu} ejected by the Sphere of Death smashed ` +
       'into the sea. The resulting super-tsunamis that circle the globe ' +
@@ -500,24 +486,21 @@ const recordDeathMeteor = async (sim: Simulation, region?: Region | null): Promi
   const tags = ['Meteor impact', 'Shol', 'Sphere of Death', 'Adamant', 'Ghosts']
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker('Meteor impact site: Struck by a meteor from Shol ' +
-    `in  millennium ${sim.millennium}. It was ${massHu},  resulting in the ` +
+  site.addMarker('Meteor impact site: Struck by a meteor from Shol ' +
+    `in  millennium ${millennium}. It was ${massHu},  resulting in the ` +
     'immediate death of everyone in the region and a 50% reduction in ' +
     'global habitability.')
-  await site.addMarker('Massive Adamant Deposit: A meteor strike from ' +
-    `millennium ${sim.millennium} left ${adamMassHu} of the cured metal in ` +
+  site.addMarker('Massive Adamant Deposit: A meteor strike from ' +
+    `millennium ${millennium} left ${adamMassHu} of the cured metal in ` +
     'the region.')
 }
 
-const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promise<void> => {
+const recordTimeMeteor = (region?: Region | null): void => {
   const mass = (Math.random() * 3) + 1
   const massHu = mass.toFixed(2) + ' trillion kilograms'
   const orcan = (Math.random() * 0.4) + 0.2
@@ -525,7 +508,7 @@ const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promis
   const orcanMass = mass * orcan
   const orcanMassHu = orcanMass.toFixed(2) + ' trillion kilograms'
 
-  const site = region === null ? null : impact(sim, region)
+  const site = region === null ? null : impact(region)
   const description = site === null
     ? `A meteor from the Sphere of Time ${massHu} in mass smashed ` +
       'into the sea. The resulting super-tsunamis that circled the globe ' +
@@ -545,20 +528,18 @@ const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promis
   const tags = ['Meteor impact', 'Sphere of Time', 'Orcan']
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
   const unseal = (regions: Region[], num: number = 1) => {
+    const { world } = Simulation.instance()
     for (const region of regions) {
-      const species = sim.world.species.get(region.species?.toLowerCase() ?? '')
+      const species = world.species.get(region.species?.toLowerCase() ?? '')
       if (!species) continue
       const text = `We become ${species.getPlural().toLowerCase()}.`
-      const populations = region.simulation.world.populations.populate(region.populations)
+      const populations = world.populations.populate(region.populations)
       for (const p of populations) {
         const scrolls = p.scribe.scrolls.filter(scroll => scroll.text === text)
         for (const scroll of scrolls) {
@@ -568,20 +549,20 @@ const recordTimeMeteor = async (sim: Simulation, region?: Region | null): Promis
     }
   }
 
-  unseal(getZone1(sim, site), 2)
-  unseal(getZone2(sim, site), 1)
+  unseal(getZone1(site), 2)
+  unseal(getZone2(site), 1)
 
-  await site.addMarker('Meteor impact site: Struck by a meteor from the ' +
-    `Sphere of Time in  millennium ${sim.millennium}. It was ${massHu}, ` +
+  site.addMarker('Meteor impact site: Struck by a meteor from the ' +
+    `Sphere of Time in  millennium ${millennium}. It was ${massHu}, ` +
     'resulting in the immediate death of everyone in the region and a 50% ' +
     'reduction in global habitability.')
-  await site.addMarker('Massive Orcan Deposit: A meteor strike from ' +
-    `millennium ${sim.millennium} left ${orcanMassHu} of the cured metal in ` +
+  site.addMarker('Massive Orcan Deposit: A meteor strike from ' +
+    `millennium ${millennium} left ${orcanMassHu} of the cured metal in ` +
     'the region.')
 }
 
-const recordFallingStar = async (sim: Simulation, region?: Region | null): Promise<void> => {
-  const site = region === null ? null : impact(sim, region)
+const recordFallingStar = (region?: Region | null): void => {
+  const site = region === null ? null : impact(region)
   const description = site === null
     ? 'A star was cast down from the Firmament of the Sphere of Space to ' +
       'Avar. It struck the sea with such force that it caused super-tsunamis ' +
@@ -605,20 +586,18 @@ const recordFallingStar = async (sim: Simulation, region?: Region | null): Promi
   const tags = ['Meteor impact', 'Sphere of Space']
   if (site) tags.push(site.id)
 
-  sim.history.add({
-    millennium: sim.millennium,
-    description,
-    tags
-  })
+  const { history, millennium } = Simulation.instance()
+  history.add({ millennium, description, tags })
 
   if (site === null) return
 
-  await site.addMarker('Meteor impact site: Struck by a star cast down from ' +
-    'the Firmament and bound to a mortal, humanoid form. It lived in the region ' +
-    'devastated by its cataclysmic arrival for a normal humanoid lifespan.')
+  site.addMarker('Meteor impact site: Struck by a star cast down from ' +
+    `the Firmament and bound to a mortal, humanoid form in millennium ${millennium}. ` +
+    'It lived in the region devastated by its cataclysmic arrival for a normal ' +
+    'humanoid lifespan.')
 }
 
-const meteor = (sim: Simulation): Promise<void> => {
+const meteor = (): void => {
   const functions = [
     recordFormMeteor,
     recordOrderMeteor,
@@ -629,7 +608,7 @@ const meteor = (sim: Simulation): Promise<void> => {
     recordFallingStar
   ]
   const fn = sample(functions) ?? recordFallingStar
-  return fn(sim)
+  return fn()
 }
 
 export {

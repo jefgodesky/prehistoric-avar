@@ -1,4 +1,4 @@
-import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
+import { describe, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import Simulation from './Simulation.ts'
 import Scroll, { defaultScrollOnUnseal } from './Scroll.ts'
@@ -8,9 +8,6 @@ describe('Scroll', () => {
   const seals = 4
   const unseal = () => 2
   const open = () => { return }
-  let sim: Simulation
-
-  beforeEach(() => { sim = new Simulation() })
 
   describe('constructor', () => {
     it('creates a Scroll instance', () => {
@@ -84,22 +81,23 @@ describe('Scroll', () => {
       })
 
       it('can use context', () => {
-        const fn = (sim?: Simulation) => sim?.world.events.length || 0
+        const { world } = Simulation.instance()
+        const fn = () => world.events.length
         const scroll = new Scroll(text, 5, fn)
 
-        expect(scroll.unseal(sim)).toBe(false)
+        expect(scroll.unseal()).toBe(false)
         expect(scroll.seals).toBe(5)
 
-        sim.world.events.push('New event')
-        expect(scroll.unseal(sim)).toBe(false)
+        world.events.push('New event')
+        expect(scroll.unseal()).toBe(false)
         expect(scroll.seals).toBe(4)
 
-        sim.world.events.push('Second event', 'Third event')
-        expect(scroll.unseal(sim)).toBe(false)
+        world.events.push('Second event', 'Third event')
+        expect(scroll.unseal()).toBe(false)
         expect(scroll.seals).toBe(1)
 
-        sim.world.events.push('Fourth event', 'Fifth event')
-        expect(scroll.unseal(sim)).toBe(true)
+        world.events.push('Fourth event', 'Fifth event')
+        expect(scroll.unseal()).toBe(true)
         expect(scroll.seals).toBe(0)
       })
 
@@ -115,12 +113,13 @@ describe('Scroll', () => {
     describe('open', () => {
       it('can use context', () => {
         let number = 0
-        sim.world.events = ['First event', 'Second event']
-        const fn = (sim?: Simulation) => {
-          number = sim?.world.events.length ?? 1
+        const { world } = Simulation.instance()
+        world.events = ['First event', 'Second event']
+        const fn = () => {
+          number = world.events.length ?? 1
         }
         const scroll = new Scroll(text, 1, defaultScrollOnUnseal, fn)
-        scroll.open(sim)
+        scroll.open()
         expect(number).toBe(2)
       })
     })

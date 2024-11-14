@@ -1,25 +1,22 @@
-import Emittery from 'emittery'
 import { shuffle } from '@std/random'
-import type { Emitter } from '../index.d.ts'
 import { SIMULATION_STAGES } from '../enums.ts'
 import History from './History.ts'
 import Region from './Region.ts'
 import World from './World.ts'
+import Singleton from '../Singleton.ts'
 
-class Simulation {
+class BaseSimulation {
   history: History
   millennium: number
   regions: Region[]
   stage: typeof SIMULATION_STAGES[keyof typeof SIMULATION_STAGES]
   world: World
-  emitter: Emitter
 
   constructor () {
-    this.emitter = new Emittery()
     this.history = new History()
     this.millennium = 1
     this.stage = SIMULATION_STAGES.REFRESH
-    this.world = new World(this)
+    this.world = new World()
     this.regions = this.world.regions.values()
 
     // Add our "inciting incident"
@@ -45,4 +42,6 @@ class Simulation {
   }
 }
 
+const Simulation = Singleton(BaseSimulation)
 export default Simulation
+export type { BaseSimulation }

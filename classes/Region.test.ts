@@ -1,209 +1,211 @@
-import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
+import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import type { IPopulation } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
-import { DragonQueen, SamplePopulation, SampleSociety } from '../test-examples.ts'
-import {EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES} from '../enums.ts'
-import { QUEST_EVENTS } from './Quest.ts'
-import Immortal from './immortals/Immortal.ts'
+import { SamplePopulation, SampleSociety } from '../test-examples.ts'
+import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../enums.ts'
 import Population from './Population.ts'
-import Quest from './Quest.ts'
-import Region from './Region.ts'
 import Simulation from './Simulation.ts'
 import Species from './Species.ts'
+import World from './World.ts'
 import { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
+import Region from './Region.ts'
 
 describe('Region', () => {
-  let sim: Simulation
+  let world: World
+
+  beforeEach(() => {
+    world = Simulation.instance().world
+  })
+
+  afterEach(() => {
+    Simulation.reset()
+  })
 
   const introducePopulation = (
-    simulation: Simulation = sim,
     region: string = 'GS02',
     populationData: IPopulation = SamplePopulation
   ): { region: Region, population: Population } => {
-    const r = simulation.world.regions.get(region)!
-    const population = new Population(sim, region, populationData)
+    const r = world.regions.get(region)!
+    const population = new Population(world, region, populationData)
     return { region: r, population }
   }
 
   const addSpeechCommunity = (
-    simulation: Simulation = sim,
     region: string = 'GS02',
     populationData: IPopulation = SamplePopulation
   ): {  region: Region, population: Population } => {
-    const r = simulation.world.regions.get(region)!
-    const { population } = introducePopulation(simulation, region, populationData)
-    sim.world.societies.get(r.society ?? '')?.addLanguage()
+    const r = world.regions.get(region)!
+    const { population } = introducePopulation(region, populationData)
+    world.societies.get(r.society ?? '')?.addLanguage()
     return { region: r, population }
   }
 
-  beforeEach(() => { sim = new Simulation() })
-
   describe('constructor', () => {
     it('creates a Region instance', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region).toBeInstanceOf(Region)
     })
 
     it('defaults id to a null string', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.id).toBe('')
     })
 
     it('defaults adjacent regions to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.adjacentRegions).toHaveLength(0)
     })
 
     it('defaults area to 0', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.area).toBe(0)
     })
 
     it('defaults biome to null', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.biome).toBe(null)
     })
 
     it('defaults carrying capacity to 0', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.capacity).toBe(0)
     })
 
     it('defaults dragons to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.dragons).toHaveLength(0)
     })
 
     it('defaults features to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.features).toHaveLength(0)
     })
 
     it('defaults fey influence to 0', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.feyInfluence).toBe(0)
     })
 
     it('defaults habitability to 1', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.habitability).toBe(1)
     })
 
     it('defaults immortals to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.immortals).toHaveLength(0)
     })
 
     it('defaults society to null', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.society).toBeNull()
     })
 
     it('defaults ogrism to 0', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.ogrism).toBe(0)
     })
 
     it('defaults populations to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.populations).toHaveLength(0)
     })
 
     it('defaults to null for society', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.society).toBeNull()
     })
 
     it('defaults markers to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.populations).toHaveLength(0)
     })
 
     it('has no species by default', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.species).not.toBeDefined()
     })
 
     it('defaults tags to an empty array', () => {
-      const region = new Region(sim)
+      const region = new Region()
       expect(region.tags).toHaveLength(0)
     })
 
     it('can take id', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.id).toBe(GS02.id)
     })
 
     it('can take an array of adjacent regions', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.adjacentRegions).toHaveLength(GS02.adjacentRegions.length)
     })
 
     it('can take area', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.area).toBe(GS02.area)
     })
 
     it('can take biome', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.biome).toBe(GS02.biome)
     })
 
     it('can take carrying capacity', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.capacity).toBe(GS02.capacity)
     })
 
     it('can take dragons', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.dragons).toHaveLength(GS02.dragons.length)
     })
 
     it('can take features', () => {
-      const region = new Region(sim, DS01)
+      const region = new Region(DS01)
       expect(region.features).toHaveLength(DS01.features.length)
     })
 
     it('can take fey influence', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.feyInfluence).toBe(GS02.feyInfluence)
     })
 
     it('can take habitability', () => {
       const habitability = 0.75
-      const region = new Region(sim, Object.assign({}, GS02, { habitability }))
+      const region = new Region(Object.assign({}, GS02, { habitability }))
       expect(region.habitability).toBe(habitability)
     })
 
     it('can take immortals', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.immortals).toHaveLength(GS02.immortals.length)
     })
 
     it('can take ogrism', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.ogrism).toBe(GS02.ogrism)
     })
 
     it('can take populations', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.populations).toHaveLength(GS02.populations.length)
     })
 
     it('can take a society', () => {
       const data = Object.assign({}, GS02, { society: SampleSociety })
-      const region = new Region(sim, data)
+      const region = new Region(data)
       expect(region.society).not.toBeNull()
     })
 
     it('can take a species', () => {
-      const region = new Region(sim, FS32)
+      const region = new Region(FS32)
       expect(region.species).toBe(FS32.species)
     })
 
     it('can take tags', () => {
-      const region = new Region(sim, GS02)
+      const region = new Region(GS02)
       expect(region.tags).toHaveLength(GS02.tags.length)
     })
   })
@@ -211,7 +213,7 @@ describe('Region', () => {
   describe('Member methods', () => {
     describe('getCapacity', () => {
       it('calculates actual carrying capacity', () => {
-        const region = new Region(sim, DS01)
+        const region = new Region(DS01)
         region.habitability = 0.9
         const featureImpact = region.features
           .map(feature => feature.impact)
@@ -242,13 +244,13 @@ describe('Region', () => {
       it('doesn\'t replace an existing society', () => {
         const { region } = introducePopulation()
         const before = region.society
-        introducePopulation(sim, region.id)
+        introducePopulation(region.id)
         expect(region.society).toBe(before)
       })
 
       it('gives each population a unique ID', () => {
         const { region, population: p1 } = introducePopulation()
-        const p2 = new Population(sim, region.id, SamplePopulation)
+        const p2 = new Population(world, region.id, SamplePopulation)
         p1.adjustSize(p1.size * -2)
         region.introduce(p2)
         expect(p1.id).toBe('GS02-HU001')
@@ -256,25 +258,25 @@ describe('Region', () => {
       })
 
       it('sets the population\'s new home', () => {
-        const dest = sim.world.regions.get('GS02')!
-        const p = new Population(sim, 'DS01', SamplePopulation)
+        const dest = world.regions.get('GS02')!
+        const p = new Population(world, 'DS01', SamplePopulation)
         dest.introduce(p)
         expect(p.home).toBe(dest.id)
       })
 
       it('has existing populations absorb new ones of the same species', () => {
         const id = 'DS01'
-        new Population(sim, id, SamplePopulation)
-        new Population(sim, id, SamplePopulation)
-        const region = sim.world.regions.get(id)!
+        new Population(world, id, SamplePopulation)
+        new Population(world, id, SamplePopulation)
+        const region = world.regions.get(id)!
         expect(region.populations).toHaveLength(1)
-        expect(sim.world.populations.get(region.populations[0])?.size).toBe(SamplePopulation.size * 2)
+        expect(world.populations.get(region.populations[0])?.size).toBe(SamplePopulation.size * 2)
       })
     })
 
     describe('isPopulated', () => {
       it('returns false if the region has no population', () => {
-        const region = new Region(sim, DS01)
+        const region = new Region(DS01)
         expect(region.isPopulated()).toBe(false)
       })
 
@@ -292,7 +294,7 @@ describe('Region', () => {
 
     describe('getSpeciesPopulation', () => {
       it('returns false if the region has no such population', () => {
-        const region = new Region(sim, DS01)
+        const region = new Region(DS01)
         expect(region.getSpeciesPopulation(SPECIES_NAMES.HUMAN)).toBe(false)
       })
 
@@ -315,13 +317,13 @@ describe('Region', () => {
 
     describe('hasPopulationCapableOfSpeech', () => {
       it('returns false if the region is unpopulated', () => {
-        const region = new Region(sim, DS01)
+        const region = new Region(DS01)
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
       it('returns false if the region has a Wosan population', () => {
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const { region } = introducePopulation(sim, 'GS02', wosan)
+        const { region } = introducePopulation('GS02', wosan)
         expect(region.hasPopulationCapableOfSpeech()).toBe(false)
       })
 
@@ -339,13 +341,13 @@ describe('Region', () => {
 
     describe('hasSpeechCommunity', () => {
       it('returns false if the region is unpopulated', () => {
-        const region = new Region(sim, DS01)
+        const region = new Region(DS01)
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
       it('returns false if the region is populated by Wosan', () => {
         const wosan = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const { region } = introducePopulation(sim, 'GS02', wosan)
+        const { region } = introducePopulation('GS02', wosan)
         expect(region.hasSpeechCommunity()).toBe(false)
       })
 
@@ -368,7 +370,7 @@ describe('Region', () => {
 
     describe('reduceHabitability', () => {
       it('reduces habitability by a given percent', () => {
-        const region = new Region(sim, GS02)
+        const region = new Region(GS02)
         region.habitability = 0.8
         region.reduceHabitability(0.25)
         expect(region.habitability).toBeCloseTo(0.6)
@@ -377,14 +379,14 @@ describe('Region', () => {
 
     describe('restoreHabitability', () => {
       it('restores half of the habitability lost', () => {
-        const region = new Region(sim, GS02)
+        const region = new Region(GS02)
         region.habitability = 0.8
         region.restoreHabitability()
         expect(region.habitability).toBe(0.9)
       })
 
       it('rounds 0.95 up to 1', () => {
-        const region = new Region(sim, GS02)
+        const region = new Region(GS02)
         region.habitability = 0.9
         region.restoreHabitability()
         expect(region.habitability).toBe(1)
@@ -393,21 +395,21 @@ describe('Region', () => {
 
     describe('getAverageGeneration', () => {
       it('returns 0 if the region is unpopulated', () => {
-        const region = new Region(sim, GS02)
+        const region = new Region(GS02)
         expect(region.getAverageGeneration()).toBe(0)
       })
 
       it('returns the population generation value if only one population', () => {
-        const p = new Population(sim, 'GS02', SamplePopulation)
-        const expected = sim.world.populations.get(p.getHome().populations[0])?.getSpecies().generation!
+        const p = new Population(world, 'GS02', SamplePopulation)
+        const expected = world.populations.get(p.getHome().populations[0])?.getSpecies().generation!
         expect(p.getHome().getAverageGeneration()).toBe(expected)
       })
 
       it('returns the average of two populations', () => {
         const humans = Object.assign({}, SamplePopulation, { size: 4000 })
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
-        const p = new Population(sim, 'GS02', humans)
-        new Population(sim, 'GS02', elves)
+        const p = new Population(world, 'GS02', humans)
+        new Population(world, 'GS02', elves)
         const expected = Math.floor(((4000 * 40) + (2000 * 5)) / (4000 + 2000))
         expect(p.getHome().getAverageGeneration()).toBe(expected)
       })
@@ -417,9 +419,9 @@ describe('Region', () => {
         const humans = Object.assign({}, SamplePopulation, { size: 4000 })
         const elves = Object.assign({}, SamplePopulation, { size: 2000, species: SPECIES_NAMES.ELF })
         const dwarves = Object.assign({}, SamplePopulation, { size: 3000, species: SPECIES_NAMES.DWARF })
-        const p = new Population(sim, home, humans)
-        new Population(sim, home, elves)
-        new Population(sim, home, dwarves)
+        const p = new Population(world, home, humans)
+        new Population(world, home, elves)
+        new Population(world, home, dwarves)
         const expected = Math.floor(((4000 * 40) + (2000 * 5) + (3000 * 20)) / (4000 + 2000 + 3000))
         expect(p.getHome().getAverageGeneration()).toBe(expected)
       })
@@ -431,14 +433,14 @@ describe('Region', () => {
       let scrollText = ''
 
       beforeEach(() => {
-        species = sim.world.species.get(key.toLowerCase())!
+        species = world.species.get(key.toLowerCase())!
         scrollText = getSpeciationScrollText(species)
       })
 
       it('creates a speciation scroll for an appropriate ancestor population', () => {
         const region = 'FS32'
-        const { population: p } = introducePopulation(sim, region)
-        sim.world.regions.get(region)!.speciate()
+        const { population: p } = introducePopulation(region)
+        world.regions.get(region)!.speciate()
         const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
         expect(scroll).toBeDefined()
         expect(scroll?.seals).toBe(500)
@@ -446,17 +448,17 @@ describe('Region', () => {
 
       it('won\'t create a speciation scroll for other populations', () => {
         const popData = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-        const p = new Population(sim, 'FS32', popData)
+        const p = new Population(world, 'FS32', popData)
         p.getHome().speciate()
         const scroll = p.scribe.scrolls.find(scroll => scroll.text === scrollText)
         expect(scroll).not.toBeDefined()
       })
 
       it('won\'t create a speciation scroll if the species already exists', () => {
-        sim.world.events.push(EVENTS_GLOBAL_UNIQUE.HALFLINGS)
+        world.events.push(EVENTS_GLOBAL_UNIQUE.HALFLINGS)
         const region = 'FS32'
-        const { population: p } = introducePopulation(sim, region)
-        sim.world.regions.get(region)!.speciate()
+        const { population: p } = introducePopulation(region)
+        world.regions.get(region)!.speciate()
         const scrolls = p.scribe.scrolls.filter(scroll => scroll.text === scrollText)
         expect(scrolls).toHaveLength(1)
       })
@@ -471,7 +473,7 @@ describe('Region', () => {
       })
 
       it('will never reduce ogrism below 0', () => {
-        const region = new Region(sim, GS02)
+        const region = new Region(GS02)
         region.ogrism = 0
         region.reduceOgrism()
         expect(region.ogrism).toBe(0)
@@ -535,81 +537,47 @@ describe('Region', () => {
         region.feyInfluence = 8
         region.adjustFeyInfluence()
         expect(region.immortals).toHaveLength(1)
-        expect(sim.world.dragons.interest.value).toBe(1)
+        expect(world.dragons.interest.value).toBe(1)
       })
 
       it('won\'t get the dragons\' attention a second time', () => {
         const { region } = addSpeechCommunity()
         region.feyInfluence = 8
         region.adjustFeyInfluence()
-        const archfey = sim.world.immortals.get(region.immortals[0])!
+        const archfey = world.immortals.get(region.immortals[0])!
         archfey.slain = true
         region.adjustFeyInfluence()
         expect(region.immortals).toHaveLength(2)
-        expect(sim.world.dragons.interest.value).toBe(1)
+        expect(world.dragons.interest.value).toBe(1)
       })
     })
 
     describe('generateSocietyId', () => {
       it('generates an ID based on the region ID and millennium', () => {
-        const region = sim.world.regions.get('DS01')!
+        const region = world.regions.get('DS01')!
         expect(region.generateSocietyId()).toBe('DS01-001')
       })
     })
 
     describe('generatePopulationId', () => {
       it('generates an ID based on the region ID and number of predecessors', () => {
-        const region = sim.world.regions.get('DS01')!
-        new Population(sim, region.id, SamplePopulation)
+        const region = world.regions.get('DS01')!
+        new Population(world, region.id, SamplePopulation)
         expect(region.generatePopulationId(SamplePopulation.species)).toBe('DS01-HU002')
       })
     })
 
     describe('toObject', () => {
       it('exports an object', () => {
-        const region = new Region(sim, FS32)
+        const region = new Region(FS32)
         expect(region.toObject()).toEqual(FS32)
       })
     })
 
     describe('toString', () => {
       it('exports a string', () => {
-        const region = new Region(sim, FS32)
+        const region = new Region(FS32)
         expect(region.toString()).toEqual(FS32.id)
-      })
-    })
-  })
-
-  describe('Event handling', () => {
-    describe(QUEST_EVENTS.ACCOMPLISHED, () => {
-      const event = QUEST_EVENTS.ACCOMPLISHED
-
-      it('leaves unharmed immortals alone', async () => {
-        const region = sim.world.regions.get('GS02')!
-        for (const id of region.immortals) sim.world.immortals.remove(id)
-        region.immortals = []
-        const queen = new Immortal(sim, region.id, DragonQueen)
-        if (!region.immortals.includes(queen.id)) region.immortals.push(queen.id)
-        await sim.emitter.emit(event, (queen?.slayable as Quest)?.id ?? 'FAIL')
-        expect(region.immortals).toHaveLength(1)
-      })
-
-      it('slays', async () => {
-        const region = sim.world.regions.get('GS02')!
-        const i = new Immortal(sim, region.id, DragonQueen)
-        if (!region.immortals.includes(i.id)) region.immortals.push(i.id)
-        const quest = sim.world.quests.get((i.slayable as Quest).id)!
-        quest.accomplished = true
-        quest.attempts.push({
-          attempted: 100,
-          abandoned: 50,
-          killed: 49,
-          success: true
-        })
-        await sim.emitter.emit(event, quest.id)
-        expect(i.slain).toBe(true)
-        expect(region.immortals).toHaveLength(0)
-        expect(sim.world.immortals.has(i.id)).toBe(false)
       })
     })
   })

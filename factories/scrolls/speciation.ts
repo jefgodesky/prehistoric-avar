@@ -16,9 +16,10 @@ const getSpeciationScrollText = (species: Species): string => {
   return `We become ${species.getPlural().toLowerCase()}.`
 }
 
-const createSpeciationScroll = (sim: Simulation, name: SpeciesName, population: Population): Scroll => {
+const createSpeciationScroll = (name: SpeciesName, population: Population): Scroll => {
+  const { world } = Simulation.instance()
   const ancestor = population.getSpecies()
-  const descendant = sim.world.species.get(name.toLowerCase())!
+  const descendant = world.species.get(name.toLowerCase())!
   const text = getSpeciationScrollText(descendant)
 
   const onUnseal = () => {
@@ -31,16 +32,17 @@ const createSpeciationScroll = (sim: Simulation, name: SpeciesName, population: 
     population.species = name
 
     // Remove other scrolls
-    const populations = sim.world.populations.values()
+    const { world, history, millennium } = Simulation.instance()
+    const populations = world.populations.values()
     for (const p of populations) {
       p.scribe.scrolls = p.scribe.scrolls.filter(scroll => scroll.text !== text)
     }
 
     // Record this moment in history
-    if (name in SpeciationEvents) sim.world.events.push(SpeciationEvents[name])
+    if (name in SpeciationEvents) world.events.push(SpeciationEvents[name])
     const homeId = population.getHome().id
-    sim.history.add({
-      millennium: sim.millennium,
+    history.add({
+      millennium,
       description: `The ${ancestor.getPlural().toLowerCase() ?? 'wosan'} of ${homeId} become the first ${descendant.getPlural().toLowerCase()}.`,
       tags: [descendant.getPlural(), homeId]
     })

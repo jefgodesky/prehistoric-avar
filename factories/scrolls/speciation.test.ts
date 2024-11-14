@@ -1,4 +1,4 @@
-import { describe, beforeEach, it } from 'jsr:@std/testing/bdd'
+import { describe, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { IPopulation } from '../../index.d.ts'
 import { SPECIES_NAMES, EVENTS_GLOBAL_UNIQUE } from '../../enums.ts'
@@ -8,10 +8,6 @@ import Simulation from '../../classes/Simulation.ts'
 import createSpeciationScroll, { getSpeciationScrollText } from './speciation.ts'
 
 describe('getSpeciationScrollText', () => {
-  let sim: Simulation
-
-  beforeEach(() => { sim = new Simulation() })
-
   it('returns text for a given species', () => {
     const scenarios = [
       [SPECIES_NAMES.DWARF, 'We become dwarves.'],
@@ -21,98 +17,99 @@ describe('getSpeciationScrollText', () => {
       [SPECIES_NAMES.ORC, 'We become orcs.']
     ]
 
+    const { world } = Simulation.instance()
     for (const [name, text] of scenarios) {
-      const species = sim.world.species.get(name.toLowerCase())!
+      const species = world.species.get(name.toLowerCase())!
       expect(getSpeciationScrollText(species)).toBe(text)
     }
   })
 })
 
 describe('createSpeciationScroll', () => {
-  let sim: Simulation
-
   const createPopulation = (
-    sim: Simulation,
     data: IPopulation,
-    region: string = sim.regions[0].id
+    region?: string
   ): Population => {
-    return new Population(sim, region, data)
+    const { regions, world } = Simulation.instance()
+    return new Population(world, region ?? regions[0].id, data)
   }
 
-  const createWosanPopulation = (sim: Simulation, region?: string): Population => {
+  const createWosanPopulation = (region?: string): Population => {
     const data = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-    return createPopulation(sim, data, region)
+    return createPopulation(data, region)
   }
 
-  const createDwarfPopulation = (sim: Simulation, region?: string): Population => {
+  const createDwarfPopulation = (region?: string): Population => {
     const data = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.DWARF })
-    return createPopulation(sim, data, region)
+    return createPopulation(data, region)
   }
 
-  const createHumanPopulation = (sim: Simulation, region?: string): Population => {
-    return createPopulation(sim, SamplePopulation, region)
+  const createHumanPopulation = (region?: string): Population => {
+    return createPopulation(SamplePopulation, region)
   }
 
-  beforeEach(() => { sim = new Simulation() })
+  afterEach(() => { Simulation.reset() })
 
   it('returns a scroll', () => {
     const scenarios: Array<[string, string, Population, string]> = [
-      [SPECIES_NAMES.DWARF, 'We become dwarves.', createWosanPopulation(sim), EVENTS_GLOBAL_UNIQUE.DWARVES],
-      [SPECIES_NAMES.GNOME, 'We become gnomes.', createDwarfPopulation(sim), EVENTS_GLOBAL_UNIQUE.GNOMES],
-      [SPECIES_NAMES.HALFLING, 'We become halflings.', createHumanPopulation(sim), EVENTS_GLOBAL_UNIQUE.HALFLINGS],
-      [SPECIES_NAMES.HUMAN, 'We become humans.', createWosanPopulation(sim), EVENTS_GLOBAL_UNIQUE.HUMANS],
-      [SPECIES_NAMES.ORC, 'We become orcs.', createWosanPopulation(sim), EVENTS_GLOBAL_UNIQUE.ORCS]
+      [SPECIES_NAMES.DWARF, 'We become dwarves.', createWosanPopulation(), EVENTS_GLOBAL_UNIQUE.DWARVES],
+      [SPECIES_NAMES.GNOME, 'We become gnomes.', createDwarfPopulation(), EVENTS_GLOBAL_UNIQUE.GNOMES],
+      [SPECIES_NAMES.HALFLING, 'We become halflings.', createHumanPopulation(), EVENTS_GLOBAL_UNIQUE.HALFLINGS],
+      [SPECIES_NAMES.HUMAN, 'We become humans.', createWosanPopulation(), EVENTS_GLOBAL_UNIQUE.HUMANS],
+      [SPECIES_NAMES.ORC, 'We become orcs.', createWosanPopulation(), EVENTS_GLOBAL_UNIQUE.ORCS]
     ]
 
+    const { world, history } = Simulation.instance()
     for (const [name, text, p, event] of scenarios) {
-      const species = sim.world.species.get(name.toLowerCase())!
-      const scroll = createSpeciationScroll(sim, name, p)
+      const species = world.species.get(name.toLowerCase())!
+      const scroll = createSpeciationScroll(name, p)
       expect(scroll.text).toBe(text)
       expect(scroll.seals).toBe(500) // See block comment at end for justification
 
       scroll.open()
       expect(p.getSpecies().name).toBe(species.name)
-      expect(sim.world.events).toContain(event)
-      expect(sim.history.get({ tags: [species.getPlural()] }).length).toBe(1)
+      expect(world.events).toContain(event)
+      expect(history.get({ tags: [species.getPlural()] }).length).toBe(1)
     }
   })
 
   it('unseals in proper regions', () => {
     const scenarios: Array<[string, Population, number]> = [
-      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, 'MS06'), 50],
-      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, 'MD06'), 20],
-      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, 'FS32'), 40],
-      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, 'GS03'), 50],
-      [SPECIES_NAMES.ORC, createWosanPopulation(sim, 'FS02'), 50]
+      [SPECIES_NAMES.DWARF, createWosanPopulation('MS06'), 50],
+      [SPECIES_NAMES.GNOME, createDwarfPopulation('MD06'), 20],
+      [SPECIES_NAMES.HALFLING, createHumanPopulation('FS32'), 40],
+      [SPECIES_NAMES.HUMAN, createWosanPopulation('GS03'), 50],
+      [SPECIES_NAMES.ORC, createWosanPopulation('FS02'), 50]
     ]
 
     for (const [species, p, generation] of scenarios) {
-      const scroll = createSpeciationScroll(sim, species, p)
+      const scroll = createSpeciationScroll(species, p)
       expect(scroll.onUnseal()).toBe(generation)
     }
   })
 
   it('will not unseal in other regions', () => {
     const scenarios: Array<[string, Population]> = [
-      [SPECIES_NAMES.DWARF, createWosanPopulation(sim, 'GS02')],
-      [SPECIES_NAMES.GNOME, createDwarfPopulation(sim, 'GS02')],
-      [SPECIES_NAMES.HALFLING, createHumanPopulation(sim, 'GS02')],
-      [SPECIES_NAMES.HUMAN, createWosanPopulation(sim, 'GS02')],
-      [SPECIES_NAMES.ORC, createWosanPopulation(sim, 'GS02')]
+      [SPECIES_NAMES.DWARF, createWosanPopulation('GS02')],
+      [SPECIES_NAMES.GNOME, createDwarfPopulation('GS02')],
+      [SPECIES_NAMES.HALFLING, createHumanPopulation('GS02')],
+      [SPECIES_NAMES.HUMAN, createWosanPopulation('GS02')],
+      [SPECIES_NAMES.ORC, createWosanPopulation('GS02')]
     ]
 
     for (const [species, p] of scenarios) {
-      const scroll = createSpeciationScroll(sim, species, p)
+      const scroll = createSpeciationScroll(species, p)
       expect(scroll.onUnseal()).toBe(0)
     }
   })
 
   it('removes all other scrolls with the same name when it is opened', () => {
+    const { regions } = Simulation.instance()
     const data = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-    const p1 = createPopulation(sim, data, sim.regions[1].id)
-    const p2 = createPopulation(sim, data, sim.regions[2].id)
-    p1.scribe.scrolls.push(createSpeciationScroll(sim, SPECIES_NAMES.HUMAN, p1))
-    p2.scribe.scrolls.push(createSpeciationScroll(sim, SPECIES_NAMES.HUMAN, p2))
+    const p1 = createPopulation(data, regions[1].id)
+    const p2 = createPopulation(data, regions[2].id)
+    p1.scribe.scrolls.push(createSpeciationScroll(SPECIES_NAMES.HUMAN, p1))
+    p2.scribe.scrolls.push(createSpeciationScroll(SPECIES_NAMES.HUMAN, p2))
 
     expect(p1.scribe.scrolls).toHaveLength(2)
     expect(p2.scribe.scrolls).toHaveLength(2)

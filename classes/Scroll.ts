@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
 import { IScroll } from '../index.d.ts'
-import Simulation from './Simulation.ts'
 
 const defaultScrollOnUnseal = (): number => 1
 const defaultScrollOnOpen = (): void => { return }
@@ -9,10 +8,10 @@ class Scroll {
   id: string
   text: string
   seals: number
-  onUnseal: (sim?: Simulation) => number
-  onOpen: (sim?: Simulation) => void
+  onUnseal: () => number
+  onOpen: () => void
 
-  constructor (text?: string, seals?: number, onUnseal?: (sim?: Simulation) => number, onOpen?: (sim?: Simulation) => void) {
+  constructor (text?: string, seals?: number, onUnseal?: () => number, onOpen?: () => void) {
     this.id = nanoid()
     this.text = text ?? ''
     this.seals = seals ?? 1
@@ -20,16 +19,16 @@ class Scroll {
     this.onOpen = onOpen ?? defaultScrollOnOpen
   }
 
-  unseal (sim?: Simulation): boolean {
-    this.seals = Math.max(0, this.seals - this.onUnseal(sim))
+  unseal (): boolean {
+    this.seals = Math.max(0, this.seals - this.onUnseal())
     const opened = this.seals === 0
-    if (opened) this.open(sim)
+    if (opened) this.open()
     return opened
   }
 
-  open(sim?: Simulation): void {
+  open(): void {
     this.seals = 0
-    this.onOpen(sim)
+    this.onOpen()
   }
 
   toObject (): IScroll {

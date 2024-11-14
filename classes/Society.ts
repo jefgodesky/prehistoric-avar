@@ -3,6 +3,7 @@ import Fitness from './Fitness.ts'
 import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
 import Simulation from './Simulation.ts'
+import World from './World.ts'
 
 class Society extends Markable {
   fitness: Fitness
@@ -10,22 +11,23 @@ class Society extends Markable {
   region: string
   scribe: Scribe
 
-  constructor (sim: Simulation, region: string, data?: ISociety) {
-    super(sim, data)
+  constructor (world: World, region: string, data?: ISociety) {
+    super(data)
 
     this.fitness = new Fitness(data?.fitness ?? undefined)
     this.language = data?.language ?? null
     this.region = region
-    this.scribe = new Scribe(this.simulation, ...(data?.scrolls ?? []))
+    this.scribe = new Scribe(...(data?.scrolls ?? []))
 
-    const id = sim.world.regions.get(region)?.generateSocietyId() ?? 'Society'
-    this.id = sim.world.societies.generateKey(id)
-    sim.world.societies.add(this)
+    const id = world.regions.get(region)?.generateSocietyId() ?? 'Society'
+    this.id = world.societies.generateKey(id)
+    world.societies.add(this)
   }
 
   addLanguage (): void {
-    this.language = this.simulation.world.regions.get(this.region)?.generateSocietyId() ?? this.id
-    this.simulation.world.languages.add(this.language, null)
+    const { world } = Simulation.instance()
+    this.language = world.regions.get(this.region)?.generateSocietyId() ?? this.id
+    world.languages.add(this.language, null)
   }
 
   toObject (): ISociety {
