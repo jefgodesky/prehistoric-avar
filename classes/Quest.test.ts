@@ -7,6 +7,7 @@ import Population from './Population.ts'
 import Simulation from './Simulation.ts'
 import Region from './Region.ts'
 import World from './World.ts'
+import createPopulation from '../factories/population.ts'
 import Quest from './Quest.ts'
 
 describe('Quest', () => {
@@ -116,7 +117,7 @@ describe('Quest', () => {
       beforeEach(() => {
         region = new Region(GS02)
         quest = new Quest(world, SampleQuest)
-        p = new Population(world, region.id, SamplePopulation)
+        p = createPopulation(region.id, SamplePopulation)
       })
 
       it('runs the quest', () => {

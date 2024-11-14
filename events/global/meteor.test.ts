@@ -6,6 +6,7 @@ import Population from '../../classes/Population.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
 import World from '../../classes/World.ts'
+import createPopulation from '../../factories/population.ts'
 import {
   getImpactRegion,
   getZone1,
@@ -39,7 +40,7 @@ describe('Meteor', () => {
     history = sim.history
     region = world.regions.get('MS06')!
     region.markers = []
-    population = new Population(world, 'MS06', SamplePopulation)
+    population = createPopulation('MS06', SamplePopulation)
   })
   
   afterEach(() => {
@@ -79,7 +80,7 @@ describe('Meteor', () => {
 
   describe('impactSea', () => {
     it('hits the sea', () => {
-      const coastalPop = new Population(world, 'FS11', SamplePopulation)
+      const coastalPop = createPopulation('FS11', SamplePopulation)
       coastalPop.size = 10000
       impactSea()
       expect(coastalPop.size).toBe(9000)

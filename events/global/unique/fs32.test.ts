@@ -2,9 +2,9 @@ import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import History from '../../../classes/History.ts'
-import Population from '../../../classes/Population.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import World from '../../../classes/World.ts'
+import createPopulation from '../../../factories/population.ts'
 import fs32, { BIG_ENOUGH_POP, DEST_REGION_ID } from './fs32.ts'
 
 describe('fs32', () => {
@@ -14,7 +14,7 @@ describe('fs32', () => {
   const destRegion = DEST_REGION_ID
 
   const addHumans = (num: number) => {
-    const p = new Population(world, srcRegion)
+    const p = createPopulation(srcRegion)
     p.adjustSize(num)
     p.species = 'human'
     world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)

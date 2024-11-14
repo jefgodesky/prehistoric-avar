@@ -5,6 +5,7 @@ import { SPECIES_NAMES, EVENTS_GLOBAL_UNIQUE } from '../../enums.ts'
 import { SamplePopulation } from '../../test-examples.ts'
 import Population from '../../classes/Population.ts'
 import Simulation from '../../classes/Simulation.ts'
+import createPopulation from '../population.ts'
 import createSpeciationScroll, { getSpeciationScrollText } from './speciation.ts'
 
 describe('getSpeciationScrollText', () => {
@@ -26,26 +27,26 @@ describe('getSpeciationScrollText', () => {
 })
 
 describe('createSpeciationScroll', () => {
-  const createPopulation = (
+  const createTestPopulation = (
     data: IPopulation,
     region?: string
   ): Population => {
-    const { regions, world } = Simulation.instance()
-    return new Population(world, region ?? regions[0].id, data)
+    const { regions } = Simulation.instance()
+    return createPopulation(region ?? regions[0].id, data)
   }
 
   const createWosanPopulation = (region?: string): Population => {
     const data = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-    return createPopulation(data, region)
+    return createTestPopulation(data, region)
   }
 
   const createDwarfPopulation = (region?: string): Population => {
     const data = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.DWARF })
-    return createPopulation(data, region)
+    return createTestPopulation(data, region)
   }
 
   const createHumanPopulation = (region?: string): Population => {
-    return createPopulation(SamplePopulation, region)
+    return createTestPopulation(SamplePopulation, region)
   }
 
   afterEach(() => { Simulation.reset() })
@@ -106,8 +107,8 @@ describe('createSpeciationScroll', () => {
   it('removes all other scrolls with the same name when it is opened', () => {
     const { regions } = Simulation.instance()
     const data = Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN })
-    const p1 = createPopulation(data, regions[1].id)
-    const p2 = createPopulation(data, regions[2].id)
+    const p1 = createTestPopulation(data, regions[1].id)
+    const p2 = createTestPopulation(data, regions[2].id)
     p1.scribe.scrolls.push(createSpeciationScroll(SPECIES_NAMES.HUMAN, p1))
     p2.scribe.scrolls.push(createSpeciationScroll(SPECIES_NAMES.HUMAN, p2))
 

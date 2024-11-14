@@ -11,6 +11,7 @@ import Scribe from './Scribe.ts'
 import Simulation from './Simulation.ts'
 import Species from './Species.ts'
 import World from './World.ts'
+import createPopulation from '../factories/population.ts'
 
 const TO_STRING_PREFIX = 'Population:' as const
 
@@ -125,7 +126,7 @@ class Population extends Markable {
       receiving.absorb(n, this.viability)
       description += ` and were absorbed into ${receiving.id}.`
     } else {
-      const p = new Population(world, dest, {
+      const p = createPopulation(dest, {
         species: this.species,
         markers: [],
         size: n,

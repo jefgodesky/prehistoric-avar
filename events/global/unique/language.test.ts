@@ -2,9 +2,9 @@ import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { EVENTS_GLOBAL_UNIQUE } from '../../../enums.ts'
 import History from '../../../classes/History.ts'
-import Population from '../../../classes/Population.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import World from '../../../classes/World.ts'
+import createPopulation from '../../../factories/population.ts'
 import language from './language.ts'
 
 describe('language', () => {
@@ -13,7 +13,7 @@ describe('language', () => {
   const homeRegion = 'GS03'
 
   const addHumans = () => {
-    const p = new Population(world, homeRegion)
+    const p = createPopulation(homeRegion)
     p.species = 'human'
     world.events.push(EVENTS_GLOBAL_UNIQUE.HUMANS)
   }
