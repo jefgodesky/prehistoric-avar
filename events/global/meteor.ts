@@ -1,13 +1,11 @@
 import { sample } from '@std/collections'
+import { TERRESTRIAL_ELEMENTS } from '../../enums.ts'
 import Region from '../../classes/Region.ts'
 import Simulation from '../../classes/Simulation.ts'
-import AirElemental from '../../classes/immortals/elementals/Air.ts'
-import EarthElemental from '../../classes/immortals/elementals/Earth.ts'
-import FireElemental from '../../classes/immortals/elementals/Fire.ts'
-import WaterElemental from '../../classes/immortals/elementals/Water.ts'
 import getChances from '../get-chances.ts'
 import oxford from '../../oxford.ts'
 import capitalize from '../../capitalize.ts'
+import createElemental from '../../factories/immortals/elemental.ts'
 
 const getImpactRegion = (): Region | null => {
   const { world } = Simulation.instance()
@@ -290,17 +288,17 @@ const recordFluidityMeteorRock = (region?: Region | null): void => {
 const recordFluidityMeteorElemental = (region?: Region | null): void => {
   const { world, history, millennium } = Simulation.instance()
   const site = region === null ? null : impact(region)
-  const element = sample(['fire', 'air', 'water', 'earth']) ?? 'earth'
+  const element = sample(Object.values(TERRESTRIAL_ELEMENTS)) ?? TERRESTRIAL_ELEMENTS.EARTH
   const coastal = world.regions.values().filter(region => region.tags.includes('coastal'))
   let elementalRegion: Region | null = site
   let description
-  if (site === null && element === 'water') {
+  if (site === null && element === TERRESTRIAL_ELEMENTS.WATER) {
     description = 'A powerful water elemental was trapped in stone and cast ' +
       'down to Avar. It landed in the sea, where the ferocity of its impact ' +
       'caused super-tsunamis that circled the globe, wiping out 10% of all ' +
       'coastal populations. The impact cracked open its stony prison, and ' +
       'has roamed the oceans of Avar ever since.'
-  } else if (site === null && element === 'earth') {
+  } else if (site === null && element === TERRESTRIAL_ELEMENTS.EARTH) {
     elementalRegion = sample(coastal) as Region
     description = 'A powerful earth elemental was cast down to Avar. It ' +
         'landed in the sea, where the ferocity of its impact caused ' +
@@ -308,7 +306,7 @@ const recordFluidityMeteorElemental = (region?: Region | null): void => {
         'coastal populations. It took years of struggle, but the elemental ' +
         'eventually found its way  to dry land, on the shores of ' +
         `${elementalRegion.id}.`
-  } else if (site === null && element === 'fire') {
+  } else if (site === null && element === TERRESTRIAL_ELEMENTS.FIRE) {
     const island = sample(getChances(1, 100))
     const underseaVolcano = sample(getChances(1, 3))
     description = 'A powerful fire elemental was trapped in stone and cast ' +
@@ -336,7 +334,7 @@ const recordFluidityMeteorElemental = (region?: Region | null): void => {
     }
   } else if (site === null) {
     elementalRegion = sample(coastal) as Region
-    description = `A powerful ${element} elemental was trapped in a cage of ` +
+    description = `A powerful ${element.toLowerCase()} elemental was trapped in a cage of ` +
       'stone and cast down to Avar. It landed in the sea, where the ferocity ' +
       'of its impact caused super-tsunamis that circled the globe, wiping ' +
       'out 10% of all coastal populations. In its cataclysmic fall, the ' +
@@ -344,10 +342,10 @@ const recordFluidityMeteorElemental = (region?: Region | null): void => {
       'eventually found its way  to dry land, on the shores of ' +
       `${elementalRegion.id}.`
   } else {
-    const wasCast = element === 'earth'
+    const wasCast = element === TERRESTRIAL_ELEMENTS.EARTH
       ? 'A powerful earth elemental was cast'
-      : `A powerful ${element} elemental was trapped in a cage of stone and cast`
-    const survived = element === 'earth'
+      : `A powerful ${element.toLowerCase()} elemental was trapped in a cage of stone and cast`
+    const survived = element === TERRESTRIAL_ELEMENTS.EARTH
       ? 'survived its fall'
       : 'not only survived its fall, but was freed from its rocky shell by the impact'
     description = `${wasCast} down to Avar. It landed in ${site.id}. The ` +
@@ -356,21 +354,14 @@ const recordFluidityMeteorElemental = (region?: Region | null): void => {
       `worldwide by half. The elemental ${survived}.`
   }
 
-  const tags = ['Meteor impact', 'Sphere of Fluidity', 'Elementals', `${capitalize(element)} Elementals`]
+  const tags = ['Meteor impact', 'Sphere of Fluidity', 'Elementals', `${element} Elementals`]
   if (site) tags.push(site.id)
   history.add({ millennium, description, tags })
 
-  if (elementalRegion) {
-    switch (element) {
-      case 'fire': new FireElemental(world, elementalRegion.id); break
-      case 'air': new AirElemental(world, elementalRegion.id); break
-      case 'water': new WaterElemental(world, elementalRegion.id); break
-      default: new EarthElemental(world, elementalRegion.id); break
-    }
-  }
+  if (elementalRegion) createElemental(elementalRegion.id, element)
   if (site === null) return
 
-  site.addMarker(`Meteor impact site: A powerful ${element} elemental ` +
+  site.addMarker(`Meteor impact site: A powerful ${element.toLowerCase()} elemental ` +
     `was cast down to Avar in millennium ${millennium}, causing a global` +
     'catastrophe.')
 }

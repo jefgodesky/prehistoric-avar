@@ -17,6 +17,13 @@ export const DISPOSITIONS = {
   FRIENDLY: 'Friendly'
 } as const
 
+export const TERRESTRIAL_ELEMENTS = {
+  AIR: 'Air',
+  EARTH: 'Earth',
+  FIRE: 'Fire',
+  WATER: 'Water'
+} as const
+
 export const EVENTS_GLOBAL_UNIQUE = {
   DWARVES: 'Dwarves Appear',
   ELVES: 'Elves Appear',
@@ -68,6 +75,7 @@ export type Biome = typeof BIOMES[keyof typeof BIOMES]
 export type Disposition = typeof DISPOSITIONS[keyof typeof DISPOSITIONS]
 export type Layer = typeof LAYER[keyof typeof LAYER]
 export type SpeciesName = typeof SPECIES_NAMES[keyof typeof SPECIES_NAMES]
+export type TerrestrialElement = typeof TERRESTRIAL_ELEMENTS[keyof typeof TERRESTRIAL_ELEMENTS]
 export type UniqueGlobalEvent = typeof EVENTS_GLOBAL_UNIQUE[keyof typeof EVENTS_GLOBAL_UNIQUE]
 
 export const SpeciesPlurals: Record<SpeciesName, string> = {
