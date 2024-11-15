@@ -5,10 +5,10 @@ import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 import Markable from './Markable.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'
-import Society from './Society.ts'
 
 import clamp from '../clamp.ts'
 import createArchfey from '../factories/immortals/archfey.ts'
+import createSociety from '../factories/society.ts'
 import createSpeciationScroll, { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
 
 class Region extends Markable implements IHabitable {
@@ -57,7 +57,7 @@ class Region extends Markable implements IHabitable {
 
   introduce (...populations: Population[]): void {
     const { world } = Simulation.instance()
-    this.society = this.society ?? new Society(world, this.id).id
+    this.society = this.society ?? createSociety(this.id).id
     for (const p of populations) {
       const conspecific = this.getSpeciesPopulation(p.species)
       if (conspecific) {

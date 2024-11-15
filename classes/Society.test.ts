@@ -4,6 +4,7 @@ import { BIOMES } from '../enums.ts'
 import { SampleSociety } from '../test-examples.ts'
 import Simulation from './Simulation.ts'
 import World from './World.ts'
+import createSociety from '../factories/society.ts'
 import Society from './Society.ts'
 
 describe('Society', () => {
@@ -77,7 +78,7 @@ describe('Society', () => {
   describe('Member methods', () => {
     describe('addLanguage', () => {
       it('adds a language to the society', () => {
-        const society = new Society(world, region)
+        const society = createSociety(region)
         society.addLanguage()
         expect(society.language).toBe(`${society.region}-001`)
       })
@@ -86,7 +87,7 @@ describe('Society', () => {
     describe('toObject', () => {
       it('exports an object', () => {
         const biome = BIOMES.BOREAL_FOREST
-        const society = new Society(world, region, SampleSociety)
+        const society = createSociety(region, SampleSociety)
         const actual = society.toObject()
         expect(actual.fitness[biome]).toBe(SampleSociety.fitness[biome])
         expect(actual.scrolls.length).toBe(SampleSociety.scrolls.length)
@@ -96,7 +97,7 @@ describe('Society', () => {
 
     describe('toString', () => {
       it('exports a string', () => {
-        const society = new Society(world, region)
+        const society = createSociety(region)
         society.id = 'f-society'
         expect(society.toString()).toBe('Society: f-society')
       })

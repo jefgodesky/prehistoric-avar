@@ -3,11 +3,11 @@ import { expect } from 'jsr:@std/expect'
 import { BIOMES, SPECIES_NAMES } from '../enums.ts'
 import { SamplePopulation, SampleSociety } from '../test-examples.ts'
 import Simulation from './Simulation.ts'
-import Society from './Society.ts'
 import Species from './Species.ts'
 import Region from './Region.ts'
 import World from './World.ts'
 import createPopulation from '../factories/population.ts'
+import createSociety from '../factories/society.ts'
 import Population from './Population.ts'
 
 describe('Population', () => {
@@ -17,7 +17,7 @@ describe('Population', () => {
   beforeEach(() => {
     world = Simulation.instance().world
     const region = world.regions.get(home)!
-    region.society = new Society(world, home, SampleSociety).id
+    region.society = createSociety(home, SampleSociety).id
   })
   
   afterEach(() => { Simulation.reset() })
