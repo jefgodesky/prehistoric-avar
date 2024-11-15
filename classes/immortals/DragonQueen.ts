@@ -38,3 +38,4 @@ class DragonOgre extends Immortal {
 
 const DragonQueen = Singleton(DragonOgre)
 export default DragonQueen
+export { DragonOgre }
