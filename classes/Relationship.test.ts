@@ -26,11 +26,6 @@ describe('Relationship', () => {
       expect(rel.disposition).toBe(DISPOSITIONS.INDIFFERENT)
     })
 
-    it('defaults scrolls to an empty list', () => {
-      const rel = new Relationship()
-      expect(rel.scribe.scrolls).toHaveLength(0)
-    })
-
     it('can set A', () => {
       const rel = new Relationship(SampleRelationship)
       expect(rel.a).toBe(SampleRelationship.a)
@@ -45,20 +40,13 @@ describe('Relationship', () => {
       const rel = new Relationship(SampleRelationship)
       expect(rel.disposition).toBe(SampleRelationship.disposition)
     })
-
-    it('can set the scrolls', () => {
-      const rel = new Relationship(SampleRelationship)
-      expect(rel.scribe.scrolls).toHaveLength(SampleRelationship.scrolls.length)
-    })
   })
 
   describe('Member methods', () => {
     describe('toObject', () => {
       it('exports an object', () => {
-        const cpy = Object.assign({}, SampleRelationship)
         const rel = new Relationship(SampleRelationship)
-        cpy.scrolls = rel.scribe.toObject()
-        expect(JSON.stringify(rel.toObject())).toBe(JSON.stringify(cpy))
+        expect(JSON.stringify(rel.toObject())).toBe(JSON.stringify(SampleRelationship))
       })
     })
 

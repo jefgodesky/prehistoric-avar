@@ -118,7 +118,6 @@ interface IRelationship {
   a: string
   b: string
   disposition: Disposition
-  scrolls: IScroll[]
 }
 
 interface IScroll {

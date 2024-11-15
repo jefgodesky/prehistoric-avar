@@ -23,8 +23,7 @@ const SamplePopulation: IPopulation = {
     {
       a: 'Population: GS02-123HU',
       b: 'Immortal: The Dragon Queen',
-      disposition: DISPOSITIONS.HOSTILE,
-      scrolls: []
+      disposition: DISPOSITIONS.HOSTILE
     }
   ],
   scrolls: [
@@ -38,17 +37,7 @@ const SamplePopulation: IPopulation = {
 const SampleRelationship: IRelationship = {
   a: 'Population: GS03-001WO',
   b: 'Immortal: The Dragon Queen',
-  disposition: DISPOSITIONS.HOSTILE,
-  scrolls: [
-    {
-      text: 'We will come to worship the Dragon Queen',
-      seals: 10
-    },
-    {
-      text: 'We will invent gods to protect us from the Dragon Queen',
-      seals: 10
-    }
-  ]
+  disposition: DISPOSITIONS.HOSTILE
 }
 
 const WosanData: ISpecies = {
@@ -150,8 +139,7 @@ const DragonQueen: IImmortal = {
     {
       a: 'Immortal: The Dragon Queen',
       b: 'Population: GS03-001WO',
-      disposition: DISPOSITIONS.HOSTILE,
-      scrolls: []
+      disposition: DISPOSITIONS.HOSTILE
     }
   ],
   scrolls: [
