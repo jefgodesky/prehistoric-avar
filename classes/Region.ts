@@ -56,6 +56,11 @@ class Region extends Markable implements IHabitable {
     this.adjustFeyInfluence()
     this.reduceOgrism()
 
+    // Language changes over time
+    const society = this.getSociety()
+    if (society) society.advanceLanguage()
+
+    // Refresh each population
     const { populations } = Simulation.instance().world
     for (const id of this.populations) {
       const p = populations.get(id)
