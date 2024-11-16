@@ -1,5 +1,6 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { sample } from '@std/random'
 import { BIOMES, SPECIES_NAMES } from '../enums.ts'
 import { SamplePopulation, SampleSociety } from '../test-examples.ts'
 import Simulation from './Simulation.ts'
@@ -102,6 +103,12 @@ describe('Population', () => {
         const actual = [BIOMES.SAVANNA, BIOMES.BOREAL_FOREST].map(biome => p.getFitness(biome))
         expect(actual).toEqual([2, 1])
       })
+
+      it('uses home\'s biome as default', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.getFitness()
+        expect(actual).toEqual(2)
+      })
     })
 
     describe('getSpecies', () => {
@@ -137,6 +144,43 @@ describe('Population', () => {
         p.adjustSize(p.size * -2)
         p.adjustViability()
         expect(p.viability).toBe(0.6)
+      })
+    })
+
+    describe('survive', () => {
+      it('returns 0 if you roll a 3 or less', () => {
+        const rolls = [-3, -2, -1, 0, 1, 2, 3]
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.survive(sample(rolls) ?? 0)
+        expect(actual).toBe(0)
+      })
+
+      it('returns 1 if you roll 4-6', () => {
+        const rolls = [4, 5, 6]
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.survive(sample(rolls) ?? 5)
+        expect(actual).toBe(1)
+      })
+
+      it('returns 2 if you roll 7-9', () => {
+        const rolls = [7, 8, 9]
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.survive(sample(rolls) ?? 8)
+        expect(actual).toBe(2)
+      })
+
+      it('returns 3 if you roll 10-12', () => {
+        const rolls = [10, 11, 12]
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.survive(sample(rolls) ?? 11)
+        expect(actual).toBe(3)
+      })
+
+      it('returns 4 if you roll 13 or higher', () => {
+        const rolls = [13, 14, 15, 99]
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.survive(sample(rolls) ?? 99)
+        expect(actual).toBe(4)
       })
     })
 

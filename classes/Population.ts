@@ -51,8 +51,9 @@ class Population extends Markable {
     this.adjustViability()
   }
 
-  getFitness (biome: Biome): number {
-    return this.fitness.get(biome)
+  getFitness (biome?: Biome): number {
+    const b = biome ?? this.getHome().biome
+    return b ? this.fitness.get(b) : 0
   }
 
   getSpecies (): Species {
@@ -64,6 +65,17 @@ class Population extends Markable {
     const { world } = Simulation.instance()
     const regions = world.regions.values()
     return world.regions.get(this.home) ?? regions[0]
+  }
+
+  survive (override?: number): number {
+    const mod = this.getFitness()
+    const roll = override ?? new DiceRoll(`2d6 + ${mod}`).total
+
+    if (roll <= 3) return 0
+    if (roll <= 6) return 1
+    if (roll <= 9) return 2
+    if (roll <= 12) return 3
+    return 4
   }
 
   adjustSize (delta: number): void {
