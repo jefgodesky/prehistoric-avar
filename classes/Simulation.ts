@@ -39,7 +39,10 @@ class BaseSimulation {
   refresh (): void {
     this.world.restoreHabitability()
     this.regions = shuffle(this.regions)
-    for (const region of this.regions) region.refresh()
+    for (const region of this.regions) {
+      region.populations = shuffle(region.populations)
+      region.refresh()
+    }
   }
 }
 
