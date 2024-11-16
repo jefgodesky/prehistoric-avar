@@ -334,6 +334,34 @@ describe('Population', () => {
       })
     })
 
+    describe('apply50500', () => {
+      it('drives a population with fewer than 50 individuals extinct', () => {
+        const p = createPopulation(home, SamplePopulation)
+        p.size = 45
+        p.apply50500()
+        expect(p.size).toBe(0)
+        expect(p.extinct).toBe(true)
+      })
+
+      it('reduces the viability of a population with fewer than 500 individuals', () => {
+        const p = createPopulation(home, SamplePopulation)
+        p.size = 450
+        p.apply50500()
+        expect(p.size).toBe(450)
+        expect(p.extinct).toBe(false)
+        expect(p.viability).toBeCloseTo(SamplePopulation.viability * 0.75)
+      })
+
+      it('does nothing to a population with 500 individuals or more', () => {
+        const p = createPopulation(home, SamplePopulation)
+        p.size = 500
+        p.apply50500()
+        expect(p.size).toBe(500)
+        expect(p.extinct).toBe(false)
+        expect(p.viability).toBeCloseTo(SamplePopulation.viability)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SamplePopulation, { extinct: false })

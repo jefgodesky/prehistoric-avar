@@ -193,6 +193,14 @@ class Population extends Markable {
     return cannibals
   }
 
+  apply50500 (): void {
+    if (this.size < 50) {
+      this.adjustSize(this.size * -1)
+    } else if (this.size < 500) {
+      this.viability = this.viability * 0.75
+    }
+  }
+
   toObject (): IPopulation {
     return {
       id: this.id,
