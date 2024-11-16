@@ -47,6 +47,10 @@ class Population extends Markable {
     world.populations.add(this)
   }
 
+  refresh (): void {
+    this.adjustViability()
+  }
+
   getFitness (biome: Biome): number {
     return this.fitness.get(biome)
   }

@@ -10,6 +10,7 @@ import Society from './Society.ts'
 import Species from './Species.ts'
 import { getRegions } from '../instances/regions/index.ts'
 import species from '../instances/species/index.ts'
+import Simulation from './Simulation.ts'
 
 
 class World implements IHabitable {

@@ -48,6 +48,18 @@ class Region extends Markable implements IHabitable {
     if (data?.species) this.species = data.species
   }
 
+  refresh (): void {
+    this.restoreHabitability()
+    this.adjustFeyInfluence()
+    this.reduceOgrism()
+
+    const { populations } = Simulation.instance().world
+    for (const id of this.populations) {
+      const p = populations.get(id)
+      if (p) p.refresh()
+    }
+  }
+
   getCapacity (worldHabitability: number): number {
     const featureImpact = this.features
       .map(feature => feature.impact)
