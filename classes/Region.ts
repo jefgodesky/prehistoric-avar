@@ -1,5 +1,7 @@
+import { sumOf } from '@std/collections'
+
 import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
-import { IHabitable, IRegion, IRegionFeature } from '../index.d.ts'
+import { IHabitable, IRegion, IRegionFeature, ISurvivalProjection, ISurvivalReport } from '../index.d.ts'
 import { ROUND_HABITABILITY_TO_FULL } from '../constants.ts'
 
 import Markable from './Markable.ts'
@@ -170,6 +172,42 @@ class Region extends Markable implements IHabitable {
       if (coronate) createArchfey(this.id)
       if (sovereigns.length < 1) world.dragons.interest.incr()
     }
+  }
+
+  survive (): ISurvivalReport[] {
+    const { populations, habitability } = Simulation.instance().world
+    const pops = populations.populate(this.populations)
+    const projections: ISurvivalProjection[] = pops.map(p => {
+      const hold = p.survive()
+      const size = p.getProjectedSize(hold)
+      return { hold, size }
+    })
+
+    const capacity = this.getCapacity(habitability)
+    const open = sumOf(projections, p => p.size) <= capacity
+    const holdSum = sumOf(projections, p => p.hold)
+    const popSum = sumOf(pops, p => p.size)
+
+    const reports: ISurvivalReport[] = []
+    for (let i = 0; i < pops.length; i++) {
+      const { hold, size } = projections[i]
+      const p = pops[i]
+
+      if (open) {
+        // Everyone can grow as much as they like and they'll still be below
+        // the region's carrying capacity. Good times!
+        pops[i].size = size
+      } else {
+        // Populations are trying to grow greater than carrying capacity will
+        // allow. That means competition, scarcity, and bad times.
+        const portion = ((p.size / popSum) + (hold / holdSum)) / 2
+        pops[i].size = Math.floor(capacity * portion)
+      }
+
+      reports.push({ hold, pressure: size - p.size })
+    }
+
+    return reports
   }
 
   generateSocietyId (): string {

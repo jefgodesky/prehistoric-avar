@@ -553,6 +553,32 @@ describe('Region', () => {
       })
     })
 
+    describe('survive', () => {
+      it('lets everyone grow if there\'s resources', () => {
+        const { region, population: humans } = introducePopulation()
+        const { population: elves } = introducePopulation(region.id, Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.ELF }))
+        humans.size = 2000
+        elves.size = 2000
+        region.capacity = 100000
+        const results = region.survive()
+        expect(results).toHaveLength(2)
+        expect(results[0].pressure).toBe(0)
+        expect(results[1].pressure).toBe(0)
+      })
+
+      it('sorts things out when there\'s competition', () => {
+        const { region, population: humans } = introducePopulation()
+        const { population: elves } = introducePopulation(region.id, Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.ELF }))
+        humans.size = 5000
+        elves.size = 5000
+        region.capacity = 3000
+        const results = region.survive()
+        expect(results).toHaveLength(2)
+        expect(results[0].pressure).toBeGreaterThan(1999)
+        expect(results[1].pressure).toBeGreaterThan(1999)
+      })
+    })
+
     describe('generateSocietyId', () => {
       it('generates an ID based on the region ID and millennium', () => {
         const region = world.regions.get('DS01')!

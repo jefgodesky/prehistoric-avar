@@ -132,6 +132,16 @@ interface ISpecies {
   canSpeak?: boolean
 }
 
+interface ISurvivalProjection {
+  hold: number
+  size: number
+}
+
+interface ISurvivalReport {
+  hold: number
+  pressure: number
+}
+
 export type {
   Constructor,
   IBiome,
@@ -149,5 +159,7 @@ export type {
   IRegionData,
   IScroll,
   ISociety,
-  ISpecies
+  ISpecies,
+  ISurvivalProjection,
+  ISurvivalReport
 }
