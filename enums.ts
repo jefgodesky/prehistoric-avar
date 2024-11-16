@@ -52,6 +52,7 @@ export const SIMULATION_STAGES = {
   REFRESH: 'Refresh',
   EVENT: 'Event',
   GROWTH: 'Growth',
+  EXPANSION: 'Expansion',
   RESOLUTION: 'Resolution'
 }
 
