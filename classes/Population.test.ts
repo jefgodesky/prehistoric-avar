@@ -325,6 +325,15 @@ describe('Population', () => {
       })
     })
 
+    describe('findCannibals', () => {
+      it('returns the number of incidents of cannibalism', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const reports = p.getHome().survive()
+        const actual = p.findCannibals(reports[0])
+        expect(actual).toBeGreaterThanOrEqual(0)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SamplePopulation, { extinct: false })

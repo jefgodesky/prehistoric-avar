@@ -1,7 +1,7 @@
 import { sample } from '@std/random/sample'
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
-import type { IPopulation } from '../index.d.ts'
+import type {IPopulation, ISurvivalReport} from '../index.d.ts'
 import clamp from '../clamp.ts'
 import { wosan } from '../instances/species/index.ts'
 import type Region from './Region.ts'
@@ -178,6 +178,19 @@ class Population extends Markable {
     }
 
     return Math.round(this.size * (adjustment / 100))
+  }
+
+  findCannibals ({ hold, pressure }: ISurvivalReport): number {
+    const chances = [1/20000, 1/200000]
+    const chance = chances[hold] ?? 1/2000000
+    const tries = this.size + pressure
+    let cannibals = 0
+
+    for (let i = 0; i < tries; i++) {
+      if (Math.random() < chance) cannibals++
+    }
+
+    return cannibals
   }
 
   toObject (): IPopulation {
