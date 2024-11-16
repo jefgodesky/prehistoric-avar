@@ -565,6 +565,35 @@ describe('Region', () => {
       })
     })
 
+    describe('spreadLanguage', () => {
+      it('does nothing if the region has no population', () => {
+        const { world } = Simulation.instance()
+        world.regions.get('GS03')!.spreadLanguage()
+        expect(world.languages.size()).toBe(0)
+      })
+
+      it('does nothing if the region has no language', () => {
+        const { region } = introducePopulation()
+        region.spreadLanguage()
+        expect(world.languages.size()).toBe(0)
+      })
+
+      it('does nothing if all of the neighbors are wosan', () => {
+        const { region } = addSpeechCommunity()
+        introducePopulation('GS03', Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.WOSAN }))
+        region.spreadLanguage()
+        expect(world.languages.size()).toBe(1)
+      })
+
+      it('spreads language to neighboring regions with potential speakers', () => {
+        const { region } = addSpeechCommunity()
+        introducePopulation('GS03')
+        region.spreadLanguage()
+        expect(world.languages.size()).toBe(2)
+        expect(world.languages.get('GS03-001')).toBe('GS02-001')
+      })
+    })
+
     describe('survive', () => {
       it('lets everyone grow if there\'s resources', () => {
         const { region, population: humans } = introducePopulation()

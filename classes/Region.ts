@@ -217,6 +217,22 @@ class Region extends Markable implements IHabitable {
     return reports
   }
 
+  spreadLanguage (): void {
+    if (!this.hasSpeechCommunity()) return
+    const society = this.getSociety()
+    const language = society?.language
+    if (!language) return
+
+    const { regions } = Simulation.instance().world
+    const adjacent = regions.populate(this.adjacentRegions)
+    for (const region of adjacent) {
+      if (!region.hasPopulationCapableOfSpeech()) continue
+      const society = region.getSociety()
+      if (!society || society.language !== null) continue
+      society.addLanguage(language)
+    }
+  }
+
   generateSocietyId (): string {
     const { millennium } = Simulation.instance()
     return `${this.id}-${millennium.toString().padStart(3, '0')}`
