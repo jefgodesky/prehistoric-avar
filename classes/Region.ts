@@ -12,6 +12,7 @@ import clamp from '../clamp.ts'
 import createArchfey from '../factories/immortals/archfey.ts'
 import createSociety from '../factories/society.ts'
 import createSpeciationScroll, { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
+import Society from './Society.ts'
 
 class Region extends Markable implements IHabitable {
   adjacentRegions: string[]
@@ -67,6 +68,12 @@ class Region extends Markable implements IHabitable {
       .map(feature => feature.impact)
       .reduce((acc, curr) => acc + curr, 0)
     return (this.capacity * this.habitability * worldHabitability) + featureImpact
+  }
+
+  getSociety (): Society | null {
+    if (!this.society) return null
+    const { societies } = Simulation.instance().world
+    return societies.get(this.society)
   }
 
   introduce (...populations: Population[]): void {

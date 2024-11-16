@@ -226,6 +226,18 @@ describe('Region', () => {
       })
     })
 
+    describe('getSociety', () => {
+      it('returns null if the region has no society', () => {
+        const region = new Region(DS01)
+        expect(region.getSociety()).toBeNull()
+      })
+
+      it('returns the society if the region has one', () => {
+        const { region } = addSpeechCommunity()
+        expect(region.getSociety()).not.toBeNull()
+      })
+    })
+
     describe('introduce', () => {
       it('adds a new population', () => {
         const { region } = introducePopulation()
