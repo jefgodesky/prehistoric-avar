@@ -1,3 +1,4 @@
+import { sample } from '@std/random/sample'
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, SPECIES_NAMES } from '../enums.ts'
 import type { IPopulation } from '../index.d.ts'
@@ -153,6 +154,30 @@ class Population extends Markable {
 
     const { history, millennium } = Simulation.instance()
     history.add({ description, millennium, tags })
+  }
+
+  getProjectedSize (hold: number): number {
+    let adjustment = 100
+    const directions = [-1, 1, 1]
+    switch (hold) {
+      case 0:
+        adjustment -= new DiceRoll('1d20').total
+        break
+      case 1:
+        adjustment -= new DiceRoll('1d4').total
+        break
+      case 3:
+        adjustment += new DiceRoll('1d6').total
+        break
+      case 4:
+        adjustment += new DiceRoll('1d8').total
+        break
+      default:
+        adjustment += new DiceRoll('1d4').total * (sample(directions) ?? 1)
+        break
+    }
+
+    return Math.round(this.size * (adjustment / 100))
   }
 
   toObject (): IPopulation {

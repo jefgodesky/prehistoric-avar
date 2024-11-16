@@ -289,6 +289,42 @@ describe('Population', () => {
       })
     })
 
+    describe('getProjectedSize', () => {
+      it('reduces the population by 1d10 percent if given 0', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.getProjectedSize(0)
+        expect(actual).toBeLessThanOrEqual((p.size * 0.9) + 1)
+      })
+
+      it('reduces the population by 1d4 percent if given 1', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.getProjectedSize(1)
+        expect(actual).toBeLessThanOrEqual((p.size * 0.99) + 1)
+        expect(actual).toBeGreaterThanOrEqual((p.size * 0.96) - 1)
+      })
+
+      it('reduces or increases the population by 1d4 percent if given 2', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.getProjectedSize(2)
+        expect(actual).toBeLessThanOrEqual((p.size * 1.04) + 1)
+        expect(actual).toBeGreaterThanOrEqual((p.size * 0.96) - 1)
+      })
+
+      it('increases the population by 1d6 percent if given 3', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.getProjectedSize(3)
+        expect(actual).toBeLessThanOrEqual((p.size * 1.06) + 1)
+        expect(actual).toBeGreaterThanOrEqual(p.size - 1)
+      })
+
+      it('increases the population by 1d8 percent if given 4', () => {
+        const p = createPopulation(home, SamplePopulation)
+        const actual = p.getProjectedSize(4)
+        expect(actual).toBeLessThanOrEqual((p.size * 1.08) + 1)
+        expect(actual).toBeGreaterThanOrEqual(p.size - 1)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SamplePopulation, { extinct: false })
