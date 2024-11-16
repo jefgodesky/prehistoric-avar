@@ -95,6 +95,30 @@ describe('Society', () => {
       })
     })
 
+    describe('advanceLanguage', () => {
+      it('does nothing if the society has no language language', () => {
+        const society = createSociety(region)
+        const sim = Simulation.instance()
+        sim.millennium++
+        society.advanceLanguage()
+        expect(sim.world.languages.size()).toBe(0)
+      })
+
+      it('adds a new language', () => {
+        // Create language
+        const society = createSociety(region)
+        society.addLanguage()
+
+        // Next millennium
+        const sim = Simulation.instance()
+        sim.millennium++
+        society.advanceLanguage()
+
+        expect(society.language).toBe('GS03-002')
+        expect(sim.world.languages.get('GS03-002')).toBe('GS03-001')
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const biome = BIOMES.BOREAL_FOREST

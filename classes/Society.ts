@@ -24,6 +24,11 @@ class Society extends Markable {
     world.societies.add(this)
   }
 
+  advanceLanguage (): void {
+    if (!this.language) return
+    this.addLanguage(this.language)
+  }
+
   addLanguage (ancestor: string | null = null): void {
     const { world } = Simulation.instance()
     this.language = world.regions.get(this.region)?.generateSocietyId() ?? this.id
