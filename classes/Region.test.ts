@@ -620,6 +620,22 @@ describe('Region', () => {
       })
     })
 
+    describe('createsOgre', () => {
+      it('returns true or false based on current ogrism level', () => {
+        const { regions } = Simulation.instance().world
+        const region = regions.get('GS03')!
+        expect([true, false]).toContain(region.createsOgre())
+      })
+
+      it('increases ogrism if an ogre is created', () => {
+        const { regions } = Simulation.instance().world
+        const region = regions.get('GS03')!
+        const before = region.ogrism
+        region.createsOgre(true)
+        expect(region.ogrism).toBe(before + 1)
+      })
+    })
+
     describe('generateSocietyId', () => {
       it('generates an ID based on the region ID and millennium', () => {
         const region = world.regions.get('DS01')!

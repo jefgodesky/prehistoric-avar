@@ -238,6 +238,14 @@ class Region extends Markable implements IHabitable {
     }
   }
 
+  createsOgre (override?: boolean): boolean {
+    const probabilities = [0.01, 0.025, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
+    const probability = probabilities[this.ogrism] ?? 0.01
+    const result = override ?? Math.random() <= probability
+    if (result) this.ogrism++
+    return result
+  }
+
   generateSocietyId (): string {
     const { millennium } = Simulation.instance()
     return `${this.id}-${millennium.toString().padStart(3, '0')}`
