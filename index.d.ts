@@ -1,6 +1,5 @@
 import type {
   Biome,
-  Disposition,
   SpeciesName
 } from './enums.ts'
 
@@ -44,9 +43,7 @@ interface IHistoricalQuery {
 
 interface IImmortal {
   description: string
-  disposition: Disposition
   impact: number
-  relationships: IRelationship[]
   scrolls: IScroll[]
   slayable: IQuest | false
 }
@@ -57,7 +54,6 @@ interface IPopulation {
   size: number
   extinct?: boolean
   viability: number
-  relationships: IRelationship[]
   scrolls: IScroll[]
   markers: string[]
 }
@@ -114,12 +110,6 @@ interface IRegionData {
   }
 }
 
-interface IRelationship {
-  a: string
-  b: string
-  disposition: Disposition
-}
-
 interface IScroll {
   id?: string
   text: string
@@ -154,7 +144,6 @@ export type {
   IPopulation,
   IQuest,
   IQuestReport,
-  IRelationship,
   IRegion,
   IRegionFeature,
   IRegionData,

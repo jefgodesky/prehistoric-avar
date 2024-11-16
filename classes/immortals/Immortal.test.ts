@@ -1,6 +1,5 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import { DISPOSITIONS } from '../../enums.ts'
 import { DragonQueen } from '../../test-examples.ts'
 import Quest from '../Quest.ts'
 import Simulation from '../Simulation.ts'
@@ -30,11 +29,6 @@ describe('Immortal', () => {
       expect(i.description).toBe('Immortal')
     })
 
-    it('defaults disposition to indifferent', () => {
-      const i = new Immortal(world, region)
-      expect(i.disposition).toBe(DISPOSITIONS.INDIFFERENT)
-    })
-
     it('defaults impact to 0', () => {
       const i = new Immortal(world, region)
       expect(i.impact).toBe(0)
@@ -43,11 +37,6 @@ describe('Immortal', () => {
     it('sets the region where the immortal is found', () => {
       const i = new Immortal(world, region)
       expect(i.region).toBe(region)
-    })
-
-    it('defaults relationships to an empty array', () => {
-      const i = new Immortal(world, region)
-      expect(i.relationships).toHaveLength(0)
     })
 
     it('defaults scrolls to an empty array', () => {
@@ -70,19 +59,9 @@ describe('Immortal', () => {
       expect(i.description).toBe(DragonQueen.description)
     })
 
-    it('can set disposition', () => {
-      const i = new Immortal(world, region, DragonQueen)
-      expect(i.disposition).toBe(DragonQueen.disposition)
-    })
-
     it('can set impact', () => {
       const i = new Immortal(world, region, DragonQueen)
       expect(i.impact).toBe(DragonQueen.impact)
-    })
-
-    it('can set relationships', () => {
-      const i = new Immortal(world, region, DragonQueen)
-      expect(i.relationships).toHaveLength(DragonQueen.relationships.length)
     })
 
     it('can set scrolls', () => {

@@ -1,5 +1,4 @@
 import { IImmortal } from '../../index.d.ts'
-import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from './Immortal.ts'
 import World from '../World.ts'
 
@@ -7,7 +6,6 @@ class Archfey extends Immortal {
   constructor (world: World, region: string, data?: IImmortal) {
     const archfeyData: IImmortal = Object.assign({}, {
       description: `Archfey Sovereign of ${region}`,
-      disposition: DISPOSITIONS.INDIFFERENT,
       impact: -250,
       slayable: {
         id: `slay-archfey-${region}`,
@@ -16,7 +14,6 @@ class Archfey extends Immortal {
         skill: 0.0001,
         lethality: 0.1
       },
-      relationships: [],
       scrolls: []
     }, data ?? {})
 

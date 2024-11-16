@@ -1,5 +1,4 @@
 import type { IImmortal } from '../../../index.d.ts'
-import { DISPOSITIONS } from '../../../enums.ts'
 import Immortal from '../Immortal.ts'
 import Simulation from '../../Simulation.ts'
 import World from '../../World.ts'
@@ -10,7 +9,6 @@ abstract class Elemental extends Immortal {
   protected constructor (world: World, region: string, element: string, data?: IImmortal) {
     const elementalData: IImmortal = Object.assign({}, {
       description: `Powerful ${element} Elemental`,
-      disposition: DISPOSITIONS.INDIFFERENT,
       impact: 250,
       slayable: {
         id: `Slay the Powerful ${element} Elemental`,
@@ -19,7 +17,6 @@ abstract class Elemental extends Immortal {
         skill: 0.0001,
         lethality: 0.25
       },
-      relationships: [],
       scrolls: []
     }, data ?? {})
 

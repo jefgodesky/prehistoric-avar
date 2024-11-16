@@ -1,6 +1,5 @@
 import {
   BIOMES,
-  DISPOSITIONS,
   SPECIES_NAMES
 } from './enums.ts'
 
@@ -8,7 +7,6 @@ import {
   IImmortal,
   IPopulation,
   IQuest,
-  IRelationship,
   ISociety,
   ISpecies
 } from './index.d.ts'
@@ -19,25 +17,12 @@ const SamplePopulation: IPopulation = {
   markers: ['Example marker'],
   size: 54321,
   viability: 0.9,
-  relationships: [
-    {
-      a: 'Population: GS02-123HU',
-      b: 'Immortal: The Dragon Queen',
-      disposition: DISPOSITIONS.HOSTILE
-    }
-  ],
   scrolls: [
     {
       text: 'Example scroll',
       seals: 10
     }
   ]
-}
-
-const SampleRelationship: IRelationship = {
-  a: 'Population: GS03-001WO',
-  b: 'Immortal: The Dragon Queen',
-  disposition: DISPOSITIONS.HOSTILE
 }
 
 const WosanData: ISpecies = {
@@ -133,15 +118,7 @@ const SampleQuest: IQuest = {
 
 const DragonQueen: IImmortal = {
   description: 'The Dragon Queen',
-  disposition: DISPOSITIONS.HOSTILE,
   impact: 1000,
-  relationships: [
-    {
-      a: 'Immortal: The Dragon Queen',
-      b: 'Population: GS03-001WO',
-      disposition: DISPOSITIONS.HOSTILE
-    }
-  ],
   scrolls: [
     {
       text: 'The Dragon Queen finds a consort',
@@ -155,7 +132,6 @@ export {
   DragonQueen,
   SamplePopulation,
   SampleQuest,
-  SampleRelationship,
   SampleSociety,
   ElfData,
   HumanData,

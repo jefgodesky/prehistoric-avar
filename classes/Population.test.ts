@@ -48,11 +48,6 @@ describe('Population', () => {
       expect(p.viability).toBe(1)
     })
 
-    it('defaults to an empty array of relationships', () => {
-      const p = new Population(world, home)
-      expect(p.relationships).toHaveLength(0)
-    })
-
     it('defaults to an empty array of scrolls', () => {
       const p = new Population(world, home)
       expect(p.scribe.scrolls).toHaveLength(0)
@@ -81,11 +76,6 @@ describe('Population', () => {
     it('can set viability', () => {
       const p = createPopulation(home, SamplePopulation)
       expect(p.viability).toBe(SamplePopulation.viability)
-    })
-
-    it('can set relationships', () => {
-      const p = createPopulation(home, SamplePopulation)
-      expect(p.relationships).toHaveLength(SamplePopulation.relationships.length)
     })
 
     it('can set scrolls', () => {

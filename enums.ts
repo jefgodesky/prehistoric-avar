@@ -11,12 +11,6 @@ export const BIOMES = {
   WORLD_BELOW: 'World Below'
 } as const
 
-export const DISPOSITIONS = {
-  HOSTILE: 'Hostile',
-  INDIFFERENT: 'Indifferent',
-  FRIENDLY: 'Friendly'
-} as const
-
 export const TERRESTRIAL_ELEMENTS = {
   AIR: 'Air',
   EARTH: 'Earth',
@@ -72,7 +66,6 @@ export const SPECIES_NAMES = {
 }
 
 export type Biome = typeof BIOMES[keyof typeof BIOMES]
-export type Disposition = typeof DISPOSITIONS[keyof typeof DISPOSITIONS]
 export type Layer = typeof LAYER[keyof typeof LAYER]
 export type SpeciesName = typeof SPECIES_NAMES[keyof typeof SPECIES_NAMES]
 export type TerrestrialElement = typeof TERRESTRIAL_ELEMENTS[keyof typeof TERRESTRIAL_ELEMENTS]

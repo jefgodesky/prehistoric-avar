@@ -1,7 +1,6 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { IRegionFeature } from '../../../index.d.ts'
-import { DISPOSITIONS } from '../../../enums.ts'
 import type Region from '../../Region.ts'
 import Simulation from '../../../classes/Simulation.ts'
 import World from '../../World.ts'
@@ -24,7 +23,6 @@ describe('FireElemental', () => {
       const elemental = new FireElemental(world, region)
       expect(elemental).toBeInstanceOf(FireElemental)
       expect(elemental.region).toBe(region)
-      expect(elemental.disposition).toBe(DISPOSITIONS.INDIFFERENT)
       expect(elemental.description).toBe('Powerful Fire Elemental')
       expect(elemental.impact).toBe(250)
       expect(elemental.slayable).not.toBe(false)

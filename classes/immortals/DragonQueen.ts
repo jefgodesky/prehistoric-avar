@@ -1,6 +1,5 @@
 import { sample } from '@std/collections'
 import { IImmortal } from '../../index.d.ts'
-import { DISPOSITIONS } from '../../enums.ts'
 import Immortal from './Immortal.ts'
 import Simulation from '../Simulation.ts'
 import Singleton from '../../Singleton.ts'
@@ -10,10 +9,8 @@ class DragonOgre extends Immortal {
   constructor (world: World, region: string, data?: IImmortal) {
     const dragonQueenData: IImmortal = Object.assign({}, {
       description: 'The Dragon Queen',
-      disposition: DISPOSITIONS.HOSTILE,
       impact: 500,
       slayable: false as false,
-      relationships: [],
       scrolls: []
     }, data ?? {})
 

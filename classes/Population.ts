@@ -5,7 +5,6 @@ import clamp from '../clamp.ts'
 import { wosan } from '../instances/species/index.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
-import Relationship from './Relationship.ts'
 import Markable from './Markable.ts'
 import Scribe from './Scribe.ts'
 import Simulation from './Simulation.ts'
@@ -21,13 +20,11 @@ class Population extends Markable {
   size: number
   viability: number
   scribe: Scribe
-  relationships: Relationship[]
   extinct: boolean
   private fitness: Fitness
 
   constructor (world: World, home: string, data?: IPopulation) {
     super(data)
-    const relationships = data?.relationships ?? []
 
     this.home = home
     this.id = world.populations.generateKey(data?.id ?? 'GS03-001WO')
@@ -35,7 +32,6 @@ class Population extends Markable {
     this.size = data?.size ?? 1
     this.viability = data?.viability ?? 1
     this.scribe = new Scribe(...(data?.scrolls ?? []))
-    this.relationships = relationships.map(rel => new Relationship(rel))
     this.markers = data?.markers ?? []
     this.extinct = data?.extinct ?? false
 
@@ -131,7 +127,6 @@ class Population extends Markable {
         markers: [],
         size: n,
         viability: this.viability,
-        relationships: [],
         scrolls: [],
         extinct: false
       })
@@ -151,7 +146,6 @@ class Population extends Markable {
       markers: this.markers,
       size: this.size,
       viability: this.viability,
-      relationships: this.relationships.map(rel => rel.toObject()),
       scrolls: this.scribe.toObject(),
       extinct: this.extinct
     }
