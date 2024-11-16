@@ -77,10 +77,21 @@ describe('Society', () => {
 
   describe('Member methods', () => {
     describe('addLanguage', () => {
-      it('adds a language to the society', () => {
+      it('adds the primordial language to the society', () => {
         const society = createSociety(region)
         society.addLanguage()
+        const { languages } = Simulation.instance().world
         expect(society.language).toBe(`${society.region}-001`)
+        expect(languages.get(society.language!)).toBeNull()
+      })
+
+      it('adds a language with an ancestor to the society', () => {
+        const society = createSociety(region)
+        const ancestor = 'GS02-001'
+        society.addLanguage(ancestor)
+        const { languages } = Simulation.instance().world
+        expect(society.language).toBe(`${society.region}-001`)
+        expect(languages.get(society.language!)).toBe(ancestor)
       })
     })
 
