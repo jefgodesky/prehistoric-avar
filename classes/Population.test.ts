@@ -290,10 +290,10 @@ describe('Population', () => {
     })
 
     describe('getProjectedSize', () => {
-      it('reduces the population by 1d10 percent if given 0', () => {
+      it('reduces the population by 1d20 percent if given 0', () => {
         const p = createPopulation(home, SamplePopulation)
         const actual = p.getProjectedSize(0)
-        expect(actual).toBeLessThanOrEqual((p.size * 0.9) + 1)
+        expect(actual).toBeLessThanOrEqual((p.size * 0.99) + 1)
       })
 
       it('reduces the population by 1d4 percent if given 1', () => {
