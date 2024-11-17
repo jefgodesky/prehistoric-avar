@@ -5,6 +5,8 @@ import Region from './Region.ts'
 import World from './World.ts'
 import Singleton from '../Singleton.ts'
 
+const END_THRESHOLD = 100 as const
+
 class BaseSimulation {
   history: History
   millennium: number
@@ -52,8 +54,13 @@ class BaseSimulation {
   expand (): void {
     for (const region of this.regions) region.expand()
   }
+
+  end (): boolean {
+    return this.world.dragons.sum() >= END_THRESHOLD
+  }
 }
 
 const Simulation = Singleton(BaseSimulation)
 export default Simulation
 export type { BaseSimulation }
+export { END_THRESHOLD }

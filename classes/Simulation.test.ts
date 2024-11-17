@@ -1,7 +1,7 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { SIMULATION_STAGES, SPECIES_NAMES } from '../enums.ts'
-import Simulation, { BaseSimulation } from './Simulation.ts'
+import Simulation, { BaseSimulation, END_THRESHOLD } from './Simulation.ts'
 
 describe('Simulation', () => {
   let sim: BaseSimulation
@@ -64,6 +64,24 @@ describe('Simulation', () => {
         sim.world.habitability = 0.5
         sim.refresh()
         expect(sim.world.habitability).toBeCloseTo(0.75)
+      })
+    })
+
+    describe('end', () => {
+      it('returns false if the sum of draconic interest and fear is below threshold', () => {
+        expect(sim.end()).toBe(false)
+      })
+
+      it('returns true if the sum of draconic interest and fear is equal to threshold', () => {
+        sim.world.dragons.interest.value = END_THRESHOLD - 50
+        sim.world.dragons.fear.value = 50
+        expect(sim.end()).toBe(true)
+      })
+
+      it('returns true if the sum of draconic interest and fear exceeds threshold', () => {
+        sim.world.dragons.interest.value = END_THRESHOLD
+        sim.world.dragons.fear.value = END_THRESHOLD
+        expect(sim.end()).toBe(true)
       })
     })
   })
