@@ -98,6 +98,15 @@ describe('Population', () => {
   })
 
   describe('Member methods', () => {
+    describe('refresh', () => {
+      it('resets growth', () => {
+        const p = createPopulation(home, SamplePopulation)
+        p.growth = { hold: 2, pressure: 0 }
+        p.refresh()
+        expect(p.growth).toBeNull()
+      })
+    })
+
     describe('getFitness', () => {
       it('returns the population fitness for a given biome', () => {
         const p = createPopulation(home, SamplePopulation)

@@ -668,6 +668,14 @@ describe('Region', () => {
         expect(results[0].pressure).toBeGreaterThan(1999)
         expect(results[1].pressure).toBeGreaterThan(1999)
       })
+
+      it('attaches report to each population', () => {
+        const { region, population: humans } = introducePopulation()
+        const { population: elves } = introducePopulation(region.id, Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.ELF }))
+        region.survive()
+        expect(humans.growth).not.toBeNull()
+        expect(elves.growth).not.toBeNull()
+      })
     })
 
     describe('createsOgre', () => {

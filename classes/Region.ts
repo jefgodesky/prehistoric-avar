@@ -220,7 +220,8 @@ class Region extends Markable implements IHabitable {
         pops[i].size = Math.floor(capacity * portion)
       }
 
-      reports.push({ hold, pressure: size - p.size })
+      p.growth = { hold, pressure: size - p.size }
+      reports.push(p.growth)
     }
 
     return reports

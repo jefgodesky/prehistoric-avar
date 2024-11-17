@@ -26,6 +26,7 @@ class Population extends Markable {
   viability: number
   scribe: Scribe
   extinct: boolean
+  growth: ISurvivalReport | null = null
   private fitness: Fitness
 
   constructor (world: World, home: string, data?: IPopulation) {
@@ -53,6 +54,7 @@ class Population extends Markable {
   }
 
   refresh (): void {
+    this.growth = null
     this.adjustViability()
   }
 
