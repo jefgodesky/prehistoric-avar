@@ -610,6 +610,40 @@ describe('Region', () => {
       })
     })
 
+    describe('spreadOgrism', () => {
+      const id = 'GS02'
+
+      it('does nothing if two regions have the same ogrism', () => {
+        const region = world.regions.get(id)!
+        const neighbor = world.regions.get(region.adjacentRegions[0])!
+        region.ogrism = 0
+        neighbor.ogrism = 0
+        region.spreadOgrism()
+        expect(region.ogrism).toBe(0)
+        expect(neighbor.ogrism).toBe(0)
+      })
+
+      it('does nothing if neighbor has higher ogrism', () => {
+        const region = world.regions.get(id)!
+        const neighbor = world.regions.get(region.adjacentRegions[0])!
+        region.ogrism = 0
+        neighbor.ogrism = 3
+        region.spreadOgrism()
+        expect(region.ogrism).toBe(0)
+        expect(neighbor.ogrism).toBe(3)
+      })
+
+      it('increases neighbor\'s ogrism if it is lower', () => {
+        const region = world.regions.get(id)!
+        const neighbor = world.regions.get(region.adjacentRegions[0])!
+        region.ogrism = 3
+        neighbor.ogrism = 0
+        region.spreadOgrism()
+        expect(region.ogrism).toBe(3)
+        expect(neighbor.ogrism).toBe(1)
+      })
+    })
+
     describe('survive', () => {
       it('lets everyone grow if there\'s resources', () => {
         const { region, population: humans } = introducePopulation()

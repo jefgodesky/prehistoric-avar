@@ -242,6 +242,14 @@ class Region extends Markable implements IHabitable {
     }
   }
 
+  spreadOgrism (): void {
+    const { regions } = Simulation.instance().world
+    const adjacent = regions.populate(this.adjacentRegions)
+    for (const region of adjacent) {
+      if (region.ogrism < this.ogrism) region.increaseOgrism()
+    }
+  }
+
   createsOgre (override?: boolean): boolean {
     const probabilities = [0.01, 0.025, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
     const probability = probabilities[this.ogrism] ?? 0.01
