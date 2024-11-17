@@ -242,7 +242,7 @@ class Region extends Markable implements IHabitable {
     const probabilities = [0.01, 0.025, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
     const probability = probabilities[this.ogrism] ?? 0.01
     const result = override ?? Math.random() <= probability
-    if (result) this.ogrism++
+    if (result) this.ogrism = clamp(this.ogrism + 1, 0, 8)
     return result
   }
 

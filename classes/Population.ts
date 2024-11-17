@@ -301,6 +301,17 @@ class Population extends Markable {
     history.add({ description, millennium, tags })
   }
 
+  checkOgres (report: ISurvivalReport): void {
+    const home = this.getHome()
+    const cannibals = this.findCannibals(report)
+    for (let i = 0; i < cannibals; i++) {
+      if (home.createsOgre()) {
+        const ogre = this.runOgre()
+        this.recordOgre(ogre)
+      }
+    }
+  }
+
   toObject (): IPopulation {
     return {
       id: this.id,
