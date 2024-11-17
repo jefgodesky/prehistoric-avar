@@ -636,6 +636,17 @@ describe('Region', () => {
       })
     })
 
+    describe('pickRandomHumanoid', () => {
+      it('selects a humanoid randomly from the population', () => {
+        const region = world.regions.get('GS03')!
+        const humans = createPopulation(region.id, SamplePopulation)
+        const elves = createPopulation(region.id, Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.ELF }))
+        const { species, population } = region.pickRandomHumanoid()
+        expect([SPECIES_NAMES.HUMAN, SPECIES_NAMES.ELF]).toContain(species)
+        expect([humans.id, elves.id]).toContain(population)
+      })
+    })
+
     describe('generateSocietyId', () => {
       it('generates an ID based on the region ID and millennium', () => {
         const region = world.regions.get('DS01')!

@@ -246,6 +246,23 @@ class Region extends Markable implements IHabitable {
     return result
   }
 
+  pickRandomHumanoid (): { species: SpeciesName, population: string } {
+    const { world } = Simulation.instance()
+    const populations = world.populations.populate(this.populations)
+    const total = sumOf(populations, p => p.size)
+    const pick = Math.round(Math.random() * total)
+
+    let limit = 0
+    let picked: Population | null = null
+    for (const p of populations) {
+      limit += p.size
+      if (pick <= limit) { picked = p; break }
+    }
+
+    picked = picked ?? populations[0]
+    return { species: picked.species, population: picked.id }
+  }
+
   generateSocietyId (): string {
     const { millennium } = Simulation.instance()
     return `${this.id}-${millennium.toString().padStart(3, '0')}`
