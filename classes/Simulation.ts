@@ -44,6 +44,10 @@ class BaseSimulation {
       region.refresh()
     }
   }
+
+  grow (): void {
+    for (const region of this.regions) region.grow()
+  }
 }
 
 const Simulation = Singleton(BaseSimulation)
