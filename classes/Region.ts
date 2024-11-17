@@ -79,10 +79,15 @@ class Region extends Markable implements IHabitable {
   }
 
   getCapacity (worldHabitability: number): number {
-    const featureImpact = this.features
-      .map(feature => feature.impact)
-      .reduce((acc, curr) => acc + curr, 0)
-    return (this.capacity * this.habitability * worldHabitability) + featureImpact
+    const { immortals } = Simulation.instance().world
+    const otherFactors = [
+      ...this.features.map(feature => feature.impact),
+      ...this.immortals.map(id => (immortals.get(id)?.impact ?? 0) * -1)
+    ]
+
+    const base = this.capacity * this.habitability * worldHabitability
+    const other = sumOf(otherFactors, factor => factor)
+    return base + other
   }
 
   getSociety (): Society | null {

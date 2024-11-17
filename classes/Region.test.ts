@@ -1,13 +1,16 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
-import type { IPopulation } from '../index.d.ts'
+import { sumOf } from '@std/collections'
+import type {IPopulation, IRegionFeature} from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import { SamplePopulation, SampleSociety } from '../test-examples.ts'
-import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES } from '../enums.ts'
+import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES, TERRESTRIAL_ELEMENTS } from '../enums.ts'
 import Population from './Population.ts'
 import Simulation from './Simulation.ts'
 import Species from './Species.ts'
 import World from './World.ts'
+import createArchfey from '../factories/immortals/archfey.ts'
+import createElemental from '../factories/immortals/elemental.ts'
 import createPopulation from '../factories/population.ts'
 import { getSpeciationScrollText } from '../factories/scrolls/speciation.ts'
 import Region from './Region.ts'
@@ -214,21 +217,32 @@ describe('Region', () => {
   describe('Member methods', () => {
     describe('getCapacity', () => {
       it('calculates actual carrying capacity', () => {
-        const region = new Region(DS01)
+        const region = world.regions.get('MS06')!
         region.habitability = 0.9
-        const featureImpact = region.features
-          .map(feature => feature.impact)
-          .reduce((acc, curr) => acc + curr, 0)
-        const worldHabitability = 0.92
-        const expected = (DS01.capacity * worldHabitability * region.habitability) + featureImpact
-        const capacity = region.getCapacity(worldHabitability)
+        const featureImpact = sumOf(region.features, (feature: IRegionFeature) => feature.impact)
+        const expected = (region.capacity * world.habitability * region.habitability) + featureImpact
+        const capacity = region.getCapacity(world.habitability)
         expect(capacity).toBe(expected)
+      })
+
+      it('is increased by an archfey', () => {
+        const region = world.regions.get('FS11')!
+        const before = region.getCapacity(world.habitability)
+        createArchfey(region.id)
+        expect(region.getCapacity(world.habitability)).toBeGreaterThan(before)
+      })
+
+      it('is reduced by an elemental', () => {
+        const region = world.regions.get('FS11')!
+        const before = region.getCapacity(world.habitability)
+        createElemental(region.id, TERRESTRIAL_ELEMENTS.FIRE)
+        expect(region.getCapacity(world.habitability)).toBeLessThan(before)
       })
     })
 
     describe('getSociety', () => {
       it('returns null if the region has no society', () => {
-        const region = new Region(DS01)
+        const region = world.regions.get('DS01')!
         expect(region.getSociety()).toBeNull()
       })
 
