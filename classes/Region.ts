@@ -77,6 +77,11 @@ class Region extends Markable implements IHabitable {
     for (const p of populations) p.grow()
   }
 
+  expand (): void {
+    const populations = this.getPopulations()
+    for (const p of populations) p.expand()
+  }
+
   getCapacity (worldHabitability: number): number {
     const { immortals } = Simulation.instance().world
     const otherFactors = [
