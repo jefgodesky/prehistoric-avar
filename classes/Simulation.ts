@@ -55,6 +55,30 @@ class BaseSimulation {
     for (const region of this.regions) region.expand()
   }
 
+  resolve (): void {
+    // Unseal immortals' scrolls and run their move functions
+    for (const immortal of this.world.immortals.values()) {
+      for (const scroll of immortal.scribe.scrolls) {
+        scroll.unseal()
+      }
+      immortal.move()
+    }
+
+    // Unseal populations' scrolls
+    for (const p of this.world.populations.values()) {
+      for (const scroll of p.scribe.scrolls) {
+        scroll.unseal()
+      }
+    }
+
+    // Unseal societies' scrolls
+    for (const society of this.world.societies.values()) {
+      for (const scroll of society.scribe.scrolls) {
+        scroll.unseal()
+      }
+    }
+  }
+
   end (): boolean {
     return this.world.dragons.sum() >= END_THRESHOLD
   }
