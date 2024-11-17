@@ -1,10 +1,9 @@
 import { nanoid } from 'nanoid'
-import { sample } from '@std/random/sample'
-import { shuffle } from '@std/random'
+import { sample, shuffle } from '@std/random'
+import { sumOf } from '@std/collections'
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
 import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
 import type { IOgreReport, IPopulation, ISurvivalReport } from '../index.d.ts'
-import clamp from '../clamp.ts'
 import { wosan } from '../instances/species/index.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
@@ -14,7 +13,9 @@ import Scribe from './Scribe.ts'
 import Simulation from './Simulation.ts'
 import Species from './Species.ts'
 import World from './World.ts'
+import clamp from '../clamp.ts'
 import createPopulation from '../factories/population.ts'
+import oxford from '../oxford.ts'
 
 const TO_STRING_PREFIX = 'Population:' as const
 
@@ -255,6 +256,49 @@ class Population extends Markable {
     }
 
     return { origin: this.id, slayer, victims }
+  }
+
+  recordOgre ({ origin, slayer, victims }: IOgreReport): void {
+    // An ogre emerged from the human population GS02-HU001, killing a total of
+    // 31 humanoids (18 humans, including 12 who died trying to destroy it and
+    // 14 elves, including 2 who died trying to destroy it) before it was
+    // destroyed by its own kin.
+
+    // An ogre emerged from the human population GS02-HU001, killing a total of
+    // 31 humanoids (18 humans, including 12 who died trying to destroy it and
+    // 14 elves, including 2 who died trying to destroy it) before it was
+    // destroyed by a group of elves from GS02-EL001.
+
+    // An ogre emerged from the human population GS02-HU001, killing a total of
+    // 31 humanoids (18 humans, including 12 who died trying to destroy it and
+    // 14 elves, including 2 who died trying to destroy it). It terrorized
+    // GS02 for many long years until it died.
+
+    const { history, millennium, world } = Simulation.instance()
+    const { populations, species } = world
+    const total = sumOf(Object.values(victims), obj => obj.total)
+    const lede = `An ogre emerged from the ${this.species.toLowerCase()} ` +
+      `population ${this.id}, killing a total of ${total} humanoids `
+
+    const breakdown = Object.keys(victims)
+      .filter(name => victims[name].total > 0)
+      .map(name => {
+        const sp = species.get(name.toLowerCase())
+        const pl = sp?.getPlural().toLowerCase() ?? 'humanoids'
+        const { fighting, total } = victims[name]
+        return `${total} ${pl}, including ${fighting} who died trying to destroy it`
+      })
+    const paren = `(${oxford(...breakdown)})`
+
+    const fate = origin === slayer
+      ? ' before it was destroyed by its own kin.'
+      : slayer !== null
+        ? ` before it was destroyed by a group of ${species.get(populations.get(slayer ?? '')?.species.toLowerCase() ?? '')?.getPlural().toLowerCase() ?? 'humanoids'} from ${slayer}`
+        : `. It terrorized ${this.home} for many long years until it died.`
+
+    const description = lede + paren + fate
+    const tags = [this.home, origin, origin === slayer ? null : slayer, 'Ogre'].filter(tag => tag !== null)
+    history.add({ description, millennium, tags })
   }
 
   toObject (): IPopulation {

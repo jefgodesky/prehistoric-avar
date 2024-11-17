@@ -390,6 +390,51 @@ describe('Population', () => {
       })
     })
 
+    describe('recordOgre', () => {
+      const victims = {
+        [SPECIES_NAMES.ELF]: { fighting: 10, murdered: 1, total: 11 },
+        [SPECIES_NAMES.DWARF]: { fighting: 0, murdered: 0, total: 0 },
+        [SPECIES_NAMES.GNOME]: { fighting: 0, murdered: 0, total: 0 },
+        [SPECIES_NAMES.HALFLING]: { fighting: 0, murdered: 0, total: 0 },
+        [SPECIES_NAMES.HUMAN]: { fighting: 15, murdered: 5, total: 20 },
+        [SPECIES_NAMES.ORC]: { fighting: 0, murdered: 0, total: 0 },
+        [SPECIES_NAMES.WOSAN]: { fighting: 0, murdered: 0, total: 0 },
+      }
+      it('records an ogre defeated by its own population in the history', () => {
+        const { history } = Simulation.instance()
+        const humans = createPopulation(home, SamplePopulation)
+        humans.recordOgre({
+          origin: humans.id,
+          slayer: humans.id,
+          victims
+        })
+        expect(history.get({ tags: ['Ogre', humans.id], logic: { tags: 'and' } })).toHaveLength(1)
+      })
+
+      it('records an ogre defeated by a different population in the history', () => {
+        const { history } = Simulation.instance()
+        const humans = createPopulation(home, SamplePopulation)
+        const elves = createPopulation(home, Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.ELF }))
+        humans.recordOgre({
+          origin: humans.id,
+          slayer: elves.id,
+          victims
+        })
+        expect(history.get({ tags: ['Ogre', humans.id, elves.id], logic: { tags: 'and' } })).toHaveLength(1)
+      })
+
+      it('records an undefeated ogre in the history', () => {
+        const { history } = Simulation.instance()
+        const humans = createPopulation(home, SamplePopulation)
+        humans.recordOgre({
+          origin: humans.id,
+          slayer: null,
+          victims
+        })
+        expect(history.get({ tags: ['Ogre', humans.id], logic: { tags: 'and' } })).toHaveLength(1)
+      })
+    })
+
     describe('toObject', () => {
       it('exports an object', () => {
         const cpy = Object.assign({}, SamplePopulation, { extinct: false })
