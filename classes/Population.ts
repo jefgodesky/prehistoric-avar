@@ -58,6 +58,11 @@ class Population extends Markable {
     this.adjustViability()
   }
 
+  grow (): void {
+    if (this.growth) this.checkOgres(this.growth)
+    this.apply50500()
+  }
+
   getFitness (biome?: Biome): number {
     const b = biome ?? this.getHome().biome
     return b ? this.fitness.get(b) : 0
