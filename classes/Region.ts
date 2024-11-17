@@ -291,6 +291,16 @@ class Region extends Markable implements IHabitable {
     return { species: picked.species, population: picked.id }
   }
 
+  evaluate (p: Population): number {
+    const { world } = Simulation.instance()
+    const capacity = this.getCapacity(world.habitability)
+    const populations = world.populations.populate(this.populations)
+    const population = sumOf(populations, p => p.size)
+    const fitness = this.biome ? p.getFitness(this.biome) : -3
+    const dragons = this.dragons.length
+    return (capacity - population) * (fitness - dragons + 3)
+  }
+
   generateSocietyId (): string {
     const { millennium } = Simulation.instance()
     return `${this.id}-${millennium.toString().padStart(3, '0')}`

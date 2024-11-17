@@ -719,6 +719,37 @@ describe('Region', () => {
       })
     })
 
+    describe('evaluate', () => {
+      const baseline = 545776
+
+      it('quantifies how appealing a region is for a population', () => {
+        const region = world.regions.get('GS03')!
+        const humans = createPopulation(region.id, SamplePopulation)
+        expect(region.evaluate(humans)).toBe(baseline)
+      })
+
+      it('is less appealing when there is more competition', () => {
+        const region = world.regions.get('GS03')!
+        const humans = createPopulation(region.id, SamplePopulation)
+        humans.adjustSize(1000)
+        expect(region.evaluate(humans)).toBeLessThan(baseline)
+      })
+
+      it('is more appealing when there is less competition', () => {
+        const region = world.regions.get('GS03')!
+        const humans = createPopulation(region.id, SamplePopulation)
+        humans.adjustSize(-1000)
+        expect(region.evaluate(humans)).toBeGreaterThan(baseline)
+      })
+
+      it('is less appealing if there are more dragons', () => {
+        const region = world.regions.get('GS03')!
+        region.dragons = [...region.dragons, 'shit dragon']
+        const humans = createPopulation(region.id, SamplePopulation)
+        expect(region.evaluate(humans)).toBeLessThan(baseline)
+      })
+    })
+
     describe('generateSocietyId', () => {
       it('generates an ID based on the region ID and millennium', () => {
         const region = world.regions.get('DS01')!
