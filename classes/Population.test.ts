@@ -1,5 +1,6 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
+import { sumOf } from '@std/collections'
 import { sample } from '@std/random'
 import { BIOMES, SPECIES_NAMES } from '../enums.ts'
 import { SamplePopulation, SampleSociety } from '../test-examples.ts'
@@ -359,6 +360,33 @@ describe('Population', () => {
         expect(p.size).toBe(500)
         expect(p.extinct).toBe(false)
         expect(p.viability).toBeCloseTo(SamplePopulation.viability)
+      })
+    })
+
+    describe('runOgre', () => {
+      it('simulates the impact of an ogre', () => {
+        const { regions } = Simulation.instance().world
+        regions.get(home)!.ogrism++
+        const humans = createPopulation(home, SamplePopulation)
+        const elves = createPopulation(home, Object.assign({}, SamplePopulation, { species: SPECIES_NAMES.ELF }))
+        const before = humans.size + elves.size
+        const report = humans.runOgre()
+        const present = [SPECIES_NAMES.HUMAN, SPECIES_NAMES.ELF]
+        const all = Object.values(SPECIES_NAMES)
+        const slain = sumOf(present.map(sp => report.victims[sp]), sp => sp.total)
+
+        expect(report.origin).toBe(humans.id)
+        expect([humans.id, elves.id, null]).toContain(report.slayer)
+        expect(humans.size + elves.size).toBe(before - slain)
+
+        for (const sp of all) {
+          if (present.includes(sp)) {
+            expect(report.victims[sp].total).toBeGreaterThanOrEqual(0)
+            expect(report.victims[sp].total).toBeLessThanOrEqual(slain)
+          } else {
+            expect(report.victims[sp].total).toBe(0)
+          }
+        }
       })
     })
 

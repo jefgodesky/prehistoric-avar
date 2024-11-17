@@ -48,6 +48,12 @@ interface IImmortal {
   slayable: IQuest | false
 }
 
+interface IOgreReport {
+  origin: string
+  slayer: string | null
+  victims: Record<SpeciesName, { fighting: number, murdered: number, total: number }>
+}
+
 interface IPopulation {
   id?: string
   species: SpeciesName
@@ -151,6 +157,7 @@ export type {
   IHistoricalQuery,
   IHistoricalRecord,
   IImmortal,
+  IOgreReport,
   IPopulation,
   IQuest,
   IQuestReport,

@@ -1,12 +1,15 @@
+import { nanoid } from 'nanoid'
 import { sample } from '@std/random/sample'
+import { shuffle } from '@std/random'
 import { DiceRoll } from '@dice-roller/rpg-dice-roller'
-import { Biome, SPECIES_NAMES } from '../enums.ts'
-import type {IPopulation, ISurvivalReport} from '../index.d.ts'
+import { Biome, BIOMES, SPECIES_NAMES, SpeciesName } from '../enums.ts'
+import type { IOgreReport, IPopulation, ISurvivalReport } from '../index.d.ts'
 import clamp from '../clamp.ts'
 import { wosan } from '../instances/species/index.ts'
 import type Region from './Region.ts'
 import Fitness from './Fitness.ts'
 import Markable from './Markable.ts'
+import Quest from './Quest.ts'
 import Scribe from './Scribe.ts'
 import Simulation from './Simulation.ts'
 import Species from './Species.ts'
@@ -81,7 +84,7 @@ class Population extends Markable {
 
   adjustSize (delta: number): void {
     if (this.extinct) return
-    if (delta > 1 || delta < -1) {
+    if (delta >= 1 || delta <= -1) {
       this.size += Math.floor(delta)
     } else {
       this.size *= 1 + delta
@@ -199,6 +202,59 @@ class Population extends Markable {
     } else if (this.size < 500) {
       this.viability = this.viability * 0.75
     }
+  }
+
+  runOgre (): IOgreReport {
+    const { world } = Simulation.instance()
+    const home = this.getHome()
+    const ogrism = Math.max(home.ogrism, 1)
+    const victims: Record<SpeciesName, { fighting: number, murdered: number, total: number }> = {
+      [SPECIES_NAMES.ELF]: { fighting: 0, murdered: 0, total: 0 },
+      [SPECIES_NAMES.DWARF]: { fighting: 0, murdered: 0, total: 0 },
+      [SPECIES_NAMES.GNOME]: { fighting: 0, murdered: 0, total: 0 },
+      [SPECIES_NAMES.HALFLING]: { fighting: 0, murdered: 0, total: 0 },
+      [SPECIES_NAMES.HUMAN]: { fighting: 0, murdered: 0, total: 0 },
+      [SPECIES_NAMES.ORC]: { fighting: 0, murdered: 0, total: 0 },
+      [SPECIES_NAMES.WOSAN]: { fighting: 0, murdered: 0, total: 0 }
+    }
+
+    const quest = new Quest(world, {
+      id: nanoid(),
+      description: `Slay the ${this.species} Ogre of ${home.id}`,
+      courage: 1 / (ogrism * 10),
+      skill: 1 / (ogrism * 10),
+      lethality: ((ogrism * 10) + 10) / 100
+    })
+
+    // Will the population that the ogre came from be the first to try to
+    // destroy it?
+    const will = Math.random() > 0.5
+    const ids = will ? [this.id, ...shuffle(home.populations)] : shuffle(home.populations)
+    const populations = world.populations.populate(ids)
+
+    let slayer: string | null = null
+    for (const p of populations) {
+      const report = quest.run(p, home.biome ?? BIOMES.TEMPERATE_FOREST)
+      p.adjustSize(report.killed * -1)
+      victims[p.species].fighting += report.killed
+      victims[p.species].total += report.killed
+      if (report.success) { slayer = p.id; break }
+    }
+
+    const die = slayer === null ? 'd20' : 'd4'
+    const killed = new DiceRoll(`${Math.min(home.ogrism, 1)}${die}`).total
+
+    for (let i = 0; i < killed; i++) {
+      const { species, population } = home.pickRandomHumanoid()
+      const victimPopulation = world.populations.get(population)
+      if (victimPopulation && victimPopulation.size > 0) {
+        victimPopulation.adjustSize(-1)
+        victims[species].murdered++
+        victims[species].total++
+      }
+    }
+
+    return { origin: this.id, slayer, victims }
   }
 
   toObject (): IPopulation {
