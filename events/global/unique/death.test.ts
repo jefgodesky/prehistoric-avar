@@ -24,7 +24,7 @@ describe('death', () => {
     death()
     expect(world.events).toHaveLength(0)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.DEATH)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('does not register an event 9 times in 10', () => {
@@ -32,7 +32,7 @@ describe('death', () => {
     death(false)
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.DEATH)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('registers an event 1 time in 10', () => {
@@ -40,7 +40,7 @@ describe('death', () => {
     death(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.DEATH)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('will not register an event twice', () => {
@@ -49,7 +49,7 @@ describe('death', () => {
     death(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.DEATH)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('increases draconic fear', () => {

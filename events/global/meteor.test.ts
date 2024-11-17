@@ -119,13 +119,13 @@ describe('Meteor', () => {
   describe('recordFormMeteor', () => {
     it('records a meteor from the Sphere of Form hitting a region', () => {
       recordFormMeteor(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBeGreaterThanOrEqual(2)
     })
 
     it('records a meteor from the Sphere of Form hitting the sea', () => {
       recordFormMeteor(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -133,13 +133,13 @@ describe('Meteor', () => {
   describe('recordOrderMeteorRock', () => {
     it('records a meteor from the Sphere of Order hitting a region', () => {
       recordOrderMeteorRock(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(2)
     })
 
     it('records a meteor from the Sphere of Order hitting the sea', () => {
       recordOrderMeteorRock(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -147,13 +147,13 @@ describe('Meteor', () => {
   describe('recordOrderMeteorEmpyrean', () => {
     it('records an empyrean cast down from the Sphere of Order hitting a region', () => {
       recordOrderMeteorEmpyrean(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(1)
     })
 
     it('records an empyrean cast down from the Sphere of Order hitting the sea', () => {
       recordOrderMeteorEmpyrean(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -161,13 +161,13 @@ describe('Meteor', () => {
   describe('recordFluidityMeteorRock', () => {
     it('records a meteor from the Sphere of Fluidity hitting a region', () => {
       recordFluidityMeteorRock(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(2)
     })
 
     it('records a meteor from the Sphere of Fluidity hitting the sea', () => {
       recordFluidityMeteorRock(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -175,14 +175,14 @@ describe('Meteor', () => {
   describe('recordFluidityMeteorElemental', () => {
     it('records an elemental cast down from the Sphere of Fluidity hitting a region', () => {
       recordFluidityMeteorElemental(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(1)
       expect(region.immortals).toHaveLength(1)
     })
 
     it('records an elemental cast down from the Sphere of Fluidity hitting the sea', () => {
       recordFluidityMeteorElemental(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -190,13 +190,13 @@ describe('Meteor', () => {
   describe('recordWarmthMeteorRock', () => {
     it('records a meteor from the Sphere of Warmth hitting a region', () => {
       recordWarmthMeteorRock(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(2)
     })
 
     it('records a meteor from the Sphere of Warmth hitting the sea', () => {
       recordWarmthMeteorRock(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -204,13 +204,13 @@ describe('Meteor', () => {
   describe('recordWarmthMeteorEntity', () => {
     it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting a region', () => {
       recordWarmthMeteorEntity(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(1)
     })
 
     it('records a Solarian or Gelid cast down from the Sphere of Warmth hitting the sea', () => {
       recordWarmthMeteorEntity(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -218,13 +218,13 @@ describe('Meteor', () => {
   describe('recordDeathMeteor', () => {
     it('records a meteor from the Sphere of Death hitting a region', () => {
       recordDeathMeteor(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(2)
     })
 
     it('records a meteor from the Sphere of Death hitting the sea', () => {
       recordDeathMeteor(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -232,13 +232,13 @@ describe('Meteor', () => {
   describe('recordTimeMeteor', () => {
     it('records a meteor from the Sphere of Time hitting a region', () => {
       recordTimeMeteor(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(2)
     })
 
     it('records a meteor from the Sphere of Time hitting the sea', () => {
       recordTimeMeteor(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })
@@ -246,13 +246,13 @@ describe('Meteor', () => {
   describe('recordFallingStar', () => {
     it('records a falling star from the Sphere of Space hitting a region', () => {
       recordFallingStar(region)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers.length).toBe(1)
     })
 
     it('records a falling star from the Sphere of Space hitting the sea', () => {
       recordFallingStar(null)
-      expect(history.events).toHaveLength(2)
+      expect(history.events).toHaveLength(1)
       expect(region.markers).toHaveLength(0)
     })
   })

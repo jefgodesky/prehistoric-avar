@@ -1,9 +1,11 @@
 import { shuffle } from '@std/random'
-import { SIMULATION_STAGES } from '../enums.ts'
+import { DiceRoll } from '@dice-roller/rpg-dice-roller'
+import { SIMULATION_STAGES, SPECIES_NAMES } from '../enums.ts'
 import History from './History.ts'
 import Region from './Region.ts'
 import World from './World.ts'
 import Singleton from '../Singleton.ts'
+import createPopulation from '../factories/population.ts'
 
 const END_THRESHOLD = 100 as const
 
@@ -20,13 +22,6 @@ class BaseSimulation {
     this.stage = SIMULATION_STAGES.REFRESH
     this.world = new World()
     this.regions = this.world.regions.values()
-
-    // Add our "inciting incident"
-    this.history.add({
-      description: 'Wosan discover fire',
-      millennium: this.millennium,
-      tags: ['GS03', 'Wosan', 'Invention']
-    })
   }
 
   advance (): string {
@@ -34,6 +29,7 @@ class BaseSimulation {
     const curr = stages.indexOf(this.stage)
     const next = (curr + 1) % stages.length
     this.stage = stages[next]
+    if (this.stage === SIMULATION_STAGES.RESOLUTION && this.end()) return 'END'
     if (next === 0) this.millennium++
     return `${this.stage} ${this.millennium}`
   }
@@ -79,8 +75,51 @@ class BaseSimulation {
     }
   }
 
+  setup (): void {
+    createPopulation('GS03', {
+      species: SPECIES_NAMES.WOSAN,
+      size: 2000 + new DiceRoll('10d100').total,
+      viability: 1,
+      scrolls: [],
+      markers: []
+    })
+
+    this.history.add({
+      description: 'Wosan discover fire',
+      millennium: this.millennium,
+      tags: ['GS03', 'Wosan', 'Invention']
+    })
+  }
+
   end (): boolean {
     return this.world.dragons.sum() >= END_THRESHOLD
+  }
+
+  static run (): BaseSimulation {
+    const sim = Simulation.instance()
+    let running = true
+    sim.setup()
+
+    while (running) {
+      switch (sim.stage) {
+        case SIMULATION_STAGES.REFRESH:
+          sim.refresh()
+          break
+        case SIMULATION_STAGES.GROWTH:
+          sim.grow()
+          break
+        case SIMULATION_STAGES.EXPANSION:
+          sim.expand()
+          break
+        case SIMULATION_STAGES.RESOLUTION:
+          sim.resolve()
+          break
+      }
+
+      running = sim.advance() !== 'END'
+    }
+
+    return sim
   }
 }
 

@@ -24,7 +24,7 @@ describe('languageTuan', () => {
     languageTuan()
     expect(world.events).toHaveLength(0)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('does not register an event 2 times in 3', () => {
@@ -32,7 +32,7 @@ describe('languageTuan', () => {
     languageTuan(false)
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('registers an event 1 time in 3', () => {
@@ -40,7 +40,7 @@ describe('languageTuan', () => {
     languageTuan(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('will not register an event twice', () => {
@@ -49,7 +49,7 @@ describe('languageTuan', () => {
     languageTuan(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_TUAN)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('interests dragons', () => {

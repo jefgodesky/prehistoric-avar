@@ -34,7 +34,7 @@ describe('fs32', () => {
     fs32()
     expect(world.events).toHaveLength(0)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it(`does not register an event if there is no human population with more than ${BIG_ENOUGH_POP} people`, () => {
@@ -42,7 +42,7 @@ describe('fs32', () => {
     fs32()
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('does not register an event 19 times in 20', () => {
@@ -50,7 +50,7 @@ describe('fs32', () => {
     fs32(false)
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('registers an event 1 time in 20', () => {
@@ -58,7 +58,7 @@ describe('fs32', () => {
     fs32(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('will not register an event twice', () => {
@@ -67,7 +67,7 @@ describe('fs32', () => {
     fs32(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.FS32_MIGRATION)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('moves humans from source region to FS32', () => {

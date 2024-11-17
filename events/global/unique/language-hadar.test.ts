@@ -26,7 +26,7 @@ describe('languageHadar', () => {
     languageHadar()
     expect(world.events).toHaveLength(0)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('does not register an event if language was invented this millennium', () => {
@@ -35,7 +35,7 @@ describe('languageHadar', () => {
     languageHadar()
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('registers an event if language was invented in a previous millennium', () => {
@@ -45,7 +45,7 @@ describe('languageHadar', () => {
     languageHadar()
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
-    expect(history.events).toHaveLength(3)
+    expect(history.events).toHaveLength(2)
   })
 
   it('will not register an event twice', () => {
@@ -56,7 +56,7 @@ describe('languageHadar', () => {
     languageHadar()
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_HADAR)
-    expect(history.events).toHaveLength(3)
+    expect(history.events).toHaveLength(2)
   })
 
   it('interests dragons', () => {

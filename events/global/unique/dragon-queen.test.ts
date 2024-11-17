@@ -29,7 +29,7 @@ describe('dragonQueen', () => {
     dragonQueen()
     expect(world.events).toHaveLength(0)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.DRAGON_QUEEN)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it(`does not register an event if there are no regions with less than ${OGRISM_THRESHOLD} ogrism`, () => {
@@ -37,7 +37,7 @@ describe('dragonQueen', () => {
     dragonQueen()
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.DRAGON_QUEEN)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('does not register an event most of the time', () => {
@@ -46,7 +46,7 @@ describe('dragonQueen', () => {
     dragonQueen(false)
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.DRAGON_QUEEN)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('registers an event sometimes', () => {
@@ -55,7 +55,7 @@ describe('dragonQueen', () => {
     dragonQueen(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.DRAGON_QUEEN)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('will not register an event twice', () => {
@@ -65,7 +65,7 @@ describe('dragonQueen', () => {
     dragonQueen(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.DRAGON_QUEEN)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('creates the Dragon Queen', () => {

@@ -24,7 +24,7 @@ describe('languageElta', () => {
     languageElta()
     expect(world.events).toHaveLength(0)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_ELTA)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('does not register an event most of the time', () => {
@@ -32,7 +32,7 @@ describe('languageElta', () => {
     languageElta(false)
     expect(world.events).toHaveLength(1)
     expect(world.events).not.toContain(EVENTS_GLOBAL_UNIQUE.LANG_ELTA)
-    expect(history.events).toHaveLength(1)
+    expect(history.events).toHaveLength(0)
   })
 
   it('registers an event sometimes', () => {
@@ -40,7 +40,7 @@ describe('languageElta', () => {
     languageElta(true)
     expect(world.events).toHaveLength(2)
     expect(world.events).toContain(EVENTS_GLOBAL_UNIQUE.LANG_ELTA)
-    expect(history.events).toHaveLength(2)
+    expect(history.events).toHaveLength(1)
   })
 
   it('will not register an event twice', () => {
