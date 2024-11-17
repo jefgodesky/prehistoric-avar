@@ -1,7 +1,7 @@
 import { describe, beforeEach, afterEach, it } from 'jsr:@std/testing/bdd'
 import { expect } from 'jsr:@std/expect'
 import { sumOf } from '@std/collections'
-import type {IPopulation, IRegionFeature} from '../index.d.ts'
+import type { IPopulation, IRegionFeature } from '../index.d.ts'
 import { DS01, GS02, FS32 } from '../instances/regions/index.ts'
 import { SamplePopulation, SampleSociety } from '../test-examples.ts'
 import { EVENTS_GLOBAL_UNIQUE, SPECIES_NAMES, TERRESTRIAL_ELEMENTS } from '../enums.ts'
@@ -237,6 +237,19 @@ describe('Region', () => {
         const before = region.getCapacity(world.habitability)
         createElemental(region.id, TERRESTRIAL_ELEMENTS.FIRE)
         expect(region.getCapacity(world.habitability)).toBeLessThan(before)
+      })
+    })
+
+    describe('getPopulations', () => {
+      it('returns an empty array if the region is unpopulated', () => {
+        const region = world.regions.get('DS01')!
+        expect(region.getPopulations()).toHaveLength(0)
+      })
+
+      it('returns an array of the region\'s populations', () => {
+        const region = world.regions.get('DS01')!
+        createPopulation(region.id, SamplePopulation)
+        expect(region.getPopulations()).toHaveLength(1)
       })
     })
 

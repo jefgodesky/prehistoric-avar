@@ -73,9 +73,8 @@ class Region extends Markable implements IHabitable {
     this.spreadOgrism()
     this.survive()
 
-    const { populations } = Simulation.instance().world
-    const pops = populations.populate(this.populations)
-    for (const p of pops) p.grow()
+    const populations = this.getPopulations()
+    for (const p of populations) p.grow()
   }
 
   getCapacity (worldHabitability: number): number {
@@ -88,6 +87,11 @@ class Region extends Markable implements IHabitable {
     const base = this.capacity * this.habitability * worldHabitability
     const other = sumOf(otherFactors, factor => factor)
     return base + other
+  }
+
+  getPopulations (): Population[] {
+    const { populations } = Simulation.instance().world
+    return populations.populate(this.populations)
   }
 
   getSociety (): Society | null {
@@ -113,23 +117,18 @@ class Region extends Markable implements IHabitable {
   }
 
   isPopulated (): boolean {
-    const { world } = Simulation.instance()
-    const populations = world.populations.populate(this.populations)
-    return populations.filter(p => !p.extinct).length > 0
+    return this.getPopulations().filter(p => !p.extinct).length > 0
   }
 
   getSpeciesPopulation (sp: SpeciesName): Population | false {
     if (!this.isPopulated()) return false
-    const { world } = Simulation.instance()
-    return world.populations.populate(this.populations)
+    return this.getPopulations()
       .find(p => p.species === sp && !p.extinct) ?? false
   }
 
   hasPopulationCapableOfSpeech (): boolean {
-    const { world } = Simulation.instance()
     const areSpeakers = (p: Population): boolean => !p.extinct && p.getSpecies().name !== SPECIES_NAMES.WOSAN
-    const populations = world.populations.populate(this.populations)
-    return populations.filter(areSpeakers).length > 0
+    return this.getPopulations().filter(areSpeakers).length > 0
   }
 
   hasSpeechCommunity (): boolean {
@@ -137,8 +136,7 @@ class Region extends Markable implements IHabitable {
     const { world } = Simulation.instance()
     const society = world.societies.get(this.society)
     if (!society?.language) return false
-    const populations = world.populations.populate(this.populations)
-    return populations
+    return this.getPopulations()
       .map(p => !p.extinct && p.getSpecies().canSpeak)
       .reduce((acc, curr) => acc && curr, true)
   }
@@ -155,8 +153,7 @@ class Region extends Markable implements IHabitable {
 
   getAverageGeneration (): number {
     if (!this.isPopulated()) return 0
-    const { world } = Simulation.instance()
-    const populations = world.populations.populate(this.populations)
+    const populations = this.getPopulations()
     let nominator = 0
     let denominator = 0
     for (const p of populations) {
@@ -171,7 +168,7 @@ class Region extends Markable implements IHabitable {
     const { world } = Simulation.instance()
     const sp = world.species.get(this.species.toLowerCase())!
     const scrollText = getSpeciationScrollText(sp)
-    const populations = world.populations.populate(this.populations)
+    const populations = this.getPopulations()
     for (const p of populations) {
       if (p.getSpecies().name !== sp?.ancestor) continue
       let scroll = p.scribe.scrolls.find(s => s.text === scrollText)
@@ -206,9 +203,9 @@ class Region extends Markable implements IHabitable {
   }
 
   survive (): ISurvivalReport[] {
-    const { populations, habitability } = Simulation.instance().world
-    const pops = populations.populate(this.populations)
-    const projections: ISurvivalProjection[] = pops.map(p => {
+    const { habitability } = Simulation.instance().world
+    const populations = this.getPopulations()
+    const projections: ISurvivalProjection[] = populations.map(p => {
       const hold = p.survive()
       const size = p.getProjectedSize(hold)
       return { hold, size }
@@ -217,22 +214,22 @@ class Region extends Markable implements IHabitable {
     const capacity = this.getCapacity(habitability)
     const open = sumOf(projections, p => p.size) <= capacity
     const holdSum = sumOf(projections, p => p.hold)
-    const popSum = sumOf(pops, p => p.size)
+    const popSum = sumOf(populations, p => p.size)
 
     const reports: ISurvivalReport[] = []
-    for (let i = 0; i < pops.length; i++) {
+    for (let i = 0; i < populations.length; i++) {
       const { hold, size } = projections[i]
-      const p = pops[i]
+      const p = populations[i]
 
       if (open) {
         // Everyone can grow as much as they like and they'll still be below
         // the region's carrying capacity. Good times!
-        pops[i].size = size
+        populations[i].size = size
       } else {
         // Populations are trying to grow greater than carrying capacity will
         // allow. That means competition, scarcity, and bad times.
         const portion = ((p.size / popSum) + (hold / holdSum)) / 2
-        pops[i].size = Math.floor(capacity * portion)
+        populations[i].size = Math.floor(capacity * portion)
       }
 
       p.growth = { hold, pressure: size - p.size }
@@ -275,8 +272,7 @@ class Region extends Markable implements IHabitable {
   }
 
   pickRandomHumanoid (): { species: SpeciesName, population: string } {
-    const { world } = Simulation.instance()
-    const populations = world.populations.populate(this.populations)
+    const populations = this.getPopulations()
     const total = sumOf(populations, p => p.size)
     const pick = Math.round(Math.random() * total)
 
@@ -294,7 +290,7 @@ class Region extends Markable implements IHabitable {
   evaluate (p: Population): number {
     const { world } = Simulation.instance()
     const capacity = this.getCapacity(world.habitability)
-    const populations = world.populations.populate(this.populations)
+    const populations = this.getPopulations()
     const population = sumOf(populations, p => p.size)
     const fitness = this.biome ? p.getFitness(this.biome) : -3
     const dragons = this.dragons.length
@@ -309,8 +305,7 @@ class Region extends Markable implements IHabitable {
   generatePopulationId (species: SpeciesName): string {
     const { world } = Simulation.instance()
     const code = world.species.get(species.toLowerCase())?.getCode() ?? 'WO'
-    const populations = world.populations.populate(this.populations)
-    const conspecific = populations.filter(p => p.species === species)
+    const conspecific = this.getPopulations().filter(p => p.species === species)
     const num = (conspecific.length + 1).toString().padStart(3, '0')
     return `${this.id}-${code}${num}`
   }
