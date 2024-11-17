@@ -68,6 +68,16 @@ class Region extends Markable implements IHabitable {
     }
   }
 
+  grow (): void {
+    this.spreadLanguage()
+    this.spreadOgrism()
+    this.survive()
+
+    const { populations } = Simulation.instance().world
+    const pops = populations.populate(this.populations)
+    for (const p of pops) p.grow()
+  }
+
   getCapacity (worldHabitability: number): number {
     const featureImpact = this.features
       .map(feature => feature.impact)
