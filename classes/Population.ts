@@ -18,6 +18,7 @@ import createPopulation from '../factories/population.ts'
 import oxford from '../oxford.ts'
 
 const TO_STRING_PREFIX = 'Population:' as const
+const EXPANSION_THRESHOLD = 750 as const
 
 class Population extends Markable {
   home: string
@@ -61,6 +62,29 @@ class Population extends Markable {
   grow (): void {
     if (this.growth) this.checkOgres(this.growth)
     this.apply50500()
+  }
+
+  expand (): void {
+    if (!this.growth) return
+    const { pressure } = this.growth
+    if (pressure < EXPANSION_THRESHOLD) return
+
+    const { regions } = Simulation.instance().world
+    const home = this.getHome()
+    let max = home.evaluate(this)
+    let index = -1
+    const neighbors = regions.populate(home.adjacentRegions)
+
+    for (let i = 0; i < neighbors.length; i++) {
+      const evaluation = neighbors[i].evaluate(this)
+      if (evaluation > max) {
+        max = evaluation
+        index = i
+      }
+    }
+
+    if (index < 0) return
+    this.migrate(neighbors[index].id, pressure)
   }
 
   getFitness (biome?: Biome): number {
@@ -337,3 +361,4 @@ class Population extends Markable {
 }
 
 export default Population
+export { EXPANSION_THRESHOLD }

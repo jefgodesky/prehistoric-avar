@@ -10,7 +10,7 @@ import Region from './Region.ts'
 import World from './World.ts'
 import createPopulation from '../factories/population.ts'
 import createSociety from '../factories/society.ts'
-import Population from './Population.ts'
+import Population, { EXPANSION_THRESHOLD } from './Population.ts'
 
 describe('Population', () => {
   let world: World
@@ -104,6 +104,24 @@ describe('Population', () => {
         p.growth = { hold: 2, pressure: 0 }
         p.refresh()
         expect(p.growth).toBeNull()
+      })
+    })
+
+    describe('expand', () => {
+      it('does nothing if pressure is below threshold', () => {
+        const p = createPopulation(home, SamplePopulation)
+        p.growth = { hold: 2, pressure: 0 }
+        p.expand()
+        expect(world.populations.size()).toBe(1)
+        expect(p.size).toBe(SamplePopulation.size)
+      })
+
+      it('runs expansion if pressure is above threshold', () => {
+        const p = createPopulation(home, SamplePopulation)
+        p.growth = { hold: 2, pressure: EXPANSION_THRESHOLD + 100 }
+        p.expand()
+        expect(world.populations.size()).toBe(2)
+        expect(p.size).toBeLessThan(SamplePopulation.size)
       })
     })
 
