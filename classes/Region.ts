@@ -170,6 +170,10 @@ class Region extends Markable implements IHabitable {
     if (!this.hasSpeechCommunity()) this.ogrism = Math.max(this.ogrism - 1, 0)
   }
 
+  increaseOgrism (): void {
+    this.ogrism = Math.min(this.ogrism + 1, 8)
+  }
+
   adjustFeyInfluence (): void {
     const mod = this.hasSpeechCommunity() ? 1 : -1
     this.feyInfluence = clamp(this.feyInfluence + mod, 0, 8)
@@ -242,7 +246,7 @@ class Region extends Markable implements IHabitable {
     const probabilities = [0.01, 0.025, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
     const probability = probabilities[this.ogrism] ?? 0.01
     const result = override ?? Math.random() <= probability
-    if (result) this.ogrism = clamp(this.ogrism + 1, 0, 8)
+    if (result) this.increaseOgrism()
     return result
   }
 

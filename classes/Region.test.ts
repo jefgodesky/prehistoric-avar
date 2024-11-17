@@ -500,6 +500,22 @@ describe('Region', () => {
       })
     })
 
+    describe('increaseOgrism', () => {
+      it('increases ogrism by 1', () => {
+        const region = new Region(GS02)
+        region.ogrism = 5
+        region.increaseOgrism()
+        expect(region.ogrism).toBe(6)
+      })
+
+      it('will never increase ogrism beyond 8', () => {
+        const region = new Region(GS02)
+        region.ogrism = 8
+        region.increaseOgrism()
+        expect(region.ogrism).toBe(8)
+      })
+    })
+
     describe('adjustFeyInfluence', () => {
       it('reduces fey influence if the region has no speech community', () => {
         const { region } = introducePopulation()
