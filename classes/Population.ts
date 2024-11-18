@@ -191,7 +191,7 @@ class Population extends Markable {
     history.add({ description, millennium, tags })
   }
 
-  getProjectedSize (hold: number): number {
+  getProjectedSize (hold: number, size: number = this.size): number {
     let adjustment = 100
     const directions = [-1, 1, 1]
     switch (hold) {
@@ -212,7 +212,7 @@ class Population extends Markable {
         break
     }
 
-    return Math.round(this.size * (adjustment / 100))
+    return Math.round(size * (adjustment / 100))
   }
 
   findCannibals ({ hold, pressure }: ISurvivalReport): number {

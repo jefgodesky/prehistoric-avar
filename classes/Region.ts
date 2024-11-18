@@ -211,8 +211,11 @@ class Region extends Markable implements IHabitable {
     const { habitability } = Simulation.instance().world
     const populations = this.getPopulations()
     const projections: ISurvivalProjection[] = populations.map(p => {
+      const species = p.getSpecies()
+      const generation = species.generation ?? 50
       const hold = p.survive()
-      const size = p.getProjectedSize(hold)
+      let size = p.size
+      for (let i = 0; i < generation; i++) size = p.getProjectedSize(hold, size)
       return { hold, size }
     })
 

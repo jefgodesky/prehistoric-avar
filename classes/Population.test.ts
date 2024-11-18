@@ -318,38 +318,38 @@ describe('Population', () => {
     })
 
     describe('getProjectedSize', () => {
-      it('reduces the population by 1d20 percent if given 0', () => {
+      it('reduces the population by 4d20 percent if given 0', () => {
         const p = createPopulation(home, SamplePopulation)
         const actual = p.getProjectedSize(0)
-        expect(actual).toBeLessThanOrEqual((p.size * 0.99) + 1)
+        expect(actual).toBeLessThanOrEqual((p.size * 0.96) + 1)
       })
 
-      it('reduces the population by 1d4 percent if given 1', () => {
+      it('reduces the population by 3d10 percent if given 1', () => {
         const p = createPopulation(home, SamplePopulation)
         const actual = p.getProjectedSize(1)
-        expect(actual).toBeLessThanOrEqual((p.size * 0.99) + 1)
-        expect(actual).toBeGreaterThanOrEqual((p.size * 0.96) - 1)
+        expect(actual).toBeLessThanOrEqual((p.size * 0.97) + 1)
+        expect(actual).toBeGreaterThanOrEqual((p.size * 0.7) - 1)
       })
 
-      it('reduces or increases the population by 1d4 percent if given 2', () => {
+      it('reduces or increases the population by 2d8 percent if given 2', () => {
         const p = createPopulation(home, SamplePopulation)
         const actual = p.getProjectedSize(2)
-        expect(actual).toBeLessThanOrEqual((p.size * 1.04) + 1)
-        expect(actual).toBeGreaterThanOrEqual((p.size * 0.96) - 1)
+        expect(actual).toBeGreaterThanOrEqual((p.size * 0.84) - 1)
+        expect(actual).toBeLessThanOrEqual((p.size * 1.16) + 1)
       })
 
-      it('increases the population by 1d6 percent if given 3', () => {
+      it('increases the population by 3d10 percent if given 3', () => {
         const p = createPopulation(home, SamplePopulation)
         const actual = p.getProjectedSize(3)
-        expect(actual).toBeLessThanOrEqual((p.size * 1.06) + 1)
-        expect(actual).toBeGreaterThanOrEqual(p.size - 1)
+        expect(actual).toBeLessThanOrEqual((p.size * 1.3) + 1)
+        expect(actual).toBeGreaterThanOrEqual((p.size * 1.03) - 1)
       })
 
-      it('increases the population by 1d8 percent if given 4', () => {
+      it('increases the population by 4d20 percent if given 4', () => {
         const p = createPopulation(home, SamplePopulation)
         const actual = p.getProjectedSize(4)
-        expect(actual).toBeLessThanOrEqual((p.size * 1.08) + 1)
-        expect(actual).toBeGreaterThanOrEqual(p.size - 1)
+        expect(actual).toBeLessThanOrEqual((p.size * 1.8) + 1)
+        expect(actual).toBeGreaterThanOrEqual((p.size * 1.04) - 1)
       })
     })
 
