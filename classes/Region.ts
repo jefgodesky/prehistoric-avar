@@ -236,7 +236,11 @@ class Region extends Markable implements IHabitable {
       } else {
         // Populations are trying to grow greater than carrying capacity will
         // allow. That means competition, scarcity, and bad times.
-        const portion = ((p.size / popSum) + (hold / holdSum)) / 2
+        const factors = [
+          holdSum === 0 ? 0 : hold / holdSum,
+          popSum === 0 ? 0 : p.size / popSum
+        ]
+        const portion = sumOf(factors, factor => factor) / factors.length
         populations[i].size = Math.floor(capacity * portion)
       }
 
